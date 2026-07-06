@@ -1328,43 +1328,8 @@
             background: #ffcc33;
         }
 
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: #141210;
-            border: 1px solid #2a241e;
-            border-radius: 16px;
-            padding: 1rem 1.5rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
-            z-index: 9999;
-            max-width: 400px;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: 0.4s ease;
-            color: #e0dcd0;
-        }
-        .toast.visible {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .toast .toast-title {
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-        .toast .toast-title.success {
-            color: #51cf66;
-        }
-        .toast .toast-title.error {
-            color: #ff6b6b;
-        }
-        .toast .toast-title.info {
-            color: #f5b81b;
-        }
-        .toast .toast-text {
-            color: #8f877a;
-            font-size: 0.95rem;
-        }
+        /* ===== ТОСТ (СОЗДАЁТСЯ ДИНАМИЧЕСКИ) ===== */
+        /* Стили для тоста уже есть в JavaScript */
 
         .admin-panel {
             background: #1a1a24;
@@ -1497,76 +1462,63 @@
             cursor: pointer;
         }
 
+        /* ===== ТОСТ (ДИНАМИЧЕСКИЙ) ===== */
+        .toast-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #141210;
+            border: 1px solid #2a241e;
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            z-index: 9999;
+            max-width: 400px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 0.4s ease;
+            color: #e0dcd0;
+        }
+        .toast-container.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast-container .toast-title {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        .toast-container .toast-title.success {
+            color: #51cf66;
+        }
+        .toast-container .toast-title.error {
+            color: #ff6b6b;
+        }
+        .toast-container .toast-title.info {
+            color: #f5b81b;
+        }
+        .toast-container .toast-text {
+            color: #8f877a;
+            font-size: 0.95rem;
+        }
+
         @media (max-width: 768px) {
-            .auth-container {
-                padding: 1.5rem;
-                margin: 16px;
-            }
-            .top-nav {
-                flex-direction: column;
-                align-items: stretch;
-                border-radius: 24px;
-                padding: 12px 16px;
-            }
-            .nav-center {
-                justify-content: center;
-                gap: 14px;
-            }
-            .nav-right {
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .profile-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .calibration-section {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .rating-table {
-                font-size: 13px;
-            }
-            .rating-table th,
-            .rating-table td {
-                padding: 10px 12px;
-            }
-            .profile-actions-btns {
-                justify-content: center;
-            }
-            .modal {
-                padding: 24px 20px;
-                margin: 16px;
-            }
-            .teams-row {
-                flex-direction: column;
-                align-items: center;
-                gap: 16px;
-            }
-            .team-col {
-                max-width: 100%;
-                width: 100%;
-            }
-            .result-row {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 14px;
-            }
-            .elo-section {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-            }
-            .elo-section .right .elo-change {
-                text-align: center;
-            }
-            .admin-user-item {
-                flex-direction: column;
-                align-items: stretch;
-            }
+            .auth-container { padding: 1.5rem; margin: 16px; }
+            .top-nav { flex-direction: column; align-items: stretch; border-radius: 24px; padding: 12px 16px; }
+            .nav-center { justify-content: center; gap: 14px; }
+            .nav-right { justify-content: center; flex-wrap: wrap; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .profile-header { flex-direction: column; text-align: center; }
+            .calibration-section { flex-direction: column; align-items: stretch; }
+            .rating-table { font-size: 13px; }
+            .rating-table th, .rating-table td { padding: 10px 12px; }
+            .profile-actions-btns { justify-content: center; }
+            .modal { padding: 24px 20px; margin: 16px; }
+            .teams-row { flex-direction: column; align-items: center; gap: 16px; }
+            .team-col { max-width: 100%; width: 100%; }
+            .result-row { flex-direction: column; align-items: stretch; gap: 14px; }
+            .elo-section { flex-direction: column; align-items: stretch; text-align: center; }
+            .elo-section .right .elo-change { text-align: center; }
+            .admin-user-item { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
@@ -1860,12 +1812,6 @@
         </div>
     </div>
 
-    <!-- ===== ТОСТ ===== -->
-    <div class="toast" id="toast">
-        <div class="toast-title" id="toastTitle">Успешно!</div>
-        <div class="toast-text" id="toastText">Действие выполнено</div>
-    </div>
-
     <!-- ===== СКРЫТЫЙ INPUT ДЛЯ РЕЗУЛЬТАТА ===== -->
     <input type="file" id="fileInputResult" accept="image/*" style="display:none;" />
     <!-- ===== СКРЫТЫЙ INPUT ДЛЯ АВАТАРА ===== -->
@@ -1883,13 +1829,31 @@
             else if (form === 'register') document.getElementById('registerForm').style.display = 'block';
         }
 
+        // ===== ИСПРАВЛЕННАЯ ФУНКЦИЯ TOAST =====
         function showToast(type, title, text) {
-            const toast = document.getElementById('toast');
+            // Проверяем, существует ли тост
+            let toast = document.querySelector('.toast-container');
+            
+            // Если тоста нет — создаём его
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.className = 'toast-container';
+                toast.innerHTML = `
+                    <div class="toast-title" id="toastTitle">Успешно!</div>
+                    <div class="toast-text" id="toastText">Действие выполнено</div>
+                `;
+                document.body.appendChild(toast);
+            }
+            
             const titleEl = document.getElementById('toastTitle');
             const textEl = document.getElementById('toastText');
-            titleEl.className = 'toast-title ' + type;
-            titleEl.textContent = title;
-            textEl.textContent = text;
+            
+            if (titleEl && textEl) {
+                titleEl.className = 'toast-title ' + type;
+                titleEl.textContent = title || 'Успешно!';
+                textEl.textContent = text || 'Действие выполнено';
+            }
+            
             toast.classList.add('visible');
             clearTimeout(toast._timeout);
             toast._timeout = setTimeout(() => toast.classList.remove('visible'), 4000);
