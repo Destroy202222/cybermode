@@ -1,0 +1,2774 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CYBERMODE · Tanks Blitz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            background: #0a0a0e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .auth-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+            background: radial-gradient(ellipse at center, #141210 0%, #0a0a0a 100%);
+        }
+        .auth-container {
+            max-width: 420px;
+            width: 100%;
+            background: #141210;
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid #2a241e;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            animation: fadeIn 0.5s ease;
+        }
+        .auth-container .auth-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .auth-container .auth-logo h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #f5b81b, #ffcc33);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .auth-container .auth-logo p {
+            color: #8f877a;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+        .auth-container h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: #e0dcd0;
+        }
+        .auth-container .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .auth-container .form-group label {
+            display: block;
+            color: #8f877a;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .auth-container .form-group label .required {
+            color: #ff6b6b;
+            margin-left: 0.2rem;
+        }
+        .auth-container .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: #0a0a0a;
+            border: 2px solid #2a241e;
+            border-radius: 12px;
+            color: #e0dcd0;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .auth-container .form-group input:focus {
+            outline: none;
+            border-color: #f5b81b;
+            box-shadow: 0 0 20px rgba(245, 184, 27, 0.15);
+        }
+        .auth-container .form-group .hint {
+            color: #6b6356;
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+        }
+        .auth-container .btn-submit {
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(45deg, #f5b81b, #ffcc33);
+            border: none;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #0a0a0a;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 0.5rem;
+        }
+        .auth-container .btn-submit:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(245, 184, 27, 0.25);
+        }
+        .auth-container .auth-links {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        .auth-container .auth-links a {
+            color: #f5b81b;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .auth-container .auth-links a:hover {
+            text-decoration: underline;
+            color: #ffcc33;
+        }
+
+        .main-site {
+            display: none;
+            max-width: 1400px;
+            width: 100%;
+            background: #16161c;
+            border-radius: 32px;
+            padding: 28px 36px 36px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            color: #eef2f6;
+            margin-top: 10px;
+        }
+        .main-site.visible {
+            display: block;
+        }
+
+        .top-nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 1400px;
+            background: #0e0e14;
+            border-radius: 60px;
+            padding: 8px 28px;
+            border: 1px solid #282830;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.6);
+        }
+        .top-nav .brand {
+            font-weight: 700;
+            font-size: 20px;
+            color: #f5b81b;
+            cursor: pointer;
+            letter-spacing: -0.3px;
+            transition: 0.15s;
+            white-space: nowrap;
+        }
+        .top-nav .brand:hover {
+            color: #ffcc33;
+        }
+        .top-nav .brand i {
+            margin-right: 8px;
+        }
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .nav-center .nav-item {
+            font-size: 15px;
+            font-weight: 500;
+            color: #88909c;
+            cursor: pointer;
+            transition: 0.15s;
+            padding: 6px 4px;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-center .nav-item:hover {
+            color: #f0f2f5;
+            border-bottom-color: #f5b81b;
+        }
+        .nav-center .nav-item.active {
+            color: #f0f2f5;
+            border-bottom-color: #f5b81b;
+        }
+        .nav-center .nav-item.match-tab {
+            color: #f5b81b;
+            font-weight: 700;
+            border-bottom-color: #f5b81b;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .nav-right .profile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #d0d6de;
+            font-weight: 500;
+            font-size: 15px;
+            cursor: pointer;
+            padding: 6px 16px 6px 10px;
+            border-radius: 40px;
+            transition: 0.15s;
+        }
+        .nav-right .profile:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        .nav-right .profile i {
+            font-size: 22px;
+            color: #6f7885;
+        }
+        .nav-right .profile:hover i {
+            color: #f5b81b;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fade 0.3s ease;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fade {
+            0% { opacity: 0.3; transform: translateY(6px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .main-menu {
+            background: #111117;
+            border-radius: 28px;
+            padding: 80px 28px;
+            text-align: center;
+            border: 1px solid #26262e;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .main-menu .big-icon {
+            font-size: 100px;
+            color: #f5b81b;
+            margin-bottom: 30px;
+        }
+        .profile-actions {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-action {
+            background: #1c1c24;
+            border: none;
+            padding: 16px 48px;
+            border-radius: 60px;
+            color: #d0d6de;
+            font-weight: 600;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .btn-action:hover {
+            background: #2a2a34;
+            color: #f0f2f5;
+        }
+        .btn-action.primary {
+            background: #f5b81b;
+            color: #0b0b0e;
+        }
+        .btn-action.primary:hover {
+            background: #ffcc33;
+            transform: scale(0.97);
+        }
+
+        .search-page {
+            background: #111117;
+            border-radius: 28px;
+            padding: 60px 28px 64px;
+            text-align: center;
+            border: 1px solid #26262e;
+        }
+        .search-page .big-icon {
+            font-size: 100px;
+            color: #f5b81b;
+            margin-bottom: 20px;
+        }
+        .search-page h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .search-page p {
+            color: #88909c;
+            font-size: 16px;
+            margin-bottom: 28px;
+        }
+        .btn-search {
+            background: #f5b81b;
+            border: none;
+            padding: 20px 64px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 22px;
+            color: #0b0b0e;
+            cursor: pointer;
+            transition: 0.12s;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 6px 20px rgba(245, 184, 27, 0.25);
+        }
+        .btn-search:hover {
+            background: #ffcc33;
+            transform: scale(0.97);
+        }
+        .btn-search:disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        .search-status {
+            margin-top: 28px;
+            color: #6f7885;
+            font-size: 16px;
+            min-height: 50px;
+        }
+        .search-status .count {
+            color: #f5b81b;
+            font-weight: 700;
+            font-size: 40px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .search-status .count.visible {
+            opacity: 1;
+        }
+        .timer-display {
+            margin-top: 18px;
+            font-size: 20px;
+            color: #aab0ba;
+        }
+        .timer-display i {
+            color: #f5b81b;
+            margin-right: 8px;
+        }
+        .timer-display .time {
+            font-weight: 700;
+            font-size: 28px;
+            color: #f5b81b;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .match-page {
+            background: #111117;
+            border-radius: 28px;
+            padding: 40px 32px 36px;
+            border: 1px solid #26262e;
+        }
+        .match-page .match-id {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: #f5b81b;
+            margin-bottom: 28px;
+            padding: 14px;
+            border-radius: 60px;
+            border: 1px solid rgba(245, 184, 27, 0.12);
+            background: rgba(245, 184, 27, 0.05);
+        }
+        .teams-row {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+        .team-col {
+            flex: 1;
+            max-width: 450px;
+            background: #0e0e14;
+            border-radius: 24px;
+            padding: 24px 28px 32px;
+            border: 1px solid #26262e;
+        }
+        .team-col h3 {
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #282830;
+        }
+        .team-col h3 i {
+            color: #f5b81b;
+        }
+        .player-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .player-tag {
+            background: #1c1c24;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #cfd6df;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .player-tag .num {
+            color: #6f7885;
+            font-weight: 400;
+            font-size: 14px;
+            min-width: 28px;
+        }
+        .player-tag i {
+            font-size: 18px;
+            color: #6f7885;
+        }
+        .player-tag.captain {
+            background: #2a2410;
+            border: 2px solid #f5b81b;
+            color: #f5b81b;
+            font-weight: 700;
+        }
+        .player-tag.captain i {
+            color: #f5b81b;
+        }
+        .player-tag.captain .num {
+            color: #f5b81b;
+        }
+        .empty-message {
+            color: #5e6670;
+            font-size: 15px;
+            padding: 14px 0;
+            text-align: center;
+        }
+
+        .ban-section {
+            margin-top: 12px;
+            padding-top: 28px;
+            border-top: 1px solid #282830;
+        }
+        .ban-section.hidden {
+            display: none;
+        }
+        .ban-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .captain-indicator {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            background: #0c0c10;
+            padding: 8px 24px 8px 28px;
+            border-radius: 60px;
+            border: 1px solid #282832;
+        }
+        .captain-indicator .turn {
+            background: #f5b81b;
+            color: #0b0b0e;
+            padding: 4px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .ban-pool {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin: 14px 0 18px;
+        }
+        .map-chip {
+            background: #1a1a22;
+            padding: 12px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 17px;
+            border: 2px solid #2e2e38;
+            cursor: pointer;
+            transition: 0.15s;
+            user-select: none;
+        }
+        .map-chip:hover:not(.banned) {
+            background: #2a2a34;
+            border-color: #f5b81b;
+            transform: scale(1.02);
+        }
+        .map-chip.banned {
+            opacity: 0.2;
+            text-decoration: line-through;
+            background: #20202a;
+            cursor: default;
+            pointer-events: none;
+        }
+        .map-chip.selected {
+            border-color: #f5b81b;
+            background: #24241e;
+        }
+
+        .result-section {
+            margin-top: 28px;
+            padding-top: 24px;
+            border-top: 1px solid #282830;
+        }
+        .result-section.hidden {
+            display: none;
+        }
+        .result-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            background: #0c0c10;
+            padding: 16px 28px 16px 32px;
+            border-radius: 60px;
+            border: 1px solid #2a2a34;
+            gap: 16px;
+        }
+        .result-row .final-map {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .result-row .final-map i {
+            color: #f5b81b;
+            font-size: 28px;
+        }
+        .result-row .final-map .map-name {
+            font-weight: 700;
+            font-size: 22px;
+        }
+        .result-row .attach-btn {
+            background: #2a2a34;
+            border: none;
+            padding: 12px 36px;
+            border-radius: 60px;
+            color: #f0f4f8;
+            font-weight: 600;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        .result-row .attach-btn:hover {
+            background: #3e3e4c;
+        }
+
+        .screenshot-preview {
+            display: none;
+            margin-top: 16px;
+            padding: 12px;
+            background: #0c0c10;
+            border-radius: 16px;
+            border: 1px solid #1f1f28;
+            text-align: center;
+        }
+        .screenshot-preview.show {
+            display: block;
+        }
+        .screenshot-preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 12px;
+            border: 1px solid #282830;
+        }
+        .screenshot-preview .file-name {
+            color: #6f7885;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .victory-buttons {
+            display: none;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+        .victory-buttons.show {
+            display: flex;
+        }
+        .victory-buttons .btn-victory {
+            padding: 16px 48px;
+            border-radius: 60px;
+            border: none;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 200px;
+            justify-content: center;
+        }
+        .victory-buttons .btn-victory.team-a {
+            background: #2a5a3a;
+            color: #8cd4a8;
+            border: 2px solid #3a7a4a;
+        }
+        .victory-buttons .btn-victory.team-a:hover {
+            background: #3a7a4a;
+            transform: scale(0.97);
+            box-shadow: 0 0 30px rgba(106, 207, 151, 0.2);
+        }
+        .victory-buttons .btn-victory.team-b {
+            background: #5a2a2a;
+            color: #e8a0a0;
+            border: 2px solid #7a3a3a;
+        }
+        .victory-buttons .btn-victory.team-b:hover {
+            background: #7a3a3a;
+            transform: scale(0.97);
+            box-shadow: 0 0 30px rgba(231, 76, 60, 0.2);
+        }
+        .victory-buttons .btn-victory i {
+            font-size: 22px;
+        }
+
+        #fileInputResult {
+            display: none;
+        }
+        #fileInputAvatar {
+            display: none;
+        }
+
+        .rating-page {
+            background: #111117;
+            border-radius: 28px;
+            padding: 32px 28px 36px;
+            border: 1px solid #26262e;
+        }
+        .rating-page .rating-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f0f2f5;
+            margin-bottom: 8px;
+        }
+        .rating-page .rating-sub {
+            font-size: 14px;
+            color: #6f7885;
+            margin-bottom: 24px;
+        }
+        .prize-pool {
+            background: #0c0c10;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            border: 1px solid #1f1f28;
+        }
+        .prize-pool .prize-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #f5b81b;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .prize-pool .prize-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .prize-pool .prize-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #d0d6de;
+        }
+        .prize-pool .prize-item .place {
+            font-weight: 600;
+            color: #6f7885;
+        }
+        .prize-pool .prize-item .amount {
+            font-weight: 700;
+            color: #f5b81b;
+        }
+        .prize-pool .prize-item:nth-child(1) {
+            background: rgba(245, 184, 27, 0.08);
+        }
+        .prize-pool .prize-item:nth-child(2) {
+            background: rgba(192, 200, 208, 0.06);
+        }
+        .prize-pool .prize-item:nth-child(3) {
+            background: rgba(205, 127, 50, 0.06);
+        }
+        .rating-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .rating-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6f7885;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #282830;
+        }
+        .rating-table td {
+            padding: 14px 16px;
+            font-size: 15px;
+            border-bottom: 1px solid #1f1f28;
+            color: #d0d6de;
+        }
+        .rating-table tr:hover td {
+            background: rgba(255,255,255,0.02);
+        }
+        .rating-table .rank {
+            font-weight: 700;
+            color: #6f7885;
+            width: 50px;
+        }
+        .rating-table .rank.gold {
+            color: #f5b81b;
+        }
+        .rating-table .rank.silver {
+            color: #c0c8d0;
+        }
+        .rating-table .rank.bronze {
+            color: #cd7f32;
+        }
+        .rating-table .player-name {
+            font-weight: 600;
+            color: #f0f2f5;
+        }
+        .rating-table .player-name i {
+            color: #f5b81b;
+            font-size: 14px;
+            margin-left: 6px;
+        }
+        .rating-table .player-rating {
+            font-weight: 700;
+            color: #f5b81b;
+        }
+        .rating-table .player-prize {
+            font-weight: 700;
+            color: #f5b81b;
+            font-size: 14px;
+        }
+
+        .missions-page {
+            background: #111117;
+            border-radius: 28px;
+            padding: 60px 28px;
+            text-align: center;
+            border: 1px solid #26262e;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .missions-page .big-icon {
+            font-size: 72px;
+            color: #f5b81b;
+            margin-bottom: 20px;
+        }
+        .missions-page h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .missions-page p {
+            color: #6f7885;
+            font-size: 16px;
+        }
+
+        .shop-page {
+            background: #111117;
+            border-radius: 28px;
+            padding: 60px 28px;
+            text-align: center;
+            border: 1px solid #26262e;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .shop-page .big-icon {
+            font-size: 72px;
+            color: #f5b81b;
+            margin-bottom: 20px;
+        }
+        .shop-page h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .shop-page p {
+            color: #6f7885;
+            font-size: 16px;
+        }
+
+        .profile-page {
+            background: #111117;
+            border-radius: 28px;
+            padding: 32px 28px 36px;
+            border: 1px solid #26262e;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 28px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #282830;
+        }
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #1c1c24;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: #6f7885;
+            border: 2px solid #282830;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: 0.15s;
+            overflow: hidden;
+        }
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-avatar:hover {
+            border-color: #f5b81b;
+            background: #24242e;
+        }
+        .profile-info .name {
+            font-size: 26px;
+            font-weight: 700;
+            color: #f0f2f5;
+        }
+        .profile-info .name i {
+            color: #f5b81b;
+            font-size: 18px;
+            margin-left: 8px;
+        }
+        .profile-info .id {
+            font-size: 15px;
+            color: #6f7885;
+            margin-top: 4px;
+        }
+        .profile-info .league {
+            display: inline-block;
+            background: #1a1a24;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #88909c;
+            margin-top: 8px;
+            border: 1px solid #282830;
+        }
+        .profile-info .league i {
+            color: #f5b81b;
+            margin-right: 6px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .stat-item {
+            background: #0c0c10;
+            border-radius: 16px;
+            padding: 18px 14px;
+            text-align: center;
+            border: 1px solid #1f1f28;
+        }
+        .stat-item .value {
+            font-size: 26px;
+            font-weight: 700;
+            color: #f0f2f5;
+        }
+        .stat-item .value.gold {
+            color: #f5b81b;
+        }
+        .stat-item .value.green {
+            color: #6fcf97;
+        }
+        .stat-item .value.red {
+            color: #e74c3c;
+        }
+        .stat-item .label {
+            font-size: 12px;
+            color: #6f7885;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        .calibration-section {
+            background: #0c0c10;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            border: 1px solid #1f1f28;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .calibration-section .left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .calibration-section .left .cal-icon {
+            font-size: 32px;
+            color: #f5b81b;
+        }
+        .calibration-section .left .cal-info .title {
+            font-weight: 600;
+            font-size: 17px;
+            color: #f0f2f5;
+        }
+        .calibration-section .left .cal-info .sub {
+            font-size: 14px;
+            color: #6f7885;
+        }
+        .calibration-section .right .progress-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f5b81b;
+        }
+        .calibration-section .right .progress-bar {
+            width: 140px;
+            height: 8px;
+            background: #1f1f28;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .calibration-section .right .progress-bar .fill {
+            height: 100%;
+            background: #f5b81b;
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .elo-section {
+            background: #0c0c10;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            border: 1px solid #1f1f28;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .elo-section.show {
+            display: flex;
+        }
+        .elo-section .left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .elo-section .left .elo-icon {
+            font-size: 32px;
+            color: #f5b81b;
+        }
+        .elo-section .left .elo-info .title {
+            font-weight: 600;
+            font-size: 17px;
+            color: #f0f2f5;
+        }
+        .elo-section .left .elo-info .sub {
+            font-size: 14px;
+            color: #6f7885;
+        }
+        .elo-section .right .elo-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #f5b81b;
+        }
+        .elo-section .right .elo-change {
+            font-size: 14px;
+            color: #6f7885;
+            text-align: right;
+        }
+        .elo-section .right .elo-change .win {
+            color: #6fcf97;
+        }
+        .elo-section .right .elo-change .lose {
+            color: #e74c3c;
+        }
+
+        .profile-actions-btns {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        .profile-actions-btns .btn {
+            padding: 12px 32px;
+            border-radius: 60px;
+            border: none;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.12s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .profile-actions-btns .btn-edit {
+            background: #1c1c24;
+            color: #d0d6de;
+        }
+        .profile-actions-btns .btn-edit:hover {
+            background: #2a2a34;
+        }
+        .profile-actions-btns .btn-help {
+            background: #1c1c24;
+            color: #d0d6de;
+        }
+        .profile-actions-btns .btn-help:hover {
+            background: #2a2a34;
+        }
+        .profile-actions-btns .btn-logout {
+            background: #3a1a1a;
+            color: #ff6b6b;
+            border: 1px solid #ff6b6b;
+        }
+        .profile-actions-btns .btn-logout:hover {
+            background: #4a2a2a;
+        }
+
+        .history-section {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #282830;
+        }
+        .history-section .history-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #f0f2f5;
+            margin-bottom: 16px;
+        }
+        .history-empty {
+            background: #0c0c10;
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+            border: 1px solid #1f1f28;
+        }
+        .history-empty i {
+            font-size: 48px;
+            color: #6f7885;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .history-empty .empty-text {
+            font-size: 16px;
+            color: #6f7885;
+        }
+        .history-empty .empty-sub {
+            font-size: 14px;
+            color: #4f5660;
+            margin-top: 4px;
+        }
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .history-item {
+            background: #0c0c10;
+            border-radius: 12px;
+            padding: 12px 18px;
+            border: 1px solid #1f1f28;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+        .history-item .match-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .history-item .match-info .match-number {
+            color: #6f7885;
+            font-weight: 600;
+        }
+        .history-item .match-info .match-map {
+            color: #88909c;
+        }
+        .history-item .match-result {
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 13px;
+        }
+        .history-item .match-result.win {
+            background: #1a3a2a;
+            color: #6fcf97;
+        }
+        .history-item .match-result.lose {
+            background: #3a1a1a;
+            color: #e74c3c;
+        }
+        .history-item .elo-change {
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        .history-item .elo-change.positive {
+            color: #6fcf97;
+        }
+        .history-item .elo-change.negative {
+            color: #e74c3c;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fade 0.25s ease;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal {
+            background: #1a1a24;
+            border-radius: 28px;
+            padding: 40px 44px 36px;
+            max-width: 480px;
+            width: 100%;
+            border: 1px solid #282832;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+            position: relative;
+        }
+        .modal .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 24px;
+            color: #6f7885;
+            cursor: pointer;
+            transition: 0.15s;
+            background: none;
+            border: none;
+        }
+        .modal .modal-close:hover {
+            color: #f0f2f5;
+        }
+        .modal .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f0f2f5;
+            margin-bottom: 6px;
+        }
+        .modal .modal-sub {
+            font-size: 14px;
+            color: #6f7885;
+            margin-bottom: 24px;
+        }
+        .modal .avatar-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 16px 20px;
+            background: #0e0e16;
+            border-radius: 16px;
+            border: 1px solid #23232b;
+        }
+        .modal .avatar-section .avatar-preview {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #1c1c24;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: #6f7885;
+            border: 2px solid #282830;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .modal .avatar-section .avatar-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .modal .avatar-section .avatar-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .modal .avatar-section .avatar-actions .label {
+            font-size: 13px;
+            color: #88909c;
+        }
+        .modal .avatar-section .avatar-actions .btn-upload {
+            background: #26262e;
+            border: none;
+            padding: 6px 20px;
+            border-radius: 40px;
+            color: #d0d6de;
+            font-weight: 500;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.1s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+        }
+        .modal .avatar-section .avatar-actions .btn-upload:hover {
+            background: #32323e;
+        }
+        .modal .form-group {
+            margin-bottom: 18px;
+        }
+        .modal .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #88909c;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .modal .form-group input {
+            width: 100%;
+            background: #0e0e16;
+            border: 1px solid #23232b;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 16px;
+            color: #f0f2f5;
+            outline: none;
+            transition: 0.15s;
+        }
+        .modal .form-group input:focus {
+            border-color: #f5b81b;
+            box-shadow: 0 0 0 3px rgba(245, 184, 27, 0.08);
+        }
+        .modal .form-group input::placeholder {
+            color: #4f5660;
+        }
+        .modal .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .modal .modal-actions .btn {
+            padding: 12px 32px;
+            border-radius: 60px;
+            border: none;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.12s;
+            flex: 1;
+        }
+        .modal .modal-actions .btn-cancel {
+            background: #1c1c24;
+            color: #d0d6de;
+        }
+        .modal .modal-actions .btn-cancel:hover {
+            background: #2a2a34;
+        }
+        .modal .modal-actions .btn-save {
+            background: #f5b81b;
+            color: #0b0b0e;
+        }
+        .modal .modal-actions .btn-save:hover {
+            background: #ffcc33;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #141210;
+            border: 1px solid #2a241e;
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            z-index: 9999;
+            max-width: 400px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 0.4s ease;
+            color: #e0dcd0;
+        }
+        .toast.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast .toast-title {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        .toast .toast-title.success {
+            color: #51cf66;
+        }
+        .toast .toast-title.error {
+            color: #ff6b6b;
+        }
+        .toast .toast-title.info {
+            color: #f5b81b;
+        }
+        .toast .toast-text {
+            color: #8f877a;
+            font-size: 0.95rem;
+        }
+
+        .admin-panel {
+            background: #1a1a24;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #f5b81b;
+            display: none;
+        }
+        .admin-panel .admin-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .admin-panel .admin-title h3 {
+            color: #f5b81b;
+        }
+        .admin-panel .admin-title span {
+            color: #6f7885;
+            font-size: 13px;
+        }
+        .admin-panel .admin-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .admin-panel .admin-buttons button {
+            background: #2a2a34;
+            padding: 10px 20px;
+            border-radius: 40px;
+            color: #d0d6de;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.15s;
+        }
+        .admin-panel .admin-buttons button:hover {
+            background: #3a3a44;
+        }
+
+        .admin-user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: #0c0c10;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            border: 1px solid #1f1f28;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .admin-user-item .user-info strong {
+            color: #f0f2f5;
+        }
+        .admin-user-item .user-info span {
+            color: #6f7885;
+            font-size: 13px;
+            margin-left: 12px;
+        }
+        .admin-user-item .user-info .badge-super {
+            color: #f5b81b;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .admin-user-item .user-info .badge-admin {
+            color: #6fcf97;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .admin-user-item .user-actions {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+        .admin-user-item .user-actions button {
+            padding: 6px 16px;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.15s;
+        }
+        .admin-user-item .user-actions .btn-make-admin {
+            background: #1a3a2a;
+            color: #6fcf97;
+        }
+        .admin-user-item .user-actions .btn-make-admin:hover {
+            background: #2a4a3a;
+        }
+        .admin-user-item .user-actions .btn-remove-admin {
+            background: #3a1a1a;
+            color: #ff6b6b;
+        }
+        .admin-user-item .user-actions .btn-remove-admin:hover {
+            background: #4a2a2a;
+        }
+        .admin-user-item .user-actions .btn-delete {
+            background: #3a1a1a;
+            color: #ff6b6b;
+        }
+        .admin-user-item .user-actions .btn-delete:hover {
+            background: #4a2a2a;
+        }
+        .admin-user-item .user-actions .disabled-text {
+            color: #6f7885;
+            font-size: 12px;
+        }
+
+        .admin-queue-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 16px;
+            background: #0c0c10;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            border: 1px solid #1f1f28;
+        }
+        .admin-queue-item span {
+            color: #f0f2f5;
+        }
+        .admin-queue-item button {
+            background: #3a1a1a;
+            border: none;
+            color: #ff6b6b;
+            padding: 4px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .auth-container {
+                padding: 1.5rem;
+                margin: 16px;
+            }
+            .top-nav {
+                flex-direction: column;
+                align-items: stretch;
+                border-radius: 24px;
+                padding: 12px 16px;
+            }
+            .nav-center {
+                justify-content: center;
+                gap: 14px;
+            }
+            .nav-right {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .calibration-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .rating-table {
+                font-size: 13px;
+            }
+            .rating-table th,
+            .rating-table td {
+                padding: 10px 12px;
+            }
+            .profile-actions-btns {
+                justify-content: center;
+            }
+            .modal {
+                padding: 24px 20px;
+                margin: 16px;
+            }
+            .teams-row {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+            .team-col {
+                max-width: 100%;
+                width: 100%;
+            }
+            .result-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 14px;
+            }
+            .elo-section {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .elo-section .right .elo-change {
+                text-align: center;
+            }
+            .admin-user-item {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== СТРАНИЦА АВТОРИЗАЦИИ ===== -->
+    <div class="auth-page" id="authPage">
+        <div class="auth-container">
+            <div class="auth-logo">
+                <h1>⚡ CYBERMODE</h1>
+                <p>Танковый портал</p>
+            </div>
+            <div id="loginForm">
+                <h2>Вход</h2>
+                <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="Введите email" /></div>
+                <div class="form-group"><label>Пароль</label><input type="password" id="loginPassword" placeholder="Введите пароль" /></div>
+                <button class="btn-submit" id="loginBtn">Войти</button>
+                <div class="auth-links"><a onclick="showAuthForm('register')">Нет аккаунта? Зарегистрироваться</a></div>
+            </div>
+            <div id="registerForm" style="display: none;">
+                <h2>Регистрация</h2>
+                <div class="form-group"><label>Имя пользователя <span class="required">*</span></label><input type="text" id="regUsername" placeholder="Придумайте имя" /></div>
+                <div class="form-group"><label>Email <span class="required">*</span></label><input type="email" id="regEmail" placeholder="Введите email" /></div>
+                <div class="form-group"><label>ID из Tanks Blitz <span class="required">*</span></label><input type="text" id="regStandoffId" placeholder="Например: 123456789" /><div class="hint">🔑 Введите ваш игровой ID из Tanks Blitz (только цифры)</div></div>
+                <div class="form-group"><label>Пароль <span class="required">*</span></label><input type="password" id="regPassword" placeholder="Минимум 8 символов" /></div>
+                <div class="form-group"><label>Подтверждение пароля <span class="required">*</span></label><input type="password" id="regPasswordConfirm" placeholder="Повторите пароль" /></div>
+                <button class="btn-submit" id="registerBtn">Зарегистрироваться</button>
+                <div class="auth-links"><a onclick="showAuthForm('login')">Уже есть аккаунт? Войти</a></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ОСНОВНОЙ САЙТ ===== -->
+    <div class="main-site" id="mainSite">
+
+        <!-- ===== НАВИГАЦИЯ ===== -->
+        <div class="top-nav" id="topNav">
+            <div class="brand" id="brandLogo"><i class="fas fa-fist-raised"></i> CYBERMODE</div>
+            <div class="nav-center">
+                <span class="nav-item" data-tab="main">Главная</span>
+                <span class="nav-item" data-tab="search">Поиск матча</span>
+                <span class="nav-item" data-tab="rating">Рейтинг</span>
+                <span class="nav-item" data-tab="missions">Миссии</span>
+                <span class="nav-item" data-tab="shop">Магазин</span>
+                <span class="nav-item" data-tab="match" id="matchTabBtn" style="display:none;">Матч</span>
+            </div>
+            <div class="nav-right">
+                <div class="profile" id="profileNav">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="navUsername">Профиль</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== АДМИН-ПАНЕЛЬ ===== -->
+        <div class="admin-panel" id="adminPanel">
+            <div class="admin-title">
+                <h3><i class="fas fa-user-shield"></i> Админ-панель</h3>
+                <span>👑 Только для администраторов</span>
+            </div>
+            <div class="admin-buttons">
+                <button onclick="switchTab('adminUsers')"><i class="fas fa-users"></i> Управление админами</button>
+                <button onclick="switchTab('adminQueue')"><i class="fas fa-clock"></i> Очередь</button>
+            </div>
+        </div>
+
+        <!-- ===== ГЛАВНОЕ МЕНЮ ===== -->
+        <div id="tabMain" class="tab-content active">
+            <div class="main-menu">
+                <div class="big-icon"><i class="fas fa-gamepad"></i></div>
+                <div class="profile-actions">
+                    <button class="btn-action" id="profileBtn"><i class="fas fa-user"></i> Мой профиль</button>
+                    <button class="btn-action primary" id="playMatchBtn"><i class="fas fa-gamepad"></i> Играть матч</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== ПОИСК МАТЧА ===== -->
+        <div id="tabSearch" class="tab-content">
+            <div class="search-page">
+                <div class="big-icon"><i class="fas fa-gamepad"></i></div>
+                <h2>Поиск матча</h2>
+                <p>Нажмите кнопку для поиска соперников.</p>
+                <button class="btn-search" id="searchMatchBtn"><i class="fas fa-play"></i> ПОИСК МАТЧА</button>
+                <div class="search-status"><span class="count" id="searchCount">0/10</span></div>
+                <div class="timer-display"><i class="fas fa-stopwatch"></i> Время поиска: <span class="time" id="timerDisplay">00:00</span></div>
+            </div>
+        </div>
+
+        <!-- ===== ВКЛАДКА МАТЧА ===== -->
+        <div id="tabMatch" class="tab-content">
+            <div class="match-page">
+                <div class="match-id">🎮 Матч #<span id="matchIdDisplay">0000</span></div>
+                <div class="teams-row">
+                    <div class="team-col">
+                        <h3><i class="fas fa-shield-alt"></i> КОМАНДА А</h3>
+                        <div class="player-list" id="teamAList"></div>
+                    </div>
+                    <div class="team-col">
+                        <h3><i class="fas fa-skull"></i> КОМАНДА В</h3>
+                        <div class="player-list" id="teamBList"></div>
+                    </div>
+                </div>
+                <div class="ban-section" id="banSection">
+                    <div class="ban-header">
+                        <div class="captain-indicator">
+                            <span><i class="fas fa-crown"></i> Капитан А</span>
+                            <span class="turn" id="turnIndicator"><i class="fas fa-arrow-right"></i> ход</span>
+                            <span><i class="fas fa-crown"></i> Капитан В</span>
+                        </div>
+                        <span style="color: #88909c; font-size: 15px;"><i class="fas fa-layer-group"></i> Нажмите на карту чтобы забанить</span>
+                    </div>
+                    <div class="ban-pool" id="mapPool">
+                        <div class="map-chip" data-map="de_dust2">de_dust2</div>
+                        <div class="map-chip" data-map="de_mirage">de_mirage</div>
+                        <div class="map-chip" data-map="de_inferno">de_inferno</div>
+                        <div class="map-chip" data-map="de_nuke">de_nuke</div>
+                        <div class="map-chip" data-map="de_vertigo">de_vertigo</div>
+                        <div class="map-chip" data-map="de_ancient">de_ancient</div>
+                    </div>
+                </div>
+                <div class="result-section hidden" id="resultSection">
+                    <div class="result-row">
+                        <div class="final-map">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <span class="map-name" id="finalMapDisplay">de_dust2</span>
+                            <span style="color: #6f7885; font-size: 15px;">(итог)</span>
+                        </div>
+                        <button class="attach-btn" id="attachResultBtn">
+                            <i class="fas fa-image"></i> ПРИКРЕПИТЬ РЕЗУЛЬТАТ
+                        </button>
+                    </div>
+                    <div class="screenshot-preview" id="screenshotPreview">
+                        <img id="screenshotImg" src="" alt="Скриншот результата" />
+                        <div class="file-name" id="screenshotName"></div>
+                    </div>
+                    <div class="victory-buttons" id="victoryButtons">
+                        <button class="btn-victory team-a" id="victoryA"><i class="fas fa-trophy"></i> Победа Команды А</button>
+                        <button class="btn-victory team-b" id="victoryB"><i class="fas fa-trophy"></i> Победа Команды В</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== РЕЙТИНГ ===== -->
+        <div id="tabRating" class="tab-content">
+            <div class="rating-page">
+                <div class="rating-title">🏆 Топ игроков</div>
+                <div class="rating-sub">Рейтинг лучших игроков по количеству побед</div>
+                <div class="prize-pool">
+                    <div class="prize-title">💰 ПРИЗОВОЙ ФОНД СЕЗОНА</div>
+                    <div class="prize-list">
+                        <div class="prize-item"><span class="place">🥇 1 место</span><span class="amount">5 000 ₽</span></div>
+                        <div class="prize-item"><span class="place">🥈 2 место</span><span class="amount">3 500 ₽</span></div>
+                        <div class="prize-item"><span class="place">🥉 3 место</span><span class="amount">1 500 ₽</span></div>
+                    </div>
+                </div>
+                <table class="rating-table">
+                    <thead><tr><th>Место</th><th>Игрок</th><th>Elo</th><th>Приз</th></tr></thead>
+                    <tbody id="ratingBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ===== МИССИИ ===== -->
+        <div id="tabMissions" class="tab-content">
+            <div class="missions-page">
+                <div class="big-icon"><i class="fas fa-tasks"></i></div>
+                <h2>Миссии</h2>
+                <p>Ежедневные задания и миссии</p>
+                <p style="color:#4f5660; margin-top:10px;">🚧 Раздел в разработке</p>
+            </div>
+        </div>
+
+        <!-- ===== МАГАЗИН ===== -->
+        <div id="tabShop" class="tab-content">
+            <div class="shop-page">
+                <div class="big-icon"><i class="fas fa-store"></i></div>
+                <h2>Магазин</h2>
+                <p>Привилегии и улучшения для аккаунта</p>
+                <p style="color:#4f5660; margin-top:10px;">🚧 Раздел в разработке</p>
+            </div>
+        </div>
+
+        <!-- ===== ПРОФИЛЬ ===== -->
+        <div id="tabProfile" class="tab-content">
+            <div class="profile-page">
+                <div class="profile-header">
+                    <div class="profile-avatar" id="avatarPreview"><i class="fas fa-user"></i></div>
+                    <div class="profile-info">
+                        <div class="name" id="profileNameDisplay">Игрок <i class="fas fa-check-circle"></i></div>
+                        <div class="id" id="profileIdDisplay">TANKS ID: 101294641</div>
+                        <div class="league"><i class="fas fa-trophy"></i> DEFAULT LEAGUE · Калибровка рейтинга</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item"><div class="value gold" id="winrateDisplay">0%</div><div class="label">Винрейт</div></div>
+                    <div class="stat-item"><div class="value green" id="winsDisplay">0</div><div class="label">Победы</div></div>
+                    <div class="stat-item"><div class="value red" id="lossesDisplay">0</div><div class="label">Поражения</div></div>
+                    <div class="stat-item"><div class="value gold" id="matchesDisplay">0</div><div class="label">Матчи</div></div>
+                </div>
+                <div class="calibration-section" id="calibrationSection">
+                    <div class="left">
+                        <div class="cal-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="cal-info">
+                            <div class="title">Калибровка</div>
+                            <div class="sub" id="calibrationSub">Пройдите 10 матчей для определения рейтинга</div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <span class="progress-text" id="calibrationText">0/10</span>
+                        <div class="progress-bar"><div class="fill" id="calibrationFill"></div></div>
+                    </div>
+                </div>
+                <div class="elo-section" id="eloSection">
+                    <div class="left">
+                        <div class="elo-icon"><i class="fas fa-star"></i></div>
+                        <div class="elo-info">
+                            <div class="title">Текущий ELO</div>
+                            <div class="sub" id="eloSub">Ваш рейтинг в лиге</div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="elo-value" id="eloValue">0</div>
+                        <div class="elo-change">
+                            <span class="win">+25</span> / <span class="lose">-25</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-actions-btns">
+                    <button class="btn btn-edit" id="editProfileBtn"><i class="fas fa-pen"></i> Редактировать</button>
+                    <button class="btn btn-help" id="helpBtn"><i class="fas fa-question-circle"></i> Помощь</button>
+                    <button class="btn btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Выйти</button>
+                </div>
+                <div class="history-section">
+                    <div class="history-title">Последние матчи</div>
+                    <div id="historyContainer">
+                        <div class="history-empty" id="historyEmpty">
+                            <i class="fas fa-trophy"></i>
+                            <div class="empty-text">В этой лиге матчей пока нет.</div>
+                            <div class="empty-sub">Сыграйте свой первый матч, чтобы он появился здесь</div>
+                        </div>
+                        <div class="history-list" id="historyList" style="display:none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== АДМИН - УПРАВЛЕНИЕ АДМИНАМИ ===== -->
+        <div id="tabAdminUsers" class="tab-content">
+            <div class="rating-page">
+                <div class="rating-title"><i class="fas fa-users-cog"></i> Управление администраторами</div>
+                <div class="rating-sub">Только главный администратор (cyber@mail.ru) может назначать и удалять админов</div>
+                <div id="adminUsersList" style="margin-top: 20px;"></div>
+            </div>
+        </div>
+
+        <!-- ===== АДМИН - ОЧЕРЕДЬ ===== -->
+        <div id="tabAdminQueue" class="tab-content">
+            <div class="rating-page">
+                <div class="rating-title"><i class="fas fa-clock"></i> Очередь игроков</div>
+                <div class="rating-sub">Просматривайте и управляйте очередью поиска</div>
+                <div id="adminQueueList" style="margin-top: 20px;"></div>
+                <button class="btn-action" onclick="clearQueue()" style="margin-top: 16px; background: #ff6b6b; color: white; border: none; padding: 12px 24px; border-radius: 40px; cursor: pointer;">
+                    <i class="fas fa-trash"></i> Очистить очередь
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО РЕДАКТИРОВАНИЯ ===== -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <button class="modal-close" id="closeEditModal">&times;</button>
+            <div class="modal-title">Редактирование профиля</div>
+            <div class="modal-sub">Измените никнейм и TANKS ID. Данные обновятся сразу после сохранения.</div>
+            <div class="avatar-section">
+                <div class="avatar-preview" id="modalAvatarPreview"><i class="fas fa-user"></i></div>
+                <div class="avatar-actions">
+                    <span class="label">Сменить аватар</span>
+                    <button class="btn-upload" id="uploadAvatarBtn"><i class="fas fa-upload"></i> Загрузить</button>
+                </div>
+            </div>
+            <div class="form-group"><label>Никнейм</label><input type="text" id="editNameInput" placeholder="Введите никнейм" /></div>
+            <div class="form-group"><label>TANKS ID</label><input type="text" id="editIdInput" placeholder="Введите TANKS ID" /></div>
+            <div class="modal-actions">
+                <button class="btn btn-cancel" id="cancelEditBtn">Отмена</button>
+                <button class="btn btn-save" id="saveEditBtn">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ТОСТ ===== -->
+    <div class="toast" id="toast">
+        <div class="toast-title" id="toastTitle">Успешно!</div>
+        <div class="toast-text" id="toastText">Действие выполнено</div>
+    </div>
+
+    <!-- ===== СКРЫТЫЙ INPUT ДЛЯ РЕЗУЛЬТАТА ===== -->
+    <input type="file" id="fileInputResult" accept="image/*" style="display:none;" />
+    <!-- ===== СКРЫТЫЙ INPUT ДЛЯ АВАТАРА ===== -->
+    <input type="file" id="fileInputAvatar" accept="image/*" style="display:none;" />
+
+    <script>
+        // ===== API КОНСТАНТА =====
+        const API_URL = '/api';
+
+        // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
+        function showAuthForm(form) {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'none';
+            if (form === 'login') document.getElementById('loginForm').style.display = 'block';
+            else if (form === 'register') document.getElementById('registerForm').style.display = 'block';
+        }
+
+        function showToast(type, title, text) {
+            const toast = document.getElementById('toast');
+            const titleEl = document.getElementById('toastTitle');
+            const textEl = document.getElementById('toastText');
+            titleEl.className = 'toast-title ' + type;
+            titleEl.textContent = title;
+            textEl.textContent = text;
+            toast.classList.add('visible');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => toast.classList.remove('visible'), 4000);
+        }
+
+        // ===== API КЛИЕНТ =====
+        async function apiRequest(endpoint, options = {}) {
+            const token = localStorage.getItem('cybermode_token');
+            const headers = {
+                'Content-Type': 'application/json',
+                ...options.headers
+            };
+            if (token) headers['Authorization'] = `Bearer ${token}`;
+
+            const response = await fetch(`${API_URL}${endpoint}`, {
+                ...options,
+                headers
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Ошибка запроса');
+            return data;
+        }
+
+        // ===== АУТЕНТИФИКАЦИЯ =====
+        async function register(username, email, standoffId, password) {
+            return apiRequest('/auth/register', {
+                method: 'POST',
+                body: JSON.stringify({ username, email, standoffId, password })
+            });
+        }
+
+        async function login(email, password) {
+            const data = await apiRequest('/auth/login', {
+                method: 'POST',
+                body: JSON.stringify({ email, password })
+            });
+            if (data.token) localStorage.setItem('cybermode_token', data.token);
+            return data;
+        }
+
+        async function getMe() {
+            return apiRequest('/auth/me');
+        }
+
+        function logout() {
+            localStorage.removeItem('cybermode_token');
+            localStorage.removeItem('cybermode_user');
+        }
+
+        // ===== ОЧЕРЕДЬ =====
+        async function getQueue() {
+            return apiRequest('/queue');
+        }
+
+        async function joinQueue(username) {
+            return apiRequest('/queue/join', {
+                method: 'POST',
+                body: JSON.stringify({ username })
+            });
+        }
+
+        async function leaveQueue(username) {
+            return apiRequest('/queue/leave', {
+                method: 'POST',
+                body: JSON.stringify({ username })
+            });
+        }
+
+        // ===== МАТЧИ =====
+        async function createMatch(matchData) {
+            return apiRequest('/match/create', {
+                method: 'POST',
+                body: JSON.stringify(matchData)
+            });
+        }
+
+        async function getMatch(matchId) {
+            return apiRequest(`/match/${matchId}`);
+        }
+
+        async function updateMatch(matchData) {
+            return apiRequest('/match/update', {
+                method: 'PUT',
+                body: JSON.stringify(matchData)
+            });
+        }
+
+        async function finishMatch(matchData) {
+            return apiRequest('/match/finish', {
+                method: 'POST',
+                body: JSON.stringify(matchData)
+            });
+        }
+
+        // ===== СТАТИСТИКА =====
+        async function getStats() {
+            return apiRequest('/stats');
+        }
+
+        // ===== РЕГИСТРАЦИЯ =====
+        async function handleRegister() {
+            try {
+                const username = document.getElementById('regUsername').value.trim();
+                const email = document.getElementById('regEmail').value.trim();
+                const standoffId = document.getElementById('regStandoffId').value.trim();
+                const password = document.getElementById('regPassword').value;
+                const passwordConfirm = document.getElementById('regPasswordConfirm').value;
+
+                if (!username || !email || !standoffId || !password || !passwordConfirm) {
+                    showToast('error', 'Ошибка', 'Заполните все поля');
+                    return;
+                }
+                if (password !== passwordConfirm) {
+                    showToast('error', 'Ошибка', 'Пароли не совпадают');
+                    return;
+                }
+                if (password.length < 8) {
+                    showToast('error', 'Ошибка', 'Пароль должен содержать минимум 8 символов');
+                    return;
+                }
+                if (!/^\d+$/.test(standoffId)) {
+                    showToast('error', 'Ошибка', 'ID должен содержать только цифры');
+                    return;
+                }
+
+                const result = await register(username, email, standoffId, password);
+                if (result.success) {
+                    localStorage.setItem('cybermode_user', JSON.stringify(result.user));
+                    showToast('success', 'Успешно', 'Регистрация пройдена');
+                    setTimeout(() => loadMainSite(), 500);
+                }
+            } catch (error) {
+                showToast('error', 'Ошибка', error.message);
+            }
+        }
+
+        // ===== ВХОД =====
+        async function handleLogin() {
+            try {
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value;
+
+                if (!email || !password) {
+                    showToast('error', 'Ошибка', 'Заполните все поля');
+                    return;
+                }
+
+                const result = await login(email, password);
+                if (result.success) {
+                    localStorage.setItem('cybermode_user', JSON.stringify(result.user));
+                    showToast('success', 'Успешно', 'Добро пожаловать');
+                    setTimeout(() => loadMainSite(), 500);
+                }
+            } catch (error) {
+                showToast('error', 'Ошибка', error.message);
+            }
+        }
+
+        // ===== ВЫХОД =====
+        function handleLogout() {
+            logout();
+            document.getElementById('mainSite').classList.remove('visible');
+            document.getElementById('authPage').style.display = 'flex';
+            showToast('info', 'Выход выполнен', 'Вы вышли из аккаунта');
+        }
+
+        // ===== АДМИН-ПАНЕЛЬ =====
+        async function checkAdmin() {
+            try {
+                const data = await apiRequest('/admin/check');
+                const adminPanel = document.getElementById('adminPanel');
+                if (data.isAdmin) {
+                    adminPanel.style.display = 'block';
+                    loadAdminUsers();
+                    loadAdminQueue();
+                } else {
+                    adminPanel.style.display = 'none';
+                }
+                return data.isAdmin;
+            } catch (error) {
+                console.error('Admin check error:', error);
+                return false;
+            }
+        }
+
+        async function loadAdminUsers() {
+            try {
+                const data = await apiRequest('/admin/users');
+                const container = document.getElementById('adminUsersList');
+                if (!data.users || data.users.length === 0) {
+                    container.innerHTML = '<p style="color: #6f7885;">Нет пользователей</p>';
+                    return;
+                }
+                container.innerHTML = data.users.map(user => {
+                    const isSuper = user.isSuperAdmin;
+                    const isAdmin = user.is_admin;
+                    return `
+                        <div class="admin-user-item" style="border-color: ${isSuper ? '#f5b81b' : '#1f1f28'}">
+                            <div class="user-info">
+                                <strong style="color: ${isSuper ? '#f5b81b' : '#f0f2f5'};">${user.username}</strong>
+                                <span>${user.email}</span>
+                                ${isSuper ? '<span class="badge-super">👑 Главный админ</span>' : ''}
+                                ${isAdmin && !isSuper ? '<span class="badge-admin">🔹 Админ</span>' : ''}
+                            </div>
+                            <div class="user-actions">
+                                ${!isSuper ? `
+                                    <button class="${isAdmin ? 'btn-remove-admin' : 'btn-make-admin'}" onclick="toggleAdmin('${user.id}', ${!isAdmin})">
+                                        ${isAdmin ? 'Снять админа' : 'Назначить админом'}
+                                    </button>
+                                    <button class="btn-delete" onclick="deleteUser('${user.id}')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                ` : '<span class="disabled-text">Нельзя редактировать</span>'}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Load admin users error:', error);
+                showToast('error', 'Ошибка', error.message);
+            }
+        }
+
+        async function toggleAdmin(userId, makeAdmin) {
+            try {
+                await apiRequest('/admin/users/toggle', {
+                    method: 'POST',
+                    body: JSON.stringify({ userId, makeAdmin })
+                });
+                showToast('success', 'Успешно', `Права администратора ${makeAdmin ? 'добавлены' : 'сняты'}`);
+                loadAdminUsers();
+            } catch (error) {
+                showToast('error', 'Ошибка', error.message);
+            }
+        }
+
+        async function deleteUser(userId) {
+            if (!confirm('Удалить этого пользователя?')) return;
+            try {
+                await apiRequest(`/admin/users/${userId}`, { method: 'DELETE' });
+                showToast('success', 'Успешно', 'Пользователь удалён');
+                loadAdminUsers();
+            } catch (error) {
+                showToast('error', 'Ошибка', error.message);
+            }
+        }
+
+        async function loadAdminQueue() {
+            try {
+                const data = await apiRequest('/queue');
+                const container = document.getElementById('adminQueueList');
+                if (!data.players || data.players.length === 0) {
+                    container.innerHTML = '<p style="color: #6f7885;">Очередь пуста</p>';
+                    return;
+                }
+                container.innerHTML = data.players.map(p => `
+                    <div class="admin-queue-item">
+                        <span>${p}</span>
+                        <button onclick="removeFromQueue('${p}')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Load admin queue error:', error);
+            }
+        }
+
+        async function removeFromQueue(username) {
+            try {
+                await apiRequest('/queue/leave', {
+                    method: 'POST',
+                    body: JSON.stringify({ username })
+                });
+                showToast('success', 'Успешно', 'Игрок удалён из очереди');
+                loadAdminQueue();
+            } catch (error) {
+                showToast('error', 'Ошибка', error.message);
+            }
+        }
+
+        async function clearQueue() {
+            if (!confirm('Очистить всю очередь?')) return;
+            try {
+                await apiRequest('/queue/clear', { method: 'DELETE' });
+                showToast('success', 'Успешно', 'Очередь очищена');
+                loadAdminQueue();
+            } catch (error) {
+                showToast('error', 'Ошибка', error.message);
+            }
+        }
+
+        // ===== ЗАГРУЗКА ОСНОВНОГО САЙТА =====
+        async function loadMainSite() {
+            try {
+                const user = await getMe();
+                document.getElementById('authPage').style.display = 'none';
+                document.getElementById('mainSite').classList.add('visible');
+                updateUI(user);
+                await checkAdmin();
+                const stats = await getStats();
+                document.getElementById('usersCount').textContent = stats.totalUsers || 0;
+                document.getElementById('tournamentsCount').textContent = stats.tournaments || 0;
+                document.getElementById('serverCount').textContent = stats.servers || 0;
+                document.getElementById('pendingCount').textContent = stats.pending || 0;
+            } catch (error) {
+                logout();
+                document.getElementById('authPage').style.display = 'flex';
+                document.getElementById('mainSite').classList.remove('visible');
+                showToast('error', 'Ошибка', error.message);
+            }
+        }
+
+        // ===== ОБНОВЛЕНИЕ UI =====
+        function updateUI(user) {
+            document.getElementById('navUsername').textContent = user.username;
+            document.getElementById('profileNameDisplay').innerHTML = user.username + ' <i class="fas fa-check-circle"></i>';
+            document.getElementById('profileIdDisplay').textContent = 'TANKS ID: ' + (user.standoffId || '101294641');
+            document.getElementById('winsDisplay').textContent = user.wins || 0;
+            document.getElementById('lossesDisplay').textContent = user.losses || 0;
+            document.getElementById('matchesDisplay').textContent = user.matches || 0;
+
+            const total = (user.wins || 0) + (user.losses || 0);
+            const winrate = total > 0 ? Math.round(((user.wins || 0) / total) * 100) : 0;
+            document.getElementById('winrateDisplay').textContent = winrate + '%';
+
+            const calibValue = Math.min(user.calibrationMatches || 0, 10);
+            const calibrationSection = document.getElementById('calibrationSection');
+            const eloSection = document.getElementById('eloSection');
+
+            if (user.isCalibrated) {
+                calibrationSection.style.display = 'none';
+                eloSection.classList.add('show');
+                document.getElementById('eloValue').textContent = user.elo || 1000;
+            } else {
+                calibrationSection.style.display = 'flex';
+                eloSection.classList.remove('show');
+                document.getElementById('calibrationText').textContent = calibValue + '/10';
+                document.getElementById('calibrationFill').style.width = (calibValue / 10 * 100) + '%';
+                document.getElementById('calibrationSub').textContent = 'Пройдите 10 матчей для определения рейтинга';
+                document.getElementById('calibrationSub').style.color = '#6f7885';
+            }
+
+            const historyList = document.getElementById('historyList');
+            const historyEmpty = document.getElementById('historyEmpty');
+            if (user.history && user.history.length > 0) {
+                historyList.style.display = 'flex';
+                historyEmpty.style.display = 'none';
+                historyList.innerHTML = user.history.slice(-15).reverse().map(item => {
+                    let eloDisplay = '';
+                    if (user.isCalibrated && !item.isCalibration) {
+                        const eloChange = item.result === 'win' ? '+25' : '-25';
+                        const cls = item.result === 'win' ? 'positive' : 'negative';
+                        eloDisplay = `<span class="elo-change ${cls}">${eloChange}</span>`;
+                    }
+                    return `
+                        <div class="history-item">
+                            <div class="match-info">
+                                <span class="match-number">#${item.matchId}</span>
+                                <span class="match-map">${item.map || 'de_dust2'}</span>
+                                <span style="color:#6f7885;font-size:12px;">${item.date}</span>
+                                ${eloDisplay}
+                            </div>
+                            <span class="match-result ${item.result === 'win' ? 'win' : 'lose'}">
+                                ${item.result === 'win' ? '🏆 Победа' : '❌ Поражение'}
+                            </span>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                historyList.style.display = 'none';
+                historyEmpty.style.display = 'block';
+            }
+
+            renderRating();
+            switchTab('main');
+        }
+
+        // ===== РЕЙТИНГ =====
+        async function renderRating() {
+            try {
+                const users = await apiRequest('/admin/users');
+                const players = (users.users || []).map(u => ({
+                    name: u.username,
+                    elo: u.is_admin ? 1500 : 1000,
+                    isCalibrated: true
+                }));
+
+                const sorted = [...players].sort((a, b) => b.elo - a.elo);
+                const prizes = ['5 000 ₽', '3 500 ₽', '1 500 ₽'];
+                const body = document.getElementById('ratingBody');
+                body.innerHTML = sorted.slice(0, 10).map((p, i) => {
+                    const rank = i + 1;
+                    let rankClass = '';
+                    if (rank === 1) rankClass = 'gold';
+                    else if (rank === 2) rankClass = 'silver';
+                    else if (rank === 3) rankClass = 'bronze';
+                    const prize = rank <= 3 ? prizes[i] : '';
+                    return `
+                        <tr>
+                            <td class="rank ${rankClass}">#${rank}</td>
+                            <td class="player-name">${p.name} <i class="fas fa-check-circle"></i></td>
+                            <td class="player-rating">${p.elo}</td>
+                            <td class="player-prize">${prize}</td>
+                        </tr>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Rating error:', error);
+            }
+        }
+
+        // ===== ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК =====
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+            const tabMap = {
+                main: 'tabMain',
+                search: 'tabSearch',
+                rating: 'tabRating',
+                missions: 'tabMissions',
+                shop: 'tabShop',
+                match: 'tabMatch',
+                profile: 'tabProfile',
+                adminUsers: 'tabAdminUsers',
+                adminQueue: 'tabAdminQueue'
+            };
+            const tab = document.getElementById(tabMap[tabId]);
+            if (tab) tab.classList.add('active');
+
+            const navItem = document.querySelector(`.nav-item[data-tab="${tabId}"]`);
+            if (navItem) navItem.classList.add('active');
+        }
+
+        // ===== МОДАЛЬНОЕ ОКНО РЕДАКТИРОВАНИЯ =====
+        function openEditModal() {
+            const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
+            if (!user) { showToast('error', 'Ошибка', 'Вы не авторизованы'); return; }
+
+            document.getElementById('editNameInput').value = user.username || '';
+            document.getElementById('editIdInput').value = user.standoffId || '';
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('active');
+        }
+
+        async function saveEditProfile() {
+            try {
+                const newName = document.getElementById('editNameInput').value.trim();
+                const newId = document.getElementById('editIdInput').value.trim();
+
+                const result = await apiRequest('/profile/update', {
+                    method: 'PUT',
+                    body: JSON.stringify({ username: newName, standoffId: newId })
+                });
+
+                if (result.success) {
+                    const user = JSON.parse(localStorage.getItem('cybermode_user') || '{}');
+                    user.username = result.user.username;
+                    user.standoffId = result.user.standoffId;
+                    localStorage.setItem('cybermode_user', JSON.stringify(user));
+                    showToast('success', 'Успешно', 'Профиль обновлён');
+                    closeEditModal();
+                    loadMainSite();
+                }
+            } catch (error) {
+                showToast('error', 'Ошибка', error.message);
+            }
+        }
+
+        // ===== ЗАГРУЗКА АВАТАРА =====
+        function handleAvatarUpload() {
+            document.getElementById('fileInputAvatar').click();
+        }
+
+        document.getElementById('fileInputAvatar').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (!file.type.startsWith('image/')) {
+                showToast('error', 'Ошибка', 'Выберите изображение');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const imgSrc = event.target.result;
+                document.getElementById('modalAvatarPreview').innerHTML =
+                    `<img src="${imgSrc}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`;
+                document.getElementById('avatarPreview').innerHTML =
+                    `<img src="${imgSrc}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`;
+                showToast('success', 'Успешно', 'Аватар обновлён');
+            };
+            reader.readAsDataURL(file);
+            this.value = '';
+        });
+
+        // ===== ПРИКРЕПЛЕНИЕ РЕЗУЛЬТАТА =====
+        let screenshotFile = null;
+        let currentMatchId = 0;
+        let currentFinalMap = 'de_dust2';
+
+        function handleAttachResult() {
+            document.getElementById('fileInputResult').click();
+        }
+
+        document.getElementById('fileInputResult').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (!file.type.startsWith('image/')) {
+                showToast('error', 'Ошибка', 'Выберите изображение');
+                this.value = '';
+                return;
+            }
+
+            screenshotFile = file;
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                document.getElementById('screenshotImg').src = event.target.result;
+                document.getElementById('screenshotName').textContent = file.name;
+                document.getElementById('screenshotPreview').classList.add('show');
+                document.getElementById('victoryButtons').classList.add('show');
+                showToast('success', 'Скриншот прикреплён', 'Файл ' + file.name + ' загружен');
+            };
+            reader.readAsDataURL(file);
+            this.value = '';
+        });
+
+        // ===== ВЫБОР ПОБЕДИТЕЛЯ (ТОЛЬКО АДМИНЫ) =====
+        async function handleVictory(team) {
+            if (!screenshotFile) {
+                showToast('error', 'Ошибка', 'Сначала прикрепите скриншот результата');
+                return;
+            }
+
+            // ===== ПРОВЕРКА: ТОЛЬКО АДМИН =====
+            const isAdmin = await checkAdmin();
+            if (!isAdmin) {
+                showToast('error', 'Доступ запрещен', 'Только администраторы могут завершать матчи');
+                return;
+            }
+
+            const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
+            if (!user) {
+                showToast('error', 'Ошибка', 'Вы не авторизованы');
+                return;
+            }
+
+            const isWin = team === 'A';
+            const winner = isWin ? 'Команда А' : 'Команда В';
+
+            try {
+                const result = await finishMatch({
+                    matchId: currentMatchId,
+                    winner: winner,
+                    playerUsername: user.username,
+                    isWin: isWin,
+                    screenshot: document.getElementById('screenshotImg').src,
+                    finalMap: currentFinalMap
+                });
+
+                if (result.success) {
+                    showToast('success', '🏆 ' + winner, 'Результат сохранён');
+                    const updatedUser = await getMe();
+                    updateUI(updatedUser);
+
+                    setTimeout(() => {
+                        document.getElementById('screenshotPreview').classList.remove('show');
+                        document.getElementById('victoryButtons').classList.remove('show');
+                        document.getElementById('resultSection').classList.add('hidden');
+                        screenshotFile = null;
+                        document.getElementById('matchTabBtn').style.display = 'none';
+                        searchCount = 0;
+                        searchCountEl.textContent = '0/10';
+                        searchCountEl.classList.remove('visible');
+                        switchTab('main');
+                    }, 1500);
+                }
+            } catch (error) {
+                showToast('error', 'Ошибка', error.message);
+            }
+        }
+
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
+            const token = localStorage.getItem('cybermode_token');
+
+            if (user && token) {
+                document.getElementById('authPage').style.display = 'none';
+                document.getElementById('mainSite').classList.add('visible');
+                loadMainSite();
+            } else {
+                document.getElementById('authPage').style.display = 'flex';
+                document.getElementById('mainSite').classList.remove('visible');
+            }
+        });
+
+        // ===== ОБРАБОТЧИКИ СОБЫТИЙ =====
+        document.getElementById('loginBtn').addEventListener('click', handleLogin);
+        document.getElementById('registerBtn').addEventListener('click', handleRegister);
+
+        document.querySelectorAll('#loginEmail, #loginPassword').forEach(el => {
+            el.addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
+        });
+        document.querySelectorAll('#regUsername, #regEmail, #regStandoffId, #regPassword, #regPasswordConfirm')
+            .forEach(el => {
+                el.addEventListener('keydown', e => { if (e.key === 'Enter') handleRegister(); });
+            });
+
+        document.querySelectorAll('.nav-item').forEach(el => {
+            el.addEventListener('click', function() {
+                const tab = this.dataset.tab;
+                if (tab) switchTab(tab);
+            });
+        });
+
+        document.getElementById('profileNav').addEventListener('click', () => switchTab('profile'));
+        document.getElementById('brandLogo').addEventListener('click', () => switchTab('main'));
+        document.getElementById('profileBtn').addEventListener('click', () => switchTab('profile'));
+        document.getElementById('playMatchBtn').addEventListener('click', () => switchTab('search'));
+
+        document.getElementById('editProfileBtn').addEventListener('click', openEditModal);
+        document.getElementById('closeEditModal').addEventListener('click', closeEditModal);
+        document.getElementById('cancelEditBtn').addEventListener('click', closeEditModal);
+        document.getElementById('saveEditBtn').addEventListener('click', saveEditProfile);
+        document.getElementById('uploadAvatarBtn').addEventListener('click', handleAvatarUpload);
+        document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+        document.getElementById('helpBtn').addEventListener('click', function() {
+            showToast('info', 'Помощь', 'Свяжитесь с поддержкой: support@cybermode.ru');
+        });
+
+        document.getElementById('editModal').addEventListener('click', function(e) {
+            if (e.target === this) closeEditModal();
+        });
+
+        document.getElementById('attachResultBtn').addEventListener('click', handleAttachResult);
+        document.getElementById('victoryA').addEventListener('click', () => handleVictory('A'));
+        document.getElementById('victoryB').addEventListener('click', () => handleVictory('B'));
+
+        // ===== ПОИСК МАТЧА =====
+        let searchCount = 0;
+        let timerInterval = null;
+        let seconds = 0;
+        let matchId = 0;
+        let teamA = [];
+        let teamB = [];
+        let banned = [];
+        let bansCompleted = false;
+        let finalMap = 'de_dust2';
+        let matchPlayers = [];
+
+        const searchBtn = document.getElementById('searchMatchBtn');
+        const searchCountEl = document.getElementById('searchCount');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const matchTabBtn = document.getElementById('matchTabBtn');
+
+        function generateMatchId() {
+            return 'match_' + Date.now();
+        }
+
+        function getRandomCaptain() {
+            return Math.random() < 0.5 ? 'A' : 'B';
+        }
+
+        function renderMatchPage() {
+            const teamAList = document.getElementById('teamAList');
+            const teamBList = document.getElementById('teamBList');
+            const mapPool = document.getElementById('mapPool');
+            const turnIndicator = document.getElementById('turnIndicator');
+            const finalMapDisplay = document.getElementById('finalMapDisplay');
+
+            teamAList.innerHTML = '';
+            teamBList.innerHTML = '';
+
+            if (teamA.length === 0) {
+                teamAList.innerHTML = '<div class="empty-message">Нет игроков</div>';
+            } else {
+                teamA.forEach((p, idx) => {
+                    const tag = document.createElement('div');
+                    tag.className = 'player-tag';
+                    if (idx === 0) tag.classList.add('captain');
+                    tag.innerHTML =
+                        `<span class="num">${idx + 1}</span><i class="fas fa-user-circle"></i> ${p}${idx === 0 ? ' 👑' : ''}`;
+                    teamAList.appendChild(tag);
+                });
+            }
+
+            if (teamB.length === 0) {
+                teamBList.innerHTML = '<div class="empty-message">Нет игроков</div>';
+            } else {
+                teamB.forEach((p, idx) => {
+                    const tag = document.createElement('div');
+                    tag.className = 'player-tag';
+                    if (idx === 0) tag.classList.add('captain');
+                    tag.innerHTML =
+                        `<span class="num">${idx + 1}</span><i class="fas fa-user-circle"></i> ${p}${idx === 0 ? ' 👑' : ''}`;
+                    teamBList.appendChild(tag);
+                });
+            }
+
+            const maps = ['de_dust2', 'de_mirage', 'de_inferno', 'de_nuke', 'de_vertigo', 'de_ancient'];
+            const chips = mapPool.querySelectorAll('.map-chip');
+            chips.forEach(el => {
+                const map = el.dataset.map;
+                el.classList.remove('banned', 'selected');
+                if (banned.includes(map)) {
+                    el.classList.add('banned');
+                }
+                if (map === finalMap && !banned.includes(map) && bansCompleted) {
+                    el.classList.add('selected');
+                }
+            });
+
+            if (getRandomCaptain() === 'A') {
+                turnIndicator.innerHTML = `<i class="fas fa-arrow-right"></i> Капитан А`;
+                turnIndicator.style.background = '#f5b81b';
+                turnIndicator.style.color = '#0b0b0e';
+            } else {
+                turnIndicator.innerHTML = `<i class="fas fa-arrow-right"></i> Капитан В`;
+                turnIndicator.style.background = '#2a2a34';
+                turnIndicator.style.color = '#d0d6de';
+            }
+            finalMapDisplay.textContent = finalMap;
+            document.getElementById('matchIdDisplay').textContent = matchId;
+            currentFinalMap = finalMap;
+        }
+
+        function performBan(mapName) {
+            if (bansCompleted) return;
+            if (banned.includes(mapName)) return;
+
+            banned.push(mapName);
+
+            const maps = ['de_dust2', 'de_mirage', 'de_inferno', 'de_nuke', 'de_vertigo', 'de_ancient'];
+            const available = maps.filter(m => !banned.includes(m));
+            if (available.length === 1) {
+                finalMap = available[0];
+                bansCompleted = true;
+                document.getElementById('banSection').classList.add('hidden');
+                document.getElementById('resultSection').classList.remove('hidden');
+                currentFinalMap = finalMap;
+                renderMatchPage();
+                return;
+            }
+
+            renderMatchPage();
+        }
+
+        function setupMapClickHandlers() {
+            const chips = document.querySelectorAll('.map-chip');
+            chips.forEach(el => {
+                el.addEventListener('click', function() {
+                    const mapName = this.dataset.map;
+                    if (bansCompleted) {
+                        showToast('info', 'Баны завершены', 'Баны уже завершены');
+                        return;
+                    }
+                    if (banned.includes(mapName)) {
+                        showToast('info', 'Уже забанено', 'Эта карта уже забанена');
+                        return;
+                    }
+                    performBan(mapName);
+                });
+            });
+        }
+
+        searchBtn.addEventListener('click', async function() {
+            if (searchCount >= 10) {
+                showToast('info', 'Матч найден!', '10/10 игроков собрано');
+                searchCount = 0;
+                searchCountEl.textContent = '0/10';
+                searchCountEl.classList.remove('visible');
+                if (timerInterval) { clearInterval(timerInterval);
+                    timerInterval = null; }
+                seconds = 0;
+                timerDisplay.textContent = '00:00';
+                return;
+            }
+
+            const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
+            if (!user) {
+                showToast('error', 'Ошибка', 'Вы не авторизованы');
+                return;
+            }
+
+            if (searchCount === 0) {
+                seconds = 0;
+                timerInterval = setInterval(() => {
+                    seconds++;
+                    const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+                    const secs = String(seconds % 60).padStart(2, '0');
+                    timerDisplay.textContent = `${mins}:${secs}`;
+                }, 1000);
+
+                matchId = generateMatchId();
+                currentMatchId = matchId;
+                teamA = [];
+                teamB = [];
+                banned = [];
+                bansCompleted = false;
+                finalMap = 'de_dust2';
+                currentFinalMap = 'de_dust2';
+                matchPlayers = [];
+                document.getElementById('resultSection').classList.add('hidden');
+                document.getElementById('screenshotPreview').classList.remove('show');
+                document.getElementById('victoryButtons').classList.remove('show');
+                document.getElementById('banSection').classList.remove('hidden');
+                document.getElementById('finalMapDisplay').textContent = 'de_dust2';
+
+                try {
+                    await joinQueue(user.username);
+                    const queueData = await getQueue();
+                    matchPlayers = queueData.players || [];
+                    teamA = [];
+                    teamB = [];
+                    matchPlayers.forEach((p, idx) => {
+                        if (idx % 2 === 0) teamA.push(p);
+                        else teamB.push(p);
+                    });
+                    searchCount = matchPlayers.length;
+                    searchCountEl.textContent = searchCount + '/10';
+                    searchCountEl.classList.add('visible');
+                } catch (error) {
+                    showToast('error', 'Ошибка', error.message);
+                }
+                return;
+            }
+
+            try {
+                await joinQueue(user.username);
+                const queueData = await getQueue();
+                matchPlayers = queueData.players || [];
+                searchCount = matchPlayers.length;
+                searchCountEl.textContent = searchCount + '/10';
+                searchCountEl.classList.add('visible');
+
+                teamA = [];
+                teamB = [];
+                matchPlayers.forEach((p, idx) => {
+                    if (idx % 2 === 0) teamA.push(p);
+                    else teamB.push(p);
+                });
+
+                if (searchCount >= 10) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+
+                    try {
+                        const matchResult = await createMatch({
+                            matchId: matchId,
+                            teamA: teamA.slice(0, 5),
+                            teamB: teamB.slice(0, 5),
+                            banned: banned,
+                            finalMap: finalMap,
+                            players: matchPlayers.slice(0, 10)
+                        });
+
+                        if (matchResult.success) {
+                            showToast('success', 'Матч найден!', '10/10 игроков собрано');
+                            matchTabBtn.style.display = 'block';
+                            renderMatchPage();
+                            setupMapClickHandlers();
+                            setTimeout(() => {
+                                switchTab('match');
+                            }, 500);
+                        }
+                    } catch (error) {
+                        showToast('error', 'Ошибка', error.message);
+                    }
+                }
+            } catch (error) {
+                showToast('error', 'Ошибка', error.message);
+            }
+        });
+
+        renderRating();
+    </script>
+
+</body>
+</html>
