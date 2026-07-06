@@ -11,8 +11,8 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // ===== ПОДКЛЮЧЕНИЕ К SUPABASE =====
-const supabaseUrl = process.env.SUPABASE_URL || 'https://ваш_проект.supabase.co';
-const supabaseKey = process.env.SUPABASE_KEY || 'ваш_anon_ключ';
+const supabaseUrl = process.env.SUPABASE_URL || 'https://bngrrpsolpqmtqwfuhjl.supabase.co';
+const supabaseKey = process.env.SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJuZ3JycHNvbHBxbXRxd2Z1aGpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzNjYwMjgsImV4cCI6MjA5ODk0MjAyOH0.LKMbN9HTyZCB27JsG5emrOk5rDEWKFj6JxSTws2Mgo0';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const JWT_SECRET = process.env.JWT_SECRET || 'cybermode_super_secret_2026';
