@@ -1328,8 +1328,43 @@
             background: #ffcc33;
         }
 
-        /* ===== ТОСТ (СОЗДАЁТСЯ ДИНАМИЧЕСКИ) ===== */
-        /* Стили для тоста уже есть в JavaScript */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #141210;
+            border: 1px solid #2a241e;
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            z-index: 9999;
+            max-width: 400px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 0.4s ease;
+            color: #e0dcd0;
+        }
+        .toast.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast .toast-title {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        .toast .toast-title.success {
+            color: #51cf66;
+        }
+        .toast .toast-title.error {
+            color: #ff6b6b;
+        }
+        .toast .toast-title.info {
+            color: #f5b81b;
+        }
+        .toast .toast-text {
+            color: #8f877a;
+            font-size: 0.95rem;
+        }
 
         .admin-panel {
             background: #1a1a24;
@@ -1462,63 +1497,76 @@
             cursor: pointer;
         }
 
-        /* ===== ТОСТ (ДИНАМИЧЕСКИЙ) ===== */
-        .toast-container {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: #141210;
-            border: 1px solid #2a241e;
-            border-radius: 16px;
-            padding: 1rem 1.5rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
-            z-index: 9999;
-            max-width: 400px;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: 0.4s ease;
-            color: #e0dcd0;
-        }
-        .toast-container.visible {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .toast-container .toast-title {
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-        .toast-container .toast-title.success {
-            color: #51cf66;
-        }
-        .toast-container .toast-title.error {
-            color: #ff6b6b;
-        }
-        .toast-container .toast-title.info {
-            color: #f5b81b;
-        }
-        .toast-container .toast-text {
-            color: #8f877a;
-            font-size: 0.95rem;
-        }
-
         @media (max-width: 768px) {
-            .auth-container { padding: 1.5rem; margin: 16px; }
-            .top-nav { flex-direction: column; align-items: stretch; border-radius: 24px; padding: 12px 16px; }
-            .nav-center { justify-content: center; gap: 14px; }
-            .nav-right { justify-content: center; flex-wrap: wrap; }
-            .stats-grid { grid-template-columns: 1fr 1fr; }
-            .profile-header { flex-direction: column; text-align: center; }
-            .calibration-section { flex-direction: column; align-items: stretch; }
-            .rating-table { font-size: 13px; }
-            .rating-table th, .rating-table td { padding: 10px 12px; }
-            .profile-actions-btns { justify-content: center; }
-            .modal { padding: 24px 20px; margin: 16px; }
-            .teams-row { flex-direction: column; align-items: center; gap: 16px; }
-            .team-col { max-width: 100%; width: 100%; }
-            .result-row { flex-direction: column; align-items: stretch; gap: 14px; }
-            .elo-section { flex-direction: column; align-items: stretch; text-align: center; }
-            .elo-section .right .elo-change { text-align: center; }
-            .admin-user-item { flex-direction: column; align-items: stretch; }
+            .auth-container {
+                padding: 1.5rem;
+                margin: 16px;
+            }
+            .top-nav {
+                flex-direction: column;
+                align-items: stretch;
+                border-radius: 24px;
+                padding: 12px 16px;
+            }
+            .nav-center {
+                justify-content: center;
+                gap: 14px;
+            }
+            .nav-right {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .calibration-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .rating-table {
+                font-size: 13px;
+            }
+            .rating-table th,
+            .rating-table td {
+                padding: 10px 12px;
+            }
+            .profile-actions-btns {
+                justify-content: center;
+            }
+            .modal {
+                padding: 24px 20px;
+                margin: 16px;
+            }
+            .teams-row {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+            .team-col {
+                max-width: 100%;
+                width: 100%;
+            }
+            .result-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 14px;
+            }
+            .elo-section {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .elo-section .right .elo-change {
+                text-align: center;
+            }
+            .admin-user-item {
+                flex-direction: column;
+                align-items: stretch;
+            }
         }
     </style>
 </head>
@@ -1812,6 +1860,12 @@
         </div>
     </div>
 
+    <!-- ===== ТОСТ ===== -->
+    <div class="toast" id="toast">
+        <div class="toast-title" id="toastTitle">Успешно!</div>
+        <div class="toast-text" id="toastText">Действие выполнено</div>
+    </div>
+
     <!-- ===== СКРЫТЫЙ INPUT ДЛЯ РЕЗУЛЬТАТА ===== -->
     <input type="file" id="fileInputResult" accept="image/*" style="display:none;" />
     <!-- ===== СКРЫТЫЙ INPUT ДЛЯ АВАТАРА ===== -->
@@ -1821,26 +1875,25 @@
         // ===== API КОНСТАНТА =====
         const API_URL = '/api';
 
-        // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
-        function showAuthForm(form) {
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('registerForm').style.display = 'none';
-            if (form === 'login') document.getElementById('loginForm').style.display = 'block';
-            else if (form === 'register') document.getElementById('registerForm').style.display = 'block';
-        }
-
-        // ===== ИСПРАВЛЕННАЯ ФУНКЦИЯ TOAST =====
+        // ===== БЕЗОПАСНАЯ ФУНКЦИЯ SHOWTOAST =====
         function showToast(type, title, text) {
-            // Проверяем, существует ли тост
-            let toast = document.querySelector('.toast-container');
-            
-            // Если тоста нет — создаём его
+            let toast = document.getElementById('toast');
             if (!toast) {
                 toast = document.createElement('div');
-                toast.className = 'toast-container';
+                toast.id = 'toast';
+                toast.style.cssText = `
+                    position: fixed; bottom: 2rem; right: 2rem;
+                    background: #141210; border: 1px solid #2a241e;
+                    border-radius: 16px; padding: 1rem 1.5rem;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+                    z-index: 9999; max-width: 400px;
+                    transform: translateY(100px); opacity: 0;
+                    transition: 0.4s ease;
+                    color: #e0dcd0;
+                `;
                 toast.innerHTML = `
-                    <div class="toast-title" id="toastTitle">Успешно!</div>
-                    <div class="toast-text" id="toastText">Действие выполнено</div>
+                    <div id="toastTitle" style="font-weight:700;margin-bottom:0.3rem;"></div>
+                    <div id="toastText" style="color:#8f877a;font-size:0.95rem;"></div>
                 `;
                 document.body.appendChild(toast);
             }
@@ -1850,13 +1903,29 @@
             
             if (titleEl && textEl) {
                 titleEl.className = 'toast-title ' + type;
-                titleEl.textContent = title || 'Успешно!';
-                textEl.textContent = text || 'Действие выполнено';
+                titleEl.textContent = title;
+                textEl.textContent = text;
             }
             
             toast.classList.add('visible');
             clearTimeout(toast._timeout);
             toast._timeout = setTimeout(() => toast.classList.remove('visible'), 4000);
+        }
+
+        // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
+        function showAuthForm(form) {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'none';
+            if (form === 'login') document.getElementById('loginForm').style.display = 'block';
+            else if (form === 'register') document.getElementById('registerForm').style.display = 'block';
+        }
+
+        function safeGetElement(id) {
+            const el = document.getElementById(id);
+            if (!el) {
+                console.warn(`Element with id "${id}" not found`);
+            }
+            return el;
         }
 
         // ===== API КЛИЕНТ =====
@@ -2025,12 +2094,14 @@
             try {
                 const data = await apiRequest('/admin/check');
                 const adminPanel = document.getElementById('adminPanel');
-                if (data.isAdmin) {
-                    adminPanel.style.display = 'block';
-                    loadAdminUsers();
-                    loadAdminQueue();
-                } else {
-                    adminPanel.style.display = 'none';
+                if (adminPanel) {
+                    if (data.isAdmin) {
+                        adminPanel.style.display = 'block';
+                        loadAdminUsers();
+                        loadAdminQueue();
+                    } else {
+                        adminPanel.style.display = 'none';
+                    }
                 }
                 return data.isAdmin;
             } catch (error) {
@@ -2043,6 +2114,7 @@
             try {
                 const data = await apiRequest('/admin/users');
                 const container = document.getElementById('adminUsersList');
+                if (!container) return;
                 if (!data.users || data.users.length === 0) {
                     container.innerHTML = '<p style="color: #6f7885;">Нет пользователей</p>';
                     return;
@@ -2105,6 +2177,7 @@
             try {
                 const data = await apiRequest('/queue');
                 const container = document.getElementById('adminQueueList');
+                if (!container) return;
                 if (!data.players || data.players.length === 0) {
                     container.innerHTML = '<p style="color: #6f7885;">Очередь пуста</p>';
                     return;
@@ -2155,10 +2228,14 @@
                 updateUI(user);
                 await checkAdmin();
                 const stats = await getStats();
-                document.getElementById('usersCount').textContent = stats.totalUsers || 0;
-                document.getElementById('tournamentsCount').textContent = stats.tournaments || 0;
-                document.getElementById('serverCount').textContent = stats.servers || 0;
-                document.getElementById('pendingCount').textContent = stats.pending || 0;
+                const el = document.getElementById('usersCount');
+                if (el) el.textContent = stats.totalUsers || 0;
+                const el2 = document.getElementById('tournamentsCount');
+                if (el2) el2.textContent = stats.tournaments || 0;
+                const el3 = document.getElementById('serverCount');
+                if (el3) el3.textContent = stats.servers || 0;
+                const el4 = document.getElementById('pendingCount');
+                if (el4) el4.textContent = stats.pending || 0;
             } catch (error) {
                 logout();
                 document.getElementById('authPage').style.display = 'flex';
@@ -2167,42 +2244,68 @@
             }
         }
 
-        // ===== ОБНОВЛЕНИЕ UI =====
+        // ===== ОБНОВЛЕНИЕ UI С ПРОВЕРКОЙ ЭЛЕМЕНТОВ =====
         function updateUI(user) {
-            document.getElementById('navUsername').textContent = user.username;
-            document.getElementById('profileNameDisplay').innerHTML = user.username + ' <i class="fas fa-check-circle"></i>';
-            document.getElementById('profileIdDisplay').textContent = 'TANKS ID: ' + (user.standoffId || '101294641');
-            document.getElementById('winsDisplay').textContent = user.wins || 0;
-            document.getElementById('lossesDisplay').textContent = user.losses || 0;
-            document.getElementById('matchesDisplay').textContent = user.matches || 0;
+            const elements = {
+                navUsername: document.getElementById('navUsername'),
+                profileNameDisplay: document.getElementById('profileNameDisplay'),
+                profileIdDisplay: document.getElementById('profileIdDisplay'),
+                winsDisplay: document.getElementById('winsDisplay'),
+                lossesDisplay: document.getElementById('lossesDisplay'),
+                matchesDisplay: document.getElementById('matchesDisplay'),
+                winrateDisplay: document.getElementById('winrateDisplay'),
+                calibrationSection: document.getElementById('calibrationSection'),
+                eloSection: document.getElementById('eloSection'),
+                eloValue: document.getElementById('eloValue'),
+                calibrationText: document.getElementById('calibrationText'),
+                calibrationFill: document.getElementById('calibrationFill'),
+                calibrationSub: document.getElementById('calibrationSub'),
+                historyList: document.getElementById('historyList'),
+                historyEmpty: document.getElementById('historyEmpty')
+            };
+            
+            // Проверяем наличие всех элементов
+            let hasMissing = false;
+            for (const [key, el] of Object.entries(elements)) {
+                if (!el) {
+                    console.warn(`Element ${key} not found, skipping update`);
+                    hasMissing = true;
+                }
+            }
+            
+            if (hasMissing) return;
+            
+            // Обновляем все элементы
+            elements.navUsername.textContent = user.username;
+            elements.profileNameDisplay.innerHTML = user.username + ' <i class="fas fa-check-circle"></i>';
+            elements.profileIdDisplay.textContent = 'TANKS ID: ' + (user.standoffId || '101294641');
+            elements.winsDisplay.textContent = user.wins || 0;
+            elements.lossesDisplay.textContent = user.losses || 0;
+            elements.matchesDisplay.textContent = user.matches || 0;
 
             const total = (user.wins || 0) + (user.losses || 0);
             const winrate = total > 0 ? Math.round(((user.wins || 0) / total) * 100) : 0;
-            document.getElementById('winrateDisplay').textContent = winrate + '%';
+            elements.winrateDisplay.textContent = winrate + '%';
 
             const calibValue = Math.min(user.calibrationMatches || 0, 10);
-            const calibrationSection = document.getElementById('calibrationSection');
-            const eloSection = document.getElementById('eloSection');
 
             if (user.isCalibrated) {
-                calibrationSection.style.display = 'none';
-                eloSection.classList.add('show');
-                document.getElementById('eloValue').textContent = user.elo || 1000;
+                elements.calibrationSection.style.display = 'none';
+                elements.eloSection.classList.add('show');
+                elements.eloValue.textContent = user.elo || 1000;
             } else {
-                calibrationSection.style.display = 'flex';
-                eloSection.classList.remove('show');
-                document.getElementById('calibrationText').textContent = calibValue + '/10';
-                document.getElementById('calibrationFill').style.width = (calibValue / 10 * 100) + '%';
-                document.getElementById('calibrationSub').textContent = 'Пройдите 10 матчей для определения рейтинга';
-                document.getElementById('calibrationSub').style.color = '#6f7885';
+                elements.calibrationSection.style.display = 'flex';
+                elements.eloSection.classList.remove('show');
+                elements.calibrationText.textContent = calibValue + '/10';
+                elements.calibrationFill.style.width = (calibValue / 10 * 100) + '%';
+                elements.calibrationSub.textContent = 'Пройдите 10 матчей для определения рейтинга';
+                elements.calibrationSub.style.color = '#6f7885';
             }
 
-            const historyList = document.getElementById('historyList');
-            const historyEmpty = document.getElementById('historyEmpty');
             if (user.history && user.history.length > 0) {
-                historyList.style.display = 'flex';
-                historyEmpty.style.display = 'none';
-                historyList.innerHTML = user.history.slice(-15).reverse().map(item => {
+                elements.historyList.style.display = 'flex';
+                elements.historyEmpty.style.display = 'none';
+                elements.historyList.innerHTML = user.history.slice(-15).reverse().map(item => {
                     let eloDisplay = '';
                     if (user.isCalibrated && !item.isCalibration) {
                         const eloChange = item.result === 'win' ? '+25' : '-25';
@@ -2224,8 +2327,8 @@
                     `;
                 }).join('');
             } else {
-                historyList.style.display = 'none';
-                historyEmpty.style.display = 'block';
+                elements.historyList.style.display = 'none';
+                elements.historyEmpty.style.display = 'block';
             }
 
             renderRating();
@@ -2234,7 +2337,16 @@
 
         // ===== РЕЙТИНГ =====
         async function renderRating() {
+            const body = document.getElementById('ratingBody');
+            if (!body) return;
+            
             try {
+                const token = localStorage.getItem('cybermode_token');
+                if (!token) {
+                    body.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#6f7885;">Войдите для просмотра рейтинга</td></tr>';
+                    return;
+                }
+                
                 const users = await apiRequest('/admin/users');
                 const players = (users.users || []).map(u => ({
                     name: u.username,
@@ -2244,7 +2356,6 @@
 
                 const sorted = [...players].sort((a, b) => b.elo - a.elo);
                 const prizes = ['5 000 ₽', '3 500 ₽', '1 500 ₽'];
-                const body = document.getElementById('ratingBody');
                 body.innerHTML = sorted.slice(0, 10).map((p, i) => {
                     const rank = i + 1;
                     let rankClass = '';
@@ -2262,7 +2373,11 @@
                     `;
                 }).join('');
             } catch (error) {
-                console.error('Rating error:', error);
+                if (error.message.includes('401') || error.message.includes('Не авторизован')) {
+                    body.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#6f7885;">Войдите для просмотра рейтинга</td></tr>';
+                } else {
+                    console.error('Rating error:', error);
+                }
             }
         }
 
@@ -2294,19 +2409,27 @@
             const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
             if (!user) { showToast('error', 'Ошибка', 'Вы не авторизованы'); return; }
 
-            document.getElementById('editNameInput').value = user.username || '';
-            document.getElementById('editIdInput').value = user.standoffId || '';
-            document.getElementById('editModal').classList.add('active');
+            const nameInput = document.getElementById('editNameInput');
+            const idInput = document.getElementById('editIdInput');
+            if (nameInput) nameInput.value = user.username || '';
+            if (idInput) idInput.value = user.standoffId || '';
+            
+            const modal = document.getElementById('editModal');
+            if (modal) modal.classList.add('active');
         }
 
         function closeEditModal() {
-            document.getElementById('editModal').classList.remove('active');
+            const modal = document.getElementById('editModal');
+            if (modal) modal.classList.remove('active');
         }
 
         async function saveEditProfile() {
             try {
-                const newName = document.getElementById('editNameInput').value.trim();
-                const newId = document.getElementById('editIdInput').value.trim();
+                const nameInput = document.getElementById('editNameInput');
+                const idInput = document.getElementById('editIdInput');
+                
+                const newName = nameInput ? nameInput.value.trim() : '';
+                const newId = idInput ? idInput.value.trim() : '';
 
                 const result = await apiRequest('/profile/update', {
                     method: 'PUT',
@@ -2342,10 +2465,14 @@
             const reader = new FileReader();
             reader.onload = function(event) {
                 const imgSrc = event.target.result;
-                document.getElementById('modalAvatarPreview').innerHTML =
-                    `<img src="${imgSrc}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`;
-                document.getElementById('avatarPreview').innerHTML =
-                    `<img src="${imgSrc}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`;
+                const modalPreview = document.getElementById('modalAvatarPreview');
+                const avatarPreview = document.getElementById('avatarPreview');
+                if (modalPreview) {
+                    modalPreview.innerHTML = `<img src="${imgSrc}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`;
+                }
+                if (avatarPreview) {
+                    avatarPreview.innerHTML = `<img src="${imgSrc}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`;
+                }
                 showToast('success', 'Успешно', 'Аватар обновлён');
             };
             reader.readAsDataURL(file);
@@ -2373,10 +2500,14 @@
             screenshotFile = file;
             const reader = new FileReader();
             reader.onload = function(event) {
-                document.getElementById('screenshotImg').src = event.target.result;
-                document.getElementById('screenshotName').textContent = file.name;
-                document.getElementById('screenshotPreview').classList.add('show');
-                document.getElementById('victoryButtons').classList.add('show');
+                const img = document.getElementById('screenshotImg');
+                const name = document.getElementById('screenshotName');
+                const preview = document.getElementById('screenshotPreview');
+                const buttons = document.getElementById('victoryButtons');
+                if (img) img.src = event.target.result;
+                if (name) name.textContent = file.name;
+                if (preview) preview.classList.add('show');
+                if (buttons) buttons.classList.add('show');
                 showToast('success', 'Скриншот прикреплён', 'Файл ' + file.name + ' загружен');
             };
             reader.readAsDataURL(file);
@@ -2390,7 +2521,6 @@
                 return;
             }
 
-            // ===== ПРОВЕРКА: ТОЛЬКО АДМИН =====
             const isAdmin = await checkAdmin();
             if (!isAdmin) {
                 showToast('error', 'Доступ запрещен', 'Только администраторы могут завершать матчи');
@@ -2412,7 +2542,7 @@
                     winner: winner,
                     playerUsername: user.username,
                     isWin: isWin,
-                    screenshot: document.getElementById('screenshotImg').src,
+                    screenshot: document.getElementById('screenshotImg')?.src || '',
                     finalMap: currentFinalMap
                 });
 
@@ -2422,14 +2552,18 @@
                     updateUI(updatedUser);
 
                     setTimeout(() => {
-                        document.getElementById('screenshotPreview').classList.remove('show');
-                        document.getElementById('victoryButtons').classList.remove('show');
-                        document.getElementById('resultSection').classList.add('hidden');
+                        const preview = document.getElementById('screenshotPreview');
+                        const buttons = document.getElementById('victoryButtons');
+                        const resultSection = document.getElementById('resultSection');
+                        const matchTabBtn = document.getElementById('matchTabBtn');
+                        if (preview) preview.classList.remove('show');
+                        if (buttons) buttons.classList.remove('show');
+                        if (resultSection) resultSection.classList.add('hidden');
                         screenshotFile = null;
-                        document.getElementById('matchTabBtn').style.display = 'none';
+                        if (matchTabBtn) matchTabBtn.style.display = 'none';
                         searchCount = 0;
-                        searchCountEl.textContent = '0/10';
-                        searchCountEl.classList.remove('visible');
+                        if (searchCountEl) searchCountEl.textContent = '0/10';
+                        if (searchCountEl) searchCountEl.classList.remove('visible');
                         switchTab('main');
                     }, 1500);
                 }
@@ -2527,13 +2661,14 @@
             const turnIndicator = document.getElementById('turnIndicator');
             const finalMapDisplay = document.getElementById('finalMapDisplay');
 
-            teamAList.innerHTML = '';
-            teamBList.innerHTML = '';
+            if (teamAList) teamAList.innerHTML = '';
+            if (teamBList) teamBList.innerHTML = '';
 
             if (teamA.length === 0) {
-                teamAList.innerHTML = '<div class="empty-message">Нет игроков</div>';
+                if (teamAList) teamAList.innerHTML = '<div class="empty-message">Нет игроков</div>';
             } else {
                 teamA.forEach((p, idx) => {
+                    if (!teamAList) return;
                     const tag = document.createElement('div');
                     tag.className = 'player-tag';
                     if (idx === 0) tag.classList.add('captain');
@@ -2544,9 +2679,10 @@
             }
 
             if (teamB.length === 0) {
-                teamBList.innerHTML = '<div class="empty-message">Нет игроков</div>';
+                if (teamBList) teamBList.innerHTML = '<div class="empty-message">Нет игроков</div>';
             } else {
                 teamB.forEach((p, idx) => {
+                    if (!teamBList) return;
                     const tag = document.createElement('div');
                     tag.className = 'player-tag';
                     if (idx === 0) tag.classList.add('captain');
@@ -2557,29 +2693,34 @@
             }
 
             const maps = ['de_dust2', 'de_mirage', 'de_inferno', 'de_nuke', 'de_vertigo', 'de_ancient'];
-            const chips = mapPool.querySelectorAll('.map-chip');
-            chips.forEach(el => {
-                const map = el.dataset.map;
-                el.classList.remove('banned', 'selected');
-                if (banned.includes(map)) {
-                    el.classList.add('banned');
-                }
-                if (map === finalMap && !banned.includes(map) && bansCompleted) {
-                    el.classList.add('selected');
-                }
-            });
-
-            if (getRandomCaptain() === 'A') {
-                turnIndicator.innerHTML = `<i class="fas fa-arrow-right"></i> Капитан А`;
-                turnIndicator.style.background = '#f5b81b';
-                turnIndicator.style.color = '#0b0b0e';
-            } else {
-                turnIndicator.innerHTML = `<i class="fas fa-arrow-right"></i> Капитан В`;
-                turnIndicator.style.background = '#2a2a34';
-                turnIndicator.style.color = '#d0d6de';
+            if (mapPool) {
+                const chips = mapPool.querySelectorAll('.map-chip');
+                chips.forEach(el => {
+                    const map = el.dataset.map;
+                    el.classList.remove('banned', 'selected');
+                    if (banned.includes(map)) {
+                        el.classList.add('banned');
+                    }
+                    if (map === finalMap && !banned.includes(map) && bansCompleted) {
+                        el.classList.add('selected');
+                    }
+                });
             }
-            finalMapDisplay.textContent = finalMap;
-            document.getElementById('matchIdDisplay').textContent = matchId;
+
+            if (turnIndicator) {
+                if (getRandomCaptain() === 'A') {
+                    turnIndicator.innerHTML = `<i class="fas fa-arrow-right"></i> Капитан А`;
+                    turnIndicator.style.background = '#f5b81b';
+                    turnIndicator.style.color = '#0b0b0e';
+                } else {
+                    turnIndicator.innerHTML = `<i class="fas fa-arrow-right"></i> Капитан В`;
+                    turnIndicator.style.background = '#2a2a34';
+                    turnIndicator.style.color = '#d0d6de';
+                }
+            }
+            if (finalMapDisplay) finalMapDisplay.textContent = finalMap;
+            const matchIdDisplay = document.getElementById('matchIdDisplay');
+            if (matchIdDisplay) matchIdDisplay.textContent = matchId;
             currentFinalMap = finalMap;
         }
 
@@ -2594,8 +2735,10 @@
             if (available.length === 1) {
                 finalMap = available[0];
                 bansCompleted = true;
-                document.getElementById('banSection').classList.add('hidden');
-                document.getElementById('resultSection').classList.remove('hidden');
+                const banSection = document.getElementById('banSection');
+                const resultSection = document.getElementById('resultSection');
+                if (banSection) banSection.classList.add('hidden');
+                if (resultSection) resultSection.classList.remove('hidden');
                 currentFinalMap = finalMap;
                 renderMatchPage();
                 return;
@@ -2626,12 +2769,12 @@
             if (searchCount >= 10) {
                 showToast('info', 'Матч найден!', '10/10 игроков собрано');
                 searchCount = 0;
-                searchCountEl.textContent = '0/10';
-                searchCountEl.classList.remove('visible');
+                if (searchCountEl) searchCountEl.textContent = '0/10';
+                if (searchCountEl) searchCountEl.classList.remove('visible');
                 if (timerInterval) { clearInterval(timerInterval);
                     timerInterval = null; }
                 seconds = 0;
-                timerDisplay.textContent = '00:00';
+                if (timerDisplay) timerDisplay.textContent = '00:00';
                 return;
             }
 
@@ -2647,7 +2790,7 @@
                     seconds++;
                     const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
                     const secs = String(seconds % 60).padStart(2, '0');
-                    timerDisplay.textContent = `${mins}:${secs}`;
+                    if (timerDisplay) timerDisplay.textContent = `${mins}:${secs}`;
                 }, 1000);
 
                 matchId = generateMatchId();
@@ -2659,11 +2802,16 @@
                 finalMap = 'de_dust2';
                 currentFinalMap = 'de_dust2';
                 matchPlayers = [];
-                document.getElementById('resultSection').classList.add('hidden');
-                document.getElementById('screenshotPreview').classList.remove('show');
-                document.getElementById('victoryButtons').classList.remove('show');
-                document.getElementById('banSection').classList.remove('hidden');
-                document.getElementById('finalMapDisplay').textContent = 'de_dust2';
+                const resultSection = document.getElementById('resultSection');
+                const screenshotPreview = document.getElementById('screenshotPreview');
+                const victoryButtons = document.getElementById('victoryButtons');
+                const banSection = document.getElementById('banSection');
+                const finalMapDisplay = document.getElementById('finalMapDisplay');
+                if (resultSection) resultSection.classList.add('hidden');
+                if (screenshotPreview) screenshotPreview.classList.remove('show');
+                if (victoryButtons) victoryButtons.classList.remove('show');
+                if (banSection) banSection.classList.remove('hidden');
+                if (finalMapDisplay) finalMapDisplay.textContent = 'de_dust2';
 
                 try {
                     await joinQueue(user.username);
@@ -2676,8 +2824,8 @@
                         else teamB.push(p);
                     });
                     searchCount = matchPlayers.length;
-                    searchCountEl.textContent = searchCount + '/10';
-                    searchCountEl.classList.add('visible');
+                    if (searchCountEl) searchCountEl.textContent = searchCount + '/10';
+                    if (searchCountEl) searchCountEl.classList.add('visible');
                 } catch (error) {
                     showToast('error', 'Ошибка', error.message);
                 }
@@ -2689,8 +2837,8 @@
                 const queueData = await getQueue();
                 matchPlayers = queueData.players || [];
                 searchCount = matchPlayers.length;
-                searchCountEl.textContent = searchCount + '/10';
-                searchCountEl.classList.add('visible');
+                if (searchCountEl) searchCountEl.textContent = searchCount + '/10';
+                if (searchCountEl) searchCountEl.classList.add('visible');
 
                 teamA = [];
                 teamB = [];
@@ -2715,7 +2863,7 @@
 
                         if (matchResult.success) {
                             showToast('success', 'Матч найден!', '10/10 игроков собрано');
-                            matchTabBtn.style.display = 'block';
+                            if (matchTabBtn) matchTabBtn.style.display = 'block';
                             renderMatchPage();
                             setupMapClickHandlers();
                             setTimeout(() => {
