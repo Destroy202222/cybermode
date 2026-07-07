@@ -56,7 +56,6 @@ app.post('/api/auth/register', async (req, res) => {
     try {
         const { username, email, standoffId, password } = req.body;
 
-        // Валидация
         if (!username || !email || !standoffId || !password) {
             return res.status(400).json({ error: 'Все поля обязательны для заполнения' });
         }
@@ -257,7 +256,7 @@ app.put('/api/profile/update', async (req, res) => {
     }
 });
 
-// ===== ПУБЛИЧНЫЙ СПИСОК ПОЛЬЗОВАТЕЛЕЙ (ДЛЯ ТОПА И РЕЙТИНГА) =====
+// ===== ПУБЛИЧНЫЙ СПИСОК ПОЛЬЗОВАТЕЛЕЙ =====
 app.get('/api/users/public', async (req, res) => {
     try {
         const { data: users, error } = await supabase
@@ -614,7 +613,6 @@ app.post('/api/match/create', async (req, res) => {
 
         if (error) throw error;
 
-        // Очищаем очередь после создания матча
         await supabase.from('queue').delete().neq('id', '0');
         await supabase.from('queue').insert({ players: [] });
 
@@ -675,7 +673,43 @@ app.put('/api/match/update', async (req, res) => {
     }
 });
 
-// ===== ЗАВЕРШЕНИЕ МАТЧА (ТОЛЬКО ДЛЯ АДМИНОВ) =====
+// ===== ОТМЕНА МАТЧА (ТОЛЬКО ДЛЯ АДМИНОВ) =====
+app.delete('/api/match/:matchId/cancel', async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader) {
+            return res.status(401).json({ error: 'Не авторизован' });
+        }
+
+        const token = authHeader.split(' ')[1];
+        const decoded = verifyToken(token);
+        if (!decoded) {
+            return res.status(401).json({ error: 'Неверный токен' });
+        }
+
+        const isAdminUser = await isAdmin(decoded.userId);
+        if (!isAdminUser) {
+            return res.status(403).json({ error: 'Доступ запрещен. Только администраторы могут отменять матчи.' });
+        }
+
+        const { matchId } = req.params;
+
+        // Удаляем матч из базы
+        const { error } = await supabase
+            .from('matches')
+            .delete()
+            .eq('match_id', matchId);
+
+        if (error) throw error;
+
+        res.json({ success: true, message: 'Матч отменён' });
+    } catch (error) {
+        console.error('Cancel match error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// ===== ЗАВЕРШЕНИЕ МАТЧА =====
 app.post('/api/match/finish', async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
@@ -702,7 +736,6 @@ app.post('/api/match/finish', async (req, res) => {
             return res.status(400).json({ error: 'Недостаточно данных для завершения матча' });
         }
 
-        // Обновляем матч
         await supabase
             .from('matches')
             .update({
@@ -713,7 +746,6 @@ app.post('/api/match/finish', async (req, res) => {
             })
             .eq('match_id', matchId);
 
-        // Получаем пользователя
         const { data: user, error: userError } = await supabase
             .from('users')
             .select('*')
@@ -754,7 +786,7 @@ app.post('/api/match/finish', async (req, res) => {
             }
         }
 
-        newElo = Math.max(0, newElo + eloChange); // ELO не может быть меньше 0
+        newElo = Math.max(0, newElo + eloChange);
 
         history.push({
             matchId: matchId,
