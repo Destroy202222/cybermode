@@ -6,7 +6,6 @@
     <title>CYBERMODE · Tanks Blitz</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ===== ВСЕ СТИЛИ (те же, что были) ===== */
         * {
             margin: 0;
             padding: 0;
@@ -1476,7 +1475,6 @@
             color: #6f7885;
             font-size: 13px;
         }
-        /* ===== КНОПКА ОТМЕНЫ МАТЧА ДЛЯ АДМИНА ===== */
         .admin-cancel-btn {
             background: #3a1a1a;
             border: none;
@@ -2059,7 +2057,7 @@
 
         // ===== ТЕКУЩИЙ МАТЧ =====
         let currentMatchPlayers = [];
-        let currentUser = null;
+        let currentUserData = null;
         let isSearching = false;
         let searchTimer = null;
         let searchInterval = null;
@@ -2163,7 +2161,6 @@
                 
                 showToast('success', '❌ Матч отменён', 'Администратор отменил матч');
                 
-                // Скрываем всё
                 document.getElementById('screenshotPreview').classList.remove('show');
                 document.getElementById('victoryButtons').classList.remove('show');
                 document.getElementById('resultSection').classList.add('hidden');
@@ -2322,11 +2319,12 @@
                     }
                 }
 
-                const currentUser = await getMe();
-                currentUser = currentUser;
+                // ИСПРАВЛЕНО: используем другое имя переменной, чтобы не конфликтовать с let currentUserData
+                const userData = await getMe();
+                currentUserData = userData;
                 document.getElementById('authPage').style.display = 'none';
                 document.getElementById('mainSite').classList.add('visible');
-                updateUI(currentUser);
+                updateUI(userData);
                 
                 const adminData = await checkAdmin();
                 const adminPanel = document.getElementById('adminPanel');
@@ -2875,7 +2873,6 @@
             checkAdmin().then(adminData => {
                 const isAdmin = adminData.isAdmin || false;
                 
-                // Показываем кнопку отмены только админам
                 if (isAdmin) {
                     cancelMatchBtn.classList.remove('hidden');
                 } else {
