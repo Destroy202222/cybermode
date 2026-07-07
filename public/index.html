@@ -1340,6 +1340,141 @@
             border-radius: 20px;
             cursor: pointer;
         }
+
+        /* ===== ИНСТРУКЦИЯ ПО СОЗДАНИЮ КОМНАТЫ ===== */
+        .room-instruction {
+            background: #0c0c10;
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 20px;
+            border: 2px solid #f5b81b;
+            animation: fade 0.5s ease;
+        }
+        .room-instruction .instruction-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #f5b81b;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .room-instruction .instruction-title i {
+            font-size: 28px;
+        }
+        .room-instruction .instruction-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .room-instruction .instruction-block {
+            background: #16161c;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #282830;
+        }
+        .room-instruction .instruction-block h4 {
+            color: #f0f2f5;
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .room-instruction .instruction-block h4 .badge {
+            background: #f5b81b;
+            color: #0b0b0e;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .room-instruction .instruction-block .step {
+            color: #88909c;
+            font-size: 14px;
+            line-height: 1.8;
+            padding: 4px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .room-instruction .instruction-block .step .step-num {
+            color: #f5b81b;
+            font-weight: 700;
+            min-width: 24px;
+        }
+        .room-instruction .room-details {
+            background: #0a0a0e;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 16px;
+            border: 1px solid #1f1f28;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .room-instruction .room-details .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .room-instruction .room-details .detail-item .label {
+            color: #6f7885;
+            font-size: 13px;
+        }
+        .room-instruction .room-details .detail-item .value {
+            color: #f5b81b;
+            font-weight: 700;
+            font-size: 18px;
+            background: #1a1a24;
+            padding: 4px 16px;
+            border-radius: 40px;
+            border: 1px solid #282830;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+        .room-instruction .copy-btn {
+            background: #2a2a34;
+            border: none;
+            color: #d0d6de;
+            padding: 6px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .room-instruction .copy-btn:hover {
+            background: #3a3a44;
+            color: #f0f2f5;
+        }
+        .room-instruction .copy-btn.copied {
+            background: #1a3a2a;
+            color: #6fcf97;
+        }
+        .room-instruction .captain-indicator {
+            background: #1a1a24;
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin-top: 12px;
+            border: 1px solid #f5b81b;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .room-instruction .captain-indicator .captain-name {
+            color: #f5b81b;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .room-instruction .captain-indicator .captain-label {
+            color: #6f7885;
+            font-size: 13px;
+        }
         @media (max-width: 768px) {
             .auth-container { padding: 1.5rem; margin: 16px; }
             .top-nav {
@@ -1361,6 +1496,8 @@
             .elo-section { flex-direction: column; align-items: stretch; text-align: center; }
             .elo-section .right .elo-change { text-align: center; }
             .admin-user-item { flex-direction: column; align-items: stretch; }
+            .room-instruction .instruction-content { grid-template-columns: 1fr; }
+            .room-instruction .room-details { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
@@ -1515,19 +1652,19 @@
                         <span style="color: #88909c; font-size: 15px;"><i class="fas fa-layer-group"></i> Нажмите на карту чтобы забанить</span>
                     </div>
                     <div class="ban-pool" id="mapPool">
-                        <div class="map-chip" data-map="de_dust2">de_dust2</div>
-                        <div class="map-chip" data-map="de_mirage">de_mirage</div>
-                        <div class="map-chip" data-map="de_inferno">de_inferno</div>
-                        <div class="map-chip" data-map="de_nuke">de_nuke</div>
-                        <div class="map-chip" data-map="de_vertigo">de_vertigo</div>
-                        <div class="map-chip" data-map="de_ancient">de_ancient</div>
+                        <div class="map-chip" data-map="Alpenstadt">Alpenstadt</div>
+                        <div class="map-chip" data-map="Black Goldville">Black Goldville</div>
+                        <div class="map-chip" data-map="Canyon">Canyon</div>
+                        <div class="map-chip" data-map="Copperfield">Copperfield</div>
+                        <div class="map-chip" data-map="Dead Rail">Dead Rail</div>
+                        <div class="map-chip" data-map="Desert Sands">Desert Sands</div>
                     </div>
                 </div>
                 <div class="result-section hidden" id="resultSection">
                     <div class="result-row">
                         <div class="final-map">
                             <i class="fas fa-map-marked-alt"></i>
-                            <span class="map-name" id="finalMapDisplay">de_dust2</span>
+                            <span class="map-name" id="finalMapDisplay">Alpenstadt</span>
                             <span style="color: #6f7885; font-size: 15px;">(итог)</span>
                         </div>
                         <button class="attach-btn" id="attachResultBtn">
@@ -1541,6 +1678,97 @@
                     <div class="victory-buttons" id="victoryButtons">
                         <button class="btn-victory team-a" id="victoryA"><i class="fas fa-trophy"></i> Победа Команды А</button>
                         <button class="btn-victory team-b" id="victoryB"><i class="fas fa-trophy"></i> Победа Команды В</button>
+                    </div>
+                </div>
+
+                <!-- ===== ИНСТРУКЦИЯ ПО СОЗДАНИЮ КОМНАТЫ ===== -->
+                <div class="room-instruction" id="roomInstruction" style="display: none;">
+                    <div class="instruction-title">
+                        <i class="fas fa-door-open"></i>
+                        📋 ИНСТРУКЦИЯ ПО СОЗДАНИЮ КОМНАТЫ
+                    </div>
+                    
+                    <div class="instruction-content">
+                        <!-- Блок для капитана -->
+                        <div class="instruction-block">
+                            <h4>
+                                <i class="fas fa-crown" style="color: #f5b81b;"></i>
+                                КАПИТАН
+                                <span class="badge" id="captainNameBadge">Игрок</span>
+                            </h4>
+                            <div class="step">
+                                <span class="step-num">1.</span>
+                                <span>Создай <strong>тренировочную комнату</strong> в Tanks Blitz</span>
+                            </div>
+                            <div class="step">
+                                <span class="step-num">2.</span>
+                                <span>Выбери карту <strong id="finalMapInstruction">Alpenstadt</strong></span>
+                            </div>
+                            <div class="step">
+                                <span class="step-num">3.</span>
+                                <span>Назови комнату <strong id="roomNameInstruction">CYBER #123</strong></span>
+                            </div>
+                            <div class="step">
+                                <span class="step-num">4.</span>
+                                <span>Установи пароль <strong id="roomPasswordInstruction">ABCD</strong></span>
+                            </div>
+                            <div class="step">
+                                <span class="step-num">5.</span>
+                                <span>Сообщи пароль остальным игрокам</span>
+                            </div>
+                        </div>
+
+                        <!-- Блок для остальных игроков -->
+                        <div class="instruction-block">
+                            <h4>
+                                <i class="fas fa-users" style="color: #6fcf97;"></i>
+                                ОСТАЛЬНЫЕ ИГРОКИ
+                            </h4>
+                            <div class="step">
+                                <span class="step-num">1.</span>
+                                <span>Найди комнату с названием <strong id="roomNameInstruction2">CYBER #123</strong></span>
+                            </div>
+                            <div class="step">
+                                <span class="step-num">2.</span>
+                                <span>Введи пароль <strong id="roomPasswordInstruction2">ABCD</strong></span>
+                            </div>
+                            <div class="step">
+                                <span class="step-num">3.</span>
+                                <span>Начинай игру на карте <strong id="finalMapInstruction2">Alpenstadt</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Детали комнаты -->
+                    <div class="room-details">
+                        <div class="detail-item">
+                            <span class="label">📌 Название комнаты:</span>
+                            <span class="value" id="roomNameDisplay">CYBER #123</span>
+                            <button class="copy-btn" onclick="copyText('roomNameDisplay')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">🔑 Пароль:</span>
+                            <span class="value" id="roomPasswordDisplay">ABCD</span>
+                            <button class="copy-btn" onclick="copyText('roomPasswordDisplay')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">🗺️ Карта:</span>
+                            <span class="value" id="roomMapDisplay">Alpenstadt</span>
+                        </div>
+                    </div>
+
+                    <!-- Кто капитан -->
+                    <div class="captain-indicator">
+                        <span class="captain-label">👑 Капитан:</span>
+                        <span class="captain-name" id="captainNameDisplay">Игрок</span>
+                        <span style="color: #6f7885; font-size: 13px; margin-left: auto;">
+                            <i class="fas fa-info-circle"></i>
+                            Только капитан создаёт комнату
+                        </span>
                     </div>
                 </div>
             </div>
@@ -1748,6 +1976,44 @@
 
             const navItem = document.querySelector(`.nav-item[data-tab="${tabId}"]`);
             if (navItem) navItem.classList.add('active');
+        }
+
+        // ===== КОПИРОВАНИЕ ТЕКСТА =====
+        function copyText(elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            const text = element.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = element.closest('.detail-item').querySelector('.copy-btn');
+                if (btn) {
+                    btn.classList.add('copied');
+                    btn.innerHTML = '<i class="fas fa-check"></i> Скопировано';
+                    setTimeout(() => {
+                        btn.classList.remove('copied');
+                        btn.innerHTML = '<i class="fas fa-copy"></i>';
+                    }, 2000);
+                }
+                showToast('success', 'Скопировано!', `"${text}" скопирован в буфер обмена`);
+            }).catch(() => {
+                // Fallback для старых браузеров
+                const range = document.createRange();
+                range.selectNode(element);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                showToast('success', 'Скопировано!', `"${text}" скопирован в буфер обмена`);
+            });
+        }
+
+        // ===== ГЕНЕРАЦИЯ ПАРОЛЯ =====
+        function generatePassword() {
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let password = '';
+            for (let i = 0; i < 4; i++) {
+                password += letters.charAt(Math.floor(Math.random() * letters.length));
+            }
+            return password;
         }
 
         // ===== API КЛИЕНТ =====
@@ -2028,7 +2294,7 @@
                         <div class="history-item">
                             <div class="match-info">
                                 <span class="match-number">#${item.matchId}</span>
-                                <span class="match-map">${item.map || 'de_dust2'}</span>
+                                <span class="match-map">${item.map || 'Alpenstadt'}</span>
                                 <span style="color:#6f7885;font-size:12px;">${item.date}</span>
                                 ${eloDisplay}
                             </div>
@@ -2370,7 +2636,7 @@
                             teamA: players.slice(0, 5),
                             teamB: players.slice(5, 10),
                             banned: [],
-                            finalMap: 'de_dust2',
+                            finalMap: 'Alpenstadt',
                             players: players.slice(0, 10)
                         };
 
@@ -2423,7 +2689,7 @@
                 `).join('');
             }
 
-            document.getElementById('finalMapDisplay').textContent = matchData.finalMap || 'de_dust2';
+            document.getElementById('finalMapDisplay').textContent = matchData.finalMap || 'Alpenstadt';
             currentMatchId = matchData.matchId;
 
             setupMapClickHandlers(matchData);
@@ -2432,7 +2698,17 @@
         function setupMapClickHandlers(matchData) {
             const chips = document.querySelectorAll('.map-chip');
             let banned = matchData.banned || [];
-            let finalMap = matchData.finalMap || 'de_dust2';
+            let finalMap = matchData.finalMap || 'Alpenstadt';
+
+            // Карты Tanks Blitz
+            const maps = [
+                'Alpenstadt', 
+                'Black Goldville', 
+                'Canyon', 
+                'Copperfield', 
+                'Dead Rail', 
+                'Desert Sands'
+            ];
 
             chips.forEach(el => {
                 el.classList.remove('banned', 'selected');
@@ -2455,7 +2731,6 @@
                     banned.push(mapName);
                     this.classList.add('banned');
 
-                    const maps = ['de_dust2', 'de_mirage', 'de_inferno', 'de_nuke', 'de_vertigo', 'de_ancient'];
                     const available = maps.filter(m => !banned.includes(m));
                     
                     if (available.length === 1) {
@@ -2463,6 +2738,10 @@
                         document.getElementById('finalMapDisplay').textContent = finalMap;
                         document.getElementById('banSection').classList.add('hidden');
                         document.getElementById('resultSection').classList.remove('hidden');
+                        
+                        // Показываем инструкцию
+                        showRoomInstruction(finalMap);
+                        
                         showToast('info', '🎯 Карта выбрана', `Играем на ${finalMap}`);
 
                         try {
@@ -2487,6 +2766,36 @@
                     }
                 });
             });
+        }
+
+        // ===== ПОКАЗ ИНСТРУКЦИИ =====
+        function showRoomInstruction(finalMap) {
+            const instruction = document.getElementById('roomInstruction');
+            if (!instruction) return;
+            
+            instruction.style.display = 'block';
+            
+            // Получаем капитана (первый игрок из команды А)
+            const teamAList = document.getElementById('teamAList');
+            const captainName = teamAList?.querySelector('.player-tag.captain')?.textContent?.trim() || 'Капитан';
+            
+            // Генерируем пароль
+            const password = generatePassword();
+            const matchNumber = document.getElementById('matchIdDisplay')?.textContent || '0000';
+            const roomName = `CYBER #${matchNumber}`;
+            
+            // Обновляем все поля
+            document.getElementById('captainNameBadge').textContent = captainName;
+            document.getElementById('captainNameDisplay').textContent = captainName;
+            document.getElementById('finalMapInstruction').textContent = finalMap;
+            document.getElementById('finalMapInstruction2').textContent = finalMap;
+            document.getElementById('roomNameInstruction').textContent = roomName;
+            document.getElementById('roomNameInstruction2').textContent = roomName;
+            document.getElementById('roomPasswordInstruction').textContent = password;
+            document.getElementById('roomPasswordInstruction2').textContent = password;
+            document.getElementById('roomNameDisplay').textContent = roomName;
+            document.getElementById('roomPasswordDisplay').textContent = password;
+            document.getElementById('roomMapDisplay').textContent = finalMap;
         }
 
         // ===== РЕДАКТИРОВАНИЕ ПРОФИЛЯ =====
@@ -2546,7 +2855,7 @@
                     playerUsername: JSON.parse(localStorage.getItem('cybermode_user') || '{}').username,
                     isWin: isWin,
                     screenshot: screenshotImg.src || '',
-                    finalMap: document.getElementById('finalMapDisplay').textContent || 'de_dust2'
+                    finalMap: document.getElementById('finalMapDisplay').textContent || 'Alpenstadt'
                 });
 
                 if (result.success) {
@@ -2555,6 +2864,7 @@
                         document.getElementById('screenshotPreview').classList.remove('show');
                         document.getElementById('victoryButtons').classList.remove('show');
                         document.getElementById('resultSection').classList.add('hidden');
+                        document.getElementById('roomInstruction').style.display = 'none';
                         document.getElementById('matchTabBtn').style.display = 'none';
                         switchTab('main');
                         loadMainSite();
