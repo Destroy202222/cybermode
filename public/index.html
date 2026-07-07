@@ -1533,7 +1533,7 @@
     <!-- ===== ОСНОВНОЙ САЙТ ===== -->
     <div class="main-site" id="mainSite">
 
-        <!-- ===== НАВИГАЦИЯ (БЕЗ "ГЛАВНАЯ") ===== -->
+        <!-- ===== НАВИГАЦИЯ ===== -->
         <div class="top-nav" id="topNav">
             <div class="brand" id="brandLogo"><i class="fas fa-fist-raised"></i> CYBERMODE</div>
             <div class="nav-center">
@@ -1566,7 +1566,6 @@
         <!-- ===== ГЛАВНОЕ МЕНЮ ===== -->
         <div id="tabMain" class="tab-content active">
             <div class="main-menu">
-                <!-- Счетчики сверху -->
                 <div class="stats-bar">
                     <div class="stat-item">
                         <i class="fas fa-users"></i>
@@ -1581,14 +1580,12 @@
                 </div>
 
                 <div class="main-grid">
-                    <!-- Левая колонка -->
                     <div class="left-col">
                         <h1>Киберспортивная платформа <span class="highlight">Tanks Blitz</span></h1>
                         <div class="desc">
                             Проверь свой скилл, поднимай уровень и играй против тех, кто тоже пришел побеждать.
                             Собирай победные серии, расти в рейтинге и становись частью сильного соревновательного комьюнити.
                         </div>
-
                         <div class="prize-block">
                             <div class="prize-title">💰 ПРИЗОВОЙ ФОНД СЕЗОНА — 10 000 ₽</div>
                             <div class="prize-list">
@@ -1598,17 +1595,12 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Правая колонка - Топ игроков -->
                     <div class="right-col">
                         <div class="top-title"><i class="fas fa-trophy"></i> Топ игроков</div>
-                        <div id="topPlayersList">
-                            <!-- Заполняется из API -->
-                        </div>
+                        <div id="topPlayersList"></div>
                     </div>
                 </div>
 
-                <!-- Кнопки снизу -->
                 <div class="profile-actions">
                     <button class="btn-action" id="profileBtn"><i class="fas fa-user"></i> Мой профиль</button>
                     <button class="btn-action primary" id="playMatchBtn"><i class="fas fa-gamepad"></i> Играть матч</button>
@@ -1616,7 +1608,7 @@
             </div>
         </div>
 
-        <!-- ===== ПОИСК МАТЧА (С ОТМЕНОЙ) ===== -->
+        <!-- ===== ПОИСК МАТЧА ===== -->
         <div id="tabSearch" class="tab-content">
             <div class="search-page">
                 <div class="big-icon"><i class="fas fa-gamepad"></i></div>
@@ -1689,7 +1681,6 @@
                     </div>
                     
                     <div class="instruction-content">
-                        <!-- Блок для капитана -->
                         <div class="instruction-block">
                             <h4>
                                 <i class="fas fa-crown" style="color: #f5b81b;"></i>
@@ -1718,7 +1709,6 @@
                             </div>
                         </div>
 
-                        <!-- Блок для остальных игроков -->
                         <div class="instruction-block">
                             <h4>
                                 <i class="fas fa-users" style="color: #6fcf97;"></i>
@@ -1739,7 +1729,6 @@
                         </div>
                     </div>
 
-                    <!-- Детали комнаты -->
                     <div class="room-details">
                         <div class="detail-item">
                             <span class="label">📌 Название комнаты:</span>
@@ -1761,7 +1750,6 @@
                         </div>
                     </div>
 
-                    <!-- Кто капитан -->
                     <div class="captain-indicator">
                         <span class="captain-label">👑 Капитан:</span>
                         <span class="captain-name" id="captainNameDisplay">Игрок</span>
@@ -1957,6 +1945,27 @@
         }
 
         function switchTab(tabId) {
+            // Если переключаемся с вкладки "Поиск матча" на другую
+            const currentActiveTab = document.querySelector('.tab-content.active');
+            const isLeavingSearch = currentActiveTab && currentActiveTab.id === 'tabSearch' && tabId !== 'search';
+            
+            if (isLeavingSearch && isSearching) {
+                cancelSearch();
+                showToast('info', '⏹️ Поиск остановлен', 'Вы вышли из вкладки поиска');
+            }
+
+            // Проверка доступа к вкладке матча
+            if (tabId === 'match') {
+                const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
+                const isAdmin = user?.isAdmin || false;
+                const isParticipant = user && currentMatchPlayers.includes(user.username);
+                
+                if (!isParticipant && !isAdmin) {
+                    showToast('error', 'Доступ запрещен', 'Вы не участвуете в этом матче');
+                    return;
+                }
+            }
+
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
 
@@ -1996,7 +2005,6 @@
                 }
                 showToast('success', 'Скопировано!', `"${text}" скопирован в буфер обмена`);
             }).catch(() => {
-                // Fallback для старых браузеров
                 const range = document.createRange();
                 range.selectNode(element);
                 window.getSelection().removeAllRanges();
@@ -2015,6 +2023,16 @@
             }
             return password;
         }
+
+        // ===== ТЕКУЩИЙ МАТЧ =====
+        let currentMatchPlayers = [];
+        let currentUser = null;
+        let isSearching = false;
+        let searchTimer = null;
+        let searchInterval = null;
+        let searchTime = 0;
+        let searchCount = 0;
+        let currentMatchId = null;
 
         // ===== API КЛИЕНТ =====
         async function apiRequest(endpoint, options = {}) {
@@ -2223,6 +2241,7 @@
         async function loadMainSite() {
             try {
                 const user = await getMe();
+                currentUser = user;
                 document.getElementById('authPage').style.display = 'none';
                 document.getElementById('mainSite').classList.add('visible');
                 updateUI(user);
@@ -2243,6 +2262,8 @@
                 document.getElementById('usersCount').textContent = stats.totalUsers || 0;
                 document.getElementById('pendingCount').textContent = stats.pending || 0;
                 
+                document.getElementById('matchTabBtn').style.display = 'none';
+                
                 await loadTopPlayers();
                 await renderRating();
             } catch (error) {
@@ -2252,6 +2273,30 @@
                 showToast('error', 'Ошибка', error.message);
             }
         }
+
+        // ===== АВТОМАТИЧЕСКИЙ ВЫХОД ИЗ ОЧЕРЕДИ =====
+        window.addEventListener('beforeunload', function() {
+            const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
+            if (user && isSearching) {
+                navigator.sendBeacon('/api/queue/leave', JSON.stringify({ username: user.username }));
+            }
+        });
+
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden && isSearching) {
+                const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
+                if (user) {
+                    navigator.sendBeacon('/api/queue/leave', JSON.stringify({ username: user.username }));
+                }
+            }
+        });
+
+        window.addEventListener('popstate', function() {
+            if (isSearching) {
+                cancelSearch();
+                showToast('info', '⏹️ Поиск остановлен', 'Вы покинули страницу поиска');
+            }
+        });
 
         // ===== ОБНОВЛЕНИЕ UI =====
         function updateUI(user) {
@@ -2312,7 +2357,7 @@
             switchTab('main');
         }
 
-        // ===== ТОП ИГРОКОВ (С FALLBACK) =====
+        // ===== ТОП ИГРОКОВ =====
         async function loadTopPlayers() {
             try {
                 const data = await getAllUsers();
@@ -2387,7 +2432,7 @@
             }
         }
 
-        // ===== РЕЙТИНГ (С FALLBACK) =====
+        // ===== РЕЙТИНГ =====
         async function renderRating() {
             const body = document.getElementById('ratingBody');
             if (!body) return;
@@ -2531,13 +2576,6 @@
         }
 
         // ===== ПОИСК МАТЧА С ОТМЕНОЙ =====
-        let isSearching = false;
-        let searchTimer = null;
-        let searchInterval = null;
-        let searchTime = 0;
-        let searchCount = 0;
-        let currentMatchId = null;
-
         function updateSearchButton(isActive) {
             const btn = document.getElementById('searchMatchBtn');
             if (isActive) {
@@ -2563,7 +2601,9 @@
 
             const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
             if (user) {
-                leaveQueue(user.username).catch(() => {});
+                leaveQueue(user.username).catch(() => {
+                    navigator.sendBeacon('/api/queue/leave', JSON.stringify({ username: user.username }));
+                });
             }
 
             updateSearchButton(false);
@@ -2576,6 +2616,7 @@
             const timerDisplay = document.getElementById('timerDisplay');
             if (timerDisplay) timerDisplay.textContent = '00:00';
             searchTime = 0;
+            isSearching = false;
 
             showToast('info', '⏹️ Поиск отменён', 'Вы отменили поиск матча');
         }
@@ -2590,6 +2631,23 @@
             if (!user) {
                 showToast('error', 'Ошибка', 'Вы не авторизованы');
                 return;
+            }
+
+            try {
+                const queueData = await getQueue();
+                if (queueData.players && queueData.players.includes(user.username)) {
+                    showToast('info', 'Уже в очереди', 'Вы уже находитесь в поиске');
+                    updateSearchButton(true);
+                    searchCount = queueData.players.length;
+                    const countEl = document.getElementById('searchCount');
+                    if (countEl) {
+                        countEl.textContent = `${searchCount}/10`;
+                        countEl.classList.add('visible');
+                    }
+                    return;
+                }
+            } catch (error) {
+                console.error('Queue check error:', error);
             }
 
             showToast('info', '🔍 Поиск начат', 'Ищем соперников...');
@@ -2626,6 +2684,12 @@
                         countEl.classList.add('visible');
                     }
 
+                    if (!players.includes(user.username)) {
+                        showToast('info', 'Вы удалены из очереди', 'Администратор удалил вас из поиска');
+                        cancelSearch();
+                        return;
+                    }
+
                     if (searchCount >= 10) {
                         clearInterval(searchTimer);
                         clearInterval(searchInterval);
@@ -2643,15 +2707,29 @@
                         try {
                             await createMatch(matchData);
                             currentMatchId = matchData.matchId;
-                            showToast('success', '🎮 Матч найден!', 'Соперники готовы к игре');
+                            
+                            currentMatchPlayers = [...matchData.teamA, ...matchData.teamB];
+                            
+                            const currentUser = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
+                            const isParticipant = currentUser && currentMatchPlayers.includes(currentUser.username);
+                            
+                            const adminData = await checkAdmin();
+                            const isAdmin = adminData.isAdmin || false;
 
-                            const matchTab = document.querySelector('[data-tab="match"]');
-                            if (matchTab) {
-                                setTimeout(() => {
-                                    renderMatchPage(matchData);
-                                    document.getElementById('matchTabBtn').style.display = 'block';
-                                    switchTab('match');
-                                }, 500);
+                            if (isParticipant || isAdmin) {
+                                showToast('success', '🎮 Матч найден!', 'Соперники готовы к игре');
+                                const matchTab = document.querySelector('[data-tab="match"]');
+                                if (matchTab) {
+                                    setTimeout(() => {
+                                        renderMatchPage(matchData);
+                                        document.getElementById('matchTabBtn').style.display = 'block';
+                                        switchTab('match');
+                                    }, 500);
+                                }
+                            } else {
+                                showToast('info', '🎮 Матч сформирован', 'Игроки собраны, матч начался!');
+                                document.getElementById('matchTabBtn').style.display = 'none';
+                                switchTab('main');
                             }
                         } catch (error) {
                             showToast('error', 'Ошибка', error.message);
@@ -2668,8 +2746,14 @@
             const teamAList = document.getElementById('teamAList');
             const teamBList = document.getElementById('teamBList');
             const matchIdDisplay = document.getElementById('matchIdDisplay');
+            const matchTabBtn = document.getElementById('matchTabBtn');
 
             if (matchIdDisplay) matchIdDisplay.textContent = matchData.matchId.replace('match_', '');
+
+            currentMatchPlayers = [...matchData.teamA, ...matchData.teamB];
+            
+            const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
+            const isParticipant = user && currentMatchPlayers.includes(user.username);
 
             if (teamAList) {
                 teamAList.innerHTML = matchData.teamA.map((p, idx) => `
@@ -2692,6 +2776,20 @@
             document.getElementById('finalMapDisplay').textContent = matchData.finalMap || 'Alpenstadt';
             currentMatchId = matchData.matchId;
 
+            checkAdmin().then(adminData => {
+                const isAdmin = adminData.isAdmin || false;
+                
+                if (isParticipant || isAdmin) {
+                    matchTabBtn.style.display = 'block';
+                    if (document.getElementById('resultSection').classList.contains('hidden') === false) {
+                        showRoomInstruction(matchData.finalMap || 'Alpenstadt');
+                    }
+                } else {
+                    matchTabBtn.style.display = 'none';
+                    document.getElementById('roomInstruction').style.display = 'none';
+                }
+            });
+
             setupMapClickHandlers(matchData);
         }
 
@@ -2700,7 +2798,6 @@
             let banned = matchData.banned || [];
             let finalMap = matchData.finalMap || 'Alpenstadt';
 
-            // Карты Tanks Blitz
             const maps = [
                 'Alpenstadt', 
                 'Black Goldville', 
@@ -2739,7 +2836,6 @@
                         document.getElementById('banSection').classList.add('hidden');
                         document.getElementById('resultSection').classList.remove('hidden');
                         
-                        // Показываем инструкцию
                         showRoomInstruction(finalMap);
                         
                         showToast('info', '🎯 Карта выбрана', `Играем на ${finalMap}`);
@@ -2775,16 +2871,13 @@
             
             instruction.style.display = 'block';
             
-            // Получаем капитана (первый игрок из команды А)
             const teamAList = document.getElementById('teamAList');
             const captainName = teamAList?.querySelector('.player-tag.captain')?.textContent?.trim() || 'Капитан';
             
-            // Генерируем пароль
             const password = generatePassword();
             const matchNumber = document.getElementById('matchIdDisplay')?.textContent || '0000';
             const roomName = `CYBER #${matchNumber}`;
             
-            // Обновляем все поля
             document.getElementById('captainNameBadge').textContent = captainName;
             document.getElementById('captainNameDisplay').textContent = captainName;
             document.getElementById('finalMapInstruction').textContent = finalMap;
@@ -2944,7 +3037,6 @@
 
         document.getElementById('searchMatchBtn').addEventListener('click', startSearch);
 
-        // Загрузка аватара
         document.getElementById('fileInputAvatar').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
@@ -2966,7 +3058,6 @@
             this.value = '';
         });
 
-        // Прикрепление результата
         document.getElementById('fileInputResult').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
