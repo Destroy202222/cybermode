@@ -11,8 +11,8 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // ===== ПОДКЛЮЧЕНИЕ К SUPABASE =====
-const supabaseUrl = process.env.SUPABASE_URL || 'https://bngrrpsolpqmtqwfuhjl.supabase.co';
-const supabaseKey = process.env.SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJuZ3JycHNvbHBxbXRxd2Z1aGpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzNjYwMjgsImV4cCI6MjA5ODk0MjAyOH0.LKMbN9HTyZCB27JsG5emrOk5rDEWKFj6JxSTws2Mgo0';
+const supabaseUrl = process.env.SUPABASE_URL || 'https://ваш_проект.supabase.co';
+const supabaseKey = process.env.SUPABASE_KEY || 'ваш_anon_ключ';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const JWT_SECRET = process.env.JWT_SECRET || 'cybermode_super_secret_2026';
@@ -56,7 +56,6 @@ app.post('/api/auth/register', async (req, res) => {
     try {
         const { username, email, standoffId, password } = req.body;
 
-        // Проверяем, существует ли пользователь
         const { data: existing } = await supabase
             .from('users')
             .select('email')
@@ -235,6 +234,37 @@ app.put('/api/profile/update', async (req, res) => {
         });
     } catch (error) {
         console.error('Update profile error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// ===== ПУБЛИЧНЫЙ СПИСОК ПОЛЬЗОВАТЕЛЕЙ (ДЛЯ ТОПА И РЕЙТИНГА) =====
+app.get('/api/users/public', async (req, res) => {
+    try {
+        const { data: users, error } = await supabase
+            .from('users')
+            .select('id, username, wins, losses, matches, elo, is_calibrated, calibration_matches')
+            .order('elo', { ascending: false });
+
+        if (error) {
+            console.error('Supabase error:', error);
+            return res.status(500).json({ error: error.message });
+        }
+
+        const formattedUsers = (users || []).map(u => ({
+            id: u.id,
+            username: u.username,
+            wins: u.wins || 0,
+            losses: u.losses || 0,
+            matches: u.matches || 0,
+            elo: u.elo || 1000,
+            is_calibrated: u.is_calibrated || false,
+            calibration_matches: u.calibration_matches || 0
+        }));
+
+        res.json({ users: formattedUsers });
+    } catch (error) {
+        console.error('Public users error:', error);
         res.status(500).json({ error: error.message });
     }
 });
@@ -604,7 +634,6 @@ app.post('/api/match/finish', async (req, res) => {
             return res.status(401).json({ error: 'Неверный токен' });
         }
 
-        // ===== ПРОВЕРКА: ТОЛЬКО АДМИН =====
         const isAdminUser = await isAdmin(decoded.userId);
         if (!isAdminUser) {
             return res.status(403).json({ 
@@ -614,7 +643,6 @@ app.post('/api/match/finish', async (req, res) => {
 
         const { matchId, winner, playerUsername, isWin, screenshot, finalMap } = req.body;
 
-        // Обновляем матч
         await supabase
             .from('matches')
             .update({
@@ -625,7 +653,6 @@ app.post('/api/match/finish', async (req, res) => {
             })
             .eq('match_id', matchId);
 
-        // Получаем пользователя
         const { data: user, error: userError } = await supabase
             .from('users')
             .select('*')
