@@ -6,7 +6,6 @@
     <title>CYBERMODE · Tanks Blitz</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ===== ОСНОВНЫЕ СТИЛИ ===== */
         * {
             margin: 0;
             padding: 0;
@@ -21,8 +20,6 @@
             min-height: 100vh;
             padding: 20px;
         }
-
-        /* ===== АВТОРИЗАЦИЯ ===== */
         .auth-page {
             display: flex;
             justify-content: center;
@@ -128,8 +125,6 @@
             text-decoration: underline;
             color: #ffcc33;
         }
-
-        /* ===== ОСНОВНОЙ САЙТ ===== */
         .main-site {
             display: none;
             max-width: 1400px;
@@ -144,8 +139,6 @@
         .main-site.visible {
             display: block;
         }
-
-        /* ===== НАВИГАЦИЯ (БЕЗ "ГЛАВНАЯ") ===== */
         .top-nav {
             position: fixed;
             top: 20px;
@@ -236,8 +229,6 @@
         .nav-right .profile:hover i {
             color: #f5b81b;
         }
-
-        /* ===== ВКЛАДКИ ===== */
         .tab-content {
             display: none;
             animation: fade 0.3s ease;
@@ -249,8 +240,6 @@
             0% { opacity: 0.3; transform: translateY(6px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
-        /* ===== ГЛАВНОЕ МЕНЮ ===== */
         .main-menu {
             background: #111117;
             border-radius: 28px;
@@ -283,15 +272,12 @@
             font-size: 20px;
             color: #6f7885;
         }
-
         .main-menu .main-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
             margin-bottom: 36px;
         }
-
-        /* Левая колонка */
         .main-menu .left-col h1 {
             font-size: 34px;
             font-weight: 800;
@@ -309,7 +295,6 @@
             margin-bottom: 28px;
             max-width: 520px;
         }
-
         .main-menu .prize-block {
             background: #0c0c10;
             border-radius: 16px;
@@ -351,8 +336,6 @@
         .main-menu .prize-block .prize-item:nth-child(3) {
             background: rgba(205, 127, 50, 0.04);
         }
-
-        /* Правая колонка - Топ игроков */
         .main-menu .right-col .top-title {
             font-size: 20px;
             font-weight: 700;
@@ -414,8 +397,6 @@
             font-size: 14px;
             font-weight: 600;
         }
-
-        /* Кнопки внизу главной */
         .main-menu .profile-actions {
             display: flex;
             gap: 24px;
@@ -448,8 +429,6 @@
             background: #ffcc33;
             transform: scale(0.97);
         }
-
-        /* ===== ПОИСК МАТЧА ===== */
         .search-page {
             background: #111117;
             border-radius: 28px;
@@ -541,8 +520,6 @@
             color: #f5b81b;
             font-variant-numeric: tabular-nums;
         }
-
-        /* ===== МАТЧ ===== */
         .match-page {
             background: #111117;
             border-radius: 28px;
@@ -819,8 +796,6 @@
         #fileInputResult, #fileInputAvatar {
             display: none;
         }
-
-        /* ===== РЕЙТИНГ ===== */
         .rating-page {
             background: #111117;
             border-radius: 28px;
@@ -906,8 +881,6 @@
         .rating-table .player-rating { font-weight: 700; color: #f5b81b; }
         .rating-table .player-rating.calibration { color: #f5b81b; font-size: 13px; }
         .rating-table .player-prize { font-weight: 700; color: #f5b81b; font-size: 14px; }
-
-        /* ===== МИССИИ ===== */
         .missions-page {
             background: #111117;
             border-radius: 28px;
@@ -934,8 +907,6 @@
             color: #6f7885;
             font-size: 16px;
         }
-
-        /* ===== МАГАЗИН ===== */
         .shop-page {
             background: #111117;
             border-radius: 28px;
@@ -962,8 +933,6 @@
             color: #6f7885;
             font-size: 16px;
         }
-
-        /* ===== ПРОФИЛЬ ===== */
         .profile-page {
             background: #111117;
             border-radius: 28px;
@@ -1133,8 +1102,6 @@
         .history-item .elo-change { font-size: 12px; font-weight: 600; margin-left: 8px; }
         .history-item .elo-change.positive { color: #6fcf97; }
         .history-item .elo-change.negative { color: #e74c3c; }
-
-        /* ===== МОДАЛЬНОЕ ОКНО ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -1255,8 +1222,6 @@
         .modal .modal-actions .btn-cancel:hover { background: #2a2a34; }
         .modal .modal-actions .btn-save { background: #f5b81b; color: #0b0b0e; }
         .modal .modal-actions .btn-save:hover { background: #ffcc33; }
-
-        /* ===== ТОСТ ===== */
         .toast {
             position: fixed;
             bottom: 2rem;
@@ -1279,8 +1244,6 @@
         .toast .toast-title.error { color: #ff6b6b; }
         .toast .toast-title.info { color: #f5b81b; }
         .toast .toast-text { color: #8f877a; font-size: 0.95rem; }
-
-        /* ===== АДМИН ===== */
         .admin-panel {
             background: #1a1a24;
             border-radius: 16px;
@@ -1377,8 +1340,6 @@
             border-radius: 20px;
             cursor: pointer;
         }
-
-        /* ===== АДАПТИВ ===== */
         @media (max-width: 768px) {
             .auth-container { padding: 1.5rem; margin: 16px; }
             .top-nav {
@@ -1872,9 +1833,9 @@
             return apiRequest('/api/stats');
         }
 
-        // ===== ВСЕ ПОЛЬЗОВАТЕЛИ (ДЛЯ ТОПА) =====
+        // ===== ВСЕ ПОЛЬЗОВАТЕЛИ (ПУБЛИЧНЫЙ ЭНДПОИНТ) =====
         async function getAllUsers() {
-            return apiRequest('/api/admin/users');
+            return apiRequest('/api/users/public');
         }
 
         // ===== АДМИН =====
@@ -1888,7 +1849,7 @@
 
         async function loadAdminUsers() {
             try {
-                const data = await getAllUsers();
+                const data = await apiRequest('/api/admin/users');
                 const container = document.getElementById('adminUsersList');
                 if (!container) return;
                 if (!data.users || data.users.length === 0) {
@@ -2085,37 +2046,45 @@
             switchTab('main');
         }
 
-        // ===== ТОП ИГРОКОВ (ИСПРАВЛЕНО) =====
+        // ===== ТОП ИГРОКОВ (С FALLBACK) =====
         async function loadTopPlayers() {
             try {
                 const data = await getAllUsers();
                 const users = data.users || [];
                 
-                // Сортируем: сначала те у кого калибровка пройдена, потом остальные
                 const sorted = [...users].sort((a, b) => {
-                    // Если у обоих калибровка - сортируем по ELO
                     if (a.is_calibrated && b.is_calibrated) {
                         return (b.elo || 0) - (a.elo || 0);
                     }
-                    // Если у одного калибровка, а у другого нет - калиброванный выше
                     if (a.is_calibrated && !b.is_calibrated) return -1;
                     if (!a.is_calibrated && b.is_calibrated) return 1;
-                    // Если у обоих нет калибровки - сортируем по количеству матчей
                     return (b.matches || 0) - (a.matches || 0);
                 }).slice(0, 5);
 
                 const container = document.getElementById('topPlayersList');
                 if (!container) return;
                 
-                const medals = ['🥇', '🥈', '🥉', '4', '5'];
+                const medals = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣'];
                 const rankClasses = ['gold', 'silver', 'bronze', '', ''];
                 
+                if (sorted.length === 0) {
+                    container.innerHTML = `
+                        <div class="top-player">
+                            <span class="rank">👤</span>
+                            <div class="info">
+                                <div class="name">Нет игроков</div>
+                                <div class="elo">Стань первым!</div>
+                            </div>
+                            <span class="wins">🏆 0</span>
+                        </div>
+                    `;
+                    return;
+                }
+                
                 container.innerHTML = sorted.map((player, index) => {
-                    // Проверяем калибровку
                     const isCalibrated = player.is_calibrated || false;
                     const calibrationMatches = player.calibration_matches || 0;
                     
-                    // Формируем отображение ELO
                     let eloDisplay = '';
                     if (isCalibrated) {
                         eloDisplay = `ELO: ${player.elo || 1000}`;
@@ -2125,7 +2094,7 @@
                     
                     return `
                         <div class="top-player">
-                            <span class="rank ${rankClasses[index] || ''}">${medals[index] || index + 1}</span>
+                            <span class="rank ${rankClasses[index] || ''}">${medals[index] || (index + 1)}</span>
                             <div class="info">
                                 <div class="name">${player.username}</div>
                                 <div class="elo ${!isCalibrated ? 'calibration' : ''}">${eloDisplay}</div>
@@ -2136,19 +2105,23 @@
                 }).join('');
             } catch (error) {
                 console.error('Load top players error:', error);
-                // Если ошибка - показываем демо-данные
                 const container = document.getElementById('topPlayersList');
                 if (container) {
                     container.innerHTML = `
-                        <div class="top-player"><span class="rank gold">🥇</span><div class="info"><div class="name">Загрузка...</div><div class="elo">Подождите</div></div><span class="wins">🏆 0</span></div>
-                        <div class="top-player"><span class="rank silver">🥈</span><div class="info"><div class="name">Загрузка...</div><div class="elo">Подождите</div></div><span class="wins">🏆 0</span></div>
-                        <div class="top-player"><span class="rank bronze">🥉</span><div class="info"><div class="name">Загрузка...</div><div class="elo">Подождите</div></div><span class="wins">🏆 0</span></div>
+                        <div class="top-player">
+                            <span class="rank">👤</span>
+                            <div class="info">
+                                <div class="name">Нет данных</div>
+                                <div class="elo">Стань первым игроком!</div>
+                            </div>
+                            <span class="wins">🏆 0</span>
+                        </div>
                     `;
                 }
             }
         }
 
-        // ===== РЕЙТИНГ (ИСПРАВЛЕНО) =====
+        // ===== РЕЙТИНГ (С FALLBACK) =====
         async function renderRating() {
             const body = document.getElementById('ratingBody');
             if (!body) return;
@@ -2157,19 +2130,29 @@
                 const data = await getAllUsers();
                 const users = data.users || [];
                 
-                // Сортируем всех пользователей по ELO (только те у кого калибровка пройдена)
                 const calibratedUsers = users.filter(u => u.is_calibrated);
                 const uncalibratedUsers = users.filter(u => !u.is_calibrated);
                 
                 const sortedCalibrated = [...calibratedUsers].sort((a, b) => (b.elo || 0) - (a.elo || 0));
                 const sortedUncalibrated = [...uncalibratedUsers].sort((a, b) => (b.matches || 0) - (a.matches || 0));
                 
-                // Берём 10 калиброванных и добавляем некалиброванных если мало
                 let topUsers = [...sortedCalibrated];
                 if (topUsers.length < 10) {
                     topUsers = [...topUsers, ...sortedUncalibrated.slice(0, 10 - topUsers.length)];
                 } else {
                     topUsers = topUsers.slice(0, 10);
+                }
+                
+                if (topUsers.length === 0) {
+                    body.innerHTML = `
+                        <tr>
+                            <td colspan="4" style="text-align:center;color:#6f7885;padding:40px 0;">
+                                <i class="fas fa-trophy" style="font-size:24px;display:block;margin-bottom:10px;"></i>
+                                Нет игроков. Стань первым!
+                            </td>
+                        </tr>
+                    `;
+                    return;
                 }
                 
                 const prizes = ['5 000 ₽', '3 500 ₽', '1 500 ₽', '', '', '', '', '', '', ''];
@@ -2181,7 +2164,6 @@
                     else if (rank === 2) rankClass = 'silver';
                     else if (rank === 3) rankClass = 'bronze';
                     
-                    // Отображение ELO или калибровки
                     let ratingDisplay = '';
                     if (p.is_calibrated) {
                         ratingDisplay = p.elo || 1000;
@@ -2202,7 +2184,16 @@
                 }).join('');
             } catch (error) {
                 console.error('Rating error:', error);
-                body.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#6f7885;">Ошибка загрузки рейтинга</td></tr>';
+                body.innerHTML = `
+                    <tr>
+                        <td colspan="4" style="text-align:center;color:#6f7885;padding:40px 0;">
+                            <i class="fas fa-exclamation-circle" style="font-size:24px;display:block;margin-bottom:10px;color:#ff6b6b;"></i>
+                            Ошибка загрузки рейтинга
+                            <br>
+                            <small style="color:#4f5660;">Попробуйте обновить страницу</small>
+                        </td>
+                    </tr>
+                `;
             }
         }
 
