@@ -555,7 +555,7 @@ app.post('/api/match/create', async (req, res) => {
                 team_a: teamA || [],
                 team_b: teamB || [],
                 banned: banned || [],
-                final_map: finalMap || 'de_dust2',
+                final_map: finalMap || 'Alpenstadt',
                 players: players || [],
                 status: 'ban_phase'
             })
@@ -649,7 +649,7 @@ app.post('/api/match/finish', async (req, res) => {
                 winner: winner,
                 status: 'finished',
                 screenshot: screenshot || '',
-                final_map: finalMap || 'de_dust2'
+                final_map: finalMap || 'Alpenstadt'
             })
             .eq('match_id', matchId);
 
@@ -697,7 +697,7 @@ app.post('/api/match/finish', async (req, res) => {
 
         history.push({
             matchId: matchId,
-            map: finalMap || 'de_dust2',
+            map: finalMap || 'Alpenstadt',
             result: isWin ? 'win' : 'lose',
             date: new Date().toLocaleDateString('ru-RU'),
             isCalibration: isCalibration
