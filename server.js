@@ -56,6 +56,17 @@ app.post('/api/auth/register', async (req, res) => {
     try {
         const { username, email, standoffId, password } = req.body;
 
+        // Валидация
+        if (!username || !email || !standoffId || !password) {
+            return res.status(400).json({ error: 'Все поля обязательны для заполнения' });
+        }
+        if (password.length < 8) {
+            return res.status(400).json({ error: 'Пароль должен содержать минимум 8 символов' });
+        }
+        if (!/^\d+$/.test(standoffId)) {
+            return res.status(400).json({ error: 'ID должен содержать только цифры' });
+        }
+
         const { data: existing } = await supabase
             .from('users')
             .select('email')
@@ -112,6 +123,10 @@ app.post('/api/auth/register', async (req, res) => {
 app.post('/api/auth/login', async (req, res) => {
     try {
         const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ error: 'Email и пароль обязательны' });
+        }
 
         const { data: user, error } = await supabase
             .from('users')
@@ -212,6 +227,10 @@ app.put('/api/profile/update', async (req, res) => {
         }
 
         const { username, standoffId } = req.body;
+
+        if (!username && !standoffId) {
+            return res.status(400).json({ error: 'Укажите хотя бы одно поле для обновления' });
+        }
 
         const { data: user, error } = await supabase
             .from('users')
@@ -354,6 +373,10 @@ app.post('/api/admin/users/toggle', async (req, res) => {
 
         const { userId, makeAdmin } = req.body;
 
+        if (!userId) {
+            return res.status(400).json({ error: 'ID пользователя обязателен' });
+        }
+
         const { data: targetUser } = await supabase
             .from('users')
             .select('email')
@@ -431,7 +454,7 @@ app.delete('/api/admin/users/:userId', async (req, res) => {
     }
 });
 
-// ===== ОЧЕРЕДЬ =====
+// ===== ОЧЕРЕДЬ (С ВАЛИДАЦИЕЙ) =====
 app.get('/api/queue', async (req, res) => {
     try {
         const { data: queue, error } = await supabase
@@ -454,6 +477,10 @@ app.post('/api/queue/join', async (req, res) => {
     try {
         const { username } = req.body;
 
+        if (!username) {
+            return res.status(400).json({ error: 'Имя пользователя не указано' });
+        }
+
         const { data: existing } = await supabase
             .from('queue')
             .select('players')
@@ -465,6 +492,12 @@ app.post('/api/queue/join', async (req, res) => {
 
         if (!players.includes(username)) {
             players.push(username);
+        } else {
+            return res.json({ 
+                players: players, 
+                alreadyInQueue: true,
+                message: 'Игрок уже в очереди'
+            });
         }
 
         await supabase.from('queue').delete().neq('id', '0');
@@ -477,7 +510,11 @@ app.post('/api/queue/join', async (req, res) => {
 
         if (error) throw error;
 
-        res.json({ players: queue.players });
+        res.json({ 
+            players: queue.players,
+            alreadyInQueue: false,
+            message: 'Игрок добавлен в очередь'
+        });
     } catch (error) {
         console.error('Join queue error:', error);
         res.status(500).json({ error: error.message });
@@ -488,6 +525,10 @@ app.post('/api/queue/leave', async (req, res) => {
     try {
         const { username } = req.body;
 
+        if (!username) {
+            return res.status(400).json({ error: 'Имя пользователя не указано' });
+        }
+
         const { data: existing } = await supabase
             .from('queue')
             .select('players')
@@ -496,6 +537,7 @@ app.post('/api/queue/leave', async (req, res) => {
             .maybeSingle();
 
         let players = existing?.players || [];
+        const wasInQueue = players.includes(username);
         players = players.filter(p => p !== username);
 
         await supabase.from('queue').delete().neq('id', '0');
@@ -508,7 +550,11 @@ app.post('/api/queue/leave', async (req, res) => {
 
         if (error) throw error;
 
-        res.json({ players: queue.players });
+        res.json({ 
+            players: queue.players,
+            wasInQueue: wasInQueue,
+            message: wasInQueue ? 'Игрок удалён из очереди' : 'Игрок не находился в очереди'
+        });
     } catch (error) {
         console.error('Leave queue error:', error);
         res.status(500).json({ error: error.message });
@@ -548,6 +594,10 @@ app.post('/api/match/create', async (req, res) => {
     try {
         const { matchId, teamA, teamB, banned, finalMap, players } = req.body;
 
+        if (!matchId || !teamA || !teamB) {
+            return res.status(400).json({ error: 'Недостаточно данных для создания матча' });
+        }
+
         const { data: match, error } = await supabase
             .from('matches')
             .insert({
@@ -564,6 +614,7 @@ app.post('/api/match/create', async (req, res) => {
 
         if (error) throw error;
 
+        // Очищаем очередь после создания матча
         await supabase.from('queue').delete().neq('id', '0');
         await supabase.from('queue').insert({ players: [] });
 
@@ -598,6 +649,10 @@ app.get('/api/match/:matchId', async (req, res) => {
 app.put('/api/match/update', async (req, res) => {
     try {
         const { matchId, banned, finalMap, status } = req.body;
+
+        if (!matchId) {
+            return res.status(400).json({ error: 'ID матча обязателен' });
+        }
 
         const updateData = {};
         if (banned !== undefined) updateData.banned = banned;
@@ -643,6 +698,11 @@ app.post('/api/match/finish', async (req, res) => {
 
         const { matchId, winner, playerUsername, isWin, screenshot, finalMap } = req.body;
 
+        if (!matchId || !playerUsername) {
+            return res.status(400).json({ error: 'Недостаточно данных для завершения матча' });
+        }
+
+        // Обновляем матч
         await supabase
             .from('matches')
             .update({
@@ -653,6 +713,7 @@ app.post('/api/match/finish', async (req, res) => {
             })
             .eq('match_id', matchId);
 
+        // Получаем пользователя
         const { data: user, error: userError } = await supabase
             .from('users')
             .select('*')
@@ -693,14 +754,15 @@ app.post('/api/match/finish', async (req, res) => {
             }
         }
 
-        newElo += eloChange;
+        newElo = Math.max(0, newElo + eloChange); // ELO не может быть меньше 0
 
         history.push({
             matchId: matchId,
             map: finalMap || 'Alpenstadt',
             result: isWin ? 'win' : 'lose',
             date: new Date().toLocaleDateString('ru-RU'),
-            isCalibration: isCalibration
+            isCalibration: isCalibration,
+            eloChange: eloChange
         });
 
         if (isCalibration && newCalibrationMatches >= 10) {
