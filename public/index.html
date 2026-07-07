@@ -6,6 +6,7 @@
     <title>CYBERMODE · Tanks Blitz</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
+        /* ===== ВСЕ СТИЛИ (те же, что были) ===== */
         * {
             margin: 0;
             padding: 0;
@@ -1475,6 +1476,33 @@
             color: #6f7885;
             font-size: 13px;
         }
+        /* ===== КНОПКА ОТМЕНЫ МАТЧА ДЛЯ АДМИНА ===== */
+        .admin-cancel-btn {
+            background: #3a1a1a;
+            border: none;
+            padding: 12px 36px;
+            border-radius: 60px;
+            color: #ff6b6b;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 16px;
+            border: 1px solid #ff6b6b;
+        }
+        .admin-cancel-btn:hover {
+            background: #4a2a2a;
+            transform: scale(0.97);
+        }
+        .admin-cancel-btn i {
+            font-size: 18px;
+        }
+        .admin-cancel-btn.hidden {
+            display: none;
+        }
         @media (max-width: 768px) {
             .auth-container { padding: 1.5rem; margin: 16px; }
             .top-nav {
@@ -1671,6 +1699,13 @@
                         <button class="btn-victory team-a" id="victoryA"><i class="fas fa-trophy"></i> Победа Команды А</button>
                         <button class="btn-victory team-b" id="victoryB"><i class="fas fa-trophy"></i> Победа Команды В</button>
                     </div>
+                </div>
+
+                <!-- ===== КНОПКА ОТМЕНЫ МАТЧА ДЛЯ АДМИНА ===== -->
+                <div style="display: flex; justify-content: center; width: 100%;">
+                    <button class="admin-cancel-btn hidden" id="cancelMatchBtn" onclick="cancelMatch()">
+                        <i class="fas fa-times-circle"></i> ОТМЕНИТЬ МАТЧ
+                    </button>
                 </div>
 
                 <!-- ===== ИНСТРУКЦИЯ ПО СОЗДАНИЮ КОМНАТЫ ===== -->
@@ -1945,7 +1980,6 @@
         }
 
         function switchTab(tabId) {
-            // Если переключаемся с вкладки "Поиск матча" на другую
             const currentActiveTab = document.querySelector('.tab-content.active');
             const isLeavingSearch = currentActiveTab && currentActiveTab.id === 'tabSearch' && tabId !== 'search';
             
@@ -1954,7 +1988,6 @@
                 showToast('info', '⏹️ Поиск остановлен', 'Вы вышли из вкладки поиска');
             }
 
-            // Проверка доступа к вкладке матча
             if (tabId === 'match') {
                 const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
                 const isAdmin = user?.isAdmin || false;
@@ -2112,12 +2145,47 @@
             });
         }
 
+        // ===== ОТМЕНА МАТЧА =====
+        async function cancelMatch() {
+            if (!currentMatchId) {
+                showToast('error', 'Ошибка', 'Нет активного матча');
+                return;
+            }
+
+            if (!confirm('Вы уверены, что хотите отменить этот матч? Все данные будут удалены.')) {
+                return;
+            }
+
+            try {
+                await apiRequest(`/api/match/${currentMatchId}/cancel`, {
+                    method: 'DELETE'
+                });
+                
+                showToast('success', '❌ Матч отменён', 'Администратор отменил матч');
+                
+                // Скрываем всё
+                document.getElementById('screenshotPreview').classList.remove('show');
+                document.getElementById('victoryButtons').classList.remove('show');
+                document.getElementById('resultSection').classList.add('hidden');
+                document.getElementById('roomInstruction').style.display = 'none';
+                document.getElementById('matchTabBtn').style.display = 'none';
+                document.getElementById('cancelMatchBtn').classList.add('hidden');
+                
+                currentMatchId = null;
+                currentMatchPlayers = [];
+                
+                switchTab('main');
+            } catch (error) {
+                showToast('error', 'Ошибка', error.message);
+            }
+        }
+
         // ===== СТАТИСТИКА =====
         async function getStats() {
             return apiRequest('/api/stats');
         }
 
-        // ===== ВСЕ ПОЛЬЗОВАТЕЛИ (ПУБЛИЧНЫЙ ЭНДПОИНТ) =====
+        // ===== ВСЕ ПОЛЬЗОВАТЕЛИ =====
         async function getAllUsers() {
             return apiRequest('/api/users/public');
         }
@@ -2240,11 +2308,25 @@
         // ===== ЗАГРУЗКА ОСНОВНОГО САЙТА =====
         async function loadMainSite() {
             try {
-                const user = await getMe();
-                currentUser = user;
+                // Очистка очереди при загрузке
+                const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
+                if (user) {
+                    try {
+                        const queueData = await getQueue();
+                        if (queueData.players && queueData.players.includes(user.username)) {
+                            await leaveQueue(user.username);
+                            console.log('🧹 Игрок удалён из очереди при загрузке');
+                        }
+                    } catch (error) {
+                        console.error('Queue cleanup error:', error);
+                    }
+                }
+
+                const currentUser = await getMe();
+                currentUser = currentUser;
                 document.getElementById('authPage').style.display = 'none';
                 document.getElementById('mainSite').classList.add('visible');
-                updateUI(user);
+                updateUI(currentUser);
                 
                 const adminData = await checkAdmin();
                 const adminPanel = document.getElementById('adminPanel');
@@ -2263,6 +2345,7 @@
                 document.getElementById('pendingCount').textContent = stats.pending || 0;
                 
                 document.getElementById('matchTabBtn').style.display = 'none';
+                document.getElementById('cancelMatchBtn').classList.add('hidden');
                 
                 await loadTopPlayers();
                 await renderRating();
@@ -2278,6 +2361,14 @@
         window.addEventListener('beforeunload', function() {
             const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
             if (user && isSearching) {
+                fetch('/api/queue/leave', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: user.username }),
+                    keepalive: true
+                }).catch(() => {
+                    navigator.sendBeacon('/api/queue/leave', JSON.stringify({ username: user.username }));
+                });
                 navigator.sendBeacon('/api/queue/leave', JSON.stringify({ username: user.username }));
             }
         });
@@ -2601,7 +2692,11 @@
 
             const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
             if (user) {
-                leaveQueue(user.username).catch(() => {
+                fetch('/api/queue/leave', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: user.username })
+                }).catch(() => {
                     navigator.sendBeacon('/api/queue/leave', JSON.stringify({ username: user.username }));
                 });
             }
@@ -2747,6 +2842,7 @@
             const teamBList = document.getElementById('teamBList');
             const matchIdDisplay = document.getElementById('matchIdDisplay');
             const matchTabBtn = document.getElementById('matchTabBtn');
+            const cancelMatchBtn = document.getElementById('cancelMatchBtn');
 
             if (matchIdDisplay) matchIdDisplay.textContent = matchData.matchId.replace('match_', '');
 
@@ -2778,6 +2874,13 @@
 
             checkAdmin().then(adminData => {
                 const isAdmin = adminData.isAdmin || false;
+                
+                // Показываем кнопку отмены только админам
+                if (isAdmin) {
+                    cancelMatchBtn.classList.remove('hidden');
+                } else {
+                    cancelMatchBtn.classList.add('hidden');
+                }
                 
                 if (isParticipant || isAdmin) {
                     matchTabBtn.style.display = 'block';
@@ -2929,7 +3032,7 @@
             }
         }
 
-        // ===== ЗАВЕРШЕНИЕ МАТЧА (ТОЛЬКО АДМИНЫ) =====
+        // ===== ЗАВЕРШЕНИЕ МАТЧА =====
         async function handleVictory(team) {
             const screenshotImg = document.getElementById('screenshotImg');
             
@@ -2959,6 +3062,7 @@
                         document.getElementById('resultSection').classList.add('hidden');
                         document.getElementById('roomInstruction').style.display = 'none';
                         document.getElementById('matchTabBtn').style.display = 'none';
+                        document.getElementById('cancelMatchBtn').classList.add('hidden');
                         switchTab('main');
                         loadMainSite();
                     }, 1500);
