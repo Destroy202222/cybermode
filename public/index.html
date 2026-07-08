@@ -6,12 +6,9 @@
 <title>CYBERMODE · Brawl Stars</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <style>
-/* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 html,body{min-height:100vh;overflow-x:hidden}
 body{background:linear-gradient(135deg,#0a0a2e 0,#1a0a3e 30%,#2a1a5e 60%,#1a0a3e 100%);display:flex;justify-content:center;align-items:flex-start;min-height:100vh;padding:20px;position:relative}
-
-/* ===== ФОН С ПЕРСОНАЖАМИ (МАКСИМАЛЬНО ВИДИМЫЙ) ===== */
 body::before{content:'⭐🔥💀🦊🐺🐉⚡💫🌟✨🎯🏆⚔️💥';position:fixed;top:0;left:0;right:0;bottom:0;font-size:120px;letter-spacing:80px;word-wrap:break-word;line-height:1.8;opacity:.08;pointer-events:none;z-index:0;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;padding:40px;transform:rotate(-10deg) scale(1.2)}
 body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 10% 20%,rgba(255,215,0,.1) 0,transparent 40%),radial-gradient(circle at 90% 80%,rgba(255,0,255,.08) 0,transparent 40%),radial-gradient(circle at 50% 50%,rgba(0,200,255,.06) 0,transparent 50%);pointer-events:none;z-index:0}
 .brawl-bg-icons{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;overflow:hidden}
@@ -27,8 +24,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .brawl-bg-icons .icon:nth-child(9){bottom:40%;right:25%;animation-delay:7s;font-size:65px}
 .brawl-bg-icons .icon:nth-child(10){top:50%;left:50%;animation-delay:1s;font-size:35px}
 @keyframes floatIcon{0%,100%{transform:translate(0,0) rotate(0) scale(1)}25%{transform:translate(30px,-30px) rotate(5deg) scale(1.1)}50%{transform:translate(-20px,20px) rotate(-3deg) scale(.9)}75%{transform:translate(15px,40px) rotate(4deg) scale(1.05)}}
-
-/* ===== АВТОРИЗАЦИЯ (ПРОЗРАЧНАЯ) ===== */
 .auth-page{display:flex;justify-content:center;align-items:center;min-height:100vh;width:100%;position:relative;z-index:1;padding:16px}
 .auth-container{max-width:420px;width:100%;background:rgba(20,20,50,.25);border-radius:24px;padding:2rem 1.5rem;border:2px solid rgba(245,184,27,.4);box-shadow:0 0 80px rgba(245,184,27,.1),0 20px 60px rgba(0,0,0,.8);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px)}
 .auth-container .auth-logo{text-align:center;margin-bottom:1.5rem}
@@ -49,12 +44,8 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .auth-container .auth-links{text-align:center;margin-top:1.2rem}
 .auth-container .auth-links a{color:#f5b81b;text-decoration:none;cursor:pointer;font-weight:500;transition:.3s;font-size:.9rem}
 .auth-container .auth-links a:hover{text-decoration:underline;color:#ffcc33}
-
-/* ===== ОСНОВНОЙ САЙТ (МАКСИМАЛЬНО ПРОЗРАЧНЫЙ) ===== */
 .main-site{display:none;max-width:1400px;width:100%;background:rgba(10,10,46,.06);border-radius:28px;padding:20px 24px 28px;box-shadow:0 0 60px rgba(245,184,27,.05),0 20px 40px rgba(0,0,0,.7);color:#f0e8d0;margin-top:10px;position:relative;z-index:1;border:1px solid rgba(245,184,27,.05);backdrop-filter:blur(35px);-webkit-backdrop-filter:blur(35px)}
 .main-site.visible{display:block}
-
-/* ===== НАВИГАЦИЯ ===== */
 .top-nav{position:sticky;top:10px;left:0;width:100%;background:rgba(18,18,58,.35);border-radius:60px;padding:8px 20px;border:1px solid rgba(245,184,27,.2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;z-index:1000;backdrop-filter:blur(25px);box-shadow:0 4px 30px rgba(0,0,0,.6);margin-bottom:16px}
 .top-nav .brand{font-weight:700;font-size:18px;background:linear-gradient(45deg,#f5b81b,#ffcc33);-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;letter-spacing:-.3px;transition:.15s;white-space:nowrap}
 .top-nav .brand:hover{transform:scale(1.02)}
@@ -69,13 +60,9 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .nav-right .profile:hover{background:rgba(245,184,27,.08)}
 .nav-right .profile i{font-size:18px;color:#8890b0}
 .nav-right .profile:hover i{color:#f5b81b}
-
-/* ===== ВКЛАДКИ ===== */
 .tab-content{display:none;animation:fade .3s ease}
 .tab-content.active{display:block}
 @keyframes fade{0%{opacity:.3;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
-
-/* ===== ВСЕ БЛОКИ (МАКСИМАЛЬНО ПРОЗРАЧНЫЕ) ===== */
 .main-menu{background:rgba(10,10,46,.08);border-radius:24px;padding:28px 20px 32px;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(20px)}
 .main-menu .stats-bar{display:flex;gap:20px;justify-content:center;margin-bottom:24px;padding:12px 20px;background:rgba(10,10,46,.12);border-radius:60px;border:1px solid rgba(245,184,27,.04);flex-wrap:wrap}
 .main-menu .stats-bar .stat-item{display:flex;align-items:center;gap:8px;color:#8890b0;font-size:13px}
@@ -128,8 +115,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .timer-display{margin-top:14px;font-size:17px;color:#8890b0;display:none}
 .timer-display i{color:#f5b81b;margin-right:6px}
 .timer-display .time{font-weight:700;font-size:24px;color:#f5b81b;font-variant-numeric:tabular-nums}
-
-/* ===== МАТЧ (ПРОЗРАЧНЫЙ) ===== */
 .match-page{background:rgba(10,10,46,.08);border-radius:24px;padding:28px 20px 30px;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(20px)}
 .match-page .match-id{text-align:center;font-size:18px;font-weight:700;color:#f5b81b;margin-bottom:20px;padding:12px;border-radius:60px;border:1px solid rgba(245,184,27,.12);background:rgba(245,184,27,.05)}
 .teams-row{display:flex;gap:20px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
@@ -347,19 +332,16 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </head>
 <body>
 
-<!-- ЗАГРУЗКА -->
 <div id="loadingIndicator" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,46,.6);display:flex;justify-content:center;align-items:center;z-index:9999;flex-direction:column;gap:20px;backdrop-filter:blur(20px)">
 <div style="width:60px;height:60px;border:4px solid rgba(245,184,27,.1);border-top:4px solid #f5b81b;border-radius:50%;animation:spin 1s linear infinite"></div>
 <div style="color:#f0e8d0;font-size:18px">Загрузка...</div>
 </div>
 <style>@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}</style>
 
-<!-- ФОН -->
 <div class="brawl-bg-icons">
 <span class="icon">⭐</span><span class="icon">🔥</span><span class="icon">💀</span><span class="icon">🦊</span><span class="icon">🐺</span><span class="icon">🐉</span><span class="icon">⚡</span><span class="icon">💫</span><span class="icon">🌟</span><span class="icon">✨</span><span class="icon">🎯</span><span class="icon">🏆</span><span class="icon">⚔️</span><span class="icon">💥</span>
 </div>
 
-<!-- АВТОРИЗАЦИЯ -->
 <div class="auth-page" id="authPage">
 <div class="auth-container">
 <div class="auth-logo"><span class="brawl-icon">⭐</span><h1>CYBERMODE</h1><p>Brawl Stars · Киберспортивная платформа</p></div>
@@ -382,7 +364,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
-<!-- ОСНОВНОЙ САЙТ -->
 <div class="main-site" id="mainSite">
 
 <div class="top-nav" id="topNav">
@@ -399,7 +380,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
-<!-- АДМИН-ПАНЕЛЬ -->
 <div class="admin-panel" id="adminPanel">
 <div class="admin-title"><h3><i class="fas fa-user-shield"></i> Админ-панель</h3><span>👑 Только для администраторов</span></div>
 <div class="admin-buttons">
@@ -408,7 +388,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
-<!-- ГЛАВНАЯ -->
 <div id="tabMain" class="tab-content active">
 <div class="main-menu">
 <div class="stats-bar">
@@ -440,7 +419,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
-<!-- ПОИСК -->
 <div id="tabSearch" class="tab-content">
 <div class="search-page">
 <div class="big-icon"><i class="fas fa-gamepad"></i></div>
@@ -452,7 +430,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
-<!-- МАТЧ -->
 <div id="tabMatch" class="tab-content">
 <div class="match-page">
 <div class="match-id">🎮 Матч #<span id="matchIdDisplay">0000</span></div>
@@ -487,13 +464,10 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 <button class="btn-victory team-b" id="victoryB"><i class="fas fa-trophy"></i> Победа Команды В</button>
 </div>
 </div>
-
-<!-- КНОПКИ АДМИНА -->
 <div style="display:flex;justify-content:center;width:100%;margin:10px 0;gap:10px;flex-wrap:wrap">
 <button class="admin-cancel-btn hidden" id="cancelMatchBtn" onclick="cancelMatch()"><i class="fas fa-times-circle"></i> ОТМЕНИТЬ МАТЧ</button>
 <button class="admin-cancel-btn hidden" id="hideMatchBtn" onclick="hideMatchTab()" style="background:rgba(255,165,0,.7);border-color:#ffa500;box-shadow:0 0 30px rgba(255,165,0,.2);"><i class="fas fa-eye-slash"></i> СКРЫТЬ ВКЛАДКУ</button>
 </div>
-
 <div class="room-instruction" id="roomInstruction" style="display:none">
 <div class="instruction-title"><i class="fas fa-door-open"></i> 📋 ИНСТРУКЦИЯ ПО СОЗДАНИЮ КОМНАТЫ</div>
 <div class="instruction-content">
@@ -520,7 +494,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
-<!-- РЕЙТИНГ -->
 <div id="tabRating" class="tab-content">
 <div class="rating-page">
 <div class="rating-title">🏆 Топ игроков</div>
@@ -531,13 +504,10 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
-<!-- МИССИИ -->
 <div id="tabMissions" class="tab-content"><div class="missions-page"><div class="big-icon"><i class="fas fa-tasks"></i></div><h2>Миссии</h2><p>Ежедневные задания и миссии</p><p style="color:#4a4270;margin-top:8px">🚧 Раздел в разработке</p></div></div>
 
-<!-- МАГАЗИН -->
 <div id="tabShop" class="tab-content"><div class="shop-page"><div class="big-icon"><i class="fas fa-store"></i></div><h2>Магазин</h2><p>Привилегии и улучшения для аккаунта</p><p style="color:#4a4270;margin-top:8px">🚧 Раздел в разработке</p></div></div>
 
-<!-- ПРОФИЛЬ -->
 <div id="tabProfile" class="tab-content">
 <div class="profile-page">
 <div class="profile-header"><div class="profile-avatar" id="avatarPreview"><i class="fas fa-user"></i></div><div class="profile-info"><div class="name" id="profileNameDisplay">Игрок <i class="fas fa-check-circle"></i></div><div class="id" style="display:none" id="profileIdDisplay"></div><div class="league"><i class="fas fa-trophy"></i> DEFAULT LEAGUE · Калибровка рейтинга</div></div></div>
@@ -549,13 +519,11 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
-<!-- АДМИН -->
 <div id="tabAdminUsers" class="tab-content"><div class="rating-page"><div class="rating-title"><i class="fas fa-users-cog"></i> Управление администраторами</div><div class="rating-sub">Только главный администратор может назначать и удалять админов</div><div id="adminUsersList" style="margin-top:16px"></div></div></div>
 <div id="tabAdminQueue" class="tab-content"><div class="rating-page"><div class="rating-title"><i class="fas fa-clock"></i> Очередь игроков</div><div class="rating-sub">Просматривайте и управляйте очередью поиска</div><div id="adminQueueList" style="margin-top:16px"></div><button class="btn-action" onclick="clearQueue()" style="margin-top:12px;background:rgba(58,26,26,.2);color:#ff6b6b;border:1px solid #ff6b6b;padding:10px 20px;border-radius:40px;cursor:pointer;font-size:13px"><i class="fas fa-trash"></i> Очистить очередь</button></div></div>
 
 </div>
 
-<!-- МОДАЛЬНОЕ ОКНО -->
 <div class="modal-overlay" id="editModal">
 <div class="modal"><button class="modal-close" id="closeEditModal">&times;</button>
 <div class="modal-title">Редактирование профиля</div><div class="modal-sub">Измените никнейм.</div>
@@ -565,54 +533,40 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
-<!-- ТОСТ -->
 <div class="toast" id="toast"><div class="toast-title" id="toastTitle">Успешно!</div><div class="toast-text" id="toastText">Действие выполнено</div></div>
 
-<!-- СКРЫТЫЕ INPUT -->
 <input type="file" id="fileInputResult" accept="image/*" style="display:none" />
 <input type="file" id="fileInputAvatar" accept="image/*" style="display:none" />
 
 <script>
-// ============================================================
-//  ВСПОМОГАТЕЛЬНЫЕ
-// ============================================================
+// ===== ВСПОМОГАТЕЛЬНЫЕ =====
 function showToast(type,title,text){const t=document.getElementById('toast'),a=document.getElementById('toastTitle'),e=document.getElementById('toastText');if(a&&e){a.className='toast-title '+type;a.textContent=title;e.textContent=text}t.classList.add('visible');clearTimeout(t._timeout);t._timeout=setTimeout(()=>t.classList.remove('visible'),4000)}
 function showAuthForm(form){document.getElementById('loginForm').style.display='none';document.getElementById('registerForm').style.display='none';if(form==='login')document.getElementById('loginForm').style.display='block';else if(form==='register')document.getElementById('registerForm').style.display='block'}
 function copyText(id){const el=document.getElementById(id);if(!el)return;const text=el.textContent;navigator.clipboard.writeText(text).then(()=>{const btn=el.closest('.detail-item').querySelector('.copy-btn');if(btn){btn.classList.add('copied');btn.innerHTML='<i class="fas fa-check"></i> Скопировано';setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML='<i class="fas fa-copy"></i>'},2000)}showToast('success','Скопировано!','"'+text+'" скопирован в буфер обмена')}).catch(()=>{const r=document.createRange();r.selectNode(el);window.getSelection().removeAllRanges();window.getSelection().addRange(r);document.execCommand('copy');showToast('success','Скопировано!','"'+text+'" скопирован в буфер обмена')})}
 function generatePassword(){const l='ABCDEFGHIJKLMNOPQRSTUVWXYZ';let p='';for(let i=0;i<4;i++)p+=l.charAt(Math.floor(Math.random()*l.length));return p}
 let matchCounter=0;
 
-// ============================================================
-//  ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК (С СОХРАНЕНИЕМ МАТЧА В localStorage)
-// ============================================================
+// ===== ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК =====
 function switchTab(tabId){
     const current=document.querySelector('.tab-content.active');
     const leaving=current&&current.id==='tabSearch'&&tabId!=='search';
     if(leaving&&isSearching){cancelSearch();showToast('info','⏹️ Поиск остановлен','Вы вышли из вкладки поиска')}
     
-    // ===== ПРОВЕРКА ДОСТУПА К ВКЛАДКЕ МАТЧ =====
+    // ПРОВЕРКА ДОСТУПА К МАТЧУ
     if(tabId==='match'){
         const user=JSON.parse(localStorage.getItem('cybermode_user')||'null');
         const isAdmin=user?.isAdmin||false;
         const isPart=user&&currentMatchPlayers.includes(user.username);
         
-        // Восстанавливаем матч из localStorage если его нет в памяти
         if(!currentMatchId && localStorage.getItem('currentMatchId')){
             currentMatchId=localStorage.getItem('currentMatchId');
-            const savedPlayers=JSON.parse(localStorage.getItem('currentMatchPlayers')||'[]');
-            currentMatchPlayers=savedPlayers;
+            currentMatchPlayers=JSON.parse(localStorage.getItem('currentMatchPlayers')||'[]');
         }
         
-        if(!currentMatchId){
-            showToast('error','Нет матча','Активный матч не найден');
-            return;
-        }
+        if(!currentMatchId){showToast('error','Нет матча','Активный матч не найден');return}
         
-        // ===== КЛЮЧЕВОЕ: ПУСКАЕМ ВСЕХ УЧАСТНИКОВ И АДМИНОВ =====
-        if(!isPart && !isAdmin){
-            showToast('error','Доступ запрещен','Вы не участвуете в этом матче');
-            return;
-        }
+        // ВСЕ УЧАСТНИКИ И АДМИНЫ МОГУТ ЗАЙТИ
+        if(!isPart&&!isAdmin){showToast('error','Доступ запрещен','Вы не участвуете в этом матче');return}
     }
     
     document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
@@ -622,9 +576,6 @@ function switchTab(tabId){
     const item=document.querySelector(`.nav-item[data-tab="${tabId}"]`);if(item)item.classList.add('active');
 }
 
-// ============================================================
-//  СКРЫТЬ ВКЛАДКУ (ТОЛЬКО ДЛЯ АДМИНА)
-// ============================================================
 function hideMatchTab(){
     if(!confirm('Вы уверены, что хотите скрыть вкладку "Матч" для всех участников?')) return;
     document.getElementById('matchTabBtn').style.display='none';
@@ -636,9 +587,7 @@ function hideMatchTab(){
     switchTab('main');
 }
 
-// ============================================================
-//  ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
-// ============================================================
+// ===== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
 let currentMatchPlayers=[];
 let currentUserData=null;
 let isSearching=false;
@@ -653,9 +602,7 @@ let finalMap='💎 Gem Grab';
 let isBanPhaseActive=false;
 let banPollingInterval=null;
 
-// ============================================================
-//  API
-// ============================================================
+// ===== API =====
 async function apiRequest(endpoint,options={}){const token=localStorage.getItem('cybermode_token'),headers={'Content-Type':'application/json',...options.headers};if(token)headers.Authorization='Bearer '+token;const res=await fetch(endpoint,{...options,headers});if(res.status===401){localStorage.removeItem('cybermode_token');localStorage.removeItem('cybermode_user');throw new Error('401: Не авторизован')}const data=await res.json();if(!res.ok)throw new Error(data.error||'Ошибка запроса');return data}
 async function register(username,email,password){return apiRequest('/api/auth/register',{method:'POST',body:JSON.stringify({username,email,password})})}
 async function login(email,password){const data=await apiRequest('/api/auth/login',{method:'POST',body:JSON.stringify({email,password})});if(data.token)localStorage.setItem('cybermode_token',data.token);return data}
@@ -672,14 +619,10 @@ async function getStats(){return apiRequest('/api/stats')}
 async function getAllUsers(){return apiRequest('/api/users/public')}
 async function checkAdmin(){try{return await apiRequest('/api/admin/check')}catch{return{isAdmin:false,isSuperAdmin:false}}}
 
-// ============================================================
-//  ОТМЕНА МАТЧА
-// ============================================================
+// ===== ОТМЕНА МАТЧА =====
 async function cancelMatch(){if(!currentMatchId){showToast('error','Ошибка','Нет активного матча');return}if(!confirm('Вы уверены, что хотите отменить этот матч?'))return;try{await apiRequest('/api/match/'+currentMatchId+'/cancel',{method:'DELETE'});showToast('success','❌ Матч отменён','Администратор отменил матч');document.getElementById('screenshotPreview').classList.remove('show');document.getElementById('victoryButtons').classList.remove('show');document.getElementById('resultSection').classList.add('hidden');document.getElementById('roomInstruction').style.display='none';document.getElementById('matchTabBtn').style.display='none';document.getElementById('cancelMatchBtn').classList.add('hidden');document.getElementById('hideMatchBtn').classList.add('hidden');document.getElementById('banSection').classList.remove('hidden');localStorage.removeItem('currentMatchId');localStorage.removeItem('currentMatchPlayers');currentMatchId=null;currentMatchPlayers=[];bannedMaps=[];isBanPhaseActive=false;if(banPollingInterval){clearInterval(banPollingInterval);banPollingInterval=null}switchTab('main')}catch(e){showToast('error','Ошибка',e.message)}}
 
-// ============================================================
-//  АДМИН
-// ============================================================
+// ===== АДМИН =====
 async function loadAdminUsers(){try{const data=await apiRequest('/api/admin/users'),c=document.getElementById('adminUsersList');if(!c)return;if(!data.users||!data.users.length){c.innerHTML='<p style="color:#6b6380">Нет пользователей</p>';return}c.innerHTML=data.users.map(u=>{const isSuper=u.isSuperAdmin,isAdmin=u.is_admin;return'<div class="admin-user-item" style="border-color:'+(isSuper?'#f5b81b':'rgba(245,184,27,.04)')+'"><div class="user-info"><strong style="color:'+(isSuper?'#f5b81b':'#f0e8d0')+'">'+u.username+'</strong><span>'+u.email+'</span>'+(isSuper?'<span class="badge-super">👑 Главный админ</span>':'')+(isAdmin&&!isSuper?'<span class="badge-admin">🔹 Админ</span>':'')+'</div><div class="user-actions">'+(!isSuper?'<button class="'+(isAdmin?'btn-remove-admin':'btn-make-admin')+'" onclick="toggleAdmin(\''+u.id+'\','+(!isAdmin)+')">'+(isAdmin?'Снять админа':'Назначить админом')+'</button><button class="btn-delete" onclick="deleteUser(\''+u.id+'\')"><i class="fas fa-trash"></i></button>':'<span class="disabled-text">Нельзя редактировать</span>')+'</div></div>'}).join('')}catch(e){showToast('error','Ошибка',e.message)}}
 async function toggleAdmin(id,make){try{await apiRequest('/api/admin/users/toggle',{method:'POST',body:JSON.stringify({userId:id,makeAdmin:make})});showToast('success','Успешно','Права администратора '+(make?'добавлены':'сняты'));loadAdminUsers()}catch(e){showToast('error','Ошибка',e.message)}}
 async function deleteUser(id){if(!confirm('Удалить этого пользователя?'))return;try{await apiRequest('/api/admin/users/'+id,{method:'DELETE'});showToast('success','Успешно','Пользователь удалён');loadAdminUsers()}catch(e){showToast('error','Ошибка',e.message)}}
@@ -687,12 +630,10 @@ async function loadAdminQueue(){try{const data=await getQueue(),c=document.getEl
 async function removeFromQueue(username){try{await leaveQueue(username);showToast('success','Успешно','Игрок удалён из очереди');loadAdminQueue()}catch(e){showToast('error','Ошибка',e.message)}}
 async function clearQueue(){if(!confirm('Очистить всю очередь?'))return;try{await apiRequest('/api/queue/clear',{method:'DELETE'});showToast('success','Успешно','Очередь очищена');loadAdminQueue()}catch(e){showToast('error','Ошибка',e.message)}}
 
-// ============================================================
-//  ЗАГРУЗКА САЙТА
-// ============================================================
+// ===== ЗАГРУЗКА САЙТА =====
 async function loadMainSite(){try{document.getElementById('loadingIndicator').style.display='none';const user=JSON.parse(localStorage.getItem('cybermode_user')||'null');if(user){try{const q=await getQueue();if(q.players&&q.players.includes(user.username))await leaveQueue(user.username)}catch(e){}}const userData=await getMe();currentUserData=userData;document.getElementById('authPage').style.display='none';document.getElementById('mainSite').classList.add('visible');updateUI(userData);const adminData=await checkAdmin(),panel=document.getElementById('adminPanel');if(panel){if(adminData.isAdmin){panel.style.display='block';loadAdminUsers();loadAdminQueue();document.getElementById('cancelMatchBtn').classList.remove('hidden');document.getElementById('hideMatchBtn').classList.remove('hidden')}else{panel.style.display='none';document.getElementById('cancelMatchBtn').classList.add('hidden');document.getElementById('hideMatchBtn').classList.add('hidden')}}const stats=await getStats();document.getElementById('usersCount').textContent=stats.totalUsers||0;document.getElementById('pendingCount').textContent=stats.pending||0;
     
-    // ===== ВОССТАНОВЛЕНИЕ МАТЧА ИЗ localStorage ДЛЯ ВСЕХ УЧАСТНИКОВ =====
+    // ===== ВОССТАНОВЛЕНИЕ МАТЧА ИЗ localStorage =====
     const savedMatchId=localStorage.getItem('currentMatchId');
     if(savedMatchId){
         currentMatchId=savedMatchId;
@@ -700,8 +641,6 @@ async function loadMainSite(){try{document.getElementById('loadingIndicator').st
         currentMatchPlayers=savedPlayers;
         const isPart=user&&savedPlayers.includes(user.username);
         const isAdmin=adminData.isAdmin||false;
-        
-        // ===== КЛЮЧЕВОЕ: ПОКАЗЫВАЕМ ВКЛАДКУ ВСЕМ УЧАСТНИКАМ И АДМИНАМ =====
         if(isPart||isAdmin){
             document.getElementById('matchTabBtn').style.display='block';
             try{
@@ -711,94 +650,61 @@ async function loadMainSite(){try{document.getElementById('loadingIndicator').st
                     document.getElementById('matchTabBtn').style.display='block';
                 }
             }catch(e){console.warn('Не удалось загрузить матч:',e)}
-        }else{
-            document.getElementById('matchTabBtn').style.display='none';
-        }
+        }else{document.getElementById('matchTabBtn').style.display='none'}
     }
     await loadTopPlayers();await renderRating()}catch(e){document.getElementById('loadingIndicator').style.display='none';logout();document.getElementById('authPage').style.display='flex';document.getElementById('mainSite').classList.remove('visible');showToast('error','Ошибка',e.message||'Попробуйте обновить страницу')}}
 
-// ============================================================
-//  ВЫХОД ИЗ ОЧЕРЕДИ ПРИ ЗАКРЫТИИ
-// ============================================================
+// ===== ВЫХОД ИЗ ОЧЕРЕДИ =====
 window.addEventListener('beforeunload',function(){const user=JSON.parse(localStorage.getItem('cybermode_user')||'null');if(user&&isSearching){fetch('/api/queue/leave',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:user.username}),keepalive:true}).catch(()=>{});navigator.sendBeacon('/api/queue/leave',JSON.stringify({username:user.username}))}});
 document.addEventListener('visibilitychange',function(){if(document.hidden&&isSearching){const user=JSON.parse(localStorage.getItem('cybermode_user')||'null');if(user)navigator.sendBeacon('/api/queue/leave',JSON.stringify({username:user.username}))}});
 window.addEventListener('popstate',function(){if(isSearching){cancelSearch();showToast('info','⏹️ Поиск остановлен','Вы покинули страницу поиска')}});
 
-// ============================================================
-//  UI
-// ============================================================
+// ===== UI =====
 function updateUI(user){document.getElementById('navUsername').textContent=user.username;document.getElementById('profileNameDisplay').innerHTML=user.username+' <i class="fas fa-check-circle"></i>';document.getElementById('winsDisplay').textContent=user.wins||0;document.getElementById('lossesDisplay').textContent=user.losses||0;document.getElementById('matchesDisplay').textContent=user.matches||0;const total=(user.wins||0)+(user.losses||0),winrate=total>0?Math.round(((user.wins||0)/total)*100):0;document.getElementById('winrateDisplay').textContent=winrate+'%';const cal=Math.min(user.calibrationMatches||0,10);if(user.isCalibrated){document.getElementById('calibrationSection').style.display='none';document.getElementById('eloSection').classList.add('show');document.getElementById('eloValue').textContent=user.elo||1000}else{document.getElementById('calibrationSection').style.display='flex';document.getElementById('eloSection').classList.remove('show');document.getElementById('calibrationText').textContent=cal+'/10';document.getElementById('calibrationFill').style.width=(cal/10*100)+'%';document.getElementById('calibrationSub').textContent='Пройдите 10 матчей для определения рейтинга'}if(user.history&&user.history.length>0){document.getElementById('historyList').style.display='flex';document.getElementById('historyEmpty').style.display='none';document.getElementById('historyList').innerHTML=user.history.slice(-15).reverse().map(item=>{let elo='';if(user.isCalibrated&&!item.isCalibration){const ch=item.result==='win'?'+25':'-25',cls=item.result==='win'?'positive':'negative';elo='<span class="elo-change '+cls+'">'+ch+'</span>'}return'<div class="history-item"><div class="match-info"><span class="match-number">#'+item.matchId+'</span><span class="match-map">'+(item.map||'💎 Gem Grab')+'</span><span style="color:#6b6380;font-size:11px">'+item.date+'</span>'+elo+'</div><span class="match-result '+(item.result==='win'?'win':'lose')+'">'+(item.result==='win'?'🏆 Победа':'❌ Поражение')+'</span></div>'}).join('')}else{document.getElementById('historyList').style.display='none';document.getElementById('historyEmpty').style.display='block'}switchTab('main')}
 
-// ============================================================
-//  ТОП ИГРОКОВ
-// ============================================================
+// ===== ТОП ИГРОКОВ =====
 async function loadTopPlayers(){try{const data=await getAllUsers(),users=data.users||[],sorted=users.sort((a,b)=>{if(a.is_calibrated&&b.is_calibrated)return(b.elo||0)-(a.elo||0);if(a.is_calibrated&&!b.is_calibrated)return-1;if(!a.is_calibrated&&b.is_calibrated)return 1;return(b.matches||0)-(a.matches||0)}).slice(0,5),c=document.getElementById('topPlayersList');if(!c)return;const medals=['🥇','🥈','🥉','4️⃣','5️⃣'],classes=['gold','silver','bronze','',''];if(!sorted.length){c.innerHTML='<div class="top-player"><span class="rank">👤</span><div class="info"><div class="name">Нет игроков</div><div class="elo">Стань первым!</div></div><span class="wins">🏆 0</span></div>';return}c.innerHTML=sorted.map((p,i)=>{const cal=p.is_calibrated||false,m=p.calibration_matches||0,elo=cal?'ELO: '+(p.elo||1000):'📊 Калибровка '+m+'/10';return'<div class="top-player"><span class="rank '+(classes[i]||'')+'">'+(medals[i]||(i+1))+'</span><div class="info"><div class="name">'+p.username+'</div><div class="elo '+(!cal?'calibration':'')+'">'+elo+'</div></div><span class="wins">🏆 '+(p.wins||0)+'</span></div>'}).join('')}catch(e){const c=document.getElementById('topPlayersList');if(c)c.innerHTML='<div class="top-player"><span class="rank">👤</span><div class="info"><div class="name">Нет данных</div><div class="elo">Стань первым игроком!</div></div><span class="wins">🏆 0</span></div>'}}
 
-// ============================================================
-//  РЕЙТИНГ
-// ============================================================
+// ===== РЕЙТИНГ =====
 async function renderRating(){const body=document.getElementById('ratingBody');if(!body)return;try{const data=await getAllUsers(),users=data.users||[],cal=users.filter(u=>u.is_calibrated),uncal=users.filter(u=>!u.is_calibrated),sCal=cal.sort((a,b)=>(b.elo||0)-(a.elo||0)),sUn=uncal.sort((a,b)=>(b.matches||0)-(a.matches||0));let top=[...sCal];if(top.length<10)top=[...top,...sUn.slice(0,10-top.length)];else top=top.slice(0,10);if(!top.length){body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#6b6380;padding:30px 0"><i class="fas fa-trophy" style="font-size:20px;display:block;margin-bottom:8px;color:#f5b81b"></i>Нет игроков. Стань первым!</td></tr>';return}const prizes=['5 000 ₽','3 500 ₽','1 500 ₽','','','','','','',''];body.innerHTML=top.map((p,i)=>{const rank=i+1,cls=rank===1?'gold':rank===2?'silver':rank===3?'bronze':'',rating=p.is_calibrated?(p.elo||1000):'📊 '+(p.calibration_matches||0)+'/10',rClass=p.is_calibrated?'player-rating':'player-rating calibration';return'<tr><td class="rank '+cls+'">#'+rank+'</td><td class="player-name">'+p.username+' <i class="fas fa-check-circle"></i></td><td class="'+rClass+'">'+rating+'</td><td class="player-prize">'+(prizes[i]||'')+'</td></tr>'}).join('')}catch(e){body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#6b6380;padding:30px 0"><i class="fas fa-exclamation-circle" style="font-size:20px;display:block;margin-bottom:8px;color:#ff6b6b"></i>Ошибка загрузки рейтинга<br><small style="color:#4a4270">Попробуйте обновить страницу</small></td></tr>'}}
 
-// ============================================================
-//  РЕГИСТРАЦИЯ / ВХОД / ВЫХОД
-// ============================================================
+// ===== РЕГИСТРАЦИЯ/ВХОД =====
 async function handleRegister(){try{const un=document.getElementById('regUsername').value.trim(),em=document.getElementById('regEmail').value.trim(),pw=document.getElementById('regPassword').value,pc=document.getElementById('regPasswordConfirm').value;if(!un||!em||!pw||!pc){showToast('error','Ошибка','Заполните все поля');return}if(pw!==pc){showToast('error','Ошибка','Пароли не совпадают');return}if(pw.length<8){showToast('error','Ошибка','Пароль должен содержать минимум 8 символов');return}const r=await register(un,em,pw);if(r.success){localStorage.setItem('cybermode_user',JSON.stringify(r.user));showToast('success','Успешно','Регистрация пройдена');setTimeout(()=>loadMainSite(),500)}}catch(e){showToast('error','Ошибка',e.message)}}
 async function handleLogin(){try{const em=document.getElementById('loginEmail').value.trim(),pw=document.getElementById('loginPassword').value;if(!em||!pw){showToast('error','Ошибка','Заполните все поля');return}const r=await login(em,pw);if(r.success){localStorage.setItem('cybermode_user',JSON.stringify(r.user));showToast('success','Успешно','Добро пожаловать');setTimeout(()=>loadMainSite(),500)}}catch(e){showToast('error','Ошибка',e.message)}}
 function handleLogout(){logout();document.getElementById('mainSite').classList.remove('visible');document.getElementById('authPage').style.display='flex';showToast('info','Выход выполнен','Вы вышли из аккаунта')}
 
-// ============================================================
-//  ПОИСК МАТЧА
-// ============================================================
+// ===== ПОИСК МАТЧА =====
 function updateSearchButton(isActive){const btn=document.getElementById('searchMatchBtn');if(isActive){btn.innerHTML='<i class="fas fa-times"></i> ОТМЕНИТЬ ПОИСК';btn.classList.add('cancel');isSearching=true;document.querySelector('.timer-display').style.display='block'}else{btn.innerHTML='<i class="fas fa-play"></i> ПОИСК МАТЧА';btn.classList.remove('cancel');isSearching=false;document.querySelector('.timer-display').style.display='none'}}
 function cancelSearch(){if(searchTimer){clearInterval(searchTimer);searchTimer=null}if(searchInterval){clearInterval(searchInterval);searchInterval=null}const user=JSON.parse(localStorage.getItem('cybermode_user')||'null');if(user){fetch('/api/queue/leave',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:user.username})}).catch(()=>{navigator.sendBeacon('/api/queue/leave',JSON.stringify({username:user.username}))})}updateSearchButton(false);searchCount=0;const ce=document.getElementById('searchCount');if(ce){ce.textContent='0/6';ce.classList.remove('visible')}const td=document.getElementById('timerDisplay');if(td)td.textContent='00:00';searchTime=0;isSearching=false;showToast('info','⏹️ Поиск отменён','Вы отменили поиск матча')}
-async function startSearch(){if(isSearching){cancelSearch();return}const user=JSON.parse(localStorage.getItem('cybermode_user')||'null');if(!user){showToast('error','Ошибка','Вы не авторизованы');return}try{const q=await getQueue();if(q.players&&q.players.includes(user.username)){showToast('info','Уже в очереди','Вы уже находитесь в поиске');updateSearchButton(true);searchCount=q.players.length;const ce=document.getElementById('searchCount');if(ce){ce.textContent=searchCount+'/6';ce.classList.add('visible')}return}}catch(e){console.error(e)}showToast('info','🔍 Поиск начат','Ищем соперников...');updateSearchButton(true);searchTime=0;const td=document.getElementById('timerDisplay');if(td)td.textContent='00:00';searchInterval=setInterval(()=>{searchTime++;const m=String(Math.floor(searchTime/60)).padStart(2,'0'),s=String(searchTime%60).padStart(2,'0');if(td)td.textContent=m+':'+s},1000);try{await joinQueue(user.username)}catch(e){showToast('error','Ошибка',e.message);cancelSearch();return}searchTimer=setInterval(async()=>{try{const q=await getQueue(),players=q.players||[];searchCount=players.length;const ce=document.getElementById('searchCount');if(ce){ce.textContent=searchCount+'/6';ce.classList.add('visible')}if(!players.includes(user.username)){showToast('info','Вы удалены из очереди','Администратор удалил вас из поиска');cancelSearch();return}if(searchCount>=6){clearInterval(searchTimer);clearInterval(searchInterval);updateSearchButton(false);const teamA=players.slice(0,3),teamB=players.slice(3,6),captainA=teamA[0]||'',captainB=teamB[0]||'',matchCounter=parseInt(localStorage.getItem('matchCounter')||'0')+1;localStorage.setItem('matchCounter',matchCounter);const matchData={matchId:'match_'+Date.now(),matchNumber:matchCounter,teamA,teamB,captainA,captainB,banned:[],finalMap:'💎 Gem Grab',players:players.slice(0,6)};try{await createMatch(matchData);currentMatchId=matchData.matchId;currentMatchPlayers=[...matchData.teamA,...matchData.teamB];// ===== СОХРАНЯЕМ В localStorage =====
-localStorage.setItem('currentMatchId',currentMatchId);localStorage.setItem('currentMatchPlayers',JSON.stringify(currentMatchPlayers));bannedMaps=[];finalMap='💎 Gem Grab';banTurn='A';isBanPhaseActive=true;window.currentMatchCaptainA=captainA;window.currentMatchCaptainB=captainB;const cu=JSON.parse(localStorage.getItem('cybermode_user')||'null'),isPart=cu&&currentMatchPlayers.includes(cu.username),admin=await checkAdmin(),isAdmin=admin.isAdmin||false;
-// ===== КЛЮЧЕВОЕ: ПОКАЗЫВАЕМ ВКЛАДКУ ВСЕМ УЧАСТНИКАМ =====
-if(isPart||isAdmin){showToast('success','🎮 Матч найден!','Соперники готовы к игре');const mt=document.querySelector('[data-tab="match"]');if(mt){setTimeout(()=>{renderMatchPage(matchData);document.getElementById('matchTabBtn').style.display='block';switchTab('match')},500)}}else{showToast('info','🎮 Матч сформирован','Игроки собраны, матч начался!');document.getElementById('matchTabBtn').style.display='none';switchTab('main')}}catch(e){showToast('error','Ошибка',e.message)}}}catch(e){console.error(e)}},1000)}
+async function startSearch(){if(isSearching){cancelSearch();return}const user=JSON.parse(localStorage.getItem('cybermode_user')||'null');if(!user){showToast('error','Ошибка','Вы не авторизованы');return}try{const q=await getQueue();if(q.players&&q.players.includes(user.username)){showToast('info','Уже в очереди','Вы уже находитесь в поиске');updateSearchButton(true);searchCount=q.players.length;const ce=document.getElementById('searchCount');if(ce){ce.textContent=searchCount+'/6';ce.classList.add('visible')}return}}catch(e){console.error(e)}showToast('info','🔍 Поиск начат','Ищем соперников...');updateSearchButton(true);searchTime=0;const td=document.getElementById('timerDisplay');if(td)td.textContent='00:00';searchInterval=setInterval(()=>{searchTime++;const m=String(Math.floor(searchTime/60)).padStart(2,'0'),s=String(searchTime%60).padStart(2,'0');if(td)td.textContent=m+':'+s},1000);try{await joinQueue(user.username)}catch(e){showToast('error','Ошибка',e.message);cancelSearch();return}searchTimer=setInterval(async()=>{try{const q=await getQueue(),players=q.players||[];searchCount=players.length;const ce=document.getElementById('searchCount');if(ce){ce.textContent=searchCount+'/6';ce.classList.add('visible')}if(!players.includes(user.username)){showToast('info','Вы удалены из очереди','Администратор удалил вас из поиска');cancelSearch();return}if(searchCount>=6){clearInterval(searchTimer);clearInterval(searchInterval);updateSearchButton(false);const teamA=players.slice(0,3),teamB=players.slice(3,6),captainA=teamA[0]||'',captainB=teamB[0]||'',matchCounter=parseInt(localStorage.getItem('matchCounter')||'0')+1;localStorage.setItem('matchCounter',matchCounter);const matchData={matchId:'match_'+Date.now(),matchNumber:matchCounter,teamA,teamB,captainA,captainB,banned:[],finalMap:'💎 Gem Grab',players:players.slice(0,6)};try{await createMatch(matchData);currentMatchId=matchData.matchId;currentMatchPlayers=[...matchData.teamA,...matchData.teamB];localStorage.setItem('currentMatchId',currentMatchId);localStorage.setItem('currentMatchPlayers',JSON.stringify(currentMatchPlayers));bannedMaps=[];finalMap='💎 Gem Grab';banTurn='A';isBanPhaseActive=true;window.currentMatchCaptainA=captainA;window.currentMatchCaptainB=captainB;const cu=JSON.parse(localStorage.getItem('cybermode_user')||'null'),isPart=cu&&currentMatchPlayers.includes(cu.username),admin=await checkAdmin(),isAdmin=admin.isAdmin||false;if(isPart||isAdmin){showToast('success','🎮 Матч найден!','Соперники готовы к игре');const mt=document.querySelector('[data-tab="match"]');if(mt){setTimeout(()=>{renderMatchPage(matchData);document.getElementById('matchTabBtn').style.display='block';switchTab('match')},500)}}else{showToast('info','🎮 Матч сформирован','Игроки собраны, матч начался!');document.getElementById('matchTabBtn').style.display='none';switchTab('main')}}catch(e){showToast('error','Ошибка',e.message)}}}catch(e){console.error(e)}},1000)}
 
-// ============================================================
-//  ОТОБРАЖЕНИЕ МАТЧА
-// ============================================================
-function renderMatchPage(matchData){const tA=document.getElementById('teamAList'),tB=document.getElementById('teamBList'),mid=document.getElementById('matchIdDisplay'),mtb=document.getElementById('matchTabBtn'),cmb=document.getElementById('cancelMatchBtn'),hmb=document.getElementById('hideMatchBtn');
-if(mid){const num=matchData.matchNumber||'0000';mid.textContent=num}currentMatchPlayers=[...matchData.teamA,...matchData.teamB];localStorage.setItem('currentMatchId',matchData.matchId);localStorage.setItem('currentMatchPlayers',JSON.stringify(currentMatchPlayers));const user=JSON.parse(localStorage.getItem('cybermode_user')||'null');const isPart=user&&currentMatchPlayers.includes(user.username);window.currentMatchCaptainA=matchData.teamA[0]||'';window.currentMatchCaptainB=matchData.teamB[0]||'';if(tA){tA.innerHTML=matchData.teamA.map((p,i)=>'<div class="player-tag'+(i===0?' captain':'')+'"><span class="num">'+(i+1)+'</span><i class="fas fa-user-circle"></i> '+p+(i===0?' 👑':'')+'</div>').join('')}if(tB){tB.innerHTML=matchData.teamB.map((p,i)=>'<div class="player-tag'+(i===0?' captain':'')+'"><span class="num">'+(i+1)+'</span><i class="fas fa-user-circle"></i> '+p+(i===0?' 👑':'')+'</div>').join('')}document.getElementById('finalMapDisplay').textContent=matchData.finalMap||'💎 Gem Grab';currentMatchId=matchData.matchId;bannedMaps=matchData.banned||[];finalMap=matchData.finalMap||'💎 Gem Grab';banTurn='A';isBanPhaseActive=true;updateBanUI();checkAdmin().then(admin=>{const isAdmin=admin.isAdmin||false;if(isAdmin){cmb.classList.remove('hidden');hmb.classList.remove('hidden')}else{cmb.classList.add('hidden');hmb.classList.add('hidden')}// ===== КЛЮЧЕВОЕ: ВКЛАДКА ВИДНА ВСЕМ УЧАСТНИКАМ И АДМИНАМ =====
-if(isPart||isAdmin){mtb.style.display='block'}else{mtb.style.display='none';document.getElementById('roomInstruction').style.display='none'}});setupMapClickHandlers();startBanPolling()}
+// ===== ОТОБРАЖЕНИЕ МАТЧА =====
+function renderMatchPage(matchData){const tA=document.getElementById('teamAList'),tB=document.getElementById('teamBList'),mid=document.getElementById('matchIdDisplay'),mtb=document.getElementById('matchTabBtn'),cmb=document.getElementById('cancelMatchBtn'),hmb=document.getElementById('hideMatchBtn');if(mid){const num=matchData.matchNumber||'0000';mid.textContent=num}currentMatchPlayers=[...matchData.teamA,...matchData.teamB];localStorage.setItem('currentMatchId',matchData.matchId);localStorage.setItem('currentMatchPlayers',JSON.stringify(currentMatchPlayers));const user=JSON.parse(localStorage.getItem('cybermode_user')||'null');const isPart=user&&currentMatchPlayers.includes(user.username);window.currentMatchCaptainA=matchData.teamA[0]||'';window.currentMatchCaptainB=matchData.teamB[0]||'';if(tA){tA.innerHTML=matchData.teamA.map((p,i)=>'<div class="player-tag'+(i===0?' captain':'')+'"><span class="num">'+(i+1)+'</span><i class="fas fa-user-circle"></i> '+p+(i===0?' 👑':'')+'</div>').join('')}if(tB){tB.innerHTML=matchData.teamB.map((p,i)=>'<div class="player-tag'+(i===0?' captain':'')+'"><span class="num">'+(i+1)+'</span><i class="fas fa-user-circle"></i> '+p+(i===0?' 👑':'')+'</div>').join('')}document.getElementById('finalMapDisplay').textContent=matchData.finalMap||'💎 Gem Grab';currentMatchId=matchData.matchId;bannedMaps=matchData.banned||[];finalMap=matchData.finalMap||'💎 Gem Grab';banTurn='A';isBanPhaseActive=true;updateBanUI();checkAdmin().then(admin=>{const isAdmin=admin.isAdmin||false;if(isAdmin){cmb.classList.remove('hidden');hmb.classList.remove('hidden')}else{cmb.classList.add('hidden');hmb.classList.add('hidden')}if(isPart||isAdmin){mtb.style.display='block'}else{mtb.style.display='none';document.getElementById('roomInstruction').style.display='none'}});setupMapClickHandlers();startBanPolling()}
 
-// ============================================================
-//  БАН КАРТ
-// ============================================================
+// ===== БАН КАРТ =====
 function updateBanUI(){const chips=document.querySelectorAll('.map-chip'),turn=document.getElementById('turnIndicator'),user=JSON.parse(localStorage.getItem('cybermode_user')||'null'),isA=user?.username===window.currentMatchCaptainA,isB=user?.username===window.currentMatchCaptainB;chips.forEach(el=>{const map=el.dataset.map;el.classList.remove('banned','selected','disabled');if(bannedMaps.includes(map))el.classList.add('banned');if(map===finalMap&&bannedMaps.length>=7)el.classList.add('selected');const myTurn=(banTurn==='A'&&isA)||(banTurn==='B'&&isB),canBan=myTurn&&!bannedMaps.includes(map)&&bannedMaps.length<7&&isBanPhaseActive;if(!canBan&&!bannedMaps.includes(map)&&bannedMaps.length<7)el.classList.add('disabled');el.onclick=null;if(canBan)el.onclick=function(){performBan(map)}});if(turn){if(banTurn==='A'){turn.innerHTML='<i class="fas fa-arrow-right"></i> Капитан А ('+(window.currentMatchCaptainA||'ожидание')+')';turn.style.background='#f5b81b';turn.style.color='#0b0b0e'}else{turn.innerHTML='<i class="fas fa-arrow-right"></i> Капитан В ('+(window.currentMatchCaptainB||'ожидание')+')';turn.style.background='#2a2a34';turn.style.color='#d0d6de'}}if(bannedMaps.length>=7){isBanPhaseActive=false;document.getElementById('banSection').classList.add('hidden');document.getElementById('resultSection').classList.remove('hidden');if(turn){turn.innerHTML='<i class="fas fa-check"></i> Баны завершены'}}}
 async function performBan(mapName){if(!isBanPhaseActive||bannedMaps.includes(mapName)||bannedMaps.length>=7)return;const user=JSON.parse(localStorage.getItem('cybermode_user')||'null'),isA=user?.username===window.currentMatchCaptainA,isB=user?.username===window.currentMatchCaptainB;if((banTurn==='A'&&!isA)||(banTurn==='B'&&!isB)){showToast('error','Не ваш ход','Сейчас банит другой капитан');return}bannedMaps.push(mapName);banTurn=banTurn==='A'?'B':'A';const maps=['💎 Gem Grab','🏆 Showdown','⚽ Brawl Ball','💰 Heist','🎯 Bounty','🔥 Hot Zone','💥 Knockout','⚔️ Duels'],available=maps.filter(m=>!bannedMaps.includes(m));if(available.length===1){finalMap=available[0];isBanPhaseActive=false;document.getElementById('banSection').classList.add('hidden');document.getElementById('resultSection').classList.remove('hidden');document.getElementById('finalMapDisplay').textContent=finalMap;showToast('info','🎯 Режим выбран','Играем в '+finalMap);showRoomInstruction(finalMap);try{await updateMatch({matchId:currentMatchId,banned:bannedMaps,finalMap:finalMap,status:'ready'})}catch(e){console.error(e)}}updateBanUI()}
 function setupMapClickHandlers(){updateBanUI()}
 function startBanPolling(){if(banPollingInterval)clearInterval(banPollingInterval);banPollingInterval=setInterval(async()=>{if(!currentMatchId){clearInterval(banPollingInterval);return}try{const data=await getMatch(currentMatchId);if(data){const nb=data.banned||[],nf=data.final_map||'💎 Gem Grab';if(JSON.stringify(nb)!==JSON.stringify(bannedMaps)||nf!==finalMap){bannedMaps=nb;finalMap=nf;updateBanUI();if(bannedMaps.length>=7){isBanPhaseActive=false;document.getElementById('banSection').classList.add('hidden');document.getElementById('resultSection').classList.remove('hidden');document.getElementById('finalMapDisplay').textContent=finalMap;showRoomInstruction(finalMap)}banTurn=bannedMaps.length%2===0?'A':'B';updateBanUI()}}}catch(e){console.error('Ban polling error:',e)}},2000)}
 
-// ============================================================
-//  ИНСТРУКЦИЯ
-// ============================================================
+// ===== ИНСТРУКЦИЯ =====
 function showRoomInstruction(finalMap){const inst=document.getElementById('roomInstruction');if(!inst)return;inst.style.display='block';const tA=document.getElementById('teamAList'),cap=tA?.querySelector('.player-tag.captain')?.textContent?.trim()||'Капитан',pw=generatePassword(),num=document.getElementById('matchIdDisplay')?.textContent||'0000',name='BRAWL #'+num;document.getElementById('captainNameBadge').textContent=cap;document.getElementById('captainNameDisplay').textContent=cap;document.getElementById('finalMapInstruction').textContent=finalMap;document.getElementById('finalMapInstruction2').textContent=finalMap;document.getElementById('roomNameInstruction').textContent=name;document.getElementById('roomNameInstruction2').textContent=name;document.getElementById('roomPasswordInstruction').textContent=pw;document.getElementById('roomPasswordInstruction2').textContent=pw;document.getElementById('roomNameDisplay').textContent=name;document.getElementById('roomPasswordDisplay').textContent=pw;document.getElementById('roomMapDisplay').textContent=finalMap}
 
-// ============================================================
-//  РЕДАКТИРОВАНИЕ
-// ============================================================
+// ===== РЕДАКТИРОВАНИЕ =====
 function openEditModal(){const user=JSON.parse(localStorage.getItem('cybermode_user')||'null');if(!user){showToast('error','Ошибка','Вы не авторизованы');return}document.getElementById('editNameInput').value=user.username||'';document.getElementById('editModal').classList.add('active')}
 function closeEditModal(){document.getElementById('editModal').classList.remove('active')}
 async function saveEditProfile(){try{const name=document.getElementById('editNameInput').value.trim(),res=await apiRequest('/api/profile/update',{method:'PUT',body:JSON.stringify({username:name})});if(res.success){const user=JSON.parse(localStorage.getItem('cybermode_user')||'{}');user.username=res.user.username;localStorage.setItem('cybermode_user',JSON.stringify(user));showToast('success','Успешно','Профиль обновлён');closeEditModal();loadMainSite()}}catch(e){showToast('error','Ошибка',e.message)}}
 
-// ============================================================
-//  ЗАВЕРШЕНИЕ МАТЧА
-// ============================================================
+// ===== ЗАВЕРШЕНИЕ МАТЧА =====
 async function handleVictory(team){const img=document.getElementById('screenshotImg');if(!img||!img.src||img.src===''){showToast('error','Ошибка','Сначала прикрепите скриншот результата');return}const win=team==='A',winner=win?'Команда А':'Команда В';try{const res=await finishMatch({matchId:currentMatchId,winner:winner,playerUsername:JSON.parse(localStorage.getItem('cybermode_user')||'{}').username,isWin:win,screenshot:img.src||'',finalMap:document.getElementById('finalMapDisplay').textContent||'💎 Gem Grab'});if(res.success){showToast('success','🏆 '+winner,'Результат сохранён');setTimeout(()=>{document.getElementById('screenshotPreview').classList.remove('show');document.getElementById('victoryButtons').classList.remove('show');document.getElementById('resultSection').classList.add('hidden');document.getElementById('roomInstruction').style.display='none';document.getElementById('matchTabBtn').style.display='none';document.getElementById('cancelMatchBtn').classList.add('hidden');document.getElementById('hideMatchBtn').classList.add('hidden');localStorage.removeItem('currentMatchId');localStorage.removeItem('currentMatchPlayers');if(banPollingInterval){clearInterval(banPollingInterval);banPollingInterval=null}switchTab('main');loadMainSite()},1500)}}catch(e){showToast('error','Ошибка',e.message)}}
 
 function handleAvatarUpload(){document.getElementById('fileInputAvatar').click()}
 function handleAttachResult(){document.getElementById('fileInputResult').click()}
 
-// ============================================================
-//  ИНИЦИАЛИЗАЦИЯ
-// ============================================================
+// ===== ИНИЦИАЛИЗАЦИЯ =====
 document.addEventListener('DOMContentLoaded',function(){const user=JSON.parse(localStorage.getItem('cybermode_user')||'null'),token=localStorage.getItem('cybermode_token');if(user&&token){document.getElementById('authPage').style.display='none';document.getElementById('mainSite').classList.add('visible');loadMainSite()}else{document.getElementById('loadingIndicator').style.display='none';document.getElementById('authPage').style.display='flex';document.getElementById('mainSite').classList.remove('visible')}});
 
-// ============================================================
-//  ОБРАБОТЧИКИ
-// ============================================================
+// ===== ОБРАБОТЧИКИ =====
 document.getElementById('loginBtn').addEventListener('click',handleLogin);
 document.getElementById('registerBtn').addEventListener('click',handleRegister);
 document.querySelectorAll('#loginEmail,#loginPassword').forEach(el=>el.addEventListener('keydown',e=>{if(e.key==='Enter')handleLogin()}));
