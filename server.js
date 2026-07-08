@@ -6,7 +6,6 @@ const cors = require('cors');
 
 const app = express();
 
-// ===== CORS =====
 app.use(cors({
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -599,10 +598,10 @@ app.delete('/api/queue/clear', async (req, res) => {
     }
 });
 
-// ===== МАТЧИ =====
+// ===== МАТЧИ (С КАПИТАНАМИ) =====
 app.post('/api/match/create', async (req, res) => {
     try {
-        const { matchId, teamA, teamB, banned, finalMap, players } = req.body;
+        const { matchId, teamA, teamB, banned, finalMap, players, captainA, captainB } = req.body;
 
         if (!matchId || !teamA || !teamB) {
             return res.status(400).json({ error: 'Недостаточно данных для создания матча' });
@@ -614,6 +613,8 @@ app.post('/api/match/create', async (req, res) => {
                 match_id: matchId,
                 team_a: teamA || [],
                 team_b: teamB || [],
+                captain_a: captainA || '',
+                captain_b: captainB || '',
                 banned: banned || [],
                 final_map: finalMap || '💎 Gem Grab',
                 players: players || [],
