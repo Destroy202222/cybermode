@@ -54,16 +54,13 @@ async function isSuperAdmin(userId) {
 // ===== АУТЕНТИФИКАЦИЯ =====
 app.post('/api/auth/register', async (req, res) => {
     try {
-        const { username, email, standoffId, password } = req.body;
+        const { username, email, password } = req.body;
 
-        if (!username || !email || !standoffId || !password) {
+        if (!username || !email || !password) {
             return res.status(400).json({ error: 'Все поля обязательны для заполнения' });
         }
         if (password.length < 8) {
             return res.status(400).json({ error: 'Пароль должен содержать минимум 8 символов' });
-        }
-        if (!/^\d+$/.test(standoffId)) {
-            return res.status(400).json({ error: 'ID должен содержать только цифры' });
         }
 
         const { data: existing } = await supabase
@@ -84,7 +81,6 @@ app.post('/api/auth/register', async (req, res) => {
             .insert({
                 username,
                 email,
-                standoff_id: standoffId,
                 password: hashedPassword,
                 is_admin: isAdmin,
                 wins: 0,
@@ -109,7 +105,6 @@ app.post('/api/auth/register', async (req, res) => {
                 id: user.id,
                 username: user.username,
                 email: user.email,
-                standoffId: user.standoff_id,
                 isAdmin: user.is_admin
             }
         });
@@ -151,7 +146,6 @@ app.post('/api/auth/login', async (req, res) => {
                 id: user.id,
                 username: user.username,
                 email: user.email,
-                standoffId: user.standoff_id,
                 isAdmin: user.is_admin || false,
                 wins: user.wins || 0,
                 losses: user.losses || 0,
@@ -195,7 +189,6 @@ app.get('/api/auth/me', async (req, res) => {
             id: user.id,
             username: user.username,
             email: user.email,
-            standoffId: user.standoff_id,
             isAdmin: user.is_admin || false,
             wins: user.wins || 0,
             losses: user.losses || 0,
@@ -225,17 +218,16 @@ app.put('/api/profile/update', async (req, res) => {
             return res.status(401).json({ error: 'Неверный токен' });
         }
 
-        const { username, standoffId } = req.body;
+        const { username } = req.body;
 
-        if (!username && !standoffId) {
-            return res.status(400).json({ error: 'Укажите хотя бы одно поле для обновления' });
+        if (!username) {
+            return res.status(400).json({ error: 'Укажите никнейм' });
         }
 
         const { data: user, error } = await supabase
             .from('users')
             .update({
-                username: username || undefined,
-                standoff_id: standoffId || undefined
+                username: username
             })
             .eq('id', decoded.userId)
             .select()
@@ -246,8 +238,7 @@ app.put('/api/profile/update', async (req, res) => {
         res.json({
             success: true,
             user: {
-                username: user.username,
-                standoffId: user.standoff_id
+                username: user.username
             }
         });
     } catch (error) {
@@ -453,7 +444,7 @@ app.delete('/api/admin/users/:userId', async (req, res) => {
     }
 });
 
-// ===== ОЧЕРЕДЬ (С ВАЛИДАЦИЕЙ) =====
+// ===== ОЧЕРЕДЬ =====
 app.get('/api/queue', async (req, res) => {
     try {
         const { data: queue, error } = await supabase
@@ -604,7 +595,7 @@ app.post('/api/match/create', async (req, res) => {
                 team_a: teamA || [],
                 team_b: teamB || [],
                 banned: banned || [],
-                final_map: finalMap || 'Alpenstadt',
+                final_map: finalMap || '💎 Gem Grab',
                 players: players || [],
                 status: 'ban_phase'
             })
@@ -673,7 +664,7 @@ app.put('/api/match/update', async (req, res) => {
     }
 });
 
-// ===== ОТМЕНА МАТЧА (ТОЛЬКО ДЛЯ АДМИНОВ) =====
+// ===== ОТМЕНА МАТЧА =====
 app.delete('/api/match/:matchId/cancel', async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
@@ -694,7 +685,6 @@ app.delete('/api/match/:matchId/cancel', async (req, res) => {
 
         const { matchId } = req.params;
 
-        // Удаляем матч из базы
         const { error } = await supabase
             .from('matches')
             .delete()
@@ -742,7 +732,7 @@ app.post('/api/match/finish', async (req, res) => {
                 winner: winner,
                 status: 'finished',
                 screenshot: screenshot || '',
-                final_map: finalMap || 'Alpenstadt'
+                final_map: finalMap || '💎 Gem Grab'
             })
             .eq('match_id', matchId);
 
@@ -790,7 +780,7 @@ app.post('/api/match/finish', async (req, res) => {
 
         history.push({
             matchId: matchId,
-            map: finalMap || 'Alpenstadt',
+            map: finalMap || '💎 Gem Grab',
             result: isWin ? 'win' : 'lose',
             date: new Date().toLocaleDateString('ru-RU'),
             isCalibration: isCalibration,
