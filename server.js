@@ -3,16 +3,28 @@ const { createClient } = require('@supabase/supabase-js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
-const path = require('path');
 
 const app = express();
-app.use(cors());
+
+// ===== ПРАВИЛЬНЫЙ CORS =====
+app.use(cors({
+    origin: '*', // Разрешаем все источники для теста
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
+
 app.use(express.json());
-app.use(express.static('public'));
 
 // ===== ПОДКЛЮЧЕНИЕ К SUPABASE =====
-const supabaseUrl = process.env.SUPABASE_URL || 'https://ваш_проект.supabase.co';
-const supabaseKey = process.env.SUPABASE_KEY || 'ваш_anon_ключ';
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+    console.error('❌ Ошибка: SUPABASE_URL или SUPABASE_KEY не заданы!');
+    process.exit(1);
+}
+
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const JWT_SECRET = process.env.JWT_SECRET || 'cybermode_super_secret_2026';
@@ -51,9 +63,19 @@ async function isSuperAdmin(userId) {
     return data.email === SUPER_ADMIN_EMAIL;
 }
 
+// ===== ТЕСТОВЫЙ ЭНДПОИНТ (ПРОВЕРКА РАБОТЫ) =====
+app.get('/api/health', (req, res) => {
+    res.json({ 
+        status: 'OK', 
+        timestamp: new Date().toISOString(),
+        supabase: supabaseUrl ? 'connected' : 'no url'
+    });
+});
+
 // ===== АУТЕНТИФИКАЦИЯ =====
 app.post('/api/auth/register', async (req, res) => {
     try {
+        console.log('📝 Register request:', req.body);
         const { username, email, password } = req.body;
 
         if (!username || !email || !password) {
@@ -94,7 +116,10 @@ app.post('/api/auth/register', async (req, res) => {
             .select()
             .single();
 
-        if (error) throw error;
+        if (error) {
+            console.error('❌ Supabase insert error:', error);
+            return res.status(500).json({ error: 'Ошибка базы данных' });
+        }
 
         const token = generateToken(user.id);
 
@@ -109,13 +134,14 @@ app.post('/api/auth/register', async (req, res) => {
             }
         });
     } catch (error) {
-        console.error('Register error:', error);
-        res.status(500).json({ error: error.message });
+        console.error('❌ Register error:', error);
+        res.status(500).json({ error: 'Внутренняя ошибка сервера' });
     }
 });
 
 app.post('/api/auth/login', async (req, res) => {
     try {
+        console.log('🔑 Login request:', req.body.email);
         const { email, password } = req.body;
 
         if (!email || !password) {
@@ -157,8 +183,8 @@ app.post('/api/auth/login', async (req, res) => {
             }
         });
     } catch (error) {
-        console.error('Login error:', error);
-        res.status(500).json({ error: error.message });
+        console.error('❌ Login error:', error);
+        res.status(500).json({ error: 'Внутренняя ошибка сервера' });
     }
 });
 
@@ -199,8 +225,8 @@ app.get('/api/auth/me', async (req, res) => {
             history: user.history || []
         });
     } catch (error) {
-        console.error('Me error:', error);
-        res.status(500).json({ error: error.message });
+        console.error('❌ Me error:', error);
+        res.status(500).json({ error: 'Внутренняя ошибка сервера' });
     }
 });
 
@@ -856,4 +882,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`🚀 Сервер запущен на порту ${PORT}`);
     console.log(`👑 Главный администратор: ${SUPER_ADMIN_EMAIL}`);
+    console.log(`📡 Supabase URL: ${supabaseUrl}`);
 });
