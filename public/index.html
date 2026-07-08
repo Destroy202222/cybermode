@@ -25,7 +25,6 @@
             padding: 20px;
             position: relative;
         }
-        /* ===== ФОН С ПЕРСОНАЖАМИ ===== */
         body::before {
             content: '⭐🔥💀🦊🐺🐉⚡💫🌟✨🎯🏆⚔️💥';
             position: fixed;
@@ -232,23 +231,22 @@
             display: none;
             max-width: 1400px;
             width: 100%;
-            background: rgba(18, 18, 58, 0.2);
+            background: rgba(10, 10, 46, 0.15);
             border-radius: 28px;
             padding: 20px 24px 28px;
-            box-shadow: 0 0 60px rgba(245, 184, 27, 0.08), 0 20px 40px rgba(0,0,0,0.7);
+            box-shadow: 0 0 60px rgba(245, 184, 27, 0.05), 0 20px 40px rgba(0,0,0,0.7);
             color: #f0e8d0;
             margin-top: 10px;
             position: relative;
             z-index: 1;
-            border: 1px solid rgba(245, 184, 27, 0.1);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(245, 184, 27, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
         .main-site.visible {
             display: block;
         }
 
-        /* ===== ОСТАЛЬНЫЕ СТИЛИ (БЕЗ ИЗМЕНЕНИЙ) ===== */
         .top-nav {
             position: sticky;
             top: 10px;
@@ -355,76 +353,22 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== ВСЕ ОСТАЛЬНЫЕ БЛОКИ С ПРОЗРАЧНОСТЬЮ ===== */
         .main-menu {
-            background: rgba(18, 18, 58, 0.35);
+            background: rgba(10, 10, 46, 0.3);
             border-radius: 24px;
             padding: 28px 20px 32px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
-            backdrop-filter: blur(5px);
+            border: 1px solid rgba(245, 184, 27, 0.05);
+            backdrop-filter: blur(10px);
         }
-        .search-page {
-            background: rgba(18, 18, 58, 0.35);
-            border-radius: 24px;
-            padding: 40px 20px 48px;
-            text-align: center;
-            border: 1px solid rgba(245, 184, 27, 0.08);
-            backdrop-filter: blur(5px);
-        }
-        .match-page {
-            background: rgba(18, 18, 58, 0.35);
-            border-radius: 24px;
-            padding: 28px 20px 30px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
-            backdrop-filter: blur(5px);
-        }
-        .rating-page {
-            background: rgba(18, 18, 58, 0.35);
-            border-radius: 24px;
-            padding: 24px 20px 28px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
-            backdrop-filter: blur(5px);
-        }
-        .missions-page, .shop-page {
-            background: rgba(18, 18, 58, 0.35);
-            border-radius: 24px;
-            padding: 40px 20px;
-            text-align: center;
-            border: 1px solid rgba(245, 184, 27, 0.08);
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-        }
-        .profile-page {
-            background: rgba(18, 18, 58, 0.35);
-            border-radius: 24px;
-            padding: 24px 20px 28px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
-            backdrop-filter: blur(5px);
-        }
-        .admin-panel {
-            background: rgba(26, 26, 62, 0.7);
-            border-radius: 14px;
-            padding: 16px;
-            margin-bottom: 16px;
-            border: 1px solid #f5b81b;
-            display: none;
-            backdrop-filter: blur(5px);
-        }
-
-        /* ===== ОСТАЛЬНЫЕ СТИЛИ (БЕЗ ИЗМЕНЕНИЙ) ===== */
         .main-menu .stats-bar {
             display: flex;
             gap: 20px;
             justify-content: center;
             margin-bottom: 24px;
             padding: 12px 20px;
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border-radius: 60px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
             flex-wrap: wrap;
         }
         .main-menu .stats-bar .stat-item {
@@ -469,10 +413,10 @@
             max-width: 100%;
         }
         .main-menu .prize-block {
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border-radius: 16px;
             padding: 16px 20px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
         }
         .main-menu .prize-block .prize-title {
             font-size: 15px;
@@ -524,7 +468,7 @@
             align-items: center;
             gap: 12px;
             padding: 10px 14px;
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border-radius: 12px;
             margin-bottom: 8px;
             border: 1px solid rgba(245, 184, 27, 0.05);
@@ -578,8 +522,8 @@
             flex-wrap: wrap;
         }
         .btn-action {
-            background: rgba(26, 26, 62, 0.7);
-            border: 1px solid rgba(245, 184, 27, 0.2);
+            background: rgba(26, 26, 62, 0.6);
+            border: 1px solid rgba(245, 184, 27, 0.15);
             padding: 12px 32px;
             border-radius: 60px;
             color: #c0b8d0;
@@ -608,6 +552,14 @@
         }
 
         /* ===== ПОИСК ===== */
+        .search-page {
+            background: rgba(10, 10, 46, 0.3);
+            border-radius: 24px;
+            padding: 40px 20px 48px;
+            text-align: center;
+            border: 1px solid rgba(245, 184, 27, 0.05);
+            backdrop-filter: blur(10px);
+        }
         .search-page .big-icon {
             font-size: 72px;
             color: #f5b81b;
@@ -681,6 +633,7 @@
             margin-top: 14px;
             font-size: 17px;
             color: #8890b0;
+            display: none;
         }
         .timer-display i {
             color: #f5b81b;
@@ -693,7 +646,14 @@
             font-variant-numeric: tabular-nums;
         }
 
-        /* ===== ОСТАЛЬНЫЕ СТИЛИ (сохраняем как есть) ===== */
+        /* ===== МАТЧ ===== */
+        .match-page {
+            background: rgba(10, 10, 46, 0.3);
+            border-radius: 24px;
+            padding: 28px 20px 30px;
+            border: 1px solid rgba(245, 184, 27, 0.05);
+            backdrop-filter: blur(10px);
+        }
         .match-page .match-id {
             text-align: center;
             font-size: 18px;
@@ -716,10 +676,10 @@
             flex: 1;
             min-width: 200px;
             max-width: 100%;
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border-radius: 20px;
             padding: 18px 20px 24px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
         }
         .team-col h3 {
             font-size: 17px;
@@ -729,7 +689,7 @@
             gap: 10px;
             margin-bottom: 14px;
             padding-bottom: 10px;
-            border-bottom: 1px solid rgba(245, 184, 27, 0.08);
+            border-bottom: 1px solid rgba(245, 184, 27, 0.05);
             color: #f0e8d0;
         }
         .team-col h3 i {
@@ -741,7 +701,7 @@
             gap: 8px;
         }
         .player-tag {
-            background: rgba(26, 26, 62, 0.5);
+            background: rgba(26, 26, 62, 0.4);
             padding: 10px 16px;
             border-radius: 12px;
             font-size: 14px;
@@ -779,10 +739,12 @@
             padding: 10px 0;
             text-align: center;
         }
+
+        /* ===== БАН КАРТ ===== */
         .ban-section {
             margin-top: 10px;
             padding-top: 20px;
-            border-top: 1px solid rgba(245, 184, 27, 0.08);
+            border-top: 1px solid rgba(245, 184, 27, 0.05);
         }
         .ban-section.hidden {
             display: none;
@@ -799,10 +761,10 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             padding: 6px 18px 6px 22px;
             border-radius: 60px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
             flex-wrap: wrap;
         }
         .captain-indicator .turn {
@@ -820,18 +782,18 @@
             margin: 10px 0 14px;
         }
         .map-chip {
-            background: rgba(26, 26, 62, 0.5);
+            background: rgba(26, 26, 62, 0.4);
             padding: 8px 20px;
             border-radius: 60px;
             font-weight: 600;
             font-size: 14px;
-            border: 2px solid rgba(245, 184, 27, 0.2);
+            border: 2px solid rgba(245, 184, 27, 0.15);
             cursor: pointer;
             transition: 0.15s;
             user-select: none;
             color: #c0b8d0;
         }
-        .map-chip:hover:not(.banned) {
+        .map-chip:hover:not(.banned):not(.disabled) {
             background: rgba(245, 184, 27, 0.1);
             border-color: #f5b81b;
             transform: scale(1.02);
@@ -839,7 +801,7 @@
         .map-chip.banned {
             opacity: 0.2;
             text-decoration: line-through;
-            background: rgba(26, 26, 62, 0.3);
+            background: rgba(26, 26, 62, 0.2);
             cursor: default;
             pointer-events: none;
         }
@@ -847,10 +809,17 @@
             border-color: #f5b81b;
             background: rgba(245, 184, 27, 0.1);
         }
+        .map-chip.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* ===== РЕЗУЛЬТАТ ===== */
         .result-section {
             margin-top: 20px;
             padding-top: 18px;
-            border-top: 1px solid rgba(245, 184, 27, 0.08);
+            border-top: 1px solid rgba(245, 184, 27, 0.05);
         }
         .result-section.hidden {
             display: none;
@@ -860,10 +829,10 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             padding: 12px 20px 12px 24px;
             border-radius: 60px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
             gap: 12px;
         }
         .result-row .final-map {
@@ -881,8 +850,8 @@
             color: #f0e8d0;
         }
         .result-row .attach-btn {
-            background: rgba(26, 26, 62, 0.7);
-            border: 1px solid rgba(245, 184, 27, 0.2);
+            background: rgba(26, 26, 62, 0.6);
+            border: 1px solid rgba(245, 184, 27, 0.15);
             padding: 10px 24px;
             border-radius: 60px;
             color: #c0b8d0;
@@ -902,9 +871,9 @@
             display: none;
             margin-top: 12px;
             padding: 10px;
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border-radius: 16px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
             text-align: center;
         }
         .screenshot-preview.show {
@@ -914,7 +883,7 @@
             max-width: 100%;
             max-height: 250px;
             border-radius: 12px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
         }
         .screenshot-preview .file-name {
             color: #6b6380;
@@ -969,6 +938,178 @@
         #fileInputResult, #fileInputAvatar {
             display: none;
         }
+
+        .admin-cancel-btn {
+            background: rgba(58, 26, 26, 0.7);
+            border: none;
+            padding: 10px 28px;
+            border-radius: 60px;
+            color: #ff6b6b;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            border: 1px solid #ff6b6b;
+        }
+        .admin-cancel-btn:hover {
+            background: rgba(74, 42, 42, 0.7);
+            transform: scale(0.97);
+        }
+        .admin-cancel-btn i {
+            font-size: 16px;
+        }
+        .admin-cancel-btn.hidden {
+            display: none;
+        }
+
+        /* ===== ИНСТРУКЦИЯ ===== */
+        .room-instruction {
+            background: rgba(10, 10, 46, 0.4);
+            border-radius: 14px;
+            padding: 18px;
+            margin-top: 16px;
+            border: 2px solid #f5b81b;
+            animation: fade 0.5s ease;
+        }
+        .room-instruction .instruction-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #f5b81b;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .room-instruction .instruction-title i {
+            font-size: 22px;
+        }
+        .room-instruction .instruction-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .room-instruction .instruction-block {
+            background: rgba(10, 10, 46, 0.3);
+            border-radius: 12px;
+            padding: 14px 16px;
+            border: 1px solid rgba(245, 184, 27, 0.05);
+        }
+        .room-instruction .instruction-block h4 {
+            color: #f0e8d0;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .room-instruction .instruction-block h4 .badge {
+            background: linear-gradient(45deg, #f5b81b, #ffcc33);
+            color: #0a0a2e;
+            padding: 2px 10px;
+            border-radius: 40px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .room-instruction .instruction-block .step {
+            color: #8890b0;
+            font-size: 13px;
+            line-height: 1.7;
+            padding: 3px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .room-instruction .instruction-block .step .step-num {
+            color: #f5b81b;
+            font-weight: 700;
+            min-width: 20px;
+        }
+        .room-instruction .room-details {
+            background: rgba(10, 10, 46, 0.3);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-top: 12px;
+            border: 1px solid rgba(245, 184, 27, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .room-instruction .room-details .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .room-instruction .room-details .detail-item .label {
+            color: #6b6380;
+            font-size: 12px;
+        }
+        .room-instruction .room-details .detail-item .value {
+            color: #f5b81b;
+            font-weight: 700;
+            font-size: 16px;
+            background: rgba(10, 10, 46, 0.3);
+            padding: 3px 12px;
+            border-radius: 40px;
+            border: 1px solid rgba(245, 184, 27, 0.05);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+        .room-instruction .copy-btn {
+            background: rgba(26, 26, 62, 0.6);
+            border: 1px solid rgba(245, 184, 27, 0.1);
+            color: #c0b8d0;
+            padding: 4px 12px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .room-instruction .copy-btn:hover {
+            background: rgba(245, 184, 27, 0.1);
+            color: #f0e8d0;
+        }
+        .room-instruction .copy-btn.copied {
+            background: rgba(26, 58, 42, 0.5);
+            color: #6fcf97;
+        }
+        .room-instruction .captain-indicator {
+            background: rgba(26, 26, 62, 0.4);
+            border-radius: 12px;
+            padding: 10px 16px;
+            margin-top: 10px;
+            border: 1px solid #f5b81b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .room-instruction .captain-indicator .captain-name {
+            color: #f5b81b;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .room-instruction .captain-indicator .captain-label {
+            color: #6b6380;
+            font-size: 12px;
+        }
+
+        /* ===== РЕЙТИНГ ===== */
+        .rating-page {
+            background: rgba(10, 10, 46, 0.3);
+            border-radius: 24px;
+            padding: 24px 20px 28px;
+            border: 1px solid rgba(245, 184, 27, 0.05);
+            backdrop-filter: blur(10px);
+        }
         .rating-page .rating-title {
             font-size: 20px;
             font-weight: 700;
@@ -981,11 +1122,11 @@
             margin-bottom: 18px;
         }
         .prize-pool {
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border-radius: 16px;
             padding: 16px 20px;
             margin-bottom: 18px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
         }
         .prize-pool .prize-title {
             font-size: 16px;
@@ -1031,7 +1172,7 @@
             color: #6b6380;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            border-bottom: 1px solid rgba(245, 184, 27, 0.08);
+            border-bottom: 1px solid rgba(245, 184, 27, 0.05);
         }
         .rating-table td {
             padding: 10px 12px;
@@ -1049,20 +1190,14 @@
         .rating-table .player-rating { font-weight: 700; color: #f5b81b; }
         .rating-table .player-rating.calibration { color: #f5b81b; font-size: 12px; }
         .rating-table .player-prize { font-weight: 700; color: #f5b81b; font-size: 13px; }
-        .missions-page .big-icon, .shop-page .big-icon {
-            font-size: 56px;
-            color: #f5b81b;
-            margin-bottom: 16px;
-        }
-        .missions-page h2, .shop-page h2 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #f0e8d0;
-        }
-        .missions-page p, .shop-page p {
-            color: #6b6380;
-            font-size: 14px;
+
+        /* ===== ПРОФИЛЬ ===== */
+        .profile-page {
+            background: rgba(10, 10, 46, 0.3);
+            border-radius: 24px;
+            padding: 24px 20px 28px;
+            border: 1px solid rgba(245, 184, 27, 0.05);
+            backdrop-filter: blur(10px);
         }
         .profile-header {
             display: flex;
@@ -1070,20 +1205,20 @@
             gap: 18px;
             margin-bottom: 20px;
             padding-bottom: 18px;
-            border-bottom: 1px solid rgba(245, 184, 27, 0.08);
+            border-bottom: 1px solid rgba(245, 184, 27, 0.05);
             flex-wrap: wrap;
         }
         .profile-avatar {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: rgba(26, 26, 62, 0.5);
+            background: rgba(26, 26, 62, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 40px;
             color: #6b6380;
-            border: 2px solid rgba(245, 184, 27, 0.2);
+            border: 2px solid rgba(245, 184, 27, 0.15);
             flex-shrink: 0;
             cursor: pointer;
             transition: 0.15s;
@@ -1096,14 +1231,14 @@
         .profile-info .id { font-size: 13px; color: #6b6380; margin-top: 2px; display: none; }
         .profile-info .league {
             display: inline-block;
-            background: rgba(26, 26, 62, 0.5);
+            background: rgba(26, 26, 62, 0.4);
             padding: 4px 14px;
             border-radius: 40px;
             font-size: 12px;
             font-weight: 600;
             color: #8890b0;
             margin-top: 6px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
         }
         .profile-info .league i { color: #f5b81b; margin-right: 4px; }
         .stats-grid {
@@ -1113,11 +1248,11 @@
             margin-bottom: 20px;
         }
         .stat-item {
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border-radius: 14px;
             padding: 14px 10px;
             text-align: center;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
         }
         .stat-item .value { font-size: 20px; font-weight: 700; color: #f0e8d0; }
         .stat-item .value.gold { color: #f5b81b; }
@@ -1125,11 +1260,11 @@
         .stat-item .value.red { color: #e74c3c; }
         .stat-item .label { font-size: 10px; color: #6b6380; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
         .calibration-section {
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border-radius: 14px;
             padding: 16px 20px;
             margin-bottom: 18px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1141,14 +1276,14 @@
         .calibration-section .left .cal-info .title { font-weight: 600; font-size: 15px; color: #f0e8d0; }
         .calibration-section .left .cal-info .sub { font-size: 13px; color: #6b6380; }
         .calibration-section .right .progress-text { font-size: 20px; font-weight: 700; color: #f5b81b; }
-        .calibration-section .right .progress-bar { width: 100px; height: 6px; background: rgba(26, 26, 62, 0.5); border-radius: 10px; overflow: hidden; }
+        .calibration-section .right .progress-bar { width: 100px; height: 6px; background: rgba(26, 26, 62, 0.4); border-radius: 10px; overflow: hidden; }
         .calibration-section .right .progress-bar .fill { height: 100%; background: linear-gradient(45deg, #f5b81b, #ffcc33); border-radius: 10px; width: 0%; transition: width 0.3s ease; }
         .elo-section {
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border-radius: 14px;
             padding: 16px 20px;
             margin-bottom: 18px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
             display: none;
             align-items: center;
             justify-content: space-between;
@@ -1182,38 +1317,38 @@
             align-items: center;
             gap: 8px;
         }
-        .profile-actions-btns .btn-edit { background: rgba(26, 26, 62, 0.7); color: #c0b8d0; border: 1px solid rgba(245, 184, 27, 0.08); }
+        .profile-actions-btns .btn-edit { background: rgba(26, 26, 62, 0.6); color: #c0b8d0; border: 1px solid rgba(245, 184, 27, 0.05); }
         .profile-actions-btns .btn-edit:hover { background: rgba(245, 184, 27, 0.1); }
-        .profile-actions-btns .btn-help { background: rgba(26, 26, 62, 0.7); color: #c0b8d0; border: 1px solid rgba(245, 184, 27, 0.08); }
+        .profile-actions-btns .btn-help { background: rgba(26, 26, 62, 0.6); color: #c0b8d0; border: 1px solid rgba(245, 184, 27, 0.05); }
         .profile-actions-btns .btn-help:hover { background: rgba(245, 184, 27, 0.1); }
         .profile-actions-btns .btn-logout {
-            background: rgba(58, 26, 26, 0.7);
+            background: rgba(58, 26, 26, 0.6);
             color: #ff6b6b;
             border: 1px solid #ff6b6b;
         }
-        .profile-actions-btns .btn-logout:hover { background: rgba(74, 42, 42, 0.7); }
+        .profile-actions-btns .btn-logout:hover { background: rgba(74, 42, 42, 0.6); }
         .history-section {
             margin-top: 18px;
             padding-top: 18px;
-            border-top: 1px solid rgba(245, 184, 27, 0.08);
+            border-top: 1px solid rgba(245, 184, 27, 0.05);
         }
         .history-section .history-title { font-size: 17px; font-weight: 700; color: #f0e8d0; margin-bottom: 12px; }
         .history-empty {
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border-radius: 14px;
             padding: 30px 16px;
             text-align: center;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
         }
         .history-empty i { font-size: 40px; color: #6b6380; margin-bottom: 10px; display: block; }
         .history-empty .empty-text { font-size: 14px; color: #6b6380; }
         .history-empty .empty-sub { font-size: 13px; color: #4a4270; margin-top: 4px; }
         .history-list { display: flex; flex-direction: column; gap: 6px; }
         .history-item {
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border-radius: 12px;
             padding: 10px 14px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -1230,6 +1365,8 @@
         .history-item .elo-change { font-size: 12px; font-weight: 600; margin-left: 6px; }
         .history-item .elo-change.positive { color: #6fcf97; }
         .history-item .elo-change.negative { color: #e74c3c; }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -1276,15 +1413,15 @@
             gap: 14px;
             margin-bottom: 18px;
             padding: 14px 16px;
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border-radius: 14px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
         }
         .modal .avatar-section .avatar-preview {
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            background: rgba(26, 26, 62, 0.5);
+            background: rgba(26, 26, 62, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1298,8 +1435,8 @@
         .modal .avatar-section .avatar-actions { display: flex; flex-direction: column; gap: 4px; }
         .modal .avatar-section .avatar-actions .label { font-size: 12px; color: #8890b0; }
         .modal .avatar-section .avatar-actions .btn-upload {
-            background: rgba(26, 26, 62, 0.7);
-            border: 1px solid rgba(245, 184, 27, 0.2);
+            background: rgba(26, 26, 62, 0.6);
+            border: 1px solid rgba(245, 184, 27, 0.15);
             padding: 4px 16px;
             border-radius: 40px;
             color: #c0b8d0;
@@ -1325,7 +1462,7 @@
         }
         .modal .form-group input {
             width: 100%;
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border: 1px solid rgba(245, 184, 27, 0.1);
             border-radius: 12px;
             padding: 10px 14px;
@@ -1347,10 +1484,12 @@
             transition: 0.12s;
             flex: 1;
         }
-        .modal .modal-actions .btn-cancel { background: rgba(26, 26, 62, 0.7); color: #c0b8d0; border: 1px solid rgba(245, 184, 27, 0.08); }
+        .modal .modal-actions .btn-cancel { background: rgba(26, 26, 62, 0.6); color: #c0b8d0; border: 1px solid rgba(245, 184, 27, 0.05); }
         .modal .modal-actions .btn-cancel:hover { background: rgba(245, 184, 27, 0.1); }
         .modal .modal-actions .btn-save { background: linear-gradient(45deg, #f5b81b, #ffcc33); color: #0a0a2e; }
         .modal .modal-actions .btn-save:hover { transform: scale(0.97); }
+
+        /* ===== ТОСТ ===== */
         .toast {
             position: fixed;
             bottom: 1.5rem;
@@ -1373,15 +1512,52 @@
         .toast .toast-title.error { color: #ff6b6b; }
         .toast .toast-title.info { color: #f5b81b; }
         .toast .toast-text { color: #8890b0; font-size: 0.9rem; }
+
+        /* ===== АДМИН ===== */
+        .admin-panel {
+            background: rgba(26, 26, 62, 0.6);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 1px solid #f5b81b;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+        .admin-panel .admin-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .admin-panel .admin-title h3 { color: #f5b81b; font-size: 16px; }
+        .admin-panel .admin-title span { color: #6b6380; font-size: 12px; }
+        .admin-panel .admin-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .admin-panel .admin-buttons button {
+            background: rgba(26, 26, 62, 0.6);
+            padding: 8px 16px;
+            border-radius: 40px;
+            color: #c0b8d0;
+            border: 1px solid rgba(245, 184, 27, 0.1);
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.15s;
+        }
+        .admin-panel .admin-buttons button:hover { background: rgba(245, 184, 27, 0.1); }
         .admin-user-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 14px;
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border-radius: 12px;
             margin-bottom: 6px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
             flex-wrap: wrap;
             gap: 6px;
         }
@@ -1423,10 +1599,10 @@
             justify-content: space-between;
             align-items: center;
             padding: 6px 14px;
-            background: rgba(10, 10, 46, 0.5);
+            background: rgba(10, 10, 46, 0.4);
             border-radius: 8px;
             margin-bottom: 4px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
+            border: 1px solid rgba(245, 184, 27, 0.05);
         }
         .admin-queue-item span { color: #f0e8d0; font-size: 14px; }
         .admin-queue-item button {
@@ -1437,166 +1613,6 @@
             border-radius: 20px;
             cursor: pointer;
             font-size: 12px;
-        }
-        .room-instruction {
-            background: rgba(10, 10, 46, 0.5);
-            border-radius: 14px;
-            padding: 18px;
-            margin-top: 16px;
-            border: 2px solid #f5b81b;
-            animation: fade 0.5s ease;
-        }
-        .room-instruction .instruction-title {
-            font-size: 17px;
-            font-weight: 700;
-            color: #f5b81b;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .room-instruction .instruction-title i {
-            font-size: 22px;
-        }
-        .room-instruction .instruction-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-        .room-instruction .instruction-block {
-            background: rgba(10, 10, 46, 0.5);
-            border-radius: 12px;
-            padding: 14px 16px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
-        }
-        .room-instruction .instruction-block h4 {
-            color: #f0e8d0;
-            font-size: 14px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .room-instruction .instruction-block h4 .badge {
-            background: linear-gradient(45deg, #f5b81b, #ffcc33);
-            color: #0a0a2e;
-            padding: 2px 10px;
-            border-radius: 40px;
-            font-size: 11px;
-            font-weight: 700;
-        }
-        .room-instruction .instruction-block .step {
-            color: #8890b0;
-            font-size: 13px;
-            line-height: 1.7;
-            padding: 3px 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
-        .room-instruction .instruction-block .step .step-num {
-            color: #f5b81b;
-            font-weight: 700;
-            min-width: 20px;
-        }
-        .room-instruction .room-details {
-            background: rgba(10, 10, 46, 0.5);
-            border-radius: 12px;
-            padding: 12px 16px;
-            margin-top: 12px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .room-instruction .room-details .detail-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .room-instruction .room-details .detail-item .label {
-            color: #6b6380;
-            font-size: 12px;
-        }
-        .room-instruction .room-details .detail-item .value {
-            color: #f5b81b;
-            font-weight: 700;
-            font-size: 16px;
-            background: rgba(10, 10, 46, 0.5);
-            padding: 3px 12px;
-            border-radius: 40px;
-            border: 1px solid rgba(245, 184, 27, 0.08);
-            font-family: 'Courier New', monospace;
-            letter-spacing: 2px;
-        }
-        .room-instruction .copy-btn {
-            background: rgba(26, 26, 62, 0.7);
-            border: 1px solid rgba(245, 184, 27, 0.1);
-            color: #c0b8d0;
-            padding: 4px 12px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: 0.15s;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .room-instruction .copy-btn:hover {
-            background: rgba(245, 184, 27, 0.1);
-            color: #f0e8d0;
-        }
-        .room-instruction .copy-btn.copied {
-            background: rgba(26, 58, 42, 0.5);
-            color: #6fcf97;
-        }
-        .room-instruction .captain-indicator {
-            background: rgba(26, 26, 62, 0.5);
-            border-radius: 12px;
-            padding: 10px 16px;
-            margin-top: 10px;
-            border: 1px solid #f5b81b;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .room-instruction .captain-indicator .captain-name {
-            color: #f5b81b;
-            font-weight: 700;
-            font-size: 15px;
-        }
-        .room-instruction .captain-indicator .captain-label {
-            color: #6b6380;
-            font-size: 12px;
-        }
-        .admin-cancel-btn {
-            background: rgba(58, 26, 26, 0.7);
-            border: none;
-            padding: 10px 28px;
-            border-radius: 60px;
-            color: #ff6b6b;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.15s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 12px;
-            border: 1px solid #ff6b6b;
-        }
-        .admin-cancel-btn:hover {
-            background: rgba(74, 42, 42, 0.7);
-            transform: scale(0.97);
-        }
-        .admin-cancel-btn i {
-            font-size: 16px;
-        }
-        .admin-cancel-btn.hidden {
-            display: none;
         }
 
         /* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
@@ -1942,6 +1958,34 @@
 </head>
 <body>
 
+    <!-- ===== ИНДИКАТОР ЗАГРУЗКИ ===== -->
+    <div id="loadingIndicator" style="
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(10, 10, 46, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        flex-direction: column;
+        gap: 20px;
+    ">
+        <div style="
+            width: 60px; height: 60px;
+            border: 4px solid rgba(245, 184, 27, 0.1);
+            border-top: 4px solid #f5b81b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        "></div>
+        <div style="color: #f0e8d0; font-size: 18px;">Загрузка...</div>
+    </div>
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
     <!-- ===== ФОН С ПЕРСОНАЖАМИ ===== -->
     <div class="brawl-bg-icons">
         <span class="icon">⭐</span>
@@ -2073,7 +2117,7 @@
                 <p>Нажмите кнопку для поиска соперников (3 на 3).</p>
                 <button class="btn-search" id="searchMatchBtn"><i class="fas fa-play"></i> ПОИСК МАТЧА</button>
                 <div class="search-status"><span class="count" id="searchCount">0/6</span></div>
-                <div class="timer-display" style="display: none;"><i class="fas fa-stopwatch"></i> Время поиска: <span class="time" id="timerDisplay">00:00</span></div>
+                <div class="timer-display"><i class="fas fa-stopwatch"></i> Время поиска: <span class="time" id="timerDisplay">00:00</span></div>
             </div>
         </div>
 
@@ -2345,7 +2389,7 @@
                 <div class="rating-title"><i class="fas fa-clock"></i> Очередь игроков</div>
                 <div class="rating-sub">Просматривайте и управляйте очередью поиска</div>
                 <div id="adminQueueList" style="margin-top: 16px;"></div>
-                <button class="btn-action" onclick="clearQueue()" style="margin-top: 12px; background: rgba(58, 26, 26, 0.7); color: #ff6b6b; border: 1px solid #ff6b6b; padding: 10px 20px; border-radius: 40px; cursor: pointer; font-size: 13px;">
+                <button class="btn-action" onclick="clearQueue()" style="margin-top: 12px; background: rgba(58, 26, 26, 0.6); color: #ff6b6b; border: 1px solid #ff6b6b; padding: 10px 20px; border-radius: 40px; cursor: pointer; font-size: 13px;">
                     <i class="fas fa-trash"></i> Очистить очередь
                 </button>
             </div>
@@ -2494,6 +2538,10 @@
         let searchTime = 0;
         let searchCount = 0;
         let currentMatchId = null;
+        let banTurn = 'A';
+        let bannedMaps = [];
+        let finalMap = '💎 Gem Grab';
+        let isBanPhaseActive = false;
 
         // ===== API КЛИЕНТ =====
         async function apiRequest(endpoint, options = {}) {
@@ -2573,6 +2621,17 @@
             });
         }
 
+        async function getMatch(matchId) {
+            return apiRequest(`/api/match/${matchId}`);
+        }
+
+        async function updateMatch(matchData) {
+            return apiRequest('/api/match/update', {
+                method: 'PUT',
+                body: JSON.stringify(matchData)
+            });
+        }
+
         // ===== ОТМЕНА МАТЧА =====
         async function cancelMatch() {
             if (!currentMatchId) {
@@ -2597,9 +2656,12 @@
                 document.getElementById('roomInstruction').style.display = 'none';
                 document.getElementById('matchTabBtn').style.display = 'none';
                 document.getElementById('cancelMatchBtn').classList.add('hidden');
+                document.getElementById('banSection').classList.remove('hidden');
                 
                 currentMatchId = null;
                 currentMatchPlayers = [];
+                bannedMaps = [];
+                isBanPhaseActive = false;
                 
                 switchTab('main');
             } catch (error) {
@@ -2639,7 +2701,7 @@
                     const isSuper = user.isSuperAdmin;
                     const isAdmin = user.is_admin;
                     return `
-                        <div class="admin-user-item" style="border-color: ${isSuper ? '#f5b81b' : 'rgba(245,184,27,0.08)'}">
+                        <div class="admin-user-item" style="border-color: ${isSuper ? '#f5b81b' : 'rgba(245,184,27,0.05)'}">
                             <div class="user-info">
                                 <strong style="color: ${isSuper ? '#f5b81b' : '#f0e8d0'};">${user.username}</strong>
                                 <span>${user.email}</span>
@@ -2735,6 +2797,8 @@
         // ===== ЗАГРУЗКА ОСНОВНОГО САЙТА =====
         async function loadMainSite() {
             try {
+                document.getElementById('loadingIndicator').style.display = 'none';
+
                 const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
                 if (user) {
                     try {
@@ -2776,10 +2840,11 @@
                 await loadTopPlayers();
                 await renderRating();
             } catch (error) {
+                document.getElementById('loadingIndicator').style.display = 'none';
                 logout();
                 document.getElementById('authPage').style.display = 'flex';
                 document.getElementById('mainSite').classList.remove('visible');
-                showToast('error', 'Ошибка', error.message);
+                showToast('error', 'Ошибка', error.message || 'Попробуйте обновить страницу');
             }
         }
 
@@ -3212,10 +3277,17 @@
                         clearInterval(searchInterval);
                         updateSearchButton(false);
 
+                        const teamA = players.slice(0, 3);
+                        const teamB = players.slice(3, 6);
+                        const captainA = teamA[0] || '';
+                        const captainB = teamB[0] || '';
+
                         const matchData = {
                             matchId: 'match_' + Date.now(),
-                            teamA: players.slice(0, 3),
-                            teamB: players.slice(3, 6),
+                            teamA: teamA,
+                            teamB: teamB,
+                            captainA: captainA,
+                            captainB: captainB,
                             banned: [],
                             finalMap: '💎 Gem Grab',
                             players: players.slice(0, 6)
@@ -3226,6 +3298,13 @@
                             currentMatchId = matchData.matchId;
                             
                             currentMatchPlayers = [...matchData.teamA, ...matchData.teamB];
+                            bannedMaps = [];
+                            finalMap = '💎 Gem Grab';
+                            banTurn = 'A';
+                            isBanPhaseActive = true;
+                            
+                            window.currentMatchCaptainA = captainA;
+                            window.currentMatchCaptainB = captainB;
                             
                             const currentUser = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
                             const isParticipant = currentUser && currentMatchPlayers.includes(currentUser.username);
@@ -3272,6 +3351,9 @@
             
             const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
             const isParticipant = user && currentMatchPlayers.includes(user.username);
+            
+            window.currentMatchCaptainA = matchData.teamA[0] || '';
+            window.currentMatchCaptainB = matchData.teamB[0] || '';
 
             if (teamAList) {
                 teamAList.innerHTML = matchData.teamA.map((p, idx) => `
@@ -3293,6 +3375,13 @@
 
             document.getElementById('finalMapDisplay').textContent = matchData.finalMap || '💎 Gem Grab';
             currentMatchId = matchData.matchId;
+            
+            bannedMaps = matchData.banned || [];
+            finalMap = matchData.finalMap || '💎 Gem Grab';
+            banTurn = 'A';
+            isBanPhaseActive = true;
+            
+            updateBanUI();
 
             checkAdmin().then(adminData => {
                 const isAdmin = adminData.isAdmin || false;
@@ -3305,84 +3394,165 @@
                 
                 if (isParticipant || isAdmin) {
                     matchTabBtn.style.display = 'block';
-                    if (document.getElementById('resultSection').classList.contains('hidden') === false) {
-                        showRoomInstruction(matchData.finalMap || '💎 Gem Grab');
-                    }
                 } else {
                     matchTabBtn.style.display = 'none';
                     document.getElementById('roomInstruction').style.display = 'none';
                 }
             });
 
-            setupMapClickHandlers(matchData);
+            setupMapClickHandlers();
+            startBanPolling();
         }
 
-        function setupMapClickHandlers(matchData) {
+        // ===== ОБНОВЛЕНИЕ UI БАНА =====
+        function updateBanUI() {
             const chips = document.querySelectorAll('.map-chip');
-            let banned = matchData.banned || [];
-            let finalMap = matchData.finalMap || '💎 Gem Grab';
-
-            const maps = [
-                '💎 Gem Grab', '🏆 Showdown', '⚽ Brawl Ball', 
-                '💰 Heist', '🎯 Bounty', '🔥 Hot Zone', 
-                '💥 Knockout', '⚔️ Duels'
-            ];
-
+            const turnIndicator = document.getElementById('turnIndicator');
+            const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
+            const isCaptainA = user?.username === window.currentMatchCaptainA;
+            const isCaptainB = user?.username === window.currentMatchCaptainB;
+            
             chips.forEach(el => {
-                el.classList.remove('banned', 'selected');
                 const map = el.dataset.map;
-                if (banned.includes(map)) {
+                el.classList.remove('banned', 'selected', 'disabled');
+                
+                if (bannedMaps.includes(map)) {
                     el.classList.add('banned');
                 }
-                if (map === finalMap && banned.length >= 7) {
+                if (map === finalMap && bannedMaps.length >= 7) {
                     el.classList.add('selected');
                 }
+                
+                const isMyTurn = (banTurn === 'A' && isCaptainA) || (banTurn === 'B' && isCaptainB);
+                const isCaptain = isCaptainA || isCaptainB;
+                const canBan = isMyTurn && !bannedMaps.includes(map) && bannedMaps.length < 7 && isBanPhaseActive;
+                
+                if (!canBan && !bannedMaps.includes(map) && bannedMaps.length < 7) {
+                    el.classList.add('disabled');
+                }
+                
+                el.onclick = null;
+                if (canBan) {
+                    el.onclick = function() {
+                        performBan(map);
+                    };
+                }
+            });
+            
+            if (turnIndicator) {
+                if (banTurn === 'A') {
+                    turnIndicator.innerHTML = `<i class="fas fa-arrow-right"></i> Капитан А (${window.currentMatchCaptainA || 'ожидание'})`;
+                    turnIndicator.style.background = '#f5b81b';
+                    turnIndicator.style.color = '#0b0b0e';
+                } else {
+                    turnIndicator.innerHTML = `<i class="fas fa-arrow-right"></i> Капитан В (${window.currentMatchCaptainB || 'ожидание'})`;
+                    turnIndicator.style.background = '#2a2a34';
+                    turnIndicator.style.color = '#d0d6de';
+                }
+            }
+            
+            if (bannedMaps.length >= 7) {
+                isBanPhaseActive = false;
+                document.getElementById('banSection').classList.add('hidden');
+                document.getElementById('resultSection').classList.remove('hidden');
+                if (turnIndicator) {
+                    turnIndicator.innerHTML = `<i class="fas fa-check"></i> Баны завершены`;
+                }
+            }
+        }
 
-                el.addEventListener('click', async function() {
-                    const mapName = this.dataset.map;
-                    if (banned.includes(mapName)) return;
-                    if (banned.length >= 7) {
-                        showToast('info', 'Баны завершены', 'Все режимы забанены');
-                        return;
-                    }
+        // ===== ВЫПОЛНЕНИЕ БАНА =====
+        async function performBan(mapName) {
+            if (!isBanPhaseActive) return;
+            if (bannedMaps.includes(mapName)) return;
+            if (bannedMaps.length >= 7) return;
+            
+            const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
+            const isCaptainA = user?.username === window.currentMatchCaptainA;
+            const isCaptainB = user?.username === window.currentMatchCaptainB;
+            
+            if ((banTurn === 'A' && !isCaptainA) || (banTurn === 'B' && !isCaptainB)) {
+                showToast('error', 'Не ваш ход', 'Сейчас банит другой капитан');
+                return;
+            }
+            
+            bannedMaps.push(mapName);
+            banTurn = banTurn === 'A' ? 'B' : 'A';
+            
+            const allMaps = ['💎 Gem Grab', '🏆 Showdown', '⚽ Brawl Ball', '💰 Heist', '🎯 Bounty', '🔥 Hot Zone', '💥 Knockout', '⚔️ Duels'];
+            const available = allMaps.filter(m => !bannedMaps.includes(m));
+            
+            if (available.length === 1) {
+                finalMap = available[0];
+                isBanPhaseActive = false;
+                document.getElementById('banSection').classList.add('hidden');
+                document.getElementById('resultSection').classList.remove('hidden');
+                document.getElementById('finalMapDisplay').textContent = finalMap;
+                
+                showToast('info', '🎯 Режим выбран', `Играем в ${finalMap}`);
+                showRoomInstruction(finalMap);
+                
+                try {
+                    await updateMatch({
+                        matchId: currentMatchId,
+                        banned: bannedMaps,
+                        finalMap: finalMap,
+                        status: 'ready'
+                    });
+                } catch (error) {
+                    console.error('Update match error:', error);
+                }
+            }
+            
+            updateBanUI();
+        }
 
-                    banned.push(mapName);
-                    this.classList.add('banned');
+        // ===== НАСТРОЙКА КЛИКОВ НА КАРТЫ =====
+        function setupMapClickHandlers() {
+            updateBanUI();
+        }
 
-                    const available = maps.filter(m => !banned.includes(m));
-                    
-                    if (available.length === 1) {
-                        finalMap = available[0];
-                        document.getElementById('finalMapDisplay').textContent = finalMap;
-                        document.getElementById('banSection').classList.add('hidden');
-                        document.getElementById('resultSection').classList.remove('hidden');
+        // ===== ПОЛЛИНГ БАНОВ =====
+        let banPollingInterval = null;
+
+        function startBanPolling() {
+            if (banPollingInterval) {
+                clearInterval(banPollingInterval);
+            }
+            banPollingInterval = setInterval(async () => {
+                if (!currentMatchId) {
+                    clearInterval(banPollingInterval);
+                    return;
+                }
+                try {
+                    const matchData = await getMatch(currentMatchId);
+                    if (matchData) {
+                        const newBanned = matchData.banned || [];
+                        const newFinalMap = matchData.final_map || '💎 Gem Grab';
                         
-                        showRoomInstruction(finalMap);
-                        
-                        showToast('info', '🎯 Режим выбран', `Играем в ${finalMap}`);
-
-                        try {
-                            await apiRequest('/api/match/update', {
-                                method: 'PUT',
-                                body: JSON.stringify({
-                                    matchId: currentMatchId,
-                                    banned: banned,
-                                    finalMap: finalMap,
-                                    status: 'ready'
-                                })
-                            });
-                        } catch (error) {
-                            console.error('Update match error:', error);
+                        if (JSON.stringify(newBanned) !== JSON.stringify(bannedMaps) || newFinalMap !== finalMap) {
+                            bannedMaps = newBanned;
+                            finalMap = newFinalMap;
+                            
+                            updateBanUI();
+                            
+                            if (bannedMaps.length >= 7) {
+                                isBanPhaseActive = false;
+                                document.getElementById('banSection').classList.add('hidden');
+                                document.getElementById('resultSection').classList.remove('hidden');
+                                document.getElementById('finalMapDisplay').textContent = finalMap;
+                                showRoomInstruction(finalMap);
+                            }
+                            
+                            const banCount = bannedMaps.length;
+                            banTurn = banCount % 2 === 0 ? 'A' : 'B';
+                            updateBanUI();
                         }
                     }
-
-                    const turnIndicator = document.getElementById('turnIndicator');
-                    if (turnIndicator) {
-                        const nextCaptain = banned.length % 2 === 0 ? 'А' : 'В';
-                        turnIndicator.innerHTML = `<i class="fas fa-arrow-right"></i> Капитан ${nextCaptain}`;
-                    }
-                });
-            });
+                } catch (error) {
+                    console.error('Ban polling error:', error);
+                }
+            }, 2000);
         }
 
         // ===== ПОКАЗ ИНСТРУКЦИИ =====
@@ -3478,6 +3648,10 @@
                         document.getElementById('roomInstruction').style.display = 'none';
                         document.getElementById('matchTabBtn').style.display = 'none';
                         document.getElementById('cancelMatchBtn').classList.add('hidden');
+                        if (banPollingInterval) {
+                            clearInterval(banPollingInterval);
+                            banPollingInterval = null;
+                        }
                         switchTab('main');
                         loadMainSite();
                     }, 1500);
@@ -3507,6 +3681,7 @@
                 document.getElementById('mainSite').classList.add('visible');
                 loadMainSite();
             } else {
+                document.getElementById('loadingIndicator').style.display = 'none';
                 document.getElementById('authPage').style.display = 'flex';
                 document.getElementById('mainSite').classList.remove('visible');
             }
