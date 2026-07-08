@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CYBERMODE · Tanks Blitz</title>
+    <title>BRAWL STARS · Киберспортивная платформа</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
@@ -13,58 +13,92 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         body {
-            background: #0a0a0e;
+            background: linear-gradient(135deg, #0a0a2e 0%, #1a0a3e 30%, #2a1a5e 60%, #1a0a3e 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
         .auth-page {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             width: 100%;
-            background: radial-gradient(ellipse at center, #141210 0%, #0a0a0a 100%);
+            position: relative;
+            z-index: 1;
         }
         .auth-container {
             max-width: 420px;
             width: 100%;
-            background: #141210;
+            background: linear-gradient(145deg, #1a1a3e, #2a1a5e);
             border-radius: 24px;
             padding: 2.5rem;
-            border: 1px solid #2a241e;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            border: 2px solid #f5b81b;
+            box-shadow: 0 0 60px rgba(245, 184, 27, 0.15), 0 20px 60px rgba(0,0,0,0.8);
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 40px rgba(245, 184, 27, 0.1), 0 20px 60px rgba(0,0,0,0.8); }
+            50% { box-shadow: 0 0 80px rgba(245, 184, 27, 0.2), 0 20px 60px rgba(0,0,0,0.8); }
         }
         .auth-container .auth-logo {
             text-align: center;
             margin-bottom: 2rem;
         }
         .auth-container .auth-logo h1 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 900;
-            background: linear-gradient(45deg, #f5b81b, #ffcc33);
+            background: linear-gradient(45deg, #f5b81b, #ffcc33, #f5b81b);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
         .auth-container .auth-logo p {
-            color: #8f877a;
+            color: #aab0c8;
             font-size: 0.9rem;
             margin-top: 0.3rem;
+        }
+        .auth-container .auth-logo .brawl-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.5rem;
         }
         .auth-container h2 {
             text-align: center;
             margin-bottom: 1.5rem;
             font-size: 1.5rem;
-            color: #e0dcd0;
+            color: #f0e8d0;
         }
         .auth-container .form-group {
             margin-bottom: 1.2rem;
         }
         .auth-container .form-group label {
             display: block;
-            color: #8f877a;
+            color: #c0b8d0;
             margin-bottom: 0.3rem;
             font-size: 0.9rem;
             font-weight: 500;
@@ -76,20 +110,20 @@
         .auth-container .form-group input {
             width: 100%;
             padding: 0.8rem 1rem;
-            background: #0a0a0a;
-            border: 2px solid #2a241e;
+            background: #0a0a2e;
+            border: 2px solid #3a2a6e;
             border-radius: 12px;
-            color: #e0dcd0;
+            color: #f0e8d0;
             font-size: 1rem;
             transition: 0.3s;
         }
         .auth-container .form-group input:focus {
             outline: none;
             border-color: #f5b81b;
-            box-shadow: 0 0 20px rgba(245, 184, 27, 0.15);
+            box-shadow: 0 0 30px rgba(245, 184, 27, 0.15);
         }
         .auth-container .form-group .hint {
-            color: #6b6356;
+            color: #6b6380;
             font-size: 0.8rem;
             margin-top: 0.3rem;
         }
@@ -101,14 +135,16 @@
             border-radius: 40px;
             font-weight: 700;
             font-size: 1.1rem;
-            color: #0a0a0a;
+            color: #0a0a2e;
             cursor: pointer;
             transition: 0.3s;
             margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .auth-container .btn-submit:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(245, 184, 27, 0.25);
+            box-shadow: 0 0 40px rgba(245, 184, 27, 0.3);
         }
         .auth-container .auth-links {
             text-align: center;
@@ -129,12 +165,15 @@
             display: none;
             max-width: 1400px;
             width: 100%;
-            background: #16161c;
+            background: linear-gradient(145deg, #12123a, #1a0a4e);
             border-radius: 32px;
             padding: 28px 36px 36px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
-            color: #eef2f6;
+            box-shadow: 0 0 60px rgba(245, 184, 27, 0.08), 0 20px 40px rgba(0,0,0,0.7);
+            color: #f0e8d0;
             margin-top: 10px;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(245, 184, 27, 0.15);
         }
         .main-site.visible {
             display: block;
@@ -146,10 +185,10 @@
             transform: translateX(-50%);
             width: calc(100% - 40px);
             max-width: 1400px;
-            background: #0e0e14;
+            background: linear-gradient(145deg, #12123a, #1a0a4e);
             border-radius: 60px;
             padding: 8px 28px;
-            border: 1px solid #282830;
+            border: 1px solid rgba(245, 184, 27, 0.2);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -162,17 +201,20 @@
         .top-nav .brand {
             font-weight: 700;
             font-size: 20px;
-            color: #f5b81b;
+            background: linear-gradient(45deg, #f5b81b, #ffcc33);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             cursor: pointer;
             letter-spacing: -0.3px;
             transition: 0.15s;
             white-space: nowrap;
         }
         .top-nav .brand:hover {
-            color: #ffcc33;
+            transform: scale(1.02);
         }
         .top-nav .brand i {
             margin-right: 8px;
+            -webkit-text-fill-color: #f5b81b;
         }
         .nav-center {
             display: flex;
@@ -183,18 +225,18 @@
         .nav-center .nav-item {
             font-size: 15px;
             font-weight: 500;
-            color: #88909c;
+            color: #8890b0;
             cursor: pointer;
             transition: 0.15s;
             padding: 6px 4px;
             border-bottom: 2px solid transparent;
         }
         .nav-center .nav-item:hover {
-            color: #f0f2f5;
+            color: #f0e8d0;
             border-bottom-color: #f5b81b;
         }
         .nav-center .nav-item.active {
-            color: #f0f2f5;
+            color: #f0e8d0;
             border-bottom-color: #f5b81b;
         }
         .nav-center .nav-item.match-tab {
@@ -211,7 +253,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #d0d6de;
+            color: #c0b8d0;
             font-weight: 500;
             font-size: 15px;
             cursor: pointer;
@@ -220,11 +262,11 @@
             transition: 0.15s;
         }
         .nav-right .profile:hover {
-            background: rgba(255,255,255,0.05);
+            background: rgba(245, 184, 27, 0.08);
         }
         .nav-right .profile i {
             font-size: 22px;
-            color: #6f7885;
+            color: #8890b0;
         }
         .nav-right .profile:hover i {
             color: #f5b81b;
@@ -241,10 +283,10 @@
             100% { opacity: 1; transform: translateY(0); }
         }
         .main-menu {
-            background: #111117;
+            background: linear-gradient(145deg, #12123a, #1a0a4e);
             border-radius: 28px;
             padding: 40px 36px 44px;
-            border: 1px solid #26262e;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
         .main-menu .stats-bar {
             display: flex;
@@ -252,15 +294,15 @@
             justify-content: center;
             margin-bottom: 32px;
             padding: 16px 28px;
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 60px;
-            border: 1px solid #1f1f28;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
         .main-menu .stats-bar .stat-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            color: #88909c;
+            color: #8890b0;
             font-size: 15px;
         }
         .main-menu .stats-bar .stat-item .num {
@@ -270,7 +312,7 @@
         }
         .main-menu .stats-bar .stat-item i {
             font-size: 20px;
-            color: #6f7885;
+            color: #6b6380;
         }
         .main-menu .main-grid {
             display: grid;
@@ -281,25 +323,27 @@
         .main-menu .left-col h1 {
             font-size: 34px;
             font-weight: 800;
-            color: #f0f2f5;
+            color: #f0e8d0;
             line-height: 1.2;
             margin-bottom: 14px;
         }
         .main-menu .left-col h1 .highlight {
-            color: #f5b81b;
+            background: linear-gradient(45deg, #f5b81b, #ffcc33);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .main-menu .left-col .desc {
-            color: #88909c;
+            color: #8890b0;
             font-size: 16px;
             line-height: 1.7;
             margin-bottom: 28px;
             max-width: 520px;
         }
         .main-menu .prize-block {
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 16px;
             padding: 20px 24px;
-            border: 1px solid #1f1f28;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
         .main-menu .prize-block .prize-title {
             font-size: 17px;
@@ -316,12 +360,12 @@
             display: flex;
             justify-content: space-between;
             font-size: 15px;
-            color: #d0d6de;
+            color: #c0b8d0;
             padding: 6px 12px;
             border-radius: 8px;
         }
         .main-menu .prize-block .prize-item .place {
-            color: #6f7885;
+            color: #6b6380;
         }
         .main-menu .prize-block .prize-item .amount {
             font-weight: 600;
@@ -339,7 +383,7 @@
         .main-menu .right-col .top-title {
             font-size: 20px;
             font-weight: 700;
-            color: #f0f2f5;
+            color: #f0e8d0;
             margin-bottom: 18px;
         }
         .main-menu .right-col .top-title i {
@@ -351,19 +395,20 @@
             align-items: center;
             gap: 14px;
             padding: 12px 16px;
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 12px;
             margin-bottom: 10px;
-            border: 1px solid #1f1f28;
+            border: 1px solid rgba(245, 184, 27, 0.05);
             transition: 0.15s;
         }
         .main-menu .top-player:hover {
             border-color: #f5b81b;
             transform: translateX(4px);
+            background: rgba(245, 184, 27, 0.05);
         }
         .main-menu .top-player .rank {
             font-weight: 700;
-            color: #6f7885;
+            color: #6b6380;
             min-width: 34px;
             font-size: 16px;
         }
@@ -381,11 +426,11 @@
         }
         .main-menu .top-player .info .name {
             font-weight: 600;
-            color: #f0f2f5;
+            color: #f0e8d0;
             font-size: 15px;
         }
         .main-menu .top-player .info .elo {
-            color: #6f7885;
+            color: #6b6380;
             font-size: 13px;
         }
         .main-menu .top-player .info .elo.calibration {
@@ -404,11 +449,11 @@
             flex-wrap: wrap;
         }
         .btn-action {
-            background: #1c1c24;
-            border: none;
+            background: rgba(26, 26, 62, 0.8);
+            border: 1px solid rgba(245, 184, 27, 0.2);
             padding: 16px 48px;
             border-radius: 60px;
-            color: #d0d6de;
+            color: #c0b8d0;
             font-weight: 600;
             font-size: 17px;
             cursor: pointer;
@@ -418,23 +463,25 @@
             gap: 12px;
         }
         .btn-action:hover {
-            background: #2a2a34;
-            color: #f0f2f5;
+            background: rgba(245, 184, 27, 0.1);
+            color: #f0e8d0;
+            border-color: #f5b81b;
         }
         .btn-action.primary {
-            background: #f5b81b;
-            color: #0b0b0e;
+            background: linear-gradient(45deg, #f5b81b, #ffcc33);
+            color: #0a0a2e;
+            border: none;
         }
         .btn-action.primary:hover {
-            background: #ffcc33;
             transform: scale(0.97);
+            box-shadow: 0 0 40px rgba(245, 184, 27, 0.3);
         }
         .search-page {
-            background: #111117;
+            background: linear-gradient(145deg, #12123a, #1a0a4e);
             border-radius: 28px;
             padding: 60px 28px 64px;
             text-align: center;
-            border: 1px solid #26262e;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
         .search-page .big-icon {
             font-size: 100px;
@@ -445,43 +492,43 @@
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 8px;
+            color: #f0e8d0;
         }
         .search-page p {
-            color: #88909c;
+            color: #8890b0;
             font-size: 16px;
             margin-bottom: 28px;
         }
         .btn-search {
-            background: #f5b81b;
+            background: linear-gradient(45deg, #f5b81b, #ffcc33);
             border: none;
             padding: 20px 64px;
             border-radius: 60px;
             font-weight: 700;
             font-size: 22px;
-            color: #0b0b0e;
+            color: #0a0a2e;
             cursor: pointer;
             transition: 0.12s;
             display: inline-flex;
             align-items: center;
             gap: 16px;
-            box-shadow: 0 6px 20px rgba(245, 184, 27, 0.25);
+            box-shadow: 0 6px 30px rgba(245, 184, 27, 0.2);
         }
         .btn-search:hover {
-            background: #ffcc33;
             transform: scale(0.97);
+            box-shadow: 0 6px 50px rgba(245, 184, 27, 0.4);
         }
         .btn-search:disabled {
             opacity: 0.4;
             pointer-events: none;
         }
         .btn-search.cancel {
-            background: #dc3545;
+            background: linear-gradient(45deg, #dc3545, #ff6b6b);
             color: white;
-            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
+            box-shadow: 0 6px 30px rgba(220, 53, 69, 0.3);
             animation: pulse 1.5s infinite;
         }
         .btn-search.cancel:hover {
-            background: #c82333;
             transform: scale(0.97);
         }
         @keyframes pulse {
@@ -491,7 +538,7 @@
         }
         .search-status {
             margin-top: 28px;
-            color: #6f7885;
+            color: #6b6380;
             font-size: 16px;
             min-height: 50px;
         }
@@ -508,7 +555,7 @@
         .timer-display {
             margin-top: 18px;
             font-size: 20px;
-            color: #aab0ba;
+            color: #8890b0;
         }
         .timer-display i {
             color: #f5b81b;
@@ -521,10 +568,10 @@
             font-variant-numeric: tabular-nums;
         }
         .match-page {
-            background: #111117;
+            background: linear-gradient(145deg, #12123a, #1a0a4e);
             border-radius: 28px;
             padding: 40px 32px 36px;
-            border: 1px solid #26262e;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
         .match-page .match-id {
             text-align: center;
@@ -546,10 +593,10 @@
         .team-col {
             flex: 1;
             max-width: 450px;
-            background: #0e0e14;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 24px;
             padding: 24px 28px 32px;
-            border: 1px solid #26262e;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
         .team-col h3 {
             font-size: 20px;
@@ -559,7 +606,8 @@
             gap: 12px;
             margin-bottom: 18px;
             padding-bottom: 14px;
-            border-bottom: 1px solid #282830;
+            border-bottom: 1px solid rgba(245, 184, 27, 0.1);
+            color: #f0e8d0;
         }
         .team-col h3 i {
             color: #f5b81b;
@@ -570,28 +618,28 @@
             gap: 10px;
         }
         .player-tag {
-            background: #1c1c24;
+            background: rgba(26, 26, 62, 0.6);
             padding: 12px 20px;
             border-radius: 12px;
             font-size: 16px;
             font-weight: 500;
-            color: #cfd6df;
+            color: #c0b8d0;
             display: flex;
             align-items: center;
             gap: 14px;
         }
         .player-tag .num {
-            color: #6f7885;
+            color: #6b6380;
             font-weight: 400;
             font-size: 14px;
             min-width: 28px;
         }
         .player-tag i {
             font-size: 18px;
-            color: #6f7885;
+            color: #6b6380;
         }
         .player-tag.captain {
-            background: #2a2410;
+            background: rgba(245, 184, 27, 0.1);
             border: 2px solid #f5b81b;
             color: #f5b81b;
             font-weight: 700;
@@ -603,7 +651,7 @@
             color: #f5b81b;
         }
         .empty-message {
-            color: #5e6670;
+            color: #5a5270;
             font-size: 15px;
             padding: 14px 0;
             text-align: center;
@@ -611,7 +659,7 @@
         .ban-section {
             margin-top: 12px;
             padding-top: 28px;
-            border-top: 1px solid #282830;
+            border-top: 1px solid rgba(245, 184, 27, 0.1);
         }
         .ban-section.hidden {
             display: none;
@@ -628,14 +676,14 @@
             display: flex;
             align-items: center;
             gap: 24px;
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             padding: 8px 24px 8px 28px;
             border-radius: 60px;
-            border: 1px solid #282832;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
         .captain-indicator .turn {
-            background: #f5b81b;
-            color: #0b0b0e;
+            background: linear-gradient(45deg, #f5b81b, #ffcc33);
+            color: #0a0a2e;
             padding: 4px 20px;
             border-radius: 40px;
             font-weight: 600;
@@ -648,36 +696,37 @@
             margin: 14px 0 18px;
         }
         .map-chip {
-            background: #1a1a22;
+            background: rgba(26, 26, 62, 0.6);
             padding: 12px 32px;
             border-radius: 60px;
             font-weight: 600;
             font-size: 17px;
-            border: 2px solid #2e2e38;
+            border: 2px solid rgba(245, 184, 27, 0.2);
             cursor: pointer;
             transition: 0.15s;
             user-select: none;
+            color: #c0b8d0;
         }
         .map-chip:hover:not(.banned) {
-            background: #2a2a34;
+            background: rgba(245, 184, 27, 0.1);
             border-color: #f5b81b;
             transform: scale(1.02);
         }
         .map-chip.banned {
             opacity: 0.2;
             text-decoration: line-through;
-            background: #20202a;
+            background: rgba(26, 26, 62, 0.3);
             cursor: default;
             pointer-events: none;
         }
         .map-chip.selected {
             border-color: #f5b81b;
-            background: #24241e;
+            background: rgba(245, 184, 27, 0.1);
         }
         .result-section {
             margin-top: 28px;
             padding-top: 24px;
-            border-top: 1px solid #282830;
+            border-top: 1px solid rgba(245, 184, 27, 0.1);
         }
         .result-section.hidden {
             display: none;
@@ -687,10 +736,10 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             padding: 16px 28px 16px 32px;
             border-radius: 60px;
-            border: 1px solid #2a2a34;
+            border: 1px solid rgba(245, 184, 27, 0.1);
             gap: 16px;
         }
         .result-row .final-map {
@@ -705,13 +754,14 @@
         .result-row .final-map .map-name {
             font-weight: 700;
             font-size: 22px;
+            color: #f0e8d0;
         }
         .result-row .attach-btn {
-            background: #2a2a34;
-            border: none;
+            background: rgba(26, 26, 62, 0.8);
+            border: 1px solid rgba(245, 184, 27, 0.2);
             padding: 12px 36px;
             border-radius: 60px;
-            color: #f0f4f8;
+            color: #c0b8d0;
             font-weight: 600;
             font-size: 15px;
             display: flex;
@@ -721,15 +771,16 @@
             transition: 0.1s;
         }
         .result-row .attach-btn:hover {
-            background: #3e3e4c;
+            background: rgba(245, 184, 27, 0.1);
+            border-color: #f5b81b;
         }
         .screenshot-preview {
             display: none;
             margin-top: 16px;
             padding: 12px;
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 16px;
-            border: 1px solid #1f1f28;
+            border: 1px solid rgba(245, 184, 27, 0.1);
             text-align: center;
         }
         .screenshot-preview.show {
@@ -739,10 +790,10 @@
             max-width: 100%;
             max-height: 300px;
             border-radius: 12px;
-            border: 1px solid #282830;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
         .screenshot-preview .file-name {
-            color: #6f7885;
+            color: #6b6380;
             font-size: 13px;
             margin-top: 8px;
         }
@@ -771,22 +822,20 @@
             justify-content: center;
         }
         .victory-buttons .btn-victory.team-a {
-            background: #2a5a3a;
+            background: linear-gradient(45deg, #2a5a3a, #3a7a4a);
             color: #8cd4a8;
             border: 2px solid #3a7a4a;
         }
         .victory-buttons .btn-victory.team-a:hover {
-            background: #3a7a4a;
             transform: scale(0.97);
             box-shadow: 0 0 30px rgba(106, 207, 151, 0.2);
         }
         .victory-buttons .btn-victory.team-b {
-            background: #5a2a2a;
+            background: linear-gradient(45deg, #5a2a2a, #7a3a3a);
             color: #e8a0a0;
             border: 2px solid #7a3a3a;
         }
         .victory-buttons .btn-victory.team-b:hover {
-            background: #7a3a3a;
             transform: scale(0.97);
             box-shadow: 0 0 30px rgba(231, 76, 60, 0.2);
         }
@@ -797,28 +846,28 @@
             display: none;
         }
         .rating-page {
-            background: #111117;
+            background: linear-gradient(145deg, #12123a, #1a0a4e);
             border-radius: 28px;
             padding: 32px 28px 36px;
-            border: 1px solid #26262e;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
         .rating-page .rating-title {
             font-size: 24px;
             font-weight: 700;
-            color: #f0f2f5;
+            color: #f0e8d0;
             margin-bottom: 8px;
         }
         .rating-page .rating-sub {
             font-size: 14px;
-            color: #6f7885;
+            color: #6b6380;
             margin-bottom: 24px;
         }
         .prize-pool {
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 16px;
             padding: 20px 24px;
             margin-bottom: 24px;
-            border: 1px solid #1f1f28;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
         .prize-pool .prize-title {
             font-size: 18px;
@@ -838,11 +887,11 @@
             padding: 6px 12px;
             border-radius: 8px;
             font-size: 15px;
-            color: #d0d6de;
+            color: #c0b8d0;
         }
         .prize-pool .prize-item .place {
             font-weight: 600;
-            color: #6f7885;
+            color: #6b6380;
         }
         .prize-pool .prize-item .amount {
             font-weight: 700;
@@ -860,33 +909,33 @@
             padding: 12px 16px;
             font-size: 12px;
             font-weight: 600;
-            color: #6f7885;
+            color: #6b6380;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            border-bottom: 1px solid #282830;
+            border-bottom: 1px solid rgba(245, 184, 27, 0.1);
         }
         .rating-table td {
             padding: 14px 16px;
             font-size: 15px;
-            border-bottom: 1px solid #1f1f28;
-            color: #d0d6de;
+            border-bottom: 1px solid rgba(245, 184, 27, 0.05);
+            color: #c0b8d0;
         }
-        .rating-table tr:hover td { background: rgba(255,255,255,0.02); }
-        .rating-table .rank { font-weight: 700; color: #6f7885; width: 50px; }
+        .rating-table tr:hover td { background: rgba(245, 184, 27, 0.02); }
+        .rating-table .rank { font-weight: 700; color: #6b6380; width: 50px; }
         .rating-table .rank.gold { color: #f5b81b; }
         .rating-table .rank.silver { color: #c0c8d0; }
         .rating-table .rank.bronze { color: #cd7f32; }
-        .rating-table .player-name { font-weight: 600; color: #f0f2f5; }
+        .rating-table .player-name { font-weight: 600; color: #f0e8d0; }
         .rating-table .player-name i { color: #f5b81b; font-size: 14px; margin-left: 6px; }
         .rating-table .player-rating { font-weight: 700; color: #f5b81b; }
         .rating-table .player-rating.calibration { color: #f5b81b; font-size: 13px; }
         .rating-table .player-prize { font-weight: 700; color: #f5b81b; font-size: 14px; }
         .missions-page {
-            background: #111117;
+            background: linear-gradient(145deg, #12123a, #1a0a4e);
             border-radius: 28px;
             padding: 60px 28px;
             text-align: center;
-            border: 1px solid #26262e;
+            border: 1px solid rgba(245, 184, 27, 0.1);
             min-height: 300px;
             display: flex;
             flex-direction: column;
@@ -902,17 +951,18 @@
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 8px;
+            color: #f0e8d0;
         }
         .missions-page p {
-            color: #6f7885;
+            color: #6b6380;
             font-size: 16px;
         }
         .shop-page {
-            background: #111117;
+            background: linear-gradient(145deg, #12123a, #1a0a4e);
             border-radius: 28px;
             padding: 60px 28px;
             text-align: center;
-            border: 1px solid #26262e;
+            border: 1px solid rgba(245, 184, 27, 0.1);
             min-height: 300px;
             display: flex;
             flex-direction: column;
@@ -928,16 +978,17 @@
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 8px;
+            color: #f0e8d0;
         }
         .shop-page p {
-            color: #6f7885;
+            color: #6b6380;
             font-size: 16px;
         }
         .profile-page {
-            background: #111117;
+            background: linear-gradient(145deg, #12123a, #1a0a4e);
             border-radius: 28px;
             padding: 32px 28px 36px;
-            border: 1px solid #26262e;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
         .profile-header {
             display: flex;
@@ -945,39 +996,39 @@
             gap: 24px;
             margin-bottom: 28px;
             padding-bottom: 24px;
-            border-bottom: 1px solid #282830;
+            border-bottom: 1px solid rgba(245, 184, 27, 0.1);
         }
         .profile-avatar {
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: #1c1c24;
+            background: rgba(26, 26, 62, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 50px;
-            color: #6f7885;
-            border: 2px solid #282830;
+            color: #6b6380;
+            border: 2px solid rgba(245, 184, 27, 0.2);
             flex-shrink: 0;
             cursor: pointer;
             transition: 0.15s;
             overflow: hidden;
         }
         .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .profile-avatar:hover { border-color: #f5b81b; background: #24242e; }
-        .profile-info .name { font-size: 26px; font-weight: 700; color: #f0f2f5; }
+        .profile-avatar:hover { border-color: #f5b81b; background: rgba(245, 184, 27, 0.05); }
+        .profile-info .name { font-size: 26px; font-weight: 700; color: #f0e8d0; }
         .profile-info .name i { color: #f5b81b; font-size: 18px; margin-left: 8px; }
-        .profile-info .id { font-size: 15px; color: #6f7885; margin-top: 4px; }
+        .profile-info .id { font-size: 15px; color: #6b6380; margin-top: 4px; }
         .profile-info .league {
             display: inline-block;
-            background: #1a1a24;
+            background: rgba(26, 26, 62, 0.6);
             padding: 6px 18px;
             border-radius: 40px;
             font-size: 13px;
             font-weight: 600;
-            color: #88909c;
+            color: #8890b0;
             margin-top: 8px;
-            border: 1px solid #282830;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
         .profile-info .league i { color: #f5b81b; margin-right: 6px; }
         .stats-grid {
@@ -987,23 +1038,23 @@
             margin-bottom: 28px;
         }
         .stat-item {
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 16px;
             padding: 18px 14px;
             text-align: center;
-            border: 1px solid #1f1f28;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
-        .stat-item .value { font-size: 26px; font-weight: 700; color: #f0f2f5; }
+        .stat-item .value { font-size: 26px; font-weight: 700; color: #f0e8d0; }
         .stat-item .value.gold { color: #f5b81b; }
         .stat-item .value.green { color: #6fcf97; }
         .stat-item .value.red { color: #e74c3c; }
-        .stat-item .label { font-size: 12px; color: #6f7885; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+        .stat-item .label { font-size: 12px; color: #6b6380; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
         .calibration-section {
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 16px;
             padding: 20px 24px;
             margin-bottom: 24px;
-            border: 1px solid #1f1f28;
+            border: 1px solid rgba(245, 184, 27, 0.1);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1012,17 +1063,17 @@
         }
         .calibration-section .left { display: flex; align-items: center; gap: 18px; }
         .calibration-section .left .cal-icon { font-size: 32px; color: #f5b81b; }
-        .calibration-section .left .cal-info .title { font-weight: 600; font-size: 17px; color: #f0f2f5; }
-        .calibration-section .left .cal-info .sub { font-size: 14px; color: #6f7885; }
+        .calibration-section .left .cal-info .title { font-weight: 600; font-size: 17px; color: #f0e8d0; }
+        .calibration-section .left .cal-info .sub { font-size: 14px; color: #6b6380; }
         .calibration-section .right .progress-text { font-size: 24px; font-weight: 700; color: #f5b81b; }
-        .calibration-section .right .progress-bar { width: 140px; height: 8px; background: #1f1f28; border-radius: 10px; overflow: hidden; }
-        .calibration-section .right .progress-bar .fill { height: 100%; background: #f5b81b; border-radius: 10px; width: 0%; transition: width 0.3s ease; }
+        .calibration-section .right .progress-bar { width: 140px; height: 8px; background: rgba(26, 26, 62, 0.6); border-radius: 10px; overflow: hidden; }
+        .calibration-section .right .progress-bar .fill { height: 100%; background: linear-gradient(45deg, #f5b81b, #ffcc33); border-radius: 10px; width: 0%; transition: width 0.3s ease; }
         .elo-section {
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 16px;
             padding: 20px 24px;
             margin-bottom: 24px;
-            border: 1px solid #1f1f28;
+            border: 1px solid rgba(245, 184, 27, 0.1);
             display: none;
             align-items: center;
             justify-content: space-between;
@@ -1032,10 +1083,10 @@
         .elo-section.show { display: flex; }
         .elo-section .left { display: flex; align-items: center; gap: 18px; }
         .elo-section .left .elo-icon { font-size: 32px; color: #f5b81b; }
-        .elo-section .left .elo-info .title { font-weight: 600; font-size: 17px; color: #f0f2f5; }
-        .elo-section .left .elo-info .sub { font-size: 14px; color: #6f7885; }
+        .elo-section .left .elo-info .title { font-weight: 600; font-size: 17px; color: #f0e8d0; }
+        .elo-section .left .elo-info .sub { font-size: 14px; color: #6b6380; }
         .elo-section .right .elo-value { font-size: 28px; font-weight: 700; color: #f5b81b; }
-        .elo-section .right .elo-change { font-size: 14px; color: #6f7885; text-align: right; }
+        .elo-section .right .elo-change { font-size: 14px; color: #6b6380; text-align: right; }
         .elo-section .right .elo-change .win { color: #6fcf97; }
         .elo-section .right .elo-change .lose { color: #e74c3c; }
         .profile-actions-btns {
@@ -1056,49 +1107,49 @@
             align-items: center;
             gap: 10px;
         }
-        .profile-actions-btns .btn-edit { background: #1c1c24; color: #d0d6de; }
-        .profile-actions-btns .btn-edit:hover { background: #2a2a34; }
-        .profile-actions-btns .btn-help { background: #1c1c24; color: #d0d6de; }
-        .profile-actions-btns .btn-help:hover { background: #2a2a34; }
+        .profile-actions-btns .btn-edit { background: rgba(26, 26, 62, 0.8); color: #c0b8d0; border: 1px solid rgba(245, 184, 27, 0.1); }
+        .profile-actions-btns .btn-edit:hover { background: rgba(245, 184, 27, 0.1); }
+        .profile-actions-btns .btn-help { background: rgba(26, 26, 62, 0.8); color: #c0b8d0; border: 1px solid rgba(245, 184, 27, 0.1); }
+        .profile-actions-btns .btn-help:hover { background: rgba(245, 184, 27, 0.1); }
         .profile-actions-btns .btn-logout {
-            background: #3a1a1a;
+            background: rgba(58, 26, 26, 0.8);
             color: #ff6b6b;
             border: 1px solid #ff6b6b;
         }
-        .profile-actions-btns .btn-logout:hover { background: #4a2a2a; }
+        .profile-actions-btns .btn-logout:hover { background: rgba(74, 42, 42, 0.8); }
         .history-section {
             margin-top: 24px;
             padding-top: 24px;
-            border-top: 1px solid #282830;
+            border-top: 1px solid rgba(245, 184, 27, 0.1);
         }
-        .history-section .history-title { font-size: 20px; font-weight: 700; color: #f0f2f5; margin-bottom: 16px; }
+        .history-section .history-title { font-size: 20px; font-weight: 700; color: #f0e8d0; margin-bottom: 16px; }
         .history-empty {
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 16px;
             padding: 40px 20px;
             text-align: center;
-            border: 1px solid #1f1f28;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
-        .history-empty i { font-size: 48px; color: #6f7885; margin-bottom: 12px; display: block; }
-        .history-empty .empty-text { font-size: 16px; color: #6f7885; }
-        .history-empty .empty-sub { font-size: 14px; color: #4f5660; margin-top: 4px; }
+        .history-empty i { font-size: 48px; color: #6b6380; margin-bottom: 12px; display: block; }
+        .history-empty .empty-text { font-size: 16px; color: #6b6380; }
+        .history-empty .empty-sub { font-size: 14px; color: #4a4270; margin-top: 4px; }
         .history-list { display: flex; flex-direction: column; gap: 8px; }
         .history-item {
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 12px;
             padding: 12px 18px;
-            border: 1px solid #1f1f28;
+            border: 1px solid rgba(245, 184, 27, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 14px;
         }
         .history-item .match-info { display: flex; align-items: center; gap: 12px; }
-        .history-item .match-info .match-number { color: #6f7885; font-weight: 600; }
-        .history-item .match-info .match-map { color: #88909c; }
+        .history-item .match-info .match-number { color: #6b6380; font-weight: 600; }
+        .history-item .match-info .match-map { color: #8890b0; }
         .history-item .match-result { font-weight: 700; padding: 4px 14px; border-radius: 40px; font-size: 13px; }
-        .history-item .match-result.win { background: #1a3a2a; color: #6fcf97; }
-        .history-item .match-result.lose { background: #3a1a1a; color: #e74c3c; }
+        .history-item .match-result.win { background: rgba(26, 58, 42, 0.6); color: #6fcf97; }
+        .history-item .match-result.lose { background: rgba(58, 26, 26, 0.6); color: #e74c3c; }
         .history-item .elo-change { font-size: 12px; font-weight: 600; margin-left: 8px; }
         .history-item .elo-change.positive { color: #6fcf97; }
         .history-item .elo-change.negative { color: #e74c3c; }
@@ -1118,12 +1169,12 @@
         }
         .modal-overlay.active { display: flex; }
         .modal {
-            background: #1a1a24;
+            background: linear-gradient(145deg, #1a1a4e, #2a1a6e);
             border-radius: 28px;
             padding: 40px 44px 36px;
             max-width: 480px;
             width: 100%;
-            border: 1px solid #282832;
+            border: 1px solid rgba(245, 184, 27, 0.2);
             box-shadow: 0 20px 60px rgba(0,0,0,0.9);
             position: relative;
         }
@@ -1132,48 +1183,48 @@
             top: 16px;
             right: 20px;
             font-size: 24px;
-            color: #6f7885;
+            color: #6b6380;
             cursor: pointer;
             transition: 0.15s;
             background: none;
             border: none;
         }
-        .modal .modal-close:hover { color: #f0f2f5; }
-        .modal .modal-title { font-size: 24px; font-weight: 700; color: #f0f2f5; margin-bottom: 6px; }
-        .modal .modal-sub { font-size: 14px; color: #6f7885; margin-bottom: 24px; }
+        .modal .modal-close:hover { color: #f0e8d0; }
+        .modal .modal-title { font-size: 24px; font-weight: 700; color: #f0e8d0; margin-bottom: 6px; }
+        .modal .modal-sub { font-size: 14px; color: #6b6380; margin-bottom: 24px; }
         .modal .avatar-section {
             display: flex;
             align-items: center;
             gap: 16px;
             margin-bottom: 24px;
             padding: 16px 20px;
-            background: #0e0e16;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 16px;
-            border: 1px solid #23232b;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
         .modal .avatar-section .avatar-preview {
             width: 64px;
             height: 64px;
             border-radius: 50%;
-            background: #1c1c24;
+            background: rgba(26, 26, 62, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 30px;
-            color: #6f7885;
-            border: 2px solid #282830;
+            color: #6b6380;
+            border: 2px solid rgba(245, 184, 27, 0.1);
             flex-shrink: 0;
             overflow: hidden;
         }
         .modal .avatar-section .avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
         .modal .avatar-section .avatar-actions { display: flex; flex-direction: column; gap: 6px; }
-        .modal .avatar-section .avatar-actions .label { font-size: 13px; color: #88909c; }
+        .modal .avatar-section .avatar-actions .label { font-size: 13px; color: #8890b0; }
         .modal .avatar-section .avatar-actions .btn-upload {
-            background: #26262e;
-            border: none;
+            background: rgba(26, 26, 62, 0.8);
+            border: 1px solid rgba(245, 184, 27, 0.2);
             padding: 6px 20px;
             border-radius: 40px;
-            color: #d0d6de;
+            color: #c0b8d0;
             font-weight: 500;
             font-size: 13px;
             cursor: pointer;
@@ -1183,30 +1234,30 @@
             gap: 8px;
             width: fit-content;
         }
-        .modal .avatar-section .avatar-actions .btn-upload:hover { background: #32323e; }
+        .modal .avatar-section .avatar-actions .btn-upload:hover { background: rgba(245, 184, 27, 0.1); }
         .modal .form-group { margin-bottom: 18px; }
         .modal .form-group label {
             display: block;
             font-size: 13px;
             font-weight: 600;
-            color: #88909c;
+            color: #8890b0;
             margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
         .modal .form-group input {
             width: 100%;
-            background: #0e0e16;
-            border: 1px solid #23232b;
+            background: rgba(10, 10, 46, 0.6);
+            border: 1px solid rgba(245, 184, 27, 0.1);
             border-radius: 12px;
             padding: 12px 16px;
             font-size: 16px;
-            color: #f0f2f5;
+            color: #f0e8d0;
             outline: none;
             transition: 0.15s;
         }
         .modal .form-group input:focus { border-color: #f5b81b; box-shadow: 0 0 0 3px rgba(245, 184, 27, 0.08); }
-        .modal .form-group input::placeholder { color: #4f5660; }
+        .modal .form-group input::placeholder { color: #4a4270; }
         .modal .modal-actions { display: flex; gap: 12px; margin-top: 8px; }
         .modal .modal-actions .btn {
             padding: 12px 32px;
@@ -1218,16 +1269,16 @@
             transition: 0.12s;
             flex: 1;
         }
-        .modal .modal-actions .btn-cancel { background: #1c1c24; color: #d0d6de; }
-        .modal .modal-actions .btn-cancel:hover { background: #2a2a34; }
-        .modal .modal-actions .btn-save { background: #f5b81b; color: #0b0b0e; }
-        .modal .modal-actions .btn-save:hover { background: #ffcc33; }
+        .modal .modal-actions .btn-cancel { background: rgba(26, 26, 62, 0.8); color: #c0b8d0; border: 1px solid rgba(245, 184, 27, 0.1); }
+        .modal .modal-actions .btn-cancel:hover { background: rgba(245, 184, 27, 0.1); }
+        .modal .modal-actions .btn-save { background: linear-gradient(45deg, #f5b81b, #ffcc33); color: #0a0a2e; }
+        .modal .modal-actions .btn-save:hover { transform: scale(0.97); }
         .toast {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: #141210;
-            border: 1px solid #2a241e;
+            background: linear-gradient(145deg, #1a1a4e, #2a1a6e);
+            border: 1px solid rgba(245, 184, 27, 0.2);
             border-radius: 16px;
             padding: 1rem 1.5rem;
             box-shadow: 0 20px 60px rgba(0,0,0,0.8);
@@ -1236,16 +1287,16 @@
             transform: translateY(100px);
             opacity: 0;
             transition: 0.4s ease;
-            color: #e0dcd0;
+            color: #f0e8d0;
         }
         .toast.visible { transform: translateY(0); opacity: 1; }
         .toast .toast-title { font-weight: 700; margin-bottom: 0.3rem; }
-        .toast .toast-title.success { color: #51cf66; }
+        .toast .toast-title.success { color: #6fcf97; }
         .toast .toast-title.error { color: #ff6b6b; }
         .toast .toast-title.info { color: #f5b81b; }
-        .toast .toast-text { color: #8f877a; font-size: 0.95rem; }
+        .toast .toast-text { color: #8890b0; font-size: 0.95rem; }
         .admin-panel {
-            background: #1a1a24;
+            background: rgba(26, 26, 62, 0.8);
             border-radius: 16px;
             padding: 20px;
             margin-bottom: 20px;
@@ -1259,37 +1310,37 @@
             margin-bottom: 12px;
         }
         .admin-panel .admin-title h3 { color: #f5b81b; }
-        .admin-panel .admin-title span { color: #6f7885; font-size: 13px; }
+        .admin-panel .admin-title span { color: #6b6380; font-size: 13px; }
         .admin-panel .admin-buttons {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
         }
         .admin-panel .admin-buttons button {
-            background: #2a2a34;
+            background: rgba(26, 26, 62, 0.8);
             padding: 10px 20px;
             border-radius: 40px;
-            color: #d0d6de;
-            border: none;
+            color: #c0b8d0;
+            border: 1px solid rgba(245, 184, 27, 0.1);
             cursor: pointer;
             font-size: 14px;
             transition: 0.15s;
         }
-        .admin-panel .admin-buttons button:hover { background: #3a3a44; }
+        .admin-panel .admin-buttons button:hover { background: rgba(245, 184, 27, 0.1); }
         .admin-user-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 12px 16px;
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 12px;
             margin-bottom: 8px;
-            border: 1px solid #1f1f28;
+            border: 1px solid rgba(245, 184, 27, 0.1);
             flex-wrap: wrap;
             gap: 8px;
         }
-        .admin-user-item .user-info strong { color: #f0f2f5; }
-        .admin-user-item .user-info span { color: #6f7885; font-size: 13px; margin-left: 12px; }
+        .admin-user-item .user-info strong { color: #f0e8d0; }
+        .admin-user-item .user-info span { color: #6b6380; font-size: 13px; margin-left: 12px; }
         .admin-user-item .user-info .badge-super { color: #f5b81b; font-size: 12px; margin-left: 8px; }
         .admin-user-item .user-info .badge-admin { color: #6fcf97; font-size: 12px; margin-left: 8px; }
         .admin-user-item .user-actions {
@@ -1306,44 +1357,42 @@
             transition: 0.15s;
         }
         .admin-user-item .user-actions .btn-make-admin {
-            background: #1a3a2a;
+            background: rgba(26, 58, 42, 0.6);
             color: #6fcf97;
         }
-        .admin-user-item .user-actions .btn-make-admin:hover { background: #2a4a3a; }
+        .admin-user-item .user-actions .btn-make-admin:hover { background: rgba(42, 74, 58, 0.6); }
         .admin-user-item .user-actions .btn-remove-admin {
-            background: #3a1a1a;
+            background: rgba(58, 26, 26, 0.6);
             color: #ff6b6b;
         }
-        .admin-user-item .user-actions .btn-remove-admin:hover { background: #4a2a2a; }
+        .admin-user-item .user-actions .btn-remove-admin:hover { background: rgba(74, 42, 42, 0.6); }
         .admin-user-item .user-actions .btn-delete {
-            background: #3a1a1a;
+            background: rgba(58, 26, 26, 0.6);
             color: #ff6b6b;
         }
-        .admin-user-item .user-actions .btn-delete:hover { background: #4a2a2a; }
-        .admin-user-item .user-actions .disabled-text { color: #6f7885; font-size: 12px; }
+        .admin-user-item .user-actions .btn-delete:hover { background: rgba(74, 42, 42, 0.6); }
+        .admin-user-item .user-actions .disabled-text { color: #6b6380; font-size: 12px; }
         .admin-queue-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 8px 16px;
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 8px;
             margin-bottom: 4px;
-            border: 1px solid #1f1f28;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
-        .admin-queue-item span { color: #f0f2f5; }
+        .admin-queue-item span { color: #f0e8d0; }
         .admin-queue-item button {
-            background: #3a1a1a;
+            background: rgba(58, 26, 26, 0.6);
             border: none;
             color: #ff6b6b;
             padding: 4px 12px;
             border-radius: 20px;
             cursor: pointer;
         }
-
-        /* ===== ИНСТРУКЦИЯ ПО СОЗДАНИЮ КОМНАТЫ ===== */
         .room-instruction {
-            background: #0c0c10;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 16px;
             padding: 24px;
             margin-top: 20px;
@@ -1368,13 +1417,13 @@
             gap: 20px;
         }
         .room-instruction .instruction-block {
-            background: #16161c;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 12px;
             padding: 20px;
-            border: 1px solid #282830;
+            border: 1px solid rgba(245, 184, 27, 0.1);
         }
         .room-instruction .instruction-block h4 {
-            color: #f0f2f5;
+            color: #f0e8d0;
             font-size: 16px;
             margin-bottom: 12px;
             display: flex;
@@ -1382,15 +1431,15 @@
             gap: 10px;
         }
         .room-instruction .instruction-block h4 .badge {
-            background: #f5b81b;
-            color: #0b0b0e;
+            background: linear-gradient(45deg, #f5b81b, #ffcc33);
+            color: #0a0a2e;
             padding: 2px 12px;
             border-radius: 40px;
             font-size: 12px;
             font-weight: 700;
         }
         .room-instruction .instruction-block .step {
-            color: #88909c;
+            color: #8890b0;
             font-size: 14px;
             line-height: 1.8;
             padding: 4px 0;
@@ -1404,11 +1453,11 @@
             min-width: 24px;
         }
         .room-instruction .room-details {
-            background: #0a0a0e;
+            background: rgba(10, 10, 46, 0.6);
             border-radius: 12px;
             padding: 16px 20px;
             margin-top: 16px;
-            border: 1px solid #1f1f28;
+            border: 1px solid rgba(245, 184, 27, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -1421,24 +1470,24 @@
             gap: 10px;
         }
         .room-instruction .room-details .detail-item .label {
-            color: #6f7885;
+            color: #6b6380;
             font-size: 13px;
         }
         .room-instruction .room-details .detail-item .value {
             color: #f5b81b;
             font-weight: 700;
             font-size: 18px;
-            background: #1a1a24;
+            background: rgba(10, 10, 46, 0.6);
             padding: 4px 16px;
             border-radius: 40px;
-            border: 1px solid #282830;
+            border: 1px solid rgba(245, 184, 27, 0.1);
             font-family: 'Courier New', monospace;
             letter-spacing: 2px;
         }
         .room-instruction .copy-btn {
-            background: #2a2a34;
-            border: none;
-            color: #d0d6de;
+            background: rgba(26, 26, 62, 0.8);
+            border: 1px solid rgba(245, 184, 27, 0.1);
+            color: #c0b8d0;
             padding: 6px 16px;
             border-radius: 40px;
             cursor: pointer;
@@ -1449,15 +1498,15 @@
             gap: 6px;
         }
         .room-instruction .copy-btn:hover {
-            background: #3a3a44;
-            color: #f0f2f5;
+            background: rgba(245, 184, 27, 0.1);
+            color: #f0e8d0;
         }
         .room-instruction .copy-btn.copied {
-            background: #1a3a2a;
+            background: rgba(26, 58, 42, 0.6);
             color: #6fcf97;
         }
         .room-instruction .captain-indicator {
-            background: #1a1a24;
+            background: rgba(26, 26, 62, 0.6);
             border-radius: 12px;
             padding: 12px 20px;
             margin-top: 12px;
@@ -1472,11 +1521,11 @@
             font-size: 16px;
         }
         .room-instruction .captain-indicator .captain-label {
-            color: #6f7885;
+            color: #6b6380;
             font-size: 13px;
         }
         .admin-cancel-btn {
-            background: #3a1a1a;
+            background: rgba(58, 26, 26, 0.8);
             border: none;
             padding: 12px 36px;
             border-radius: 60px;
@@ -1492,7 +1541,7 @@
             border: 1px solid #ff6b6b;
         }
         .admin-cancel-btn:hover {
-            background: #4a2a2a;
+            background: rgba(74, 42, 42, 0.8);
             transform: scale(0.97);
         }
         .admin-cancel-btn i {
@@ -1533,8 +1582,9 @@
     <div class="auth-page" id="authPage">
         <div class="auth-container">
             <div class="auth-logo">
-                <h1>⚡ CYBERMODE</h1>
-                <p>Танковый портал</p>
+                <span class="brawl-icon">⭐</span>
+                <h1>BRAWL STARS</h1>
+                <p>Киберспортивная платформа</p>
             </div>
             <div id="loginForm">
                 <h2>Вход</h2>
@@ -1547,7 +1597,6 @@
                 <h2>Регистрация</h2>
                 <div class="form-group"><label>Имя пользователя <span class="required">*</span></label><input type="text" id="regUsername" placeholder="Придумайте имя" /></div>
                 <div class="form-group"><label>Email <span class="required">*</span></label><input type="email" id="regEmail" placeholder="Введите email" /></div>
-                <div class="form-group"><label>ID из Tanks Blitz <span class="required">*</span></label><input type="text" id="regStandoffId" placeholder="Например: 123456789" /><div class="hint">🔑 Введите ваш игровой ID из Tanks Blitz (только цифры)</div></div>
                 <div class="form-group"><label>Пароль <span class="required">*</span></label><input type="password" id="regPassword" placeholder="Минимум 8 символов" /></div>
                 <div class="form-group"><label>Подтверждение пароля <span class="required">*</span></label><input type="password" id="regPasswordConfirm" placeholder="Повторите пароль" /></div>
                 <button class="btn-submit" id="registerBtn">Зарегистрироваться</button>
@@ -1561,7 +1610,7 @@
 
         <!-- ===== НАВИГАЦИЯ ===== -->
         <div class="top-nav" id="topNav">
-            <div class="brand" id="brandLogo"><i class="fas fa-fist-raised"></i> CYBERMODE</div>
+            <div class="brand" id="brandLogo"><i class="fas fa-star"></i> BRAWL STARS</div>
             <div class="nav-center">
                 <span class="nav-item" data-tab="search">Поиск матча</span>
                 <span class="nav-item" data-tab="rating">Рейтинг</span>
@@ -1607,10 +1656,10 @@
 
                 <div class="main-grid">
                     <div class="left-col">
-                        <h1>Киберспортивная платформа <span class="highlight">Tanks Blitz</span></h1>
+                        <h1>Киберспортивная платформа <span class="highlight">Brawl Stars</span></h1>
                         <div class="desc">
                             Проверь свой скилл, поднимай уровень и играй против тех, кто тоже пришел побеждать.
-                            Собирай победные серии, расти в рейтинге и становись частью сильного соревновательного комьюнити.
+                            Собирай победные серии, расти в рейтинге и становись частью сильного соревновательного комьюнити Brawl Stars.
                         </div>
                         <div class="prize-block">
                             <div class="prize-title">💰 ПРИЗОВОЙ ФОНД СЕЗОНА — 10 000 ₽</div>
@@ -1667,23 +1716,25 @@
                             <span class="turn" id="turnIndicator"><i class="fas fa-arrow-right"></i> ход</span>
                             <span><i class="fas fa-crown"></i> Капитан В</span>
                         </div>
-                        <span style="color: #88909c; font-size: 15px;"><i class="fas fa-layer-group"></i> Нажмите на карту чтобы забанить</span>
+                        <span style="color: #8890b0; font-size: 15px;"><i class="fas fa-layer-group"></i> Нажмите на карту чтобы забанить</span>
                     </div>
                     <div class="ban-pool" id="mapPool">
-                        <div class="map-chip" data-map="Alpenstadt">Alpenstadt</div>
-                        <div class="map-chip" data-map="Black Goldville">Black Goldville</div>
-                        <div class="map-chip" data-map="Canyon">Canyon</div>
-                        <div class="map-chip" data-map="Copperfield">Copperfield</div>
-                        <div class="map-chip" data-map="Dead Rail">Dead Rail</div>
-                        <div class="map-chip" data-map="Desert Sands">Desert Sands</div>
+                        <div class="map-chip" data-map="Gem Grab">💎 Gem Grab</div>
+                        <div class="map-chip" data-map="Showdown">🏆 Showdown</div>
+                        <div class="map-chip" data-map="Brawl Ball">⚽ Brawl Ball</div>
+                        <div class="map-chip" data-map="Heist">💰 Heist</div>
+                        <div class="map-chip" data-map="Bounty">🎯 Bounty</div>
+                        <div class="map-chip" data-map="Hot Zone">🔥 Hot Zone</div>
+                        <div class="map-chip" data-map="Knockout">💥 Knockout</div>
+                        <div class="map-chip" data-map="Duels">⚔️ Duels</div>
                     </div>
                 </div>
                 <div class="result-section hidden" id="resultSection">
                     <div class="result-row">
                         <div class="final-map">
                             <i class="fas fa-map-marked-alt"></i>
-                            <span class="map-name" id="finalMapDisplay">Alpenstadt</span>
-                            <span style="color: #6f7885; font-size: 15px;">(итог)</span>
+                            <span class="map-name" id="finalMapDisplay">💎 Gem Grab</span>
+                            <span style="color: #6b6380; font-size: 15px;">(итог)</span>
                         </div>
                         <button class="attach-btn" id="attachResultBtn">
                             <i class="fas fa-image"></i> ПРИКРЕПИТЬ РЕЗУЛЬТАТ
@@ -1722,15 +1773,15 @@
                             </h4>
                             <div class="step">
                                 <span class="step-num">1.</span>
-                                <span>Создай <strong>тренировочную комнату</strong> в Tanks Blitz</span>
+                                <span>Создай <strong>комнату</strong> в Brawl Stars</span>
                             </div>
                             <div class="step">
                                 <span class="step-num">2.</span>
-                                <span>Выбери карту <strong id="finalMapInstruction">Alpenstadt</strong></span>
+                                <span>Выбери режим <strong id="finalMapInstruction">💎 Gem Grab</strong></span>
                             </div>
                             <div class="step">
                                 <span class="step-num">3.</span>
-                                <span>Назови комнату <strong id="roomNameInstruction">CYBER #123</strong></span>
+                                <span>Назови комнату <strong id="roomNameInstruction">BRAWL #123</strong></span>
                             </div>
                             <div class="step">
                                 <span class="step-num">4.</span>
@@ -1749,7 +1800,7 @@
                             </h4>
                             <div class="step">
                                 <span class="step-num">1.</span>
-                                <span>Найди комнату с названием <strong id="roomNameInstruction2">CYBER #123</strong></span>
+                                <span>Найди комнату с названием <strong id="roomNameInstruction2">BRAWL #123</strong></span>
                             </div>
                             <div class="step">
                                 <span class="step-num">2.</span>
@@ -1757,7 +1808,7 @@
                             </div>
                             <div class="step">
                                 <span class="step-num">3.</span>
-                                <span>Начинай игру на карте <strong id="finalMapInstruction2">Alpenstadt</strong></span>
+                                <span>Начинай игру в режиме <strong id="finalMapInstruction2">💎 Gem Grab</strong></span>
                             </div>
                         </div>
                     </div>
@@ -1765,7 +1816,7 @@
                     <div class="room-details">
                         <div class="detail-item">
                             <span class="label">📌 Название комнаты:</span>
-                            <span class="value" id="roomNameDisplay">CYBER #123</span>
+                            <span class="value" id="roomNameDisplay">BRAWL #123</span>
                             <button class="copy-btn" onclick="copyText('roomNameDisplay')">
                                 <i class="fas fa-copy"></i>
                             </button>
@@ -1778,15 +1829,15 @@
                             </button>
                         </div>
                         <div class="detail-item">
-                            <span class="label">🗺️ Карта:</span>
-                            <span class="value" id="roomMapDisplay">Alpenstadt</span>
+                            <span class="label">🎮 Режим:</span>
+                            <span class="value" id="roomMapDisplay">💎 Gem Grab</span>
                         </div>
                     </div>
 
                     <div class="captain-indicator">
                         <span class="captain-label">👑 Капитан:</span>
                         <span class="captain-name" id="captainNameDisplay">Игрок</span>
-                        <span style="color: #6f7885; font-size: 13px; margin-left: auto;">
+                        <span style="color: #6b6380; font-size: 13px; margin-left: auto;">
                             <i class="fas fa-info-circle"></i>
                             Только капитан создаёт комнату
                         </span>
@@ -1821,7 +1872,7 @@
                 <div class="big-icon"><i class="fas fa-tasks"></i></div>
                 <h2>Миссии</h2>
                 <p>Ежедневные задания и миссии</p>
-                <p style="color:#4f5660; margin-top:10px;">🚧 Раздел в разработке</p>
+                <p style="color:#4a4270; margin-top:10px;">🚧 Раздел в разработке</p>
             </div>
         </div>
 
@@ -1831,7 +1882,7 @@
                 <div class="big-icon"><i class="fas fa-store"></i></div>
                 <h2>Магазин</h2>
                 <p>Привилегии и улучшения для аккаунта</p>
-                <p style="color:#4f5660; margin-top:10px;">🚧 Раздел в разработке</p>
+                <p style="color:#4a4270; margin-top:10px;">🚧 Раздел в разработке</p>
             </div>
         </div>
 
@@ -1842,7 +1893,7 @@
                     <div class="profile-avatar" id="avatarPreview"><i class="fas fa-user"></i></div>
                     <div class="profile-info">
                         <div class="name" id="profileNameDisplay">Игрок <i class="fas fa-check-circle"></i></div>
-                        <div class="id" id="profileIdDisplay">TANKS ID: 101294641</div>
+                        <div class="id" style="display: none;" id="profileIdDisplay"></div>
                         <div class="league"><i class="fas fa-trophy"></i> DEFAULT LEAGUE · Калибровка рейтинга</div>
                     </div>
                 </div>
@@ -1914,7 +1965,7 @@
                 <div class="rating-title"><i class="fas fa-clock"></i> Очередь игроков</div>
                 <div class="rating-sub">Просматривайте и управляйте очередью поиска</div>
                 <div id="adminQueueList" style="margin-top: 20px;"></div>
-                <button class="btn-action" onclick="clearQueue()" style="margin-top: 16px; background: #ff6b6b; color: white; border: none; padding: 12px 24px; border-radius: 40px; cursor: pointer;">
+                <button class="btn-action" onclick="clearQueue()" style="margin-top: 16px; background: rgba(58, 26, 26, 0.8); color: #ff6b6b; border: 1px solid #ff6b6b; padding: 12px 24px; border-radius: 40px; cursor: pointer;">
                     <i class="fas fa-trash"></i> Очистить очередь
                 </button>
             </div>
@@ -1927,7 +1978,7 @@
         <div class="modal">
             <button class="modal-close" id="closeEditModal">&times;</button>
             <div class="modal-title">Редактирование профиля</div>
-            <div class="modal-sub">Измените никнейм и TANKS ID.</div>
+            <div class="modal-sub">Измените никнейм.</div>
             <div class="avatar-section">
                 <div class="avatar-preview" id="modalAvatarPreview"><i class="fas fa-user"></i></div>
                 <div class="avatar-actions">
@@ -1936,7 +1987,6 @@
                 </div>
             </div>
             <div class="form-group"><label>Никнейм</label><input type="text" id="editNameInput" placeholder="Введите никнейм" /></div>
-            <div class="form-group"><label>TANKS ID</label><input type="text" id="editIdInput" placeholder="Введите TANKS ID" /></div>
             <div class="modal-actions">
                 <button class="btn btn-cancel" id="cancelEditBtn">Отмена</button>
                 <button class="btn btn-save" id="saveEditBtn">Сохранить</button>
@@ -2084,10 +2134,10 @@
         }
 
         // ===== АУТЕНТИФИКАЦИЯ =====
-        async function register(username, email, standoffId, password) {
+        async function register(username, email, password) {
             return apiRequest('/api/auth/register', {
                 method: 'POST',
-                body: JSON.stringify({ username, email, standoffId, password })
+                body: JSON.stringify({ username, email, password })
             });
         }
 
@@ -2202,16 +2252,16 @@
                 const container = document.getElementById('adminUsersList');
                 if (!container) return;
                 if (!data.users || data.users.length === 0) {
-                    container.innerHTML = '<p style="color: #6f7885;">Нет пользователей</p>';
+                    container.innerHTML = '<p style="color: #6b6380;">Нет пользователей</p>';
                     return;
                 }
                 container.innerHTML = data.users.map(user => {
                     const isSuper = user.isSuperAdmin;
                     const isAdmin = user.is_admin;
                     return `
-                        <div class="admin-user-item" style="border-color: ${isSuper ? '#f5b81b' : '#1f1f28'}">
+                        <div class="admin-user-item" style="border-color: ${isSuper ? '#f5b81b' : 'rgba(245,184,27,0.1)'}">
                             <div class="user-info">
-                                <strong style="color: ${isSuper ? '#f5b81b' : '#f0f2f5'};">${user.username}</strong>
+                                <strong style="color: ${isSuper ? '#f5b81b' : '#f0e8d0'};">${user.username}</strong>
                                 <span>${user.email}</span>
                                 ${isSuper ? '<span class="badge-super">👑 Главный админ</span>' : ''}
                                 ${isAdmin && !isSuper ? '<span class="badge-admin">🔹 Админ</span>' : ''}
@@ -2265,7 +2315,7 @@
                 const container = document.getElementById('adminQueueList');
                 if (!container) return;
                 if (!data.players || data.players.length === 0) {
-                    container.innerHTML = '<p style="color: #6f7885;">Очередь пуста</p>';
+                    container.innerHTML = '<p style="color: #6b6380;">Очередь пуста</p>';
                     return;
                 }
                 container.innerHTML = data.players.map(p => `
@@ -2305,7 +2355,6 @@
         // ===== ЗАГРУЗКА ОСНОВНОГО САЙТА =====
         async function loadMainSite() {
             try {
-                // Очистка очереди при загрузке
                 const user = JSON.parse(localStorage.getItem('cybermode_user') || 'null');
                 if (user) {
                     try {
@@ -2319,7 +2368,6 @@
                     }
                 }
 
-                // ИСПРАВЛЕНО: используем другое имя переменной, чтобы не конфликтовать с let currentUserData
                 const userData = await getMe();
                 currentUserData = userData;
                 document.getElementById('authPage').style.display = 'none';
@@ -2391,7 +2439,6 @@
         function updateUI(user) {
             document.getElementById('navUsername').textContent = user.username;
             document.getElementById('profileNameDisplay').innerHTML = user.username + ' <i class="fas fa-check-circle"></i>';
-            document.getElementById('profileIdDisplay').textContent = 'TANKS ID: ' + (user.standoffId || '101294641');
             document.getElementById('winsDisplay').textContent = user.wins || 0;
             document.getElementById('lossesDisplay').textContent = user.losses || 0;
             document.getElementById('matchesDisplay').textContent = user.matches || 0;
@@ -2428,8 +2475,8 @@
                         <div class="history-item">
                             <div class="match-info">
                                 <span class="match-number">#${item.matchId}</span>
-                                <span class="match-map">${item.map || 'Alpenstadt'}</span>
-                                <span style="color:#6f7885;font-size:12px;">${item.date}</span>
+                                <span class="match-map">${item.map || '💎 Gem Grab'}</span>
+                                <span style="color:#6b6380;font-size:12px;">${item.date}</span>
                                 ${eloDisplay}
                             </div>
                             <span class="match-result ${item.result === 'win' ? 'win' : 'lose'}">
@@ -2546,8 +2593,8 @@
                 if (topUsers.length === 0) {
                     body.innerHTML = `
                         <tr>
-                            <td colspan="4" style="text-align:center;color:#6f7885;padding:40px 0;">
-                                <i class="fas fa-trophy" style="font-size:24px;display:block;margin-bottom:10px;"></i>
+                            <td colspan="4" style="text-align:center;color:#6b6380;padding:40px 0;">
+                                <i class="fas fa-trophy" style="font-size:24px;display:block;margin-bottom:10px;color:#f5b81b;"></i>
                                 Нет игроков. Стань первым!
                             </td>
                         </tr>
@@ -2586,11 +2633,11 @@
                 console.error('Rating error:', error);
                 body.innerHTML = `
                     <tr>
-                        <td colspan="4" style="text-align:center;color:#6f7885;padding:40px 0;">
+                        <td colspan="4" style="text-align:center;color:#6b6380;padding:40px 0;">
                             <i class="fas fa-exclamation-circle" style="font-size:24px;display:block;margin-bottom:10px;color:#ff6b6b;"></i>
                             Ошибка загрузки рейтинга
                             <br>
-                            <small style="color:#4f5660;">Попробуйте обновить страницу</small>
+                            <small style="color:#4a4270;">Попробуйте обновить страницу</small>
                         </td>
                     </tr>
                 `;
@@ -2602,11 +2649,10 @@
             try {
                 const username = document.getElementById('regUsername').value.trim();
                 const email = document.getElementById('regEmail').value.trim();
-                const standoffId = document.getElementById('regStandoffId').value.trim();
                 const password = document.getElementById('regPassword').value;
                 const passwordConfirm = document.getElementById('regPasswordConfirm').value;
 
-                if (!username || !email || !standoffId || !password || !passwordConfirm) {
+                if (!username || !email || !password || !passwordConfirm) {
                     showToast('error', 'Ошибка', 'Заполните все поля');
                     return;
                 }
@@ -2618,12 +2664,8 @@
                     showToast('error', 'Ошибка', 'Пароль должен содержать минимум 8 символов');
                     return;
                 }
-                if (!/^\d+$/.test(standoffId)) {
-                    showToast('error', 'Ошибка', 'ID должен содержать только цифры');
-                    return;
-                }
 
-                const result = await register(username, email, standoffId, password);
+                const result = await register(username, email, password);
                 if (result.success) {
                     localStorage.setItem('cybermode_user', JSON.stringify(result.user));
                     showToast('success', 'Успешно', 'Регистрация пройдена');
@@ -2793,7 +2835,7 @@
                             teamA: players.slice(0, 5),
                             teamB: players.slice(5, 10),
                             banned: [],
-                            finalMap: 'Alpenstadt',
+                            finalMap: '💎 Gem Grab',
                             players: players.slice(0, 10)
                         };
 
@@ -2867,7 +2909,7 @@
                 `).join('');
             }
 
-            document.getElementById('finalMapDisplay').textContent = matchData.finalMap || 'Alpenstadt';
+            document.getElementById('finalMapDisplay').textContent = matchData.finalMap || '💎 Gem Grab';
             currentMatchId = matchData.matchId;
 
             checkAdmin().then(adminData => {
@@ -2882,7 +2924,7 @@
                 if (isParticipant || isAdmin) {
                     matchTabBtn.style.display = 'block';
                     if (document.getElementById('resultSection').classList.contains('hidden') === false) {
-                        showRoomInstruction(matchData.finalMap || 'Alpenstadt');
+                        showRoomInstruction(matchData.finalMap || '💎 Gem Grab');
                     }
                 } else {
                     matchTabBtn.style.display = 'none';
@@ -2896,15 +2938,12 @@
         function setupMapClickHandlers(matchData) {
             const chips = document.querySelectorAll('.map-chip');
             let banned = matchData.banned || [];
-            let finalMap = matchData.finalMap || 'Alpenstadt';
+            let finalMap = matchData.finalMap || '💎 Gem Grab';
 
             const maps = [
-                'Alpenstadt', 
-                'Black Goldville', 
-                'Canyon', 
-                'Copperfield', 
-                'Dead Rail', 
-                'Desert Sands'
+                '💎 Gem Grab', '🏆 Showdown', '⚽ Brawl Ball', 
+                '💰 Heist', '🎯 Bounty', '🔥 Hot Zone', 
+                '💥 Knockout', '⚔️ Duels'
             ];
 
             chips.forEach(el => {
@@ -2913,15 +2952,15 @@
                 if (banned.includes(map)) {
                     el.classList.add('banned');
                 }
-                if (map === finalMap && banned.length >= 5) {
+                if (map === finalMap && banned.length >= 7) {
                     el.classList.add('selected');
                 }
 
                 el.addEventListener('click', async function() {
                     const mapName = this.dataset.map;
                     if (banned.includes(mapName)) return;
-                    if (banned.length >= 5) {
-                        showToast('info', 'Баны завершены', 'Все карты забанены');
+                    if (banned.length >= 7) {
+                        showToast('info', 'Баны завершены', 'Все режимы забанены');
                         return;
                     }
 
@@ -2938,7 +2977,7 @@
                         
                         showRoomInstruction(finalMap);
                         
-                        showToast('info', '🎯 Карта выбрана', `Играем на ${finalMap}`);
+                        showToast('info', '🎯 Режим выбран', `Играем в ${finalMap}`);
 
                         try {
                             await apiRequest('/api/match/update', {
@@ -2976,7 +3015,7 @@
             
             const password = generatePassword();
             const matchNumber = document.getElementById('matchIdDisplay')?.textContent || '0000';
-            const roomName = `CYBER #${matchNumber}`;
+            const roomName = `BRAWL #${matchNumber}`;
             
             document.getElementById('captainNameBadge').textContent = captainName;
             document.getElementById('captainNameDisplay').textContent = captainName;
@@ -2997,7 +3036,6 @@
             if (!user) { showToast('error', 'Ошибка', 'Вы не авторизованы'); return; }
 
             document.getElementById('editNameInput').value = user.username || '';
-            document.getElementById('editIdInput').value = user.standoffId || '';
             document.getElementById('editModal').classList.add('active');
         }
 
@@ -3008,17 +3046,15 @@
         async function saveEditProfile() {
             try {
                 const newName = document.getElementById('editNameInput').value.trim();
-                const newId = document.getElementById('editIdInput').value.trim();
 
                 const result = await apiRequest('/api/profile/update', {
                     method: 'PUT',
-                    body: JSON.stringify({ username: newName, standoffId: newId })
+                    body: JSON.stringify({ username: newName })
                 });
 
                 if (result.success) {
                     const user = JSON.parse(localStorage.getItem('cybermode_user') || '{}');
                     user.username = result.user.username;
-                    user.standoffId = result.user.standoffId;
                     localStorage.setItem('cybermode_user', JSON.stringify(user));
                     showToast('success', 'Успешно', 'Профиль обновлён');
                     closeEditModal();
@@ -3048,7 +3084,7 @@
                     playerUsername: JSON.parse(localStorage.getItem('cybermode_user') || '{}').username,
                     isWin: isWin,
                     screenshot: screenshotImg.src || '',
-                    finalMap: document.getElementById('finalMapDisplay').textContent || 'Alpenstadt'
+                    finalMap: document.getElementById('finalMapDisplay').textContent || '💎 Gem Grab'
                 });
 
                 if (result.success) {
@@ -3101,7 +3137,7 @@
         document.querySelectorAll('#loginEmail, #loginPassword').forEach(el => {
             el.addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
         });
-        document.querySelectorAll('#regUsername, #regEmail, #regStandoffId, #regPassword, #regPasswordConfirm')
+        document.querySelectorAll('#regUsername, #regEmail, #regPassword, #regPasswordConfirm')
             .forEach(el => {
                 el.addEventListener('keydown', e => { if (e.key === 'Enter') handleRegister(); });
             });
