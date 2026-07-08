@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>BRAWL STARS · Киберспортивная платформа</title>
+    <title>CYBERMODE · Brawl Stars</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
@@ -25,9 +25,9 @@
             padding: 20px;
             position: relative;
         }
-        /* ===== ФОН С ПЕРСОНАЖАМИ (CSS-стилизация) ===== */
+        /* ===== ФОН С ПЕРСОНАЖАМИ ===== */
         body::before {
-            content: '⭐🔥💀🦊🐺🐉⚡💫🌟✨';
+            content: '⭐🔥💀🦊🐺🐉⚡💫🌟✨🎯🏆⚔️💥';
             position: fixed;
             top: 0;
             left: 0;
@@ -61,7 +61,6 @@
             pointer-events: none;
             z-index: 0;
         }
-        /* ===== ПЛАВАЮЩИЕ ИКОНКИ ПЕРСОНАЖЕЙ ===== */
         .brawl-bg-icons {
             position: fixed;
             top: 0;
@@ -231,7 +230,7 @@
             display: none;
             max-width: 1400px;
             width: 100%;
-            background: rgba(18, 18, 58, 0.92);
+            background: rgba(18, 18, 58, 0.7);
             border-radius: 28px;
             padding: 20px 24px 28px;
             box-shadow: 0 0 60px rgba(245, 184, 27, 0.08), 0 20px 40px rgba(0,0,0,0.7);
@@ -351,10 +350,11 @@
             100% { opacity: 1; transform: translateY(0); }
         }
         .main-menu {
-            background: rgba(18, 18, 58, 0.6);
+            background: rgba(18, 18, 58, 0.5);
             border-radius: 24px;
             padding: 28px 20px 32px;
             border: 1px solid rgba(245, 184, 27, 0.1);
+            backdrop-filter: blur(5px);
         }
         .main-menu .stats-bar {
             display: flex;
@@ -546,11 +546,12 @@
             box-shadow: 0 0 40px rgba(245, 184, 27, 0.3);
         }
         .search-page {
-            background: rgba(18, 18, 58, 0.6);
+            background: rgba(18, 18, 58, 0.5);
             border-radius: 24px;
             padding: 40px 20px 48px;
             text-align: center;
             border: 1px solid rgba(245, 184, 27, 0.1);
+            backdrop-filter: blur(5px);
         }
         .search-page .big-icon {
             font-size: 72px;
@@ -637,10 +638,11 @@
             font-variant-numeric: tabular-nums;
         }
         .match-page {
-            background: rgba(18, 18, 58, 0.6);
+            background: rgba(18, 18, 58, 0.5);
             border-radius: 24px;
             padding: 28px 20px 30px;
             border: 1px solid rgba(245, 184, 27, 0.1);
+            backdrop-filter: blur(5px);
         }
         .match-page .match-id {
             text-align: center;
@@ -918,10 +920,11 @@
             display: none;
         }
         .rating-page {
-            background: rgba(18, 18, 58, 0.6);
+            background: rgba(18, 18, 58, 0.5);
             border-radius: 24px;
             padding: 24px 20px 28px;
             border: 1px solid rgba(245, 184, 27, 0.1);
+            backdrop-filter: blur(5px);
         }
         .rating-page .rating-title {
             font-size: 20px;
@@ -1004,7 +1007,7 @@
         .rating-table .player-rating.calibration { color: #f5b81b; font-size: 12px; }
         .rating-table .player-prize { font-weight: 700; color: #f5b81b; font-size: 13px; }
         .missions-page, .shop-page {
-            background: rgba(18, 18, 58, 0.6);
+            background: rgba(18, 18, 58, 0.5);
             border-radius: 24px;
             padding: 40px 20px;
             text-align: center;
@@ -1014,6 +1017,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(5px);
         }
         .missions-page .big-icon, .shop-page .big-icon {
             font-size: 56px;
@@ -1031,10 +1035,11 @@
             font-size: 14px;
         }
         .profile-page {
-            background: rgba(18, 18, 58, 0.6);
+            background: rgba(18, 18, 58, 0.5);
             border-radius: 24px;
             padding: 24px 20px 28px;
             border: 1px solid rgba(245, 184, 27, 0.1);
+            backdrop-filter: blur(5px);
         }
         .profile-header {
             display: flex;
@@ -1971,8 +1976,8 @@
         <div class="auth-container">
             <div class="auth-logo">
                 <span class="brawl-icon">⭐</span>
-                <h1>BRAWL STARS</h1>
-                <p>Киберспортивная платформа</p>
+                <h1>CYBERMODE</h1>
+                <p>Brawl Stars · Киберспортивная платформа</p>
             </div>
             <div id="loginForm">
                 <h2>Вход</h2>
@@ -1998,7 +2003,7 @@
 
         <!-- ===== НАВИГАЦИЯ ===== -->
         <div class="top-nav" id="topNav">
-            <div class="brand" id="brandLogo"><i class="fas fa-star"></i> BRAWL STARS</div>
+            <div class="brand" id="brandLogo"><i class="fas fa-star"></i> CYBERMODE</div>
             <div class="nav-center">
                 <span class="nav-item" data-tab="search">Поиск</span>
                 <span class="nav-item" data-tab="rating">Рейтинг</span>
@@ -2076,10 +2081,10 @@
             <div class="search-page">
                 <div class="big-icon"><i class="fas fa-gamepad"></i></div>
                 <h2>Поиск матча</h2>
-                <p>Нажмите кнопку для поиска соперников.</p>
+                <p>Нажмите кнопку для поиска соперников (3 на 3).</p>
                 <button class="btn-search" id="searchMatchBtn"><i class="fas fa-play"></i> ПОИСК МАТЧА</button>
-                <div class="search-status"><span class="count" id="searchCount">0/10</span></div>
-                <div class="timer-display"><i class="fas fa-stopwatch"></i> Время поиска: <span class="time" id="timerDisplay">00:00</span></div>
+                <div class="search-status"><span class="count" id="searchCount">0/6</span></div>
+                <div class="timer-display" style="display: none;"><i class="fas fa-stopwatch"></i> Время поиска: <span class="time" id="timerDisplay">00:00</span></div>
             </div>
         </div>
 
@@ -3092,17 +3097,19 @@
             showToast('info', 'Выход выполнен', 'Вы вышли из аккаунта');
         }
 
-        // ===== ПОИСК МАТЧА С ОТМЕНОЙ =====
+        // ===== ПОИСК МАТЧА С ОТМЕНОЙ (3 НА 3) =====
         function updateSearchButton(isActive) {
             const btn = document.getElementById('searchMatchBtn');
             if (isActive) {
                 btn.innerHTML = '<i class="fas fa-times"></i> ОТМЕНИТЬ ПОИСК';
                 btn.classList.add('cancel');
                 isSearching = true;
+                document.querySelector('.timer-display').style.display = 'block';
             } else {
                 btn.innerHTML = '<i class="fas fa-play"></i> ПОИСК МАТЧА';
                 btn.classList.remove('cancel');
                 isSearching = false;
+                document.querySelector('.timer-display').style.display = 'none';
             }
         }
 
@@ -3131,7 +3138,7 @@
             searchCount = 0;
             const countEl = document.getElementById('searchCount');
             if (countEl) {
-                countEl.textContent = '0/10';
+                countEl.textContent = '0/6';
                 countEl.classList.remove('visible');
             }
             const timerDisplay = document.getElementById('timerDisplay');
@@ -3162,7 +3169,7 @@
                     searchCount = queueData.players.length;
                     const countEl = document.getElementById('searchCount');
                     if (countEl) {
-                        countEl.textContent = `${searchCount}/10`;
+                        countEl.textContent = `${searchCount}/6`;
                         countEl.classList.add('visible');
                     }
                     return;
@@ -3193,6 +3200,7 @@
                 return;
             }
 
+            // Обновление очереди КАЖДУЮ СЕКУНДУ для быстрого появления 1/6
             searchTimer = setInterval(async () => {
                 try {
                     const queueData = await getQueue();
@@ -3201,7 +3209,7 @@
                     
                     const countEl = document.getElementById('searchCount');
                     if (countEl) {
-                        countEl.textContent = `${searchCount}/10`;
+                        countEl.textContent = `${searchCount}/6`;
                         countEl.classList.add('visible');
                     }
 
@@ -3211,18 +3219,18 @@
                         return;
                     }
 
-                    if (searchCount >= 10) {
+                    if (searchCount >= 6) {
                         clearInterval(searchTimer);
                         clearInterval(searchInterval);
                         updateSearchButton(false);
 
                         const matchData = {
                             matchId: 'match_' + Date.now(),
-                            teamA: players.slice(0, 5),
-                            teamB: players.slice(5, 10),
+                            teamA: players.slice(0, 3),
+                            teamB: players.slice(3, 6),
                             banned: [],
                             finalMap: '💎 Gem Grab',
-                            players: players.slice(0, 10)
+                            players: players.slice(0, 6)
                         };
 
                         try {
@@ -3259,7 +3267,7 @@
                 } catch (error) {
                     console.error('Queue update error:', error);
                 }
-            }, 3000);
+            }, 1000); // <-- ОБНОВЛЕНИЕ КАЖДУЮ СЕКУНДУ ДЛЯ БЫСТРОГО ПОЯВЛЕНИЯ 1/6
         }
 
         // ===== ОТОБРАЖЕНИЕ МАТЧА =====
