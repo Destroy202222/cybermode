@@ -6,9 +6,9 @@ const cors = require('cors');
 
 const app = express();
 
-// ===== ПРАВИЛЬНЫЙ CORS =====
+// ===== CORS =====
 app.use(cors({
-    origin: '*', // Разрешаем все источники для теста
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
@@ -63,7 +63,7 @@ async function isSuperAdmin(userId) {
     return data.email === SUPER_ADMIN_EMAIL;
 }
 
-// ===== ТЕСТОВЫЙ ЭНДПОИНТ (ПРОВЕРКА РАБОТЫ) =====
+// ===== ТЕСТОВЫЙ ЭНДПОИНТ =====
 app.get('/api/health', (req, res) => {
     res.json({ 
         status: 'OK', 
@@ -75,7 +75,6 @@ app.get('/api/health', (req, res) => {
 // ===== АУТЕНТИФИКАЦИЯ =====
 app.post('/api/auth/register', async (req, res) => {
     try {
-        console.log('📝 Register request:', req.body);
         const { username, email, password } = req.body;
 
         if (!username || !email || !password) {
@@ -141,7 +140,6 @@ app.post('/api/auth/register', async (req, res) => {
 
 app.post('/api/auth/login', async (req, res) => {
     try {
-        console.log('🔑 Login request:', req.body.email);
         const { email, password } = req.body;
 
         if (!email || !password) {
@@ -252,9 +250,7 @@ app.put('/api/profile/update', async (req, res) => {
 
         const { data: user, error } = await supabase
             .from('users')
-            .update({
-                username: username
-            })
+            .update({ username: username })
             .eq('id', decoded.userId)
             .select()
             .single();
@@ -263,9 +259,7 @@ app.put('/api/profile/update', async (req, res) => {
 
         res.json({
             success: true,
-            user: {
-                username: user.username
-            }
+            user: { username: user.username }
         });
     } catch (error) {
         console.error('Update profile error:', error);
