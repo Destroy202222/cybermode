@@ -6,7 +6,6 @@
 <title>CYBERMODE · Brawl Stars</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <style>
-/* ===== БАЗОВЫЕ СТИЛИ ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 html,body{min-height:100vh;overflow-x:hidden}
 body{background:linear-gradient(135deg,#0a0a2e 0,#1a0a3e 30%,#2a1a5e 60%,#1a0a3e 100%);display:flex;justify-content:center;align-items:flex-start;min-height:100vh;padding:20px;position:relative}
@@ -25,8 +24,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .brawl-bg-icons .icon:nth-child(9){bottom:40%;right:25%;animation-delay:7s;font-size:65px}
 .brawl-bg-icons .icon:nth-child(10){top:50%;left:50%;animation-delay:1s;font-size:35px}
 @keyframes floatIcon{0%,100%{transform:translate(0,0) rotate(0) scale(1)}25%{transform:translate(30px,-30px) rotate(5deg) scale(1.1)}50%{transform:translate(-20px,20px) rotate(-3deg) scale(.9)}75%{transform:translate(15px,40px) rotate(4deg) scale(1.05)}}
-
-/* ===== АВТОРИЗАЦИЯ ===== */
 .auth-page{display:flex;justify-content:center;align-items:center;min-height:100vh;width:100%;position:relative;z-index:1;padding:16px}
 .auth-container{max-width:420px;width:100%;background:rgba(20,20,50,.25);border-radius:24px;padding:2rem 1.5rem;border:2px solid rgba(245,184,27,.4);box-shadow:0 0 80px rgba(245,184,27,.1),0 20px 60px rgba(0,0,0,.8);backdrop-filter:blur(30px)}
 .auth-container .auth-logo{text-align:center;margin-bottom:1.5rem}
@@ -47,9 +44,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .auth-container .auth-links{text-align:center;margin-top:1.2rem}
 .auth-container .auth-links a{color:#f5b81b;text-decoration:none;cursor:pointer;font-weight:500;transition:.3s;font-size:.9rem}
 .auth-container .auth-links a:hover{text-decoration:underline;color:#ffcc33}
-
-/* ===== ОСНОВНОЙ САЙТ ===== */
-.main-site{display:none;max-width:1400px;width:100%;background:rgba(10,10,46,.08);border-radius:28px;padding:20px 24px 28px;box-shadow:0 0 60px rgba(245,184,27,.05),0 20px 40px rgba(0,0,0,.7);color:#f0e8d0;margin-top:10px;position:relative;z-index:1;border:1px solid rgba(245,184,27,.05);backdrop-filter:blur(30px)}
+.main-site{display:none;max-width:1400px;width:100%;background:rgba(10,10,46,.06);border-radius:28px;padding:20px 24px 28px;box-shadow:0 0 60px rgba(245,184,27,.05),0 20px 40px rgba(0,0,0,.7);color:#f0e8d0;margin-top:10px;position:relative;z-index:1;border:1px solid rgba(245,184,27,.05);backdrop-filter:blur(35px)}
 .main-site.visible{display:block}
 .top-nav{position:sticky;top:10px;left:0;width:100%;background:rgba(18,18,58,.35);border-radius:60px;padding:8px 20px;border:1px solid rgba(245,184,27,.2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;z-index:1000;backdrop-filter:blur(20px);box-shadow:0 4px 30px rgba(0,0,0,.6);margin-bottom:16px}
 .top-nav .brand{font-weight:700;font-size:18px;background:linear-gradient(45deg,#f5b81b,#ffcc33);-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;letter-spacing:-.3px;transition:.15s;white-space:nowrap}
@@ -68,8 +63,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .tab-content{display:none;animation:fade .3s ease}
 .tab-content.active{display:block}
 @keyframes fade{0%{opacity:.3;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
-
-/* ===== ВСЕ БЛОКИ (ПРОЗРАЧНЫЕ) ===== */
 .main-menu{background:rgba(10,10,46,.08);border-radius:24px;padding:28px 20px 32px;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(15px)}
 .main-menu .stats-bar{display:flex;gap:20px;justify-content:center;margin-bottom:24px;padding:12px 20px;background:rgba(10,10,46,.1);border-radius:60px;border:1px solid rgba(245,184,27,.04);flex-wrap:wrap}
 .main-menu .stats-bar .stat-item{display:flex;align-items:center;gap:8px;color:#8890b0;font-size:13px}
@@ -122,8 +115,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .timer-display{margin-top:14px;font-size:17px;color:#8890b0;display:none}
 .timer-display i{color:#f5b81b;margin-right:6px}
 .timer-display .time{font-weight:700;font-size:24px;color:#f5b81b;font-variant-numeric:tabular-nums}
-
-/* ===== МАТЧ ===== */
 .match-page{background:rgba(10,10,46,.08);border-radius:24px;padding:28px 20px 30px;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(15px)}
 .match-page .match-id{text-align:center;font-size:18px;font-weight:700;color:#f5b81b;margin-bottom:20px;padding:12px;border-radius:60px;border:1px solid rgba(245,184,27,.12);background:rgba(245,184,27,.05)}
 .teams-row{display:flex;gap:20px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
@@ -548,21 +539,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 <input type="file" id="fileInputAvatar" accept="image/*" style="display:none" />
 
 <script>
-// ===== КЛЮЧЕВЫЕ ПЕРЕМЕННЫЕ ДЛЯ СОХРАНЕНИЯ МАТЧА =====
-let currentMatchPlayers = [];
-let currentMatchId = null;
-let isSearching = false;
-let searchTimer = null;
-let searchInterval = null;
-let searchTime = 0;
-let searchCount = 0;
-let banTurn = 'A';
-let bannedMaps = [];
-let finalMap = '💎 Gem Grab';
-let isBanPhaseActive = false;
-let banPollingInterval = null;
-let matchCounter = 0;
-
 // ===== ВСПОМОГАТЕЛЬНЫЕ =====
 function showToast(type,title,text){
     const t=document.getElementById('toast');
@@ -616,7 +592,6 @@ function switchTab(tabId){
         const isAdmin=user?.isAdmin||false;
         const isPart=user&&currentMatchPlayers.includes(user.username);
         
-        // Восстанавливаем из localStorage
         if(!currentMatchId && localStorage.getItem('currentMatchId')){
             currentMatchId=localStorage.getItem('currentMatchId');
             currentMatchPlayers=JSON.parse(localStorage.getItem('currentMatchPlayers')||'[]');
@@ -627,7 +602,6 @@ function switchTab(tabId){
             return;
         }
         
-        // ТОЛЬКО УЧАСТНИКИ И АДМИНЫ
         if(!isPart&&!isAdmin){
             showToast('error','Доступ запрещен','Вы не участвуете в этом матче');
             return;
@@ -651,6 +625,22 @@ function hideMatchTab(){
     showToast('info','👁️ Вкладка скрыта','Вкладка "Матч" скрыта для всех');
     switchTab('main');
 }
+
+// ===== ПЕРЕМЕННЫЕ =====
+let currentMatchPlayers=[];
+let currentUserData=null;
+let isSearching=false;
+let searchTimer=null;
+let searchInterval=null;
+let searchTime=0;
+let searchCount=0;
+let currentMatchId=null;
+let banTurn='A';
+let bannedMaps=[];
+let finalMap='💎 Gem Grab';
+let isBanPhaseActive=false;
+let banPollingInterval=null;
+let matchCounter=0;
 
 // ===== API =====
 async function apiRequest(endpoint,options={}){
@@ -791,6 +781,7 @@ async function loadMainSite(){
             }catch(e){}
         }
         const userData=await getMe();
+        currentUserData=userData;
         document.getElementById('authPage').style.display='none';
         document.getElementById('mainSite').classList.add('visible');
         updateUI(userData);
@@ -815,7 +806,7 @@ async function loadMainSite(){
         document.getElementById('usersCount').textContent=stats.totalUsers||0;
         document.getElementById('pendingCount').textContent=stats.pending||0;
         
-        // ===== ВОССТАНОВЛЕНИЕ МАТЧА =====
+        // ===== ВОССТАНОВЛЕНИЕ МАТЧА ИЗ БД =====
         const savedMatchId=localStorage.getItem('currentMatchId');
         if(savedMatchId){
             currentMatchId=savedMatchId;
@@ -1113,7 +1104,6 @@ async function startSearch(){
                     await createMatch(matchData);
                     currentMatchId=matchData.matchId;
                     currentMatchPlayers=[...matchData.teamA,...matchData.teamB];
-                    // ===== СОХРАНЯЕМ В localStorage =====
                     localStorage.setItem('currentMatchId',currentMatchId);
                     localStorage.setItem('currentMatchPlayers',JSON.stringify(currentMatchPlayers));
                     bannedMaps=[];
@@ -1156,35 +1146,35 @@ function renderMatchPage(matchData){
     const cmb=document.getElementById('cancelMatchBtn');
     const hmb=document.getElementById('hideMatchBtn');
     
-    if(mid){const num=matchData.matchNumber||'0000';mid.textContent=num}
+    if(mid){const num=matchData.match_number||'0000';mid.textContent=num}
     
-    currentMatchPlayers=[...matchData.teamA,...matchData.teamB];
-    localStorage.setItem('currentMatchId',matchData.matchId);
+    currentMatchPlayers=[...matchData.team_a||[],...matchData.team_b||[]];
+    localStorage.setItem('currentMatchId',matchData.match_id);
     localStorage.setItem('currentMatchPlayers',JSON.stringify(currentMatchPlayers));
     
     const user=JSON.parse(localStorage.getItem('cybermode_user')||'null');
     const isPart=user&&currentMatchPlayers.includes(user.username);
     
-    window.currentMatchCaptainA=matchData.teamA[0]||'';
-    window.currentMatchCaptainB=matchData.teamB[0]||'';
+    window.currentMatchCaptainA=matchData.captain_a||'';
+    window.currentMatchCaptainB=matchData.captain_b||'';
     
     if(tA){
-        tA.innerHTML=matchData.teamA.map((p,i)=>
+        tA.innerHTML=(matchData.team_a||[]).map((p,i)=>
             '<div class="player-tag'+(i===0?' captain':'')+'"><span class="num">'+(i+1)+'</span><i class="fas fa-user-circle"></i> '+p+(i===0?' 👑':'')+'</div>'
-        ).join('');
+        ).join('')||'<div class="empty-message">Нет игроков</div>';
     }
     if(tB){
-        tB.innerHTML=matchData.teamB.map((p,i)=>
+        tB.innerHTML=(matchData.team_b||[]).map((p,i)=>
             '<div class="player-tag'+(i===0?' captain':'')+'"><span class="num">'+(i+1)+'</span><i class="fas fa-user-circle"></i> '+p+(i===0?' 👑':'')+'</div>'
-        ).join('');
+        ).join('')||'<div class="empty-message">Нет игроков</div>';
     }
     
-    document.getElementById('finalMapDisplay').textContent=matchData.finalMap||'💎 Gem Grab';
-    currentMatchId=matchData.matchId;
+    document.getElementById('finalMapDisplay').textContent=matchData.final_map||'💎 Gem Grab';
+    currentMatchId=matchData.match_id;
     bannedMaps=matchData.banned||[];
-    finalMap=matchData.finalMap||'💎 Gem Grab';
-    banTurn='A';
-    isBanPhaseActive=true;
+    finalMap=matchData.final_map||'💎 Gem Grab';
+    banTurn=matchData.ban_turn||'A';
+    isBanPhaseActive=matchData.status!=='ready'&&matchData.status!=='finished';
     
     updateBanUI();
     
@@ -1254,7 +1244,17 @@ async function performBan(mapName){
         return;
     }
     bannedMaps.push(mapName);
-    banTurn=banTurn==='A'?'B':'A';
+    const newBanTurn=banTurn==='A'?'B':'A';
+    banTurn=newBanTurn;
+    
+    try{
+        await updateMatch({
+            matchId:currentMatchId,
+            banned:bannedMaps,
+            banTurn:newBanTurn
+        });
+    }catch(e){console.error(e)}
+    
     const maps=['💎 Gem Grab','🏆 Showdown','⚽ Brawl Ball','💰 Heist','🎯 Bounty','🔥 Hot Zone','💥 Knockout','⚔️ Duels'];
     const available=maps.filter(m=>!bannedMaps.includes(m));
     if(available.length===1){
@@ -1266,7 +1266,12 @@ async function performBan(mapName){
         showToast('info','🎯 Режим выбран','Играем в '+finalMap);
         showRoomInstruction(finalMap);
         try{
-            await updateMatch({matchId:currentMatchId,banned:bannedMaps,finalMap:finalMap,status:'ready'});
+            await updateMatch({
+                matchId:currentMatchId,
+                banned:bannedMaps,
+                finalMap:finalMap,
+                status:'ready'
+            });
         }catch(e){console.error(e)}
     }
     updateBanUI();
@@ -1283,9 +1288,11 @@ function startBanPolling(){
             if(data){
                 const nb=data.banned||[];
                 const nf=data.final_map||'💎 Gem Grab';
-                if(JSON.stringify(nb)!==JSON.stringify(bannedMaps)||nf!==finalMap){
+                const nt=data.ban_turn||'A';
+                if(JSON.stringify(nb)!==JSON.stringify(bannedMaps)||nf!==finalMap||nt!==banTurn){
                     bannedMaps=nb;
                     finalMap=nf;
+                    banTurn=nt;
                     updateBanUI();
                     if(bannedMaps.length>=7){
                         isBanPhaseActive=false;
@@ -1294,8 +1301,6 @@ function startBanPolling(){
                         document.getElementById('finalMapDisplay').textContent=finalMap;
                         showRoomInstruction(finalMap);
                     }
-                    banTurn=bannedMaps.length%2===0?'A':'B';
-                    updateBanUI();
                 }
             }
         }catch(e){console.error('Ban polling error:',e)}
