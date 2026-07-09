@@ -297,7 +297,7 @@ app.get('/api/users/public', async (req, res) => {
     }
 });
 
-// ===== АДМИН - ПРОВЕРКА =====
+// ===== АДМИН =====
 app.get('/api/admin/check', async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
@@ -324,7 +324,6 @@ app.get('/api/admin/check', async (req, res) => {
     }
 });
 
-// ===== АДМИН - УПРАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯМИ =====
 app.get('/api/admin/users', async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
@@ -598,10 +597,10 @@ app.delete('/api/queue/clear', async (req, res) => {
     }
 });
 
-// ===== МАТЧИ (С КАПИТАНАМИ) =====
+// ===== МАТЧИ (С СОХРАНЕНИЕМ ВСЕХ ДАННЫХ В БД) =====
 app.post('/api/match/create', async (req, res) => {
     try {
-        const { matchId, teamA, teamB, banned, finalMap, players, captainA, captainB } = req.body;
+        const { matchId, matchNumber, teamA, teamB, banned, finalMap, players, captainA, captainB, status } = req.body;
 
         if (!matchId || !teamA || !teamB) {
             return res.status(400).json({ error: 'Недостаточно данных для создания матча' });
@@ -611,6 +610,7 @@ app.post('/api/match/create', async (req, res) => {
             .from('matches')
             .insert({
                 match_id: matchId,
+                match_number: matchNumber || 1,
                 team_a: teamA || [],
                 team_b: teamB || [],
                 captain_a: captainA || '',
@@ -618,7 +618,9 @@ app.post('/api/match/create', async (req, res) => {
                 banned: banned || [],
                 final_map: finalMap || '💎 Gem Grab',
                 players: players || [],
-                status: 'ban_phase'
+                status: status || 'ban_phase',
+                ban_turn: 'A',
+                created_at: new Date().toISOString()
             })
             .select()
             .single();
@@ -658,7 +660,7 @@ app.get('/api/match/:matchId', async (req, res) => {
 
 app.put('/api/match/update', async (req, res) => {
     try {
-        const { matchId, banned, finalMap, status } = req.body;
+        const { matchId, banned, finalMap, status, banTurn } = req.body;
 
         if (!matchId) {
             return res.status(400).json({ error: 'ID матча обязателен' });
@@ -668,6 +670,7 @@ app.put('/api/match/update', async (req, res) => {
         if (banned !== undefined) updateData.banned = banned;
         if (finalMap !== undefined) updateData.final_map = finalMap;
         if (status !== undefined) updateData.status = status;
+        if (banTurn !== undefined) updateData.ban_turn = banTurn;
 
         const { data: match, error } = await supabase
             .from('matches')
