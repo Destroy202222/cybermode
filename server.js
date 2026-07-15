@@ -266,6 +266,42 @@ app.put('/api/profile/update', async (req, res) => {
     }
 });
 
+// ===== ПУБЛИЧНЫЙ СПИСОК ПОЛЬЗОВАТЕЛЕЙ (УПРОЩЕННЫЙ) =====
+app.get('/api/users/public', async (req, res) => {
+    try {
+        console.log('📡 Запрос /api/users/public');
+        
+        // Простой запрос без avatar
+        const { data: users, error } = await supabase
+            .from('users')
+            .select('id, username, wins, losses, matches, elo, is_calibrated, calibration_matches')
+            .order('elo', { ascending: false });
+
+        if (error) {
+            console.error('❌ Supabase error:', error);
+            return res.status(500).json({ error: error.message });
+        }
+
+        console.log(`✅ Найдено ${users?.length || 0} пользователей`);
+
+        const formattedUsers = (users || []).map(u => ({
+            id: u.id,
+            username: u.username,
+            wins: u.wins || 0,
+            losses: u.losses || 0,
+            matches: u.matches || 0,
+            elo: u.elo || 1000,
+            is_calibrated: u.is_calibrated || false,
+            calibration_matches: u.calibration_matches || 0
+        }));
+
+        res.json({ users: formattedUsers });
+    } catch (error) {
+        console.error('❌ Public users error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // ===== ПОЛУЧЕНИЕ ПРОФИЛЯ ДРУГОГО ИГРОКА =====
 app.get('/api/users/:username', async (req, res) => {
     try {
@@ -275,41 +311,25 @@ app.get('/api/users/:username', async (req, res) => {
             return res.status(400).json({ error: 'Имя пользователя не указано' });
         }
 
-        // Пробуем получить пользователя с avatar, если поле есть
-        let query = supabase
+        console.log(`📡 Запрос /api/users/${username}`);
+
+        const { data: user, error } = await supabase
             .from('users')
             .select('id, username, wins, losses, matches, elo, is_calibrated, calibration_matches, history, created_at')
-            .eq('username', username);
-        
-        // Пробуем добавить avatar, если поле существует
-        try {
-            const { data: columns } = await supabase
-                .from('information_schema.columns')
-                .select('column_name')
-                .eq('table_name', 'users')
-                .eq('column_name', 'avatar');
-            
-            if (columns && columns.length > 0) {
-                query = supabase
-                    .from('users')
-                    .select('id, username, avatar, wins, losses, matches, elo, is_calibrated, calibration_matches, history, created_at')
-                    .eq('username', username);
-            }
-        } catch (e) {
-            // Если не удалось проверить, просто запрашиваем без avatar
-        }
-
-        const { data: user, error } = await query.single();
+            .eq('username', username)
+            .single();
 
         if (error || !user) {
+            console.error(`❌ Пользователь ${username} не найден:`, error);
             return res.status(404).json({ error: 'Пользователь не найден' });
         }
+
+        console.log(`✅ Найден пользователь: ${user.username}`);
 
         res.json({
             user: {
                 id: user.id,
                 username: user.username,
-                avatar: user.avatar || null,
                 wins: user.wins || 0,
                 losses: user.losses || 0,
                 matches: user.matches || 0,
@@ -321,60 +341,7 @@ app.get('/api/users/:username', async (req, res) => {
             }
         });
     } catch (error) {
-        console.error('Get user error:', error);
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// ===== ПУБЛИЧНЫЙ СПИСОК ПОЛЬЗОВАТЕЛЕЙ =====
-app.get('/api/users/public', async (req, res) => {
-    try {
-        // Пробуем получить с avatar
-        let query = supabase
-            .from('users')
-            .select('id, username, wins, losses, matches, elo, is_calibrated, calibration_matches')
-            .order('elo', { ascending: false });
-        
-        // Пробуем добавить avatar
-        try {
-            const { data: columns } = await supabase
-                .from('information_schema.columns')
-                .select('column_name')
-                .eq('table_name', 'users')
-                .eq('column_name', 'avatar');
-            
-            if (columns && columns.length > 0) {
-                query = supabase
-                    .from('users')
-                    .select('id, username, avatar, wins, losses, matches, elo, is_calibrated, calibration_matches')
-                    .order('elo', { ascending: false });
-            }
-        } catch (e) {
-            // Игнорируем
-        }
-
-        const { data: users, error } = await query;
-
-        if (error) {
-            console.error('Supabase error:', error);
-            return res.status(500).json({ error: error.message });
-        }
-
-        const formattedUsers = (users || []).map(u => ({
-            id: u.id,
-            username: u.username,
-            avatar: u.avatar || null,
-            wins: u.wins || 0,
-            losses: u.losses || 0,
-            matches: u.matches || 0,
-            elo: u.elo || 1000,
-            is_calibrated: u.is_calibrated || false,
-            calibration_matches: u.calibration_matches || 0
-        }));
-
-        res.json({ users: formattedUsers });
-    } catch (error) {
-        console.error('Public users error:', error);
+        console.error('❌ Get user error:', error);
         res.status(500).json({ error: error.message });
     }
 });
@@ -547,7 +514,6 @@ app.delete('/api/admin/users/:userId', async (req, res) => {
 // ===== ОЧЕРЕДЬ =====
 app.get('/api/queue', async (req, res) => {
     try {
-        // Проверяем существование таблицы
         const { data: queue, error } = await supabase
             .from('queue')
             .select('players')
@@ -555,7 +521,7 @@ app.get('/api/queue', async (req, res) => {
             .limit(1)
             .maybeSingle();
 
-        if (error && error.code === '42P01') { // Таблица не существует
+        if (error && error.code === '42P01') {
             return res.json({ players: [] });
         }
 
@@ -576,7 +542,6 @@ app.post('/api/queue/join', async (req, res) => {
             return res.status(400).json({ error: 'Имя пользователя не указано' });
         }
 
-        // Проверяем существование таблицы
         const { data: existing } = await supabase
             .from('queue')
             .select('players')
@@ -942,7 +907,6 @@ app.get('/api/stats', async (req, res) => {
             .from('matches')
             .select('*', { count: 'exact', head: true });
 
-        // Проверяем существование таблицы queue
         let pending = 0;
         try {
             const { data: queue } = await supabase
@@ -952,9 +916,7 @@ app.get('/api/stats', async (req, res) => {
                 .limit(1)
                 .maybeSingle();
             pending = queue?.players?.length || 0;
-        } catch (e) {
-            // Таблица не существует
-        }
+        } catch (e) {}
 
         res.json({
             totalUsers: usersCount || 0,
