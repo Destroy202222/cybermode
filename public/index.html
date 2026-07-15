@@ -119,7 +119,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
     margin-top: 4px;
 }
 
-/* Статус поиска */
 .search-status-container {
     background: rgba(10,10,46,.15);
     border-radius: 16px;
@@ -154,11 +153,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
     background: #f5b81b;
     box-shadow: 0 0 20px rgba(245,184,27,.4);
     animation: pulse-dot 1.5s ease-in-out infinite;
-}
-
-.search-status-left .status-dot.found {
-    background: #6fcf97;
-    box-shadow: 0 0 20px rgba(111,207,151,.4);
 }
 
 @keyframes pulse-dot {
@@ -222,7 +216,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
     min-width: 44px;
 }
 
-/* Слоты игроков (без анимаций) */
 .players-slots {
     display: flex;
     align-items: center;
@@ -278,7 +271,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
     background: rgba(245,184,27,.25);
 }
 
-/* Кнопки */
 .search-actions {
     display: flex;
     flex-direction: column;
@@ -431,7 +423,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
     color: #4a4270;
 }
 
-/* Для мобильных */
 @media(max-width:768px) {
     .search-page-modern {
         padding: 20px 14px 28px;
@@ -528,8 +519,9 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .main-menu .top-player .rank.gold{color:#f5b81b}
 .main-menu .top-player .rank.silver{color:#c0c8d0}
 .main-menu .top-player .rank.bronze{color:#cd7f32}
+.main-menu .top-player .avatar-mini{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid rgba(245,184,27,.1);flex-shrink:0}
 .main-menu .top-player .info{flex:1}
-.main-menu .top-player .info .name{font-weight:600;color:#f0e8d0;font-size:14px}
+.main-menu .top-player .info .name{font-weight:600;color:#f0e8d0;font-size:14px;display:flex;align-items:center;gap:8px}
 .main-menu .top-player .info .elo{color:#6b6380;font-size:12px}
 .main-menu .top-player .info .elo.calibration{color:#f5b81b;font-weight:600}
 .main-menu .top-player .wins{color:#6fcf97;font-size:13px;font-weight:600}
@@ -627,7 +619,8 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .rating-table .rank.gold{color:#f5b81b}
 .rating-table .rank.silver{color:#c0c8d0}
 .rating-table .rank.bronze{color:#cd7f32}
-.rating-table .player-name{font-weight:600;color:#f0e8d0;font-size:13px}
+.rating-table .player-name{font-weight:600;color:#f0e8d0;font-size:13px;display:flex;align-items:center;gap:8px}
+.rating-table .player-name .avatar-mini{width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid rgba(245,184,27,.1);flex-shrink:0}
 .rating-table .player-name i{color:#f5b81b;font-size:12px;margin-left:4px}
 .rating-table .player-rating{font-weight:700;color:#f5b81b}
 .rating-table .player-rating.calibration{color:#f5b81b;font-size:12px}
@@ -753,7 +746,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .missions-page h2,.shop-page h2{font-size:24px;font-weight:700;margin-bottom:6px;color:#f0e8d0}
 .missions-page p,.shop-page p{color:#8890b0;font-size:14px;margin-bottom:20px}
 @media(max-width:992px){.main-menu .main-grid{grid-template-columns:1fr;gap:24px}}
-@media(max-width:768px){body{padding:10px;align-items:flex-start}.auth-container{padding:1.5rem 1.2rem;margin:8px}.auth-container .auth-logo h1{font-size:1.6rem}.auth-container .auth-logo .brawl-icon{font-size:2.2rem}.top-nav{padding:6px 14px;border-radius:40px;flex-direction:row;flex-wrap:wrap;gap:6px;top:6px}.top-nav .brand{font-size:15px}.top-nav .brand i{font-size:14px}.nav-center{gap:10px}.nav-center .nav-item{font-size:11px;padding:3px 2px}.nav-right .profile{font-size:12px;padding:3px 10px 3px 6px}.nav-right .profile i{font-size:16px}.main-site{padding:12px 14px 18px;border-radius:20px;margin-top:6px}.main-menu{padding:18px 14px 22px;border-radius:18px}.main-menu .stats-bar{gap:12px;padding:10px 14px;flex-direction:row;flex-wrap:wrap}.main-menu .stats-bar .stat-item{font-size:12px}.main-menu .stats-bar .stat-item .num{font-size:17px}.main-menu .left-col h1{font-size:20px}.main-menu .left-col .desc{font-size:13px}.main-menu .prize-block{padding:12px 14px}.main-menu .prize-block .prize-title{font-size:13px}.main-menu .prize-block .prize-item{font-size:13px;padding:3px 8px}.main-menu .right-col .top-title{font-size:15px;margin-bottom:10px}.main-menu .top-player{padding:8px 12px;gap:10px}.main-menu .top-player .info .name{font-size:13px}.main-menu .top-player .info .elo{font-size:11px}.main-menu .top-player .wins{font-size:12px}.btn-action{padding:10px 22px;font-size:13px;gap:8px}.match-page{padding:18px 14px 22px}.teams-row{flex-direction:column;gap:14px}.team-col{min-width:unset;padding:14px 16px 18px}.team-col h3{font-size:15px}.player-tag{font-size:13px;padding:8px 12px}.ban-pool{gap:8px}.map-chip{font-size:12px;padding:6px 14px}.captain-indicator{font-size:12px;padding:4px 12px 4px 16px;gap:10px}.captain-indicator .turn{font-size:11px;padding:2px 12px}.result-row{flex-direction:column;align-items:stretch;gap:10px;padding:12px 16px}.result-row .final-map .map-name{font-size:15px}.result-row .attach-btn{justify-content:center;font-size:12px;padding:8px 16px}.victory-buttons .btn-victory{padding:10px 20px;font-size:14px;min-width:130px}.rating-page{padding:18px 14px 22px}.rating-page .rating-title{font-size:18px}.rating-table{font-size:12px}.rating-table td,.rating-table th{padding:8px;font-size:12px}.rating-table .player-name{font-size:12px}.profile-page{padding:18px 14px 22px}.profile-header{flex-direction:column;text-align:center;gap:12px}.profile-avatar{width:70px;height:70px;font-size:32px}.profile-info .name{font-size:18px}.stats-grid{grid-template-columns:1fr 1fr;gap:10px}.stat-item .value{font-size:18px}.calibration-section{flex-direction:column;align-items:stretch;gap:8px}.calibration-section .right{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.calibration-section .right .progress-bar{flex:1;width:auto}.elo-section{flex-direction:column;align-items:stretch;text-align:center;gap:8px}.elo-section .right .elo-change{text-align:center}.profile-actions-btns{justify-content:center}.profile-actions-btns .btn{font-size:12px;padding:8px 18px}.history-item{font-size:12px;padding:8px 12px}.modal{padding:24px 18px;margin:10px}.modal .modal-title{font-size:18px}.room-instruction .instruction-content{grid-template-columns:1fr}.room-instruction .room-details{flex-direction:column;align-items:stretch}.admin-user-item{flex-direction:column;align-items:stretch}.admin-user-item .user-actions{justify-content:flex-start}.toast{bottom:1rem;right:1rem;left:1rem;max-width:unset}.brawl-bg-icons .icon{font-size:40px!important}}
+@media(max-width:768px){body{padding:10px;align-items:flex-start}.auth-container{padding:1.5rem 1.2rem;margin:8px}.auth-container .auth-logo h1{font-size:1.6rem}.auth-container .auth-logo .brawl-icon{font-size:2.2rem}.top-nav{padding:6px 14px;border-radius:40px;flex-direction:row;flex-wrap:wrap;gap:6px;top:6px}.top-nav .brand{font-size:15px}.top-nav .brand i{font-size:14px}.nav-center{gap:10px}.nav-center .nav-item{font-size:11px;padding:3px 2px}.nav-right .profile{font-size:12px;padding:3px 10px 3px 6px}.nav-right .profile i{font-size:16px}.main-site{padding:12px 14px 18px;border-radius:20px;margin-top:6px}.main-menu{padding:18px 14px 22px;border-radius:18px}.main-menu .stats-bar{gap:12px;padding:10px 14px;flex-direction:row;flex-wrap:wrap}.main-menu .stats-bar .stat-item{font-size:12px}.main-menu .stats-bar .stat-item .num{font-size:17px}.main-menu .left-col h1{font-size:20px}.main-menu .left-col .desc{font-size:13px}.main-menu .prize-block{padding:12px 14px}.main-menu .prize-block .prize-title{font-size:13px}.main-menu .prize-block .prize-item{font-size:13px;padding:3px 8px}.main-menu .right-col .top-title{font-size:15px;margin-bottom:10px}.main-menu .top-player{padding:8px 12px;gap:10px}.main-menu .top-player .avatar-mini{width:26px;height:26px}.main-menu .top-player .info .name{font-size:13px}.main-menu .top-player .info .elo{font-size:11px}.main-menu .top-player .wins{font-size:12px}.btn-action{padding:10px 22px;font-size:13px;gap:8px}.match-page{padding:18px 14px 22px}.teams-row{flex-direction:column;gap:14px}.team-col{min-width:unset;padding:14px 16px 18px}.team-col h3{font-size:15px}.player-tag{font-size:13px;padding:8px 12px}.ban-pool{gap:8px}.map-chip{font-size:12px;padding:6px 14px}.captain-indicator{font-size:12px;padding:4px 12px 4px 16px;gap:10px}.captain-indicator .turn{font-size:11px;padding:2px 12px}.result-row{flex-direction:column;align-items:stretch;gap:10px;padding:12px 16px}.result-row .final-map .map-name{font-size:15px}.result-row .attach-btn{justify-content:center;font-size:12px;padding:8px 16px}.victory-buttons .btn-victory{padding:10px 20px;font-size:14px;min-width:130px}.rating-page{padding:18px 14px 22px}.rating-page .rating-title{font-size:18px}.rating-table{font-size:12px}.rating-table td,.rating-table th{padding:8px;font-size:12px}.rating-table .player-name{font-size:12px}.rating-table .player-name .avatar-mini{width:22px;height:22px}.profile-page{padding:18px 14px 22px}.profile-header{flex-direction:column;text-align:center;gap:12px}.profile-avatar{width:70px;height:70px;font-size:32px}.profile-info .name{font-size:18px}.stats-grid{grid-template-columns:1fr 1fr;gap:10px}.stat-item .value{font-size:18px}.calibration-section{flex-direction:column;align-items:stretch;gap:8px}.calibration-section .right{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.calibration-section .right .progress-bar{flex:1;width:auto}.elo-section{flex-direction:column;align-items:stretch;text-align:center;gap:8px}.elo-section .right .elo-change{text-align:center}.profile-actions-btns{justify-content:center}.profile-actions-btns .btn{font-size:12px;padding:8px 18px}.history-item{font-size:12px;padding:8px 12px}.modal{padding:24px 18px;margin:10px}.modal .modal-title{font-size:18px}.room-instruction .instruction-content{grid-template-columns:1fr}.room-instruction .room-details{flex-direction:column;align-items:stretch}.admin-user-item{flex-direction:column;align-items:stretch}.admin-user-item .user-actions{justify-content:flex-start}.toast{bottom:1rem;right:1rem;left:1rem;max-width:unset}.brawl-bg-icons .icon{font-size:40px!important}}
 @media(max-width:480px){.auth-container{padding:1.2rem 1rem}.auth-container .auth-logo h1{font-size:1.4rem}.top-nav .brand{font-size:13px}.nav-center .nav-item{font-size:10px}.main-menu .stats-bar .stat-item{font-size:11px}.main-menu .stats-bar .stat-item .num{font-size:15px}.main-menu .left-col h1{font-size:18px}.main-menu .prize-block .prize-item{font-size:12px}.btn-action{padding:8px 16px;font-size:12px}.stats-grid{grid-template-columns:1fr 1fr;gap:8px}.stat-item{padding:10px 8px}.stat-item .value{font-size:16px}.modal{padding:18px 14px}.modal .modal-actions{flex-direction:column}.brawl-bg-icons .icon{font-size:30px!important}}
 </style>
 </head>
@@ -796,7 +789,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 <div class="top-nav" id="topNav">
 <div class="brand" id="brandLogo"><i class="fas fa-star"></i> CYBERMODE</div>
 <div class="nav-center">
-<span class="nav-item active" data-tab="main">Главная</span>
 <span class="nav-item" data-tab="search">Поиск</span>
 <span class="nav-item" data-tab="rating">Рейтинг</span>
 <span class="nav-item" data-tab="missions">Миссии</span>
@@ -816,6 +808,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
+<!-- ГЛАВНАЯ СТРАНИЦА (вкладка main, но без кнопки в навбаре) -->
 <div id="tabMain" class="tab-content active">
 <div class="main-menu">
 <div class="stats-bar">
@@ -872,7 +865,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
-<!-- Слоты игроков (без анимаций) -->
 <div class="players-slots" id="playersSlots">
 <div class="player-slot" data-slot="1"><span class="slot-number">1</span></div>
 <div class="player-slot-connector"></div>
@@ -1003,7 +995,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 
 <div class="modal-overlay" id="editModal">
 <div class="modal"><button class="modal-close" id="closeEditModal">&times;</button>
-<div class="modal-title">Редактирование профиля</div><div class="modal-sub">Измените никнейм.</div>
+<div class="modal-title">Редактирование профиля</div><div class="modal-sub">Измените никнейм и аватар.</div>
 <div class="avatar-section"><div class="avatar-preview" id="modalAvatarPreview"><i class="fas fa-user"></i></div><div class="avatar-actions"><span class="label">Сменить аватар</span><button class="btn-upload" id="uploadAvatarBtn"><i class="fas fa-upload"></i> Загрузить</button></div></div>
 <div class="form-group"><label>Никнейм</label><input type="text" id="editNameInput" placeholder="Введите никнейм" /></div>
 <div class="modal-actions"><button class="btn btn-cancel" id="cancelEditBtn">Отмена</button><button class="btn btn-save" id="saveEditBtn">Сохранить</button></div>
@@ -1283,7 +1275,14 @@ async function loadMainSite(){
         document.getElementById('usersCount').textContent=stats.totalUsers||0;
         document.getElementById('pendingCount').textContent=stats.pending||0;
         
-        // ===== ВОССТАНОВЛЕНИЕ МАТЧА ИЗ БД =====
+        // Восстановление аватара
+        const savedAvatar=localStorage.getItem('user_avatar');
+        if(savedAvatar){
+            document.getElementById('avatarPreview').innerHTML='<img src="'+savedAvatar+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
+            document.getElementById('modalAvatarPreview').innerHTML='<img src="'+savedAvatar+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
+        }
+        
+        // Восстановление матча
         const savedMatchId=localStorage.getItem('currentMatchId');
         if(savedMatchId){
             currentMatchId=savedMatchId;
@@ -1381,7 +1380,7 @@ function updateUI(user){
     switchTab('main');
 }
 
-// ===== ТОП ИГРОКОВ =====
+// ===== ТОП ИГРОКОВ С АВАТАРАМИ =====
 async function loadTopPlayers(){
     try{
         const data=await getAllUsers();
@@ -1404,7 +1403,9 @@ async function loadTopPlayers(){
             const cal=p.is_calibrated||false;
             const m=p.calibration_matches||0;
             const elo=cal?'ELO: '+(p.elo||1000):'📊 Калибровка '+m+'/10';
-            return'<div class="top-player"><span class="rank '+(classes[i]||'')+'">'+(medals[i]||(i+1))+'</span><div class="info"><div class="name">'+p.username+'</div><div class="elo '+(!cal?'calibration':'')+'">'+elo+'</div></div><span class="wins">🏆 '+(p.wins||0)+'</span></div>';
+            const avatar = p.avatar || '';
+            const avatarHtml = avatar ? '<img src="'+avatar+'" class="avatar-mini" />' : '<div class="avatar-mini" style="background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;border-radius:50%;width:32px;height:32px;font-size:14px;border:2px solid rgba(245,184,27,.1);flex-shrink:0;color:#6b6380;"><i class="fas fa-user"></i></div>';
+            return'<div class="top-player"><span class="rank '+(classes[i]||'')+'">'+(medals[i]||(i+1))+'</span>'+avatarHtml+'<div class="info"><div class="name">'+p.username+'</div><div class="elo '+(!cal?'calibration':'')+'">'+elo+'</div></div><span class="wins">🏆 '+(p.wins||0)+'</span></div>';
         }).join('');
     }catch(e){
         const c=document.getElementById('topPlayersList');
@@ -1412,7 +1413,7 @@ async function loadTopPlayers(){
     }
 }
 
-// ===== РЕЙТИНГ =====
+// ===== РЕЙТИНГ С АВАТАРАМИ =====
 async function renderRating(){
     const body=document.getElementById('ratingBody');
     if(!body)return;
@@ -1436,7 +1437,9 @@ async function renderRating(){
             const cls=rank===1?'gold':rank===2?'silver':rank===3?'bronze':'';
             const rating=p.is_calibrated?(p.elo||1000):'📊 '+(p.calibration_matches||0)+'/10';
             const rClass=p.is_calibrated?'player-rating':'player-rating calibration';
-            return'<tr><td class="rank '+cls+'">#'+rank+'</td><td class="player-name">'+p.username+' <i class="fas fa-check-circle"></i></td><td class="'+rClass+'">'+rating+'</td><td class="player-prize">'+(prizes[i]||'')+'</td></tr>';
+            const avatar = p.avatar || '';
+            const avatarHtml = avatar ? '<img src="'+avatar+'" class="avatar-mini" />' : '<div class="avatar-mini" style="background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;border-radius:50%;width:28px;height:28px;font-size:12px;border:1px solid rgba(245,184,27,.1);flex-shrink:0;color:#6b6380;"><i class="fas fa-user"></i></div>';
+            return'<tr><td class="rank '+cls+'">#'+rank+'</td><td class="player-name">'+avatarHtml+' '+p.username+' <i class="fas fa-check-circle"></i></td><td class="'+rClass+'">'+rating+'</td><td class="player-prize">'+(prizes[i]||'')+'</td></tr>';
         }).join('');
     }catch(e){
         body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#6b6380;padding:30px 0"><i class="fas fa-exclamation-circle" style="font-size:20px;display:block;margin-bottom:8px;color:#ff6b6b"></i>Ошибка загрузки рейтинга<br><small style="color:#4a4270">Попробуйте обновить страницу</small></td></tr>';
@@ -1502,7 +1505,6 @@ function updateSearchUI(isActive, players=[]){
         statusText.innerHTML='<span class="highlight-text">Поиск</span> соперников...';
         isSearching=true;
         
-        // Обновляем слоты
         slots.forEach((slot, i) => {
             if(i < players.length) {
                 slot.classList.add('filled');
@@ -1901,6 +1903,23 @@ async function handleVictory(team){
 function handleAvatarUpload(){document.getElementById('fileInputAvatar').click()}
 function handleAttachResult(){document.getElementById('fileInputResult').click()}
 
+// ===== СОХРАНЕНИЕ АВАТАРА =====
+document.getElementById('fileInputAvatar').addEventListener('change',function(e){
+    const file=e.target.files[0];
+    if(!file)return;
+    if(!file.type.startsWith('image/')){showToast('error','Ошибка','Выберите изображение');this.value='';return}
+    const reader=new FileReader();
+    reader.onload=function(ev){
+        const src=ev.target.result;
+        document.getElementById('modalAvatarPreview').innerHTML='<img src="'+src+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
+        document.getElementById('avatarPreview').innerHTML='<img src="'+src+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
+        localStorage.setItem('user_avatar', src);
+        showToast('success','Аватар загружен','Изображение сохранено');
+    };
+    reader.readAsDataURL(file);
+    this.value='';
+});
+
 // ===== ИНИЦИАЛИЗАЦИЯ =====
 document.addEventListener('DOMContentLoaded',function(){
     const user=JSON.parse(localStorage.getItem('cybermode_user')||'null');
@@ -1940,20 +1959,6 @@ document.getElementById('victoryB').addEventListener('click',()=>handleVictory('
 document.getElementById('searchMatchBtn').addEventListener('click',startSearch);
 document.getElementById('cancelSearchBtn').addEventListener('click',cancelSearch);
 
-document.getElementById('fileInputAvatar').addEventListener('change',function(e){
-    const file=e.target.files[0];
-    if(!file)return;
-    if(!file.type.startsWith('image/')){showToast('error','Ошибка','Выберите изображение');this.value='';return}
-    const reader=new FileReader();
-    reader.onload=function(ev){
-        const src=ev.target.result;
-        document.getElementById('modalAvatarPreview').innerHTML='<img src="'+src+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
-        document.getElementById('avatarPreview').innerHTML='<img src="'+src+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
-        showToast('success','Аватар загружен','Изображение обновлено');
-    };
-    reader.readAsDataURL(file);
-    this.value='';
-});
 document.getElementById('fileInputResult').addEventListener('change',function(e){
     const file=e.target.files[0];
     if(!file)return;
