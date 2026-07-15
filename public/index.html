@@ -62,28 +62,8 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .tab-content{display:none;animation:fade .3s ease}
 .tab-content.active{display:block}
 @keyframes fade{0%{opacity:.3;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
-
-/* ===== ПОИСК МАТЧА ===== */
-.search-page-modern {
-    background: rgba(10,10,46,.08);
-    border-radius: 32px;
-    padding: 40px 32px 48px;
-    border: 1px solid rgba(245,184,27,.06);
-    backdrop-filter: blur(15px);
-    position: relative;
-    overflow: hidden;
-}
-.search-page-modern::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(ellipse at 30% 50%, rgba(245,184,27,.03) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 50%, rgba(245,184,27,.02) 0%, transparent 60%);
-    pointer-events: none;
-}
+.search-page-modern{background:rgba(10,10,46,.08);border-radius:32px;padding:40px 32px 48px;border:1px solid rgba(245,184,27,.06);backdrop-filter:blur(15px);position:relative;overflow:hidden}
+.search-page-modern::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 30% 50%,rgba(245,184,27,.03)0%,transparent 60%),radial-gradient(ellipse at 70% 50%,rgba(245,184,27,.02)0%,transparent 60%);pointer-events:none}
 .search-hero{text-align:center;position:relative;z-index:1;margin-bottom:28px}
 .search-hero .hero-icon{font-size:56px;color:#f5b81b;display:block;margin-bottom:10px}
 .search-hero h2{font-size:28px;font-weight:800;color:#f0e8d0;letter-spacing:-0.5px}
@@ -130,28 +110,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .search-info{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:6px;font-size:13px;color:#6b6380;position:relative;z-index:1}
 .search-info .info-item{display:flex;align-items:center;gap:6px}
 .search-info .info-item i{color:#4a4270}
-
-@media(max-width:768px){
-.search-page-modern{padding:20px 14px 28px;border-radius:20px}
-.search-hero h2{font-size:20px}
-.search-hero .hero-icon{font-size:40px}
-.search-status-container{flex-direction:column;align-items:stretch;padding:12px 14px;gap:10px}
-.search-status-right{justify-content:space-between}
-.search-status-right .players-count .number{font-size:20px;min-width:24px}
-.search-status-right .timer .time{font-size:15px;min-width:36px}
-.players-slots{gap:4px;min-height:40px}
-.player-slot{width:36px;height:36px;font-size:12px}
-.player-slot .slot-number{font-size:8px}
-.player-slot-connector{width:8px}
-.btn-search-modern{padding:12px 28px;font-size:14px;min-width:160px}
-.btn-cancel-search{padding:12px 24px;font-size:14px;min-width:140px}
-.search-buttons-row{flex-direction:column;width:100%}
-.search-buttons-row .btn-search-modern,
-.search-buttons-row .btn-cancel-search{width:100%}
-.search-info{gap:10px;font-size:12px;flex-direction:column;align-items:center}
-}
-
-/* ===== ОСНОВНЫЕ СТИЛИ ===== */
+@media(max-width:768px){.search-page-modern{padding:20px 14px 28px;border-radius:20px}.search-hero h2{font-size:20px}.search-hero .hero-icon{font-size:40px}.search-status-container{flex-direction:column;align-items:stretch;padding:12px 14px;gap:10px}.search-status-right{justify-content:space-between}.search-status-right .players-count .number{font-size:20px;min-width:24px}.search-status-right .timer .time{font-size:15px;min-width:36px}.players-slots{gap:4px;min-height:40px}.player-slot{width:36px;height:36px;font-size:12px}.player-slot .slot-number{font-size:8px}.player-slot-connector{width:8px}.btn-search-modern{padding:12px 28px;font-size:14px;min-width:160px}.btn-cancel-search{padding:12px 24px;font-size:14px;min-width:140px}.search-buttons-row{flex-direction:column;width:100%}.search-buttons-row .btn-search-modern,.search-buttons-row .btn-cancel-search{width:100%}.search-info{gap:10px;font-size:12px;flex-direction:column;align-items:center}}
 .main-menu{background:rgba(10,10,46,.08);border-radius:24px;padding:28px 20px 32px;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(15px)}
 .main-menu .stats-bar{display:flex;gap:20px;justify-content:center;margin-bottom:24px;padding:12px 20px;background:rgba(10,10,46,.1);border-radius:60px;border:1px solid rgba(245,184,27,.04);flex-wrap:wrap}
 .main-menu .stats-bar .stat-item{display:flex;align-items:center;gap:8px;color:#8890b0;font-size:13px}
@@ -189,8 +148,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .btn-action:hover{background:rgba(245,184,27,.1);color:#f0e8d0;border-color:#f5b81b}
 .btn-action.primary{background:linear-gradient(45deg,#f5b81b,#ffcc33);color:#0a0a2e;border:0}
 .btn-action.primary:hover{transform:scale(.97);box-shadow:0 0 40px rgba(245,184,27,.3)}
-
-/* ===== ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ (свой и чужой) ===== */
 .profile-page{background:rgba(10,10,46,.08);border-radius:24px;padding:24px 20px 28px;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(15px)}
 .profile-header{display:flex;align-items:center;gap:18px;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid rgba(245,184,27,.04);flex-wrap:wrap}
 .profile-avatar{width:80px;height:80px;border-radius:50%;background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;font-size:40px;color:#6b6380;border:2px solid rgba(245,184,27,.15);flex-shrink:0;overflow:hidden}
@@ -252,35 +209,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .history-item .elo-change{font-size:12px;font-weight:600;margin-left:6px}
 .history-item .elo-change.positive{color:#6fcf97}
 .history-item .elo-change.negative{color:#e74c3c}
-
-/* ===== МОДАЛЬНОЕ ОКНО ===== */
-.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:2000;justify-content:center;align-items:center;animation:fade .25s ease;padding:20px}
-.modal-overlay.active{display:flex}
-.modal{background:linear-gradient(145deg,#1a1a4e,#2a1a6e);border-radius:24px;padding:30px 28px;max-width:440px;width:100%;border:1px solid rgba(245,184,27,.2);box-shadow:0 20px 60px rgba(0,0,0,.9);position:relative}
-.modal .modal-close{position:absolute;top:12px;right:16px;font-size:22px;color:#6b6380;cursor:pointer;transition:.15s;background:0;border:0}
-.modal .modal-close:hover{color:#f0e8d0}
-.modal .modal-title{font-size:20px;font-weight:700;color:#f0e8d0;margin-bottom:4px}
-.modal .modal-sub{font-size:13px;color:#6b6380;margin-bottom:18px}
-.modal .avatar-section{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:14px 16px;background:rgba(10,10,46,.1);border-radius:14px;border:1px solid rgba(245,184,27,.04)}
-.modal .avatar-section .avatar-preview{width:56px;height:56px;border-radius:50%;background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;font-size:26px;color:#6b6380;border:2px solid rgba(245,184,27,.1);flex-shrink:0;overflow:hidden}
-.modal .avatar-section .avatar-preview img{width:100%;height:100%;object-fit:cover}
-.modal .avatar-section .avatar-actions{display:flex;flex-direction:column;gap:4px}
-.modal .avatar-section .avatar-actions .label{font-size:12px;color:#8890b0}
-.modal .avatar-section .avatar-actions .btn-upload{background:rgba(26,26,62,.2);border:1px solid rgba(245,184,27,.15);padding:4px 16px;border-radius:40px;color:#c0b8d0;font-weight:500;font-size:12px;cursor:pointer;transition:.1s;display:inline-flex;align-items:center;gap:6px;width:fit-content}
-.modal .avatar-section .avatar-actions .btn-upload:hover{background:rgba(245,184,27,.1)}
-.modal .form-group{margin-bottom:14px}
-.modal .form-group label{display:block;font-size:12px;font-weight:600;color:#8890b0;margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px}
-.modal .form-group input{width:100%;background:rgba(10,10,46,.1);border:1px solid rgba(245,184,27,.1);border-radius:12px;padding:10px 14px;font-size:15px;color:#f0e8d0;outline:0;transition:.15s}
-.modal .form-group input:focus{border-color:#f5b81b;box-shadow:0 0 0 3px rgba(245,184,27,.08)}
-.modal .form-group input::placeholder{color:#4a4270}
-.modal .modal-actions{display:flex;gap:10px;margin-top:6px}
-.modal .modal-actions .btn{padding:10px 24px;border-radius:60px;border:0;font-weight:600;font-size:14px;cursor:pointer;transition:.12s;flex:1}
-.modal .modal-actions .btn-cancel{background:rgba(26,26,62,.2);color:#c0b8d0;border:1px solid rgba(245,184,27,.04)}
-.modal .modal-actions .btn-cancel:hover{background:rgba(245,184,27,.1)}
-.modal .modal-actions .btn-save{background:linear-gradient(45deg,#f5b81b,#ffcc33);color:#0a0a2e}
-.modal .modal-actions .btn-save:hover{transform:scale(.97)}
-
-/* ===== ДРУГИЕ СТИЛИ ===== */
 .match-page{background:rgba(10,10,46,.08);border-radius:24px;padding:28px 20px 30px;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(15px)}
 .match-page .match-id{text-align:center;font-size:18px;font-weight:700;color:#f5b81b;margin-bottom:20px;padding:12px;border-radius:60px;border:1px solid rgba(245,184,27,.12);background:rgba(245,184,27,.05)}
 .teams-row{display:flex;gap:20px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
@@ -370,7 +298,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .rating-table .rank.gold{color:#f5b81b}
 .rating-table .rank.silver{color:#c0c8d0}
 .rating-table .rank.bronze{color:#cd7f32}
-.rating-table .player-name{font-weight:600;color:#f0e8d0;font-size:13px;display:flex;align-items:center;gap:8px}
+.rating-table .player-name{font-weight:600;color:#f0e8d0;font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer}
 .rating-table .player-name .avatar-mini{width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid rgba(245,184,27,.1);flex-shrink:0;background:rgba(26,26,62,.15)}
 .rating-table .player-name i{color:#f5b81b;font-size:12px;margin-left:4px}
 .rating-table .player-rating{font-weight:700;color:#f5b81b}
@@ -411,6 +339,31 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .missions-page .big-icon,.shop-page .big-icon{font-size:72px;color:#f5b81b;margin-bottom:16px}
 .missions-page h2,.shop-page h2{font-size:24px;font-weight:700;margin-bottom:6px;color:#f0e8d0}
 .missions-page p,.shop-page p{color:#8890b0;font-size:14px;margin-bottom:20px}
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:2000;justify-content:center;align-items:center;animation:fade .25s ease;padding:20px}
+.modal-overlay.active{display:flex}
+.modal{background:linear-gradient(145deg,#1a1a4e,#2a1a6e);border-radius:24px;padding:30px 28px;max-width:440px;width:100%;border:1px solid rgba(245,184,27,.2);box-shadow:0 20px 60px rgba(0,0,0,.9);position:relative}
+.modal .modal-close{position:absolute;top:12px;right:16px;font-size:22px;color:#6b6380;cursor:pointer;transition:.15s;background:0;border:0}
+.modal .modal-close:hover{color:#f0e8d0}
+.modal .modal-title{font-size:20px;font-weight:700;color:#f0e8d0;margin-bottom:4px}
+.modal .modal-sub{font-size:13px;color:#6b6380;margin-bottom:18px}
+.modal .avatar-section{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:14px 16px;background:rgba(10,10,46,.1);border-radius:14px;border:1px solid rgba(245,184,27,.04)}
+.modal .avatar-section .avatar-preview{width:56px;height:56px;border-radius:50%;background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;font-size:26px;color:#6b6380;border:2px solid rgba(245,184,27,.1);flex-shrink:0;overflow:hidden}
+.modal .avatar-section .avatar-preview img{width:100%;height:100%;object-fit:cover}
+.modal .avatar-section .avatar-actions{display:flex;flex-direction:column;gap:4px}
+.modal .avatar-section .avatar-actions .label{font-size:12px;color:#8890b0}
+.modal .avatar-section .avatar-actions .btn-upload{background:rgba(26,26,62,.2);border:1px solid rgba(245,184,27,.15);padding:4px 16px;border-radius:40px;color:#c0b8d0;font-weight:500;font-size:12px;cursor:pointer;transition:.1s;display:inline-flex;align-items:center;gap:6px;width:fit-content}
+.modal .avatar-section .avatar-actions .btn-upload:hover{background:rgba(245,184,27,.1)}
+.modal .form-group{margin-bottom:14px}
+.modal .form-group label{display:block;font-size:12px;font-weight:600;color:#8890b0;margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px}
+.modal .form-group input{width:100%;background:rgba(10,10,46,.1);border:1px solid rgba(245,184,27,.1);border-radius:12px;padding:10px 14px;font-size:15px;color:#f0e8d0;outline:0;transition:.15s}
+.modal .form-group input:focus{border-color:#f5b81b;box-shadow:0 0 0 3px rgba(245,184,27,.08)}
+.modal .form-group input::placeholder{color:#4a4270}
+.modal .modal-actions{display:flex;gap:10px;margin-top:6px}
+.modal .modal-actions .btn{padding:10px 24px;border-radius:60px;border:0;font-weight:600;font-size:14px;cursor:pointer;transition:.12s;flex:1}
+.modal .modal-actions .btn-cancel{background:rgba(26,26,62,.2);color:#c0b8d0;border:1px solid rgba(245,184,27,.04)}
+.modal .modal-actions .btn-cancel:hover{background:rgba(245,184,27,.1)}
+.modal .modal-actions .btn-save{background:linear-gradient(45deg,#f5b81b,#ffcc33);color:#0a0a2e}
+.modal .modal-actions .btn-save:hover{transform:scale(.97)}
 @media(max-width:992px){.main-menu .main-grid{grid-template-columns:1fr;gap:24px}}
 @media(max-width:768px){body{padding:10px;align-items:flex-start}.auth-container{padding:1.5rem 1.2rem;margin:8px}.auth-container .auth-logo h1{font-size:1.6rem}.auth-container .auth-logo .brawl-icon{font-size:2.2rem}.top-nav{padding:6px 14px;border-radius:40px;flex-direction:row;flex-wrap:wrap;gap:6px;top:6px}.top-nav .brand{font-size:15px}.top-nav .brand i{font-size:14px}.nav-center{gap:10px}.nav-center .nav-item{font-size:11px;padding:3px 2px}.nav-right .profile{font-size:12px;padding:3px 10px 3px 6px}.nav-right .profile i{font-size:16px}.main-site{padding:12px 14px 18px;border-radius:20px;margin-top:6px}.main-menu{padding:18px 14px 22px;border-radius:18px}.main-menu .stats-bar{gap:12px;padding:10px 14px;flex-direction:row;flex-wrap:wrap}.main-menu .stats-bar .stat-item{font-size:12px}.main-menu .stats-bar .stat-item .num{font-size:17px}.main-menu .left-col h1{font-size:20px}.main-menu .left-col .desc{font-size:13px}.main-menu .prize-block{padding:12px 14px}.main-menu .prize-block .prize-title{font-size:13px}.main-menu .prize-block .prize-item{font-size:13px;padding:3px 8px}.main-menu .right-col .top-title{font-size:15px;margin-bottom:10px}.main-menu .top-player{padding:8px 12px;gap:10px}.main-menu .top-player .avatar-mini{width:26px;height:26px}.main-menu .top-player .info .name{font-size:13px}.main-menu .top-player .info .elo{font-size:11px}.main-menu .top-player .wins{font-size:12px}.btn-action{padding:10px 22px;font-size:13px;gap:8px}.match-page{padding:18px 14px 22px}.teams-row{flex-direction:column;gap:14px}.team-col{min-width:unset;padding:14px 16px 18px}.team-col h3{font-size:15px}.player-tag{font-size:13px;padding:8px 12px}.ban-pool{gap:8px}.map-chip{font-size:12px;padding:6px 14px}.captain-indicator{font-size:12px;padding:4px 12px 4px 16px;gap:10px}.captain-indicator .turn{font-size:11px;padding:2px 12px}.result-row{flex-direction:column;align-items:stretch;gap:10px;padding:12px 16px}.result-row .final-map .map-name{font-size:15px}.result-row .attach-btn{justify-content:center;font-size:12px;padding:8px 16px}.victory-buttons .btn-victory{padding:10px 20px;font-size:14px;min-width:130px}.rating-page{padding:18px 14px 22px}.rating-page .rating-title{font-size:18px}.rating-table{font-size:12px}.rating-table td,.rating-table th{padding:8px;font-size:12px}.rating-table .player-name{font-size:12px}.rating-table .player-name .avatar-mini{width:22px;height:22px}.profile-page{padding:18px 14px 22px}.profile-header{flex-direction:column;text-align:center;gap:12px}.profile-avatar{width:70px;height:70px;font-size:32px}.profile-info .name{font-size:18px}.stats-grid{grid-template-columns:1fr 1fr;gap:10px}.stat-item .value{font-size:18px}.calibration-section{flex-direction:column;align-items:stretch;gap:8px}.calibration-section .right{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.calibration-section .right .progress-bar{flex:1;width:auto}.elo-section{flex-direction:column;align-items:stretch;text-align:center;gap:8px}.elo-section .right .elo-change{text-align:center}.profile-actions-btns{justify-content:center}.profile-actions-btns .btn{font-size:12px;padding:8px 18px}.history-item{font-size:12px;padding:8px 12px}.modal{padding:24px 18px;margin:10px}.modal .modal-title{font-size:18px}.room-instruction .instruction-content{grid-template-columns:1fr}.room-instruction .room-details{flex-direction:column;align-items:stretch}.admin-user-item{flex-direction:column;align-items:stretch}.admin-user-item .user-actions{justify-content:flex-start}.toast{bottom:1rem;right:1rem;left:1rem;max-width:unset}.brawl-bg-icons .icon{font-size:40px!important}}
 @media(max-width:480px){.auth-container{padding:1.2rem 1rem}.auth-container .auth-logo h1{font-size:1.4rem}.top-nav .brand{font-size:13px}.nav-center .nav-item{font-size:10px}.main-menu .stats-bar .stat-item{font-size:11px}.main-menu .stats-bar .stat-item .num{font-size:15px}.main-menu .left-col h1{font-size:18px}.main-menu .prize-block .prize-item{font-size:12px}.btn-action{padding:8px 16px;font-size:12px}.stats-grid{grid-template-columns:1fr 1fr;gap:8px}.stat-item{padding:10px 8px}.stat-item .value{font-size:16px}.modal{padding:18px 14px}.modal .modal-actions{flex-direction:column}.brawl-bg-icons .icon{font-size:30px!important}}
@@ -661,7 +614,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
-<!-- ПРОФИЛЬ ДРУГОГО ИГРОКА (скрытая вкладка) -->
+<!-- ПРОФИЛЬ ДРУГОГО ИГРОКА -->
 <div id="tabUserProfile" class="tab-content">
 <div class="profile-page">
 <div class="profile-header"><div class="profile-avatar" id="userProfileAvatar"><i class="fas fa-user"></i></div><div class="profile-info"><div class="name" id="userProfileName">Игрок</div><div class="league" id="userProfileLeague"><i class="fas fa-trophy"></i> DEFAULT LEAGUE</div></div></div>
@@ -944,7 +897,7 @@ async function loadMainSite(){
         document.getElementById('authPage').style.display='none';
         document.getElementById('mainSite').classList.add('visible');
         updateUI(userData);
-        
+
         const adminData=await checkAdmin();
         const panel=document.getElementById('adminPanel');
         if(panel){
@@ -960,18 +913,19 @@ async function loadMainSite(){
                 document.getElementById('hideMatchBtn').classList.add('hidden');
             }
         }
-        
+
         const stats=await getStats();
         document.getElementById('usersCount').textContent=stats.totalUsers||0;
         document.getElementById('pendingCount').textContent=stats.pending||0;
-        
-        // Восстановление аватара
-        const savedAvatar=localStorage.getItem('user_avatar');
-        if(savedAvatar){
-            document.getElementById('avatarPreview').innerHTML='<img src="'+savedAvatar+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
-            document.getElementById('modalAvatarPreview').innerHTML='<img src="'+savedAvatar+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
+
+        // Восстановление аватара пользователя
+        const username = userData.username || '';
+        const savedAvatar = localStorage.getItem('user_avatar_' + username) || localStorage.getItem('user_avatar');
+        if (savedAvatar) {
+            document.getElementById('avatarPreview').innerHTML = '<img src="' + savedAvatar + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
+            document.getElementById('modalAvatarPreview').innerHTML = '<img src="' + savedAvatar + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
         }
-        
+
         // Восстановление матча
         const savedMatchId=localStorage.getItem('currentMatchId');
         if(savedMatchId){
@@ -980,7 +934,7 @@ async function loadMainSite(){
             currentMatchPlayers=savedPlayers;
             const isPart=user&&savedPlayers.includes(user.username);
             const isAdmin=adminData.isAdmin||false;
-            
+
             if(isPart||isAdmin){
                 document.getElementById('matchTabBtn').style.display='block';
                 try{
@@ -994,7 +948,7 @@ async function loadMainSite(){
                 document.getElementById('matchTabBtn').style.display='none';
             }
         }
-        
+
         await loadTopPlayers();
         await renderRating();
     }catch(e){
@@ -1067,7 +1021,6 @@ function updateUI(user){
         document.getElementById('historyList').style.display='none';
         document.getElementById('historyEmpty').style.display='block';
     }
-    // Показываем кнопки редактирования только для своего профиля
     document.getElementById('profileActions').style.display='flex';
     switchTab('main');
 }
@@ -1075,64 +1028,78 @@ function updateUI(user){
 // ===== ПРОСМОТР ПРОФИЛЯ ДРУГОГО ИГРОКА =====
 async function viewUserProfile(username){
     try{
-        // Прячем кнопки редактирования
         document.getElementById('profileActions').style.display='none';
         
-        const data = await getUserByUsername(username);
-        if(!data || !data.user){
+        let userData = allUsersCache.find(u => u.username === username);
+        
+        if(!userData){
+            try{
+                const data = await getAllUsers();
+                allUsersCache = data.users || [];
+                userData = allUsersCache.find(u => u.username === username);
+            }catch(e){
+                console.warn('Не удалось загрузить пользователей через API');
+            }
+        }
+        
+        if(!userData){
             showToast('error','Ошибка','Пользователь не найден');
             return;
         }
-        const u = data.user;
+        
+        const u = userData;
         
         document.getElementById('userProfileName').textContent = u.username;
         
-        // Аватар
-        const avatar = u.avatar || localStorage.getItem('user_avatar_'+u.username) || '';
+        let avatar = u.avatar || '';
+        if(!avatar){
+            const savedAvatar = localStorage.getItem('user_avatar_' + u.username);
+            if(savedAvatar) avatar = savedAvatar;
+        }
+        
         if(avatar){
-            document.getElementById('userProfileAvatar').innerHTML = '<img src="'+avatar+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
+            document.getElementById('userProfileAvatar').innerHTML = '<img src="' + avatar + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
         }else{
             document.getElementById('userProfileAvatar').innerHTML = '<i class="fas fa-user"></i>';
         }
         
-        document.getElementById('userWins').textContent = u.wins||0;
-        document.getElementById('userLosses').textContent = u.losses||0;
-        document.getElementById('userMatches').textContent = u.matches||0;
-        const total=(u.wins||0)+(u.losses||0);
-        const winrate=total>0?Math.round(((u.wins||0)/total)*100):0;
-        document.getElementById('userWinrate').textContent = winrate+'%';
+        document.getElementById('userWins').textContent = u.wins || 0;
+        document.getElementById('userLosses').textContent = u.losses || 0;
+        document.getElementById('userMatches').textContent = u.matches || 0;
+        const total = (u.wins || 0) + (u.losses || 0);
+        const winrate = total > 0 ? Math.round(((u.wins || 0) / total) * 100) : 0;
+        document.getElementById('userWinrate').textContent = winrate + '%';
         
-        const cal=Math.min(u.calibrationMatches||0,10);
-        if(u.isCalibrated){
-            document.getElementById('userCalibrationSection').style.display='none';
+        const cal = Math.min(u.calibration_matches || 0, 10);
+        if(u.is_calibrated){
+            document.getElementById('userCalibrationSection').style.display = 'none';
             document.getElementById('userEloSection').classList.add('show');
-            document.getElementById('userEloValue').textContent = u.elo||1000;
+            document.getElementById('userEloValue').textContent = u.elo || 1000;
         }else{
-            document.getElementById('userCalibrationSection').style.display='flex';
+            document.getElementById('userCalibrationSection').style.display = 'flex';
             document.getElementById('userEloSection').classList.remove('show');
-            document.getElementById('userCalibrationText').textContent = cal+'/10';
-            document.getElementById('userCalibrationFill').style.width = (cal/10*100)+'%';
+            document.getElementById('userCalibrationText').textContent = cal + '/10';
+            document.getElementById('userCalibrationFill').style.width = (cal / 10 * 100) + '%';
             document.getElementById('userCalibrationSub').textContent = 'Пройдите 10 матчей для определения рейтинга';
         }
         
-        // История
-        if(u.history && u.history.length>0){
-            document.getElementById('userHistoryList').style.display='flex';
-            document.getElementById('userHistoryEmpty').style.display='none';
-            document.getElementById('userHistoryList').innerHTML = u.history.slice(-15).reverse().map(item=>{
-                return'<div class="history-item"><div class="match-info"><span class="match-number">#'+item.matchId+'</span><span class="match-map">'+(item.map||'💎 Gem Grab')+'</span><span style="color:#6b6380;font-size:11px">'+item.date+'</span></div><span class="match-result '+(item.result==='win'?'win':'lose')+'">'+(item.result==='win'?'🏆 Победа':'❌ Поражение')+'</span></div>';
+        if(u.history && u.history.length > 0){
+            document.getElementById('userHistoryList').style.display = 'flex';
+            document.getElementById('userHistoryEmpty').style.display = 'none';
+            document.getElementById('userHistoryList').innerHTML = u.history.slice(-15).reverse().map(item => {
+                return '<div class="history-item"><div class="match-info"><span class="match-number">#' + item.matchId + '</span><span class="match-map">' + (item.map || '💎 Gem Grab') + '</span><span style="color:#6b6380;font-size:11px">' + item.date + '</span></div><span class="match-result ' + (item.result === 'win' ? 'win' : 'lose') + '">' + (item.result === 'win' ? '🏆 Победа' : '❌ Поражение') + '</span></div>';
             }).join('');
         }else{
-            document.getElementById('userHistoryList').style.display='none';
-            document.getElementById('userHistoryEmpty').style.display='block';
+            document.getElementById('userHistoryList').style.display = 'none';
+            document.getElementById('userHistoryEmpty').style.display = 'block';
         }
         
-        document.getElementById('userProfileLeague').innerHTML = '<i class="fas fa-trophy"></i> '+(u.isCalibrated ? 'ELO '+u.elo : 'Калибровка');
+        document.getElementById('userProfileLeague').innerHTML = '<i class="fas fa-trophy"></i> ' + (u.is_calibrated ? 'ELO ' + u.elo : 'Калибровка');
         
         switchTab('userProfile');
     }catch(e){
-        showToast('error','Ошибка','Не удалось загрузить профиль игрока');
         console.error(e);
+        showToast('error','Ошибка','Не удалось загрузить профиль игрока');
     }
 }
 
@@ -1142,29 +1109,56 @@ async function loadTopPlayers(){
         const data=await getAllUsers();
         const users=data.users||[];
         allUsersCache=users;
+        
         const sorted=users.sort((a,b)=>{
             if(a.is_calibrated&&b.is_calibrated)return(b.elo||0)-(a.elo||0);
             if(a.is_calibrated&&!b.is_calibrated)return-1;
             if(!a.is_calibrated&&b.is_calibrated)return 1;
             return(b.matches||0)-(a.matches||0);
         }).slice(0,5);
+        
         const c=document.getElementById('topPlayersList');
         if(!c)return;
+        
         const medals=['🥇','🥈','🥉','4️⃣','5️⃣'];
         const classes=['gold','silver','bronze','',''];
+        
         if(!sorted.length){
             c.innerHTML='<div class="top-player"><span class="rank">👤</span><div class="info"><div class="name">Нет игроков</div><div class="elo">Стань первым!</div></div><span class="wins">🏆 0</span></div>';
             return;
         }
+        
         c.innerHTML=sorted.map((p,i)=>{
             const cal=p.is_calibrated||false;
             const m=p.calibration_matches||0;
             const elo=cal?'ELO: '+(p.elo||1000):'📊 Калибровка '+m+'/10';
-            const avatar = p.avatar || '';
-            const avatarHtml = avatar ? '<img src="'+avatar+'" class="avatar-mini" />' : '<div class="avatar-mini" style="background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;border-radius:50%;width:32px;height:32px;font-size:14px;border:2px solid rgba(245,184,27,.1);flex-shrink:0;color:#6b6380;"><i class="fas fa-user"></i></div>';
-            return'<div class="top-player" onclick="viewUserProfile(\''+p.username+'\')"><span class="rank '+(classes[i]||'')+'">'+(medals[i]||(i+1))+'</span>'+avatarHtml+'<div class="info"><div class="name">'+p.username+'</div><div class="elo '+(!cal?'calibration':'')+'">'+elo+'</div></div><span class="wins">🏆 '+(p.wins||0)+'</span></div>';
+            
+            let avatar = p.avatar || '';
+            if(!avatar){
+                const savedAvatar = localStorage.getItem('user_avatar_'+p.username);
+                if(savedAvatar) avatar = savedAvatar;
+            }
+            
+            let avatarHtml = '';
+            if(avatar){
+                avatarHtml = `<img src="${avatar}" class="avatar-mini" onerror="this.style.display='none'" />`;
+            } else {
+                avatarHtml = `<div class="avatar-mini" style="background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;border-radius:50%;width:32px;height:32px;font-size:14px;border:2px solid rgba(245,184,27,.1);flex-shrink:0;color:#6b6380;"><i class="fas fa-user"></i></div>`;
+            }
+            
+            return`<div class="top-player" onclick="viewUserProfile('${p.username}')">
+                <span class="rank ${classes[i]||''}">${medals[i]||(i+1)}</span>
+                ${avatarHtml}
+                <div class="info">
+                    <div class="name">${p.username}</div>
+                    <div class="elo ${!cal?'calibration':''}">${elo}</div>
+                </div>
+                <span class="wins">🏆 ${p.wins||0}</span>
+            </div>`;
         }).join('');
-    }catch(e){
+        
+    } catch(e){
+        console.error('Ошибка загрузки топа:', e);
         const c=document.getElementById('topPlayersList');
         if(c)c.innerHTML='<div class="top-player"><span class="rank">👤</span><div class="info"><div class="name">Нет данных</div><div class="elo">Стань первым игроком!</div></div><span class="wins">🏆 0</span></div>';
     }
@@ -1177,6 +1171,7 @@ async function renderRating(){
     try{
         const data=await getAllUsers();
         const users=data.users||[];
+        allUsersCache=users;
         const cal=users.filter(u=>u.is_calibrated);
         const uncal=users.filter(u=>!u.is_calibrated);
         const sCal=cal.sort((a,b)=>(b.elo||0)-(a.elo||0));
@@ -1194,11 +1189,24 @@ async function renderRating(){
             const cls=rank===1?'gold':rank===2?'silver':rank===3?'bronze':'';
             const rating=p.is_calibrated?(p.elo||1000):'📊 '+(p.calibration_matches||0)+'/10';
             const rClass=p.is_calibrated?'player-rating':'player-rating calibration';
-            const avatar = p.avatar || '';
-            const avatarHtml = avatar ? '<img src="'+avatar+'" class="avatar-mini" />' : '<div class="avatar-mini" style="background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;border-radius:50%;width:28px;height:28px;font-size:12px;border:1px solid rgba(245,184,27,.1);flex-shrink:0;color:#6b6380;"><i class="fas fa-user"></i></div>';
-            return'<tr><td class="rank '+cls+'">#'+rank+'</td><td class="player-name" style="cursor:pointer" onclick="viewUserProfile(\''+p.username+'\')">'+avatarHtml+' '+p.username+' <i class="fas fa-check-circle"></i></td><td class="'+rClass+'">'+rating+'</td><td class="player-prize">'+(prizes[i]||'')+'</td></tr>';
+            
+            let avatar = p.avatar || '';
+            if(!avatar){
+                const savedAvatar = localStorage.getItem('user_avatar_'+p.username);
+                if(savedAvatar) avatar = savedAvatar;
+            }
+            
+            let avatarHtml = '';
+            if(avatar){
+                avatarHtml = `<img src="${avatar}" class="avatar-mini" onerror="this.style.display='none'" />`;
+            } else {
+                avatarHtml = `<div class="avatar-mini" style="background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;border-radius:50%;width:28px;height:28px;font-size:12px;border:1px solid rgba(245,184,27,.1);flex-shrink:0;color:#6b6380;"><i class="fas fa-user"></i></div>`;
+            }
+            
+            return'<tr><td class="rank '+cls+'">#'+rank+'</td><td class="player-name" onclick="viewUserProfile(\''+p.username+'\')">'+avatarHtml+' '+p.username+' <i class="fas fa-check-circle"></i></td><td class="'+rClass+'">'+rating+'</td><td class="player-prize">'+(prizes[i]||'')+'</td></tr>';
         }).join('');
     }catch(e){
+        console.error('Ошибка загрузки рейтинга:', e);
         body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#6b6380;padding:30px 0"><i class="fas fa-exclamation-circle" style="font-size:20px;display:block;margin-bottom:8px;color:#ff6b6b"></i>Ошибка загрузки рейтинга<br><small style="color:#4a4270">Попробуйте обновить страницу</small></td></tr>';
     }
 }
@@ -1661,23 +1669,57 @@ function handleAvatarUpload(){document.getElementById('fileInputAvatar').click()
 function handleAttachResult(){document.getElementById('fileInputResult').click()}
 
 // ===== СОХРАНЕНИЕ АВАТАРА =====
-document.getElementById('fileInputAvatar').addEventListener('change',function(e){
-    const file=e.target.files[0];
-    if(!file)return;
-    if(!file.type.startsWith('image/')){showToast('error','Ошибка','Выберите изображение');this.value='';return}
-    const reader=new FileReader();
-    reader.onload=function(ev){
-        const src=ev.target.result;
-        document.getElementById('modalAvatarPreview').innerHTML='<img src="'+src+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
-        document.getElementById('avatarPreview').innerHTML='<img src="'+src+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
+async function updateAvatar(avatarBase64) {
+    try {
+        const response = await fetch('/api/profile/update', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('cybermode_token')
+            },
+            body: JSON.stringify({ avatar: avatarBase64 })
+        });
+        const data = await response.json();
+        if (data.success) {
+            showToast('success', 'Аватар обновлен', 'Ваш аватар сохранен');
+            return true;
+        }
+        return false;
+    } catch (e) {
+        console.error('Update avatar error:', e);
+        return false;
+    }
+}
+
+document.getElementById('fileInputAvatar').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+        showToast('error', 'Ошибка', 'Выберите изображение');
+        this.value = '';
+        return;
+    }
+    const reader = new FileReader();
+    reader.onload = async function(ev) {
+        const src = ev.target.result;
+        
+        const user = JSON.parse(localStorage.getItem('cybermode_user') || '{}');
+        const username = user.username || 'user';
+        localStorage.setItem('user_avatar_' + username, src);
         localStorage.setItem('user_avatar', src);
-        showToast('success','Аватар загружен','Изображение сохранено');
-        // Обновляем топ и рейтинг
+        
+        document.getElementById('modalAvatarPreview').innerHTML = '<img src="' + src + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
+        document.getElementById('avatarPreview').innerHTML = '<img src="' + src + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
+        
+        await updateAvatar(src);
+        
+        showToast('success', 'Аватар загружен', 'Изображение сохранено');
+        
         loadTopPlayers();
         renderRating();
     };
     reader.readAsDataURL(file);
-    this.value='';
+    this.value = '';
 });
 
 // ===== ИНИЦИАЛИЗАЦИЯ =====
