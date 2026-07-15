@@ -38,7 +38,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .auth-container .form-group label .required{color:#ff6b6b;margin-left:.2rem}
 .auth-container .form-group input{width:100%;padding:.7rem 1rem;background:rgba(10,10,46,.4);border:2px solid rgba(58,42,110,.6);border-radius:12px;color:#f0e8d0;font-size:1rem;transition:.3s}
 .auth-container .form-group input:focus{outline:0;border-color:#f5b81b;box-shadow:0 0 30px rgba(245,184,27,.15)}
-.auth-container .form-group .hint{color:#6b6380;font-size:.75rem;margin-top:.3rem}
 .auth-container .btn-submit{width:100%;padding:.8rem;background:linear-gradient(45deg,#f5b81b,#ffcc33);border:0;border-radius:40px;font-weight:700;font-size:1rem;color:#0a0a2e;cursor:pointer;transition:.3s;margin-top:.5rem;text-transform:uppercase;letter-spacing:1px}
 .auth-container .btn-submit:hover{transform:scale(1.02);box-shadow:0 0 40px rgba(245,184,27,.3)}
 .auth-container .auth-links{text-align:center;margin-top:1.2rem}
@@ -63,6 +62,456 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .tab-content{display:none;animation:fade .3s ease}
 .tab-content.active{display:block}
 @keyframes fade{0%{opacity:.3;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
+
+/* ===== КРАСИВЫЙ ПОИСК МАТЧА ===== */
+.search-page-modern {
+    background: rgba(10,10,46,.08);
+    border-radius: 32px;
+    padding: 40px 32px 48px;
+    border: 1px solid rgba(245,184,27,.06);
+    backdrop-filter: blur(15px);
+    position: relative;
+    overflow: hidden;
+}
+
+.search-page-modern::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(245,184,27,.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(245,184,27,.02) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.search-hero {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 36px;
+}
+
+.search-hero .hero-icon {
+    font-size: 72px;
+    color: #f5b81b;
+    display: block;
+    margin-bottom: 12px;
+    animation: floatIcon 4s ease-in-out infinite;
+}
+
+.search-hero h2 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #f0e8d0;
+    letter-spacing: -0.5px;
+}
+
+.search-hero h2 .highlight {
+    background: linear-gradient(45deg, #f5b81b, #ffcc33);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.search-hero p {
+    color: #8890b0;
+    font-size: 16px;
+    margin-top: 6px;
+}
+
+/* Статус поиска */
+.search-status-container {
+    background: rgba(10,10,46,.15);
+    border-radius: 20px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(245,184,27,.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.search-status-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.search-status-left .status-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #4a4270;
+    transition: all .3s ease;
+    flex-shrink: 0;
+}
+
+.search-status-left .status-dot.searching {
+    background: #f5b81b;
+    box-shadow: 0 0 20px rgba(245,184,27,.4);
+    animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+.search-status-left .status-dot.found {
+    background: #6fcf97;
+    box-shadow: 0 0 20px rgba(111,207,151,.4);
+}
+
+@keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: .6; }
+}
+
+.search-status-left .status-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #c0b8d0;
+}
+
+.search-status-left .status-text .highlight-text {
+    color: #f5b81b;
+}
+
+.search-status-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-status-right .players-count {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(10,10,46,.2);
+    padding: 6px 16px 6px 12px;
+    border-radius: 40px;
+    border: 1px solid rgba(245,184,27,.08);
+}
+
+.search-status-right .players-count .number {
+    font-size: 28px;
+    font-weight: 800;
+    color: #f5b81b;
+    font-variant-numeric: tabular-nums;
+    min-width: 32px;
+    text-align: center;
+}
+
+.search-status-right .players-count .label {
+    font-size: 13px;
+    color: #8890b0;
+}
+
+.search-status-right .timer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #8890b0;
+    font-size: 14px;
+}
+
+.search-status-right .timer .time {
+    font-weight: 700;
+    color: #f0e8d0;
+    font-size: 18px;
+    font-variant-numeric: tabular-nums;
+    min-width: 48px;
+}
+
+/* Анимация игроков */
+.players-animation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px 0 28px;
+    position: relative;
+    z-index: 1;
+    min-height: 56px;
+}
+
+.player-slot {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(26,26,62,.15);
+    border: 2px solid rgba(245,184,27,.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #4a4270;
+    transition: all .4s ease;
+    position: relative;
+}
+
+.player-slot.filled {
+    border-color: #f5b81b;
+    background: rgba(245,184,27,.1);
+    color: #f5b81b;
+    transform: scale(1.05);
+}
+
+.player-slot.filled::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid rgba(245,184,27,.15);
+    animation: ripple 1.5s ease-out infinite;
+}
+
+@keyframes ripple {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.4); opacity: 0; }
+}
+
+.player-slot .slot-number {
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    background: #0a0a2e;
+    border: 1px solid rgba(245,184,27,.15);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
+    font-weight: 700;
+    color: #8890b0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-slot.filled .slot-number {
+    background: #f5b81b;
+    color: #0a0a2e;
+}
+
+.player-slot .player-name-tag {
+    position: absolute;
+    bottom: -24px;
+    font-size: 9px;
+    color: #6b6380;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.player-slot.filled .player-name-tag {
+    opacity: 1;
+}
+
+.player-slot-connector {
+    width: 20px;
+    height: 2px;
+    background: rgba(245,184,27,.1);
+    transition: background .4s ease;
+    flex-shrink: 0;
+}
+
+.player-slot-connector.active {
+    background: rgba(245,184,27,.3);
+}
+
+/* Кнопка поиска */
+.search-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-search-modern {
+    background: linear-gradient(135deg, #f5b81b, #f5a623);
+    border: none;
+    padding: 18px 56px;
+    border-radius: 60px;
+    font-weight: 700;
+    font-size: 18px;
+    color: #0a0a2e;
+    cursor: pointer;
+    transition: all .3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 8px 40px rgba(245,184,27,.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-search-modern::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,.1) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity .4s ease;
+}
+
+.btn-search-modern:hover:not(:disabled)::before {
+    opacity: 1;
+}
+
+.btn-search-modern:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 50px rgba(245,184,27,.35);
+}
+
+.btn-search-modern:active:not(:disabled) {
+    transform: scale(.96);
+}
+
+.btn-search-modern:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+.btn-search-modern.cancel {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: #fff;
+    box-shadow: 0 8px 40px rgba(231,76,60,.3);
+    animation: pulse-cancel 2s ease-in-out infinite;
+}
+
+@keyframes pulse-cancel {
+    0%, 100% { box-shadow: 0 8px 40px rgba(231,76,60,.3); }
+    50% { box-shadow: 0 8px 60px rgba(231,76,60,.5); }
+}
+
+.btn-search-modern.cancel:hover:not(:disabled) {
+    box-shadow: 0 12px 50px rgba(231,76,60,.45);
+}
+
+.btn-search-modern .btn-icon {
+    font-size: 20px;
+}
+
+.btn-search-modern .btn-spinner {
+    display: none;
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(10,10,46,.1);
+    border-top-color: #0a0a2e;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.btn-search-modern.searching .btn-spinner {
+    display: inline-block;
+}
+
+.btn-search-modern.searching .btn-text {
+    display: none;
+}
+
+.btn-search-modern.searching .btn-icon {
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Инфо под кнопкой */
+.search-info {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #6b6380;
+    position: relative;
+    z-index: 1;
+}
+
+.search-info .info-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.search-info .info-item i {
+    color: #4a4270;
+}
+
+/* Для мобильных */
+@media(max-width:768px) {
+    .search-page-modern {
+        padding: 24px 16px 32px;
+        border-radius: 24px;
+    }
+    .search-hero h2 {
+        font-size: 24px;
+    }
+    .search-hero .hero-icon {
+        font-size: 48px;
+    }
+    .search-status-container {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px 18px;
+        gap: 12px;
+    }
+    .search-status-right {
+        justify-content: space-between;
+    }
+    .search-status-right .players-count .number {
+        font-size: 22px;
+        min-width: 28px;
+    }
+    .search-status-right .timer .time {
+        font-size: 16px;
+        min-width: 40px;
+    }
+    .players-animation {
+        gap: 4px;
+        flex-wrap: wrap;
+        min-height: 44px;
+    }
+    .player-slot {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+    .player-slot .slot-number {
+        width: 16px;
+        height: 16px;
+        font-size: 8px;
+        bottom: -6px;
+        right: -6px;
+    }
+    .player-slot-connector {
+        width: 10px;
+    }
+    .btn-search-modern {
+        padding: 14px 36px;
+        font-size: 15px;
+        gap: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+    .search-info {
+        gap: 12px;
+        font-size: 12px;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Остальные стили */
 .main-menu{background:rgba(10,10,46,.08);border-radius:24px;padding:28px 20px 32px;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(15px)}
 .main-menu .stats-bar{display:flex;gap:20px;justify-content:center;margin-bottom:24px;padding:12px 20px;background:rgba(10,10,46,.1);border-radius:60px;border:1px solid rgba(245,184,27,.04);flex-wrap:wrap}
 .main-menu .stats-bar .stat-item{display:flex;align-items:center;gap:8px;color:#8890b0;font-size:13px}
@@ -99,22 +548,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .btn-action:hover{background:rgba(245,184,27,.1);color:#f0e8d0;border-color:#f5b81b}
 .btn-action.primary{background:linear-gradient(45deg,#f5b81b,#ffcc33);color:#0a0a2e;border:0}
 .btn-action.primary:hover{transform:scale(.97);box-shadow:0 0 40px rgba(245,184,27,.3)}
-.search-page{background:rgba(10,10,46,.08);border-radius:24px;padding:40px 20px 48px;text-align:center;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(15px)}
-.search-page .big-icon{font-size:72px;color:#f5b81b;margin-bottom:16px}
-.search-page h2{font-size:24px;font-weight:700;margin-bottom:6px;color:#f0e8d0}
-.search-page p{color:#8890b0;font-size:14px;margin-bottom:20px}
-.btn-search{background:linear-gradient(45deg,#f5b81b,#ffcc33);border:0;padding:16px 48px;border-radius:60px;font-weight:700;font-size:18px;color:#0a0a2e;cursor:pointer;transition:.12s;display:inline-flex;align-items:center;gap:12px;box-shadow:0 6px 30px rgba(245,184,27,.2)}
-.btn-search:hover{transform:scale(.97);box-shadow:0 6px 50px rgba(245,184,27,.4)}
-.btn-search:disabled{opacity:.4;pointer-events:none}
-.btn-search.cancel{background:linear-gradient(45deg,#dc3545,#ff6b6b);color:#fff;box-shadow:0 6px 30px rgba(220,53,69,.3);animation:pulse 1.5s infinite}
-.btn-search.cancel:hover{transform:scale(.97)}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(220,53,69,.5)}70%{box-shadow:0 0 0 20px rgba(220,53,69,0)}100%{box-shadow:0 0 0 0 rgba(220,53,69,0)}}
-.search-status{margin-top:20px;color:#6b6380;font-size:14px;min-height:40px}
-.search-status .count{color:#f5b81b;font-weight:700;font-size:32px;opacity:0;transition:opacity .3s ease}
-.search-status .count.visible{opacity:1}
-.timer-display{margin-top:14px;font-size:17px;color:#8890b0;display:none}
-.timer-display i{color:#f5b81b;margin-right:6px}
-.timer-display .time{font-weight:700;font-size:24px;color:#f5b81b;font-variant-numeric:tabular-nums}
 .match-page{background:rgba(10,10,46,.08);border-radius:24px;padding:28px 20px 30px;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(15px)}
 .match-page .match-id{text-align:center;font-size:18px;font-weight:700;color:#f5b81b;margin-bottom:20px;padding:12px;border-radius:60px;border:1px solid rgba(245,184,27,.12);background:rgba(245,184,27,.05)}
 .teams-row{display:flex;gap:20px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
@@ -272,7 +705,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:2000;justify-content:center;align-items:center;animation:fade .25s ease;padding:20px}
 .modal-overlay.active{display:flex}
 .modal{background:linear-gradient(145deg,#1a1a4e,#2a1a6e);border-radius:24px;padding:30px 28px;max-width:440px;width:100%;border:1px solid rgba(245,184,27,.2);box-shadow:0 20px 60px rgba(0,0,0,.9);position:relative}
-.modal .modal-close{position:absolute;top:12px;right:16px;font-size:22px;color:#6b6380;cursor:pointer;transition:.15s;background:0 0;border:0}
+.modal .modal-close{position:absolute;top:12px;right:16px;font-size:22px;color:#6b6380;cursor:pointer;transition:.15s;background:0;border:0}
 .modal .modal-close:hover{color:#f0e8d0}
 .modal .modal-title{font-size:20px;font-weight:700;color:#f0e8d0;margin-bottom:4px}
 .modal .modal-sub{font-size:13px;color:#6b6380;margin-bottom:18px}
@@ -325,9 +758,13 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .admin-queue-item{display:flex;justify-content:space-between;align-items:center;padding:6px 14px;background:rgba(10,10,46,.1);border-radius:8px;margin-bottom:4px;border:1px solid rgba(245,184,27,.04)}
 .admin-queue-item span{color:#f0e8d0;font-size:14px}
 .admin-queue-item button{background:rgba(58,26,26,.2);border:0;color:#ff6b6b;padding:3px 10px;border-radius:20px;cursor:pointer;font-size:12px}
+.missions-page,.shop-page{background:rgba(10,10,46,.08);border-radius:24px;padding:40px 20px 48px;text-align:center;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(15px)}
+.missions-page .big-icon,.shop-page .big-icon{font-size:72px;color:#f5b81b;margin-bottom:16px}
+.missions-page h2,.shop-page h2{font-size:24px;font-weight:700;margin-bottom:6px;color:#f0e8d0}
+.missions-page p,.shop-page p{color:#8890b0;font-size:14px;margin-bottom:20px}
 @media(max-width:992px){.main-menu .main-grid{grid-template-columns:1fr;gap:24px}}
-@media(max-width:768px){body{padding:10px;align-items:flex-start}.auth-container{padding:1.5rem 1.2rem;margin:8px}.auth-container .auth-logo h1{font-size:1.6rem}.auth-container .auth-logo .brawl-icon{font-size:2.2rem}.top-nav{padding:6px 14px;border-radius:40px;flex-direction:row;flex-wrap:wrap;gap:6px;top:6px}.top-nav .brand{font-size:15px}.top-nav .brand i{font-size:14px}.nav-center{gap:10px}.nav-center .nav-item{font-size:11px;padding:3px 2px}.nav-right .profile{font-size:12px;padding:3px 10px 3px 6px}.nav-right .profile i{font-size:16px}.main-site{padding:12px 14px 18px;border-radius:20px;margin-top:6px}.main-menu{padding:18px 14px 22px;border-radius:18px}.main-menu .stats-bar{gap:12px;padding:10px 14px;flex-direction:row;flex-wrap:wrap}.main-menu .stats-bar .stat-item{font-size:12px}.main-menu .stats-bar .stat-item .num{font-size:17px}.main-menu .left-col h1{font-size:20px}.main-menu .left-col .desc{font-size:13px}.main-menu .prize-block{padding:12px 14px}.main-menu .prize-block .prize-title{font-size:13px}.main-menu .prize-block .prize-item{font-size:13px;padding:3px 8px}.main-menu .right-col .top-title{font-size:15px;margin-bottom:10px}.main-menu .top-player{padding:8px 12px;gap:10px}.main-menu .top-player .info .name{font-size:13px}.main-menu .top-player .info .elo{font-size:11px}.main-menu .top-player .wins{font-size:12px}.btn-action{padding:10px 22px;font-size:13px;gap:8px}.search-page{padding:28px 16px 34px}.search-page .big-icon{font-size:56px}.search-page h2{font-size:20px}.btn-search{padding:14px 32px;font-size:15px}.match-page{padding:18px 14px 22px}.teams-row{flex-direction:column;gap:14px}.team-col{min-width:unset;padding:14px 16px 18px}.team-col h3{font-size:15px}.player-tag{font-size:13px;padding:8px 12px}.ban-pool{gap:8px}.map-chip{font-size:12px;padding:6px 14px}.captain-indicator{font-size:12px;padding:4px 12px 4px 16px;gap:10px}.captain-indicator .turn{font-size:11px;padding:2px 12px}.result-row{flex-direction:column;align-items:stretch;gap:10px;padding:12px 16px}.result-row .final-map .map-name{font-size:15px}.result-row .attach-btn{justify-content:center;font-size:12px;padding:8px 16px}.victory-buttons .btn-victory{padding:10px 20px;font-size:14px;min-width:130px}.rating-page{padding:18px 14px 22px}.rating-page .rating-title{font-size:18px}.rating-table{font-size:12px}.rating-table td,.rating-table th{padding:8px;font-size:12px}.rating-table .player-name{font-size:12px}.profile-page{padding:18px 14px 22px}.profile-header{flex-direction:column;text-align:center;gap:12px}.profile-avatar{width:70px;height:70px;font-size:32px}.profile-info .name{font-size:18px}.stats-grid{grid-template-columns:1fr 1fr;gap:10px}.stat-item .value{font-size:18px}.calibration-section{flex-direction:column;align-items:stretch;gap:8px}.calibration-section .right{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.calibration-section .right .progress-bar{flex:1;width:auto}.elo-section{flex-direction:column;align-items:stretch;text-align:center;gap:8px}.elo-section .right .elo-change{text-align:center}.profile-actions-btns{justify-content:center}.profile-actions-btns .btn{font-size:12px;padding:8px 18px}.history-item{font-size:12px;padding:8px 12px}.modal{padding:24px 18px;margin:10px}.modal .modal-title{font-size:18px}.room-instruction .instruction-content{grid-template-columns:1fr}.room-instruction .room-details{flex-direction:column;align-items:stretch}.admin-user-item{flex-direction:column;align-items:stretch}.admin-user-item .user-actions{justify-content:flex-start}.toast{bottom:1rem;right:1rem;left:1rem;max-width:unset}.brawl-bg-icons .icon{font-size:40px!important}}
-@media(max-width:480px){.auth-container{padding:1.2rem 1rem}.auth-container .auth-logo h1{font-size:1.4rem}.top-nav .brand{font-size:13px}.nav-center .nav-item{font-size:10px}.main-menu .stats-bar .stat-item{font-size:11px}.main-menu .stats-bar .stat-item .num{font-size:15px}.main-menu .left-col h1{font-size:18px}.main-menu .prize-block .prize-item{font-size:12px}.btn-action{padding:8px 16px;font-size:12px}.btn-search{padding:12px 24px;font-size:14px}.search-page .big-icon{font-size:44px}.search-page h2{font-size:18px}.stats-grid{grid-template-columns:1fr 1fr;gap:8px}.stat-item{padding:10px 8px}.stat-item .value{font-size:16px}.modal{padding:18px 14px}.modal .modal-actions{flex-direction:column}.brawl-bg-icons .icon{font-size:30px!important}}
+@media(max-width:768px){body{padding:10px;align-items:flex-start}.auth-container{padding:1.5rem 1.2rem;margin:8px}.auth-container .auth-logo h1{font-size:1.6rem}.auth-container .auth-logo .brawl-icon{font-size:2.2rem}.top-nav{padding:6px 14px;border-radius:40px;flex-direction:row;flex-wrap:wrap;gap:6px;top:6px}.top-nav .brand{font-size:15px}.top-nav .brand i{font-size:14px}.nav-center{gap:10px}.nav-center .nav-item{font-size:11px;padding:3px 2px}.nav-right .profile{font-size:12px;padding:3px 10px 3px 6px}.nav-right .profile i{font-size:16px}.main-site{padding:12px 14px 18px;border-radius:20px;margin-top:6px}.main-menu{padding:18px 14px 22px;border-radius:18px}.main-menu .stats-bar{gap:12px;padding:10px 14px;flex-direction:row;flex-wrap:wrap}.main-menu .stats-bar .stat-item{font-size:12px}.main-menu .stats-bar .stat-item .num{font-size:17px}.main-menu .left-col h1{font-size:20px}.main-menu .left-col .desc{font-size:13px}.main-menu .prize-block{padding:12px 14px}.main-menu .prize-block .prize-title{font-size:13px}.main-menu .prize-block .prize-item{font-size:13px;padding:3px 8px}.main-menu .right-col .top-title{font-size:15px;margin-bottom:10px}.main-menu .top-player{padding:8px 12px;gap:10px}.main-menu .top-player .info .name{font-size:13px}.main-menu .top-player .info .elo{font-size:11px}.main-menu .top-player .wins{font-size:12px}.btn-action{padding:10px 22px;font-size:13px;gap:8px}.match-page{padding:18px 14px 22px}.teams-row{flex-direction:column;gap:14px}.team-col{min-width:unset;padding:14px 16px 18px}.team-col h3{font-size:15px}.player-tag{font-size:13px;padding:8px 12px}.ban-pool{gap:8px}.map-chip{font-size:12px;padding:6px 14px}.captain-indicator{font-size:12px;padding:4px 12px 4px 16px;gap:10px}.captain-indicator .turn{font-size:11px;padding:2px 12px}.result-row{flex-direction:column;align-items:stretch;gap:10px;padding:12px 16px}.result-row .final-map .map-name{font-size:15px}.result-row .attach-btn{justify-content:center;font-size:12px;padding:8px 16px}.victory-buttons .btn-victory{padding:10px 20px;font-size:14px;min-width:130px}.rating-page{padding:18px 14px 22px}.rating-page .rating-title{font-size:18px}.rating-table{font-size:12px}.rating-table td,.rating-table th{padding:8px;font-size:12px}.rating-table .player-name{font-size:12px}.profile-page{padding:18px 14px 22px}.profile-header{flex-direction:column;text-align:center;gap:12px}.profile-avatar{width:70px;height:70px;font-size:32px}.profile-info .name{font-size:18px}.stats-grid{grid-template-columns:1fr 1fr;gap:10px}.stat-item .value{font-size:18px}.calibration-section{flex-direction:column;align-items:stretch;gap:8px}.calibration-section .right{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.calibration-section .right .progress-bar{flex:1;width:auto}.elo-section{flex-direction:column;align-items:stretch;text-align:center;gap:8px}.elo-section .right .elo-change{text-align:center}.profile-actions-btns{justify-content:center}.profile-actions-btns .btn{font-size:12px;padding:8px 18px}.history-item{font-size:12px;padding:8px 12px}.modal{padding:24px 18px;margin:10px}.modal .modal-title{font-size:18px}.room-instruction .instruction-content{grid-template-columns:1fr}.room-instruction .room-details{flex-direction:column;align-items:stretch}.admin-user-item{flex-direction:column;align-items:stretch}.admin-user-item .user-actions{justify-content:flex-start}.toast{bottom:1rem;right:1rem;left:1rem;max-width:unset}.brawl-bg-icons .icon{font-size:40px!important}}
+@media(max-width:480px){.auth-container{padding:1.2rem 1rem}.auth-container .auth-logo h1{font-size:1.4rem}.top-nav .brand{font-size:13px}.nav-center .nav-item{font-size:10px}.main-menu .stats-bar .stat-item{font-size:11px}.main-menu .stats-bar .stat-item .num{font-size:15px}.main-menu .left-col h1{font-size:18px}.main-menu .prize-block .prize-item{font-size:12px}.btn-action{padding:8px 16px;font-size:12px}.stats-grid{grid-template-columns:1fr 1fr;gap:8px}.stat-item{padding:10px 8px}.stat-item .value{font-size:16px}.modal{padding:18px 14px}.modal .modal-actions{flex-direction:column}.brawl-bg-icons .icon{font-size:30px!important}}
 </style>
 </head>
 <body>
@@ -369,6 +806,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 <div class="top-nav" id="topNav">
 <div class="brand" id="brandLogo"><i class="fas fa-star"></i> CYBERMODE</div>
 <div class="nav-center">
+<span class="nav-item active" data-tab="main">Главная</span>
 <span class="nav-item" data-tab="search">Поиск</span>
 <span class="nav-item" data-tab="rating">Рейтинг</span>
 <span class="nav-item" data-tab="missions">Миссии</span>
@@ -420,13 +858,56 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 
 <div id="tabSearch" class="tab-content">
-<div class="search-page">
-<div class="big-icon"><i class="fas fa-gamepad"></i></div>
-<h2>Поиск матча</h2>
-<p>Нажмите кнопку для поиска соперников (3 на 3).</p>
-<button class="btn-search" id="searchMatchBtn"><i class="fas fa-play"></i> ПОИСК МАТЧА</button>
-<div class="search-status"><span class="count" id="searchCount">0/6</span></div>
-<div class="timer-display"><i class="fas fa-stopwatch"></i> Время поиска: <span class="time" id="timerDisplay">00:00</span></div>
+<div class="search-page-modern">
+<div class="search-hero">
+<span class="hero-icon"><i class="fas fa-gamepad"></i></span>
+<h2>Поиск <span class="highlight">матча</span></h2>
+<p>Найди соперников и докажи своё превосходство в 3 на 3</p>
+</div>
+
+<div class="search-status-container">
+<div class="search-status-left">
+<div class="status-dot" id="statusDot"></div>
+<div class="status-text" id="statusText">Готов к поиску</div>
+</div>
+<div class="search-status-right">
+<div class="players-count">
+<span class="number" id="playersCountDisplay">0</span>
+<span class="label">/ 6 игроков</span>
+</div>
+<div class="timer">
+<i class="fas fa-stopwatch"></i>
+<span class="time" id="timerDisplay">00:00</span>
+</div>
+</div>
+</div>
+
+<div class="players-animation" id="playersAnimation">
+<div class="player-slot" data-slot="1"><span class="slot-number">1</span><span class="player-name-tag"></span></div>
+<div class="player-slot-connector"></div>
+<div class="player-slot" data-slot="2"><span class="slot-number">2</span><span class="player-name-tag"></span></div>
+<div class="player-slot-connector"></div>
+<div class="player-slot" data-slot="3"><span class="slot-number">3</span><span class="player-name-tag"></span></div>
+<div class="player-slot-connector" style="width:30px;background:rgba(245,184,27,.05)"></div>
+<div class="player-slot" data-slot="4"><span class="slot-number">4</span><span class="player-name-tag"></span></div>
+<div class="player-slot-connector"></div>
+<div class="player-slot" data-slot="5"><span class="slot-number">5</span><span class="player-name-tag"></span></div>
+<div class="player-slot-connector"></div>
+<div class="player-slot" data-slot="6"><span class="slot-number">6</span><span class="player-name-tag"></span></div>
+</div>
+
+<div class="search-actions">
+<button class="btn-search-modern" id="searchMatchBtn">
+<span class="btn-icon"><i class="fas fa-play"></i></span>
+<span class="btn-text">НАЙТИ МАТЧ</span>
+<span class="btn-spinner"></span>
+</button>
+<div class="search-info">
+<span class="info-item"><i class="fas fa-users"></i> 3v3 формат</span>
+<span class="info-item"><i class="fas fa-clock"></i> Быстрый поиск</span>
+<span class="info-item"><i class="fas fa-shield-alt"></i> Рейтинговые матчи</span>
+</div>
+</div>
 </div>
 </div>
 
@@ -1007,18 +1488,55 @@ function handleLogout(){
 }
 
 // ===== ПОИСК МАТЧА =====
-function updateSearchButton(isActive){
+function updateSearchUI(isActive, players=[]){
     const btn=document.getElementById('searchMatchBtn');
+    const dot=document.getElementById('statusDot');
+    const statusText=document.getElementById('statusText');
+    const countDisplay=document.getElementById('playersCountDisplay');
+    const slots=document.querySelectorAll('.player-slot');
+    const connectors=document.querySelectorAll('.player-slot-connector');
+    
     if(isActive){
-        btn.innerHTML='<i class="fas fa-times"></i> ОТМЕНИТЬ ПОИСК';
-        btn.classList.add('cancel');
+        btn.classList.add('searching');
+        btn.innerHTML='<span class="btn-spinner"></span><span class="btn-text">ПОИСК...</span>';
+        dot.className='status-dot searching';
+        statusText.innerHTML='<span class="highlight-text">Поиск</span> соперников...';
         isSearching=true;
-        document.querySelector('.timer-display').style.display='block';
-    }else{
-        btn.innerHTML='<i class="fas fa-play"></i> ПОИСК МАТЧА';
-        btn.classList.remove('cancel');
+        document.querySelector('.timer-display')?.style.setProperty('display','block');
+        
+        // Активируем слоты
+        slots.forEach((slot, i) => {
+            if(i < players.length) {
+                slot.classList.add('filled');
+                const nameTag = slot.querySelector('.player-name-tag');
+                if(nameTag && players[i]) nameTag.textContent = players[i];
+            } else {
+                slot.classList.remove('filled');
+                const nameTag = slot.querySelector('.player-name-tag');
+                if(nameTag) nameTag.textContent = '';
+            }
+        });
+        
+        connectors.forEach((conn, i) => {
+            if(i < players.length - 1) conn.classList.add('active');
+            else conn.classList.remove('active');
+        });
+        
+        countDisplay.textContent = players.length;
+    } else {
+        btn.classList.remove('searching');
+        btn.innerHTML='<span class="btn-icon"><i class="fas fa-play"></i></span><span class="btn-text">НАЙТИ МАТЧ</span>';
+        dot.className='status-dot';
+        statusText.textContent='Готов к поиску';
         isSearching=false;
-        document.querySelector('.timer-display').style.display='none';
+        
+        slots.forEach(slot => {
+            slot.classList.remove('filled');
+            const nameTag = slot.querySelector('.player-name-tag');
+            if(nameTag) nameTag.textContent = '';
+        });
+        connectors.forEach(conn => conn.classList.remove('active'));
+        countDisplay.textContent = '0';
     }
 }
 
@@ -1031,10 +1549,8 @@ function cancelSearch(){
             navigator.sendBeacon('/api/queue/leave',JSON.stringify({username:user.username}));
         });
     }
-    updateSearchButton(false);
+    updateSearchUI(false);
     searchCount=0;
-    const ce=document.getElementById('searchCount');
-    if(ce){ce.textContent='0/6';ce.classList.remove('visible')}
     const td=document.getElementById('timerDisplay');
     if(td)td.textContent='00:00';
     searchTime=0;
@@ -1050,15 +1566,13 @@ async function startSearch(){
         const q=await getQueue();
         if(q.players&&q.players.includes(user.username)){
             showToast('info','Уже в очереди','Вы уже находитесь в поиске');
-            updateSearchButton(true);
+            updateSearchUI(true, q.players);
             searchCount=q.players.length;
-            const ce=document.getElementById('searchCount');
-            if(ce){ce.textContent=searchCount+'/6';ce.classList.add('visible')}
             return;
         }
     }catch(e){console.error(e)}
     showToast('info','🔍 Поиск начат','Ищем соперников...');
-    updateSearchButton(true);
+    updateSearchUI(true, [user.username]);
     searchTime=0;
     const td=document.getElementById('timerDisplay');
     if(td)td.textContent='00:00';
@@ -1074,8 +1588,7 @@ async function startSearch(){
             const q=await getQueue();
             const players=q.players||[];
             searchCount=players.length;
-            const ce=document.getElementById('searchCount');
-            if(ce){ce.textContent=searchCount+'/6';ce.classList.add('visible')}
+            updateSearchUI(true, players);
             if(!players.includes(user.username)){
                 showToast('info','Вы удалены из очереди','Администратор удалил вас из поиска');
                 cancelSearch();
@@ -1084,7 +1597,7 @@ async function startSearch(){
             if(searchCount>=6){
                 clearInterval(searchTimer);
                 clearInterval(searchInterval);
-                updateSearchButton(false);
+                updateSearchUI(false);
                 const teamA=players.slice(0,3);
                 const teamB=players.slice(3,6);
                 const captainA=teamA[0]||'';
