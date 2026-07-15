@@ -73,7 +73,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
     position: relative;
     overflow: hidden;
 }
-
 .search-page-modern::before {
     content: '';
     position: absolute;
@@ -85,414 +84,74 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
                 radial-gradient(ellipse at 70% 50%, rgba(245,184,27,.02) 0%, transparent 60%);
     pointer-events: none;
 }
+.search-hero{text-align:center;position:relative;z-index:1;margin-bottom:28px}
+.search-hero .hero-icon{font-size:56px;color:#f5b81b;display:block;margin-bottom:10px}
+.search-hero h2{font-size:28px;font-weight:800;color:#f0e8d0;letter-spacing:-0.5px}
+.search-hero h2 .highlight{background:linear-gradient(45deg,#f5b81b,#ffcc33);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.search-hero p{color:#8890b0;font-size:15px;margin-top:4px}
+.search-status-container{background:rgba(10,10,46,.15);border-radius:16px;padding:16px 20px;margin-bottom:20px;border:1px solid rgba(245,184,27,.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:relative;z-index:1}
+.search-status-left{display:flex;align-items:center;gap:12px}
+.search-status-left .status-dot{width:12px;height:12px;border-radius:50%;background:#4a4270;transition:all .3s ease;flex-shrink:0}
+.search-status-left .status-dot.searching{background:#f5b81b;box-shadow:0 0 20px rgba(245,184,27,.4);animation:pulse-dot 1.5s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.6}}
+.search-status-left .status-text{font-size:15px;font-weight:500;color:#c0b8d0}
+.search-status-left .status-text .highlight-text{color:#f5b81b}
+.search-status-right{display:flex;align-items:center;gap:16px}
+.search-status-right .players-count{display:flex;align-items:center;gap:6px;background:rgba(10,10,46,.2);padding:4px 14px 4px 10px;border-radius:40px;border:1px solid rgba(245,184,27,.08)}
+.search-status-right .players-count .number{font-size:24px;font-weight:800;color:#f5b81b;font-variant-numeric:tabular-nums;min-width:28px;text-align:center}
+.search-status-right .players-count .label{font-size:12px;color:#8890b0}
+.search-status-right .timer{display:flex;align-items:center;gap:6px;color:#8890b0;font-size:13px}
+.search-status-right .timer .time{font-weight:700;color:#f0e8d0;font-size:17px;font-variant-numeric:tabular-nums;min-width:44px}
+.players-slots{display:flex;align-items:center;justify-content:center;gap:6px;margin:16px 0 24px;position:relative;z-index:1;min-height:48px;flex-wrap:wrap}
+.player-slot{width:44px;height:44px;border-radius:50%;background:rgba(26,26,62,.15);border:2px solid rgba(245,184,27,.1);display:flex;align-items:center;justify-content:center;font-size:14px;color:#4a4270;transition:all .3s ease;position:relative;font-weight:600}
+.player-slot.filled{border-color:#f5b81b;background:rgba(245,184,27,.1);color:#f5b81b}
+.player-slot .slot-number{font-size:10px;opacity:.5}
+.player-slot.filled .slot-number{opacity:1}
+.player-slot-connector{width:14px;height:2px;background:rgba(245,184,27,.08);transition:background .4s ease;flex-shrink:0}
+.player-slot-connector.active{background:rgba(245,184,27,.25)}
+.search-actions{display:flex;flex-direction:column;align-items:center;gap:12px;position:relative;z-index:1}
+.search-buttons-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn-search-modern{background:linear-gradient(135deg,#f5b81b,#f5a623);border:none;padding:16px 48px;border-radius:60px;font-weight:700;font-size:16px;color:#0a0a2e;cursor:pointer;transition:all .3s ease;display:inline-flex;align-items:center;gap:12px;box-shadow:0 8px 40px rgba(245,184,27,.25);position:relative;overflow:hidden;min-width:200px;justify-content:center}
+.btn-search-modern::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.1)0%,transparent 60%);opacity:0;transition:opacity .4s ease}
+.btn-search-modern:hover:not(:disabled)::before{opacity:1}
+.btn-search-modern:hover:not(:disabled){transform:translateY(-2px) scale(1.02);box-shadow:0 12px 50px rgba(245,184,27,.35)}
+.btn-search-modern:active:not(:disabled){transform:scale(.96)}
+.btn-search-modern:disabled{opacity:.4;cursor:not-allowed}
+.btn-search-modern.cancel{background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;box-shadow:0 8px 40px rgba(231,76,60,.3)}
+.btn-search-modern.cancel:hover:not(:disabled){box-shadow:0 12px 50px rgba(231,76,60,.45)}
+.btn-search-modern .btn-spinner{display:none;width:22px;height:22px;border:3px solid rgba(10,10,46,.1);border-top-color:#0a0a2e;border-radius:50%;animation:spin 1s linear infinite}
+.btn-search-modern.searching .btn-spinner{display:inline-block}
+.btn-search-modern.searching .btn-text{display:none}
+.btn-search-modern.searching .btn-icon{display:none}
+@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.btn-cancel-search{background:rgba(231,76,60,.15);border:2px solid rgba(231,76,60,.3);padding:16px 32px;border-radius:60px;font-weight:700;font-size:16px;color:#ff6b6b;cursor:pointer;transition:all .3s ease;display:inline-flex;align-items:center;gap:10px;min-width:180px;justify-content:center}
+.btn-cancel-search:hover{background:rgba(231,76,60,.25);border-color:#e74c3c;transform:scale(1.02)}
+.btn-cancel-search.hidden{display:none}
+.search-info{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:6px;font-size:13px;color:#6b6380;position:relative;z-index:1}
+.search-info .info-item{display:flex;align-items:center;gap:6px}
+.search-info .info-item i{color:#4a4270}
 
-.search-hero {
-    text-align: center;
-    position: relative;
-    z-index: 1;
-    margin-bottom: 28px;
+@media(max-width:768px){
+.search-page-modern{padding:20px 14px 28px;border-radius:20px}
+.search-hero h2{font-size:20px}
+.search-hero .hero-icon{font-size:40px}
+.search-status-container{flex-direction:column;align-items:stretch;padding:12px 14px;gap:10px}
+.search-status-right{justify-content:space-between}
+.search-status-right .players-count .number{font-size:20px;min-width:24px}
+.search-status-right .timer .time{font-size:15px;min-width:36px}
+.players-slots{gap:4px;min-height:40px}
+.player-slot{width:36px;height:36px;font-size:12px}
+.player-slot .slot-number{font-size:8px}
+.player-slot-connector{width:8px}
+.btn-search-modern{padding:12px 28px;font-size:14px;min-width:160px}
+.btn-cancel-search{padding:12px 24px;font-size:14px;min-width:140px}
+.search-buttons-row{flex-direction:column;width:100%}
+.search-buttons-row .btn-search-modern,
+.search-buttons-row .btn-cancel-search{width:100%}
+.search-info{gap:10px;font-size:12px;flex-direction:column;align-items:center}
 }
 
-.search-hero .hero-icon {
-    font-size: 56px;
-    color: #f5b81b;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.search-hero h2 {
-    font-size: 28px;
-    font-weight: 800;
-    color: #f0e8d0;
-    letter-spacing: -0.5px;
-}
-
-.search-hero h2 .highlight {
-    background: linear-gradient(45deg, #f5b81b, #ffcc33);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.search-hero p {
-    color: #8890b0;
-    font-size: 15px;
-    margin-top: 4px;
-}
-
-.search-status-container {
-    background: rgba(10,10,46,.15);
-    border-radius: 16px;
-    padding: 16px 20px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(245,184,27,.08);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    position: relative;
-    z-index: 1;
-}
-
-.search-status-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.search-status-left .status-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #4a4270;
-    transition: all .3s ease;
-    flex-shrink: 0;
-}
-
-.search-status-left .status-dot.searching {
-    background: #f5b81b;
-    box-shadow: 0 0 20px rgba(245,184,27,.4);
-    animation: pulse-dot 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse-dot {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.4); opacity: .6; }
-}
-
-.search-status-left .status-text {
-    font-size: 15px;
-    font-weight: 500;
-    color: #c0b8d0;
-}
-
-.search-status-left .status-text .highlight-text {
-    color: #f5b81b;
-}
-
-.search-status-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.search-status-right .players-count {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(10,10,46,.2);
-    padding: 4px 14px 4px 10px;
-    border-radius: 40px;
-    border: 1px solid rgba(245,184,27,.08);
-}
-
-.search-status-right .players-count .number {
-    font-size: 24px;
-    font-weight: 800;
-    color: #f5b81b;
-    font-variant-numeric: tabular-nums;
-    min-width: 28px;
-    text-align: center;
-}
-
-.search-status-right .players-count .label {
-    font-size: 12px;
-    color: #8890b0;
-}
-
-.search-status-right .timer {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #8890b0;
-    font-size: 13px;
-}
-
-.search-status-right .timer .time {
-    font-weight: 700;
-    color: #f0e8d0;
-    font-size: 17px;
-    font-variant-numeric: tabular-nums;
-    min-width: 44px;
-}
-
-.players-slots {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    margin: 16px 0 24px;
-    position: relative;
-    z-index: 1;
-    min-height: 48px;
-    flex-wrap: wrap;
-}
-
-.player-slot {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: rgba(26,26,62,.15);
-    border: 2px solid rgba(245,184,27,.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    color: #4a4270;
-    transition: all .3s ease;
-    position: relative;
-    font-weight: 600;
-}
-
-.player-slot.filled {
-    border-color: #f5b81b;
-    background: rgba(245,184,27,.1);
-    color: #f5b81b;
-}
-
-.player-slot .slot-number {
-    font-size: 10px;
-    opacity: .5;
-}
-
-.player-slot.filled .slot-number {
-    opacity: 1;
-}
-
-.player-slot-connector {
-    width: 14px;
-    height: 2px;
-    background: rgba(245,184,27,.08);
-    transition: background .4s ease;
-    flex-shrink: 0;
-}
-
-.player-slot-connector.active {
-    background: rgba(245,184,27,.25);
-}
-
-.search-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    position: relative;
-    z-index: 1;
-}
-
-.search-buttons-row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.btn-search-modern {
-    background: linear-gradient(135deg, #f5b81b, #f5a623);
-    border: none;
-    padding: 16px 48px;
-    border-radius: 60px;
-    font-weight: 700;
-    font-size: 16px;
-    color: #0a0a2e;
-    cursor: pointer;
-    transition: all .3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 8px 40px rgba(245,184,27,.25);
-    position: relative;
-    overflow: hidden;
-    min-width: 200px;
-    justify-content: center;
-}
-
-.btn-search-modern::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,.1) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity .4s ease;
-}
-
-.btn-search-modern:hover:not(:disabled)::before {
-    opacity: 1;
-}
-
-.btn-search-modern:hover:not(:disabled) {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 12px 50px rgba(245,184,27,.35);
-}
-
-.btn-search-modern:active:not(:disabled) {
-    transform: scale(.96);
-}
-
-.btn-search-modern:disabled {
-    opacity: .4;
-    cursor: not-allowed;
-}
-
-.btn-search-modern.cancel {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
-    color: #fff;
-    box-shadow: 0 8px 40px rgba(231,76,60,.3);
-}
-
-.btn-search-modern.cancel:hover:not(:disabled) {
-    box-shadow: 0 12px 50px rgba(231,76,60,.45);
-}
-
-.btn-search-modern .btn-spinner {
-    display: none;
-    width: 22px;
-    height: 22px;
-    border: 3px solid rgba(10,10,46,.1);
-    border-top-color: #0a0a2e;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-.btn-search-modern.searching .btn-spinner {
-    display: inline-block;
-}
-
-.btn-search-modern.searching .btn-text {
-    display: none;
-}
-
-.btn-search-modern.searching .btn-icon {
-    display: none;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0); }
-    100% { transform: rotate(360deg); }
-}
-
-.btn-cancel-search {
-    background: rgba(231,76,60,.15);
-    border: 2px solid rgba(231,76,60,.3);
-    padding: 16px 32px;
-    border-radius: 60px;
-    font-weight: 700;
-    font-size: 16px;
-    color: #ff6b6b;
-    cursor: pointer;
-    transition: all .3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 180px;
-    justify-content: center;
-}
-
-.btn-cancel-search:hover {
-    background: rgba(231,76,60,.25);
-    border-color: #e74c3c;
-    transform: scale(1.02);
-}
-
-.btn-cancel-search.hidden {
-    display: none;
-}
-
-.search-info {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 6px;
-    font-size: 13px;
-    color: #6b6380;
-    position: relative;
-    z-index: 1;
-}
-
-.search-info .info-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.search-info .info-item i {
-    color: #4a4270;
-}
-
-@media(max-width:768px) {
-    .search-page-modern {
-        padding: 20px 14px 28px;
-        border-radius: 20px;
-    }
-    .search-hero h2 {
-        font-size: 20px;
-    }
-    .search-hero .hero-icon {
-        font-size: 40px;
-    }
-    .search-status-container {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 12px 14px;
-        gap: 10px;
-    }
-    .search-status-right {
-        justify-content: space-between;
-    }
-    .search-status-right .players-count .number {
-        font-size: 20px;
-        min-width: 24px;
-    }
-    .search-status-right .timer .time {
-        font-size: 15px;
-        min-width: 36px;
-    }
-    .players-slots {
-        gap: 4px;
-        min-height: 40px;
-    }
-    .player-slot {
-        width: 36px;
-        height: 36px;
-        font-size: 12px;
-    }
-    .player-slot .slot-number {
-        font-size: 8px;
-    }
-    .player-slot-connector {
-        width: 8px;
-    }
-    .btn-search-modern {
-        padding: 12px 28px;
-        font-size: 14px;
-        min-width: 160px;
-    }
-    .btn-cancel-search {
-        padding: 12px 24px;
-        font-size: 14px;
-        min-width: 140px;
-    }
-    .search-buttons-row {
-        flex-direction: column;
-        width: 100%;
-    }
-    .search-buttons-row .btn-search-modern,
-    .search-buttons-row .btn-cancel-search {
-        width: 100%;
-    }
-    .search-info {
-        gap: 10px;
-        font-size: 12px;
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
-/* Остальные стили */
+/* ===== ОСНОВНЫЕ СТИЛИ ===== */
 .main-menu{background:rgba(10,10,46,.08);border-radius:24px;padding:28px 20px 32px;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(15px)}
 .main-menu .stats-bar{display:flex;gap:20px;justify-content:center;margin-bottom:24px;padding:12px 20px;background:rgba(10,10,46,.1);border-radius:60px;border:1px solid rgba(245,184,27,.04);flex-wrap:wrap}
 .main-menu .stats-bar .stat-item{display:flex;align-items:center;gap:8px;color:#8890b0;font-size:13px}
@@ -513,14 +172,14 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .main-menu .prize-block .prize-item:nth-child(3){background:rgba(205,127,50,.04)}
 .main-menu .right-col .top-title{font-size:17px;font-weight:700;color:#f0e8d0;margin-bottom:14px}
 .main-menu .right-col .top-title i{color:#f5b81b;margin-right:8px}
-.main-menu .top-player{display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(10,10,46,.1);border-radius:12px;margin-bottom:8px;border:1px solid rgba(245,184,27,.04);transition:.15s}
+.main-menu .top-player{display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(10,10,46,.1);border-radius:12px;margin-bottom:8px;border:1px solid rgba(245,184,27,.04);transition:.15s;cursor:pointer}
 .main-menu .top-player:hover{border-color:#f5b81b;transform:translateX(4px);background:rgba(245,184,27,.05)}
 .main-menu .top-player .rank{font-weight:700;color:#6b6380;min-width:30px;font-size:14px}
 .main-menu .top-player .rank.gold{color:#f5b81b}
 .main-menu .top-player .rank.silver{color:#c0c8d0}
 .main-menu .top-player .rank.bronze{color:#cd7f32}
-.main-menu .top-player .avatar-mini{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid rgba(245,184,27,.1);flex-shrink:0}
-.main-menu .top-player .info{flex:1}
+.main-menu .top-player .avatar-mini{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid rgba(245,184,27,.1);flex-shrink:0;background:rgba(26,26,62,.15)}
+.main-menu .top-player .info{flex:1;min-width:0}
 .main-menu .top-player .info .name{font-weight:600;color:#f0e8d0;font-size:14px;display:flex;align-items:center;gap:8px}
 .main-menu .top-player .info .elo{color:#6b6380;font-size:12px}
 .main-menu .top-player .info .elo.calibration{color:#f5b81b;font-weight:600}
@@ -530,6 +189,98 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .btn-action:hover{background:rgba(245,184,27,.1);color:#f0e8d0;border-color:#f5b81b}
 .btn-action.primary{background:linear-gradient(45deg,#f5b81b,#ffcc33);color:#0a0a2e;border:0}
 .btn-action.primary:hover{transform:scale(.97);box-shadow:0 0 40px rgba(245,184,27,.3)}
+
+/* ===== ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ (свой и чужой) ===== */
+.profile-page{background:rgba(10,10,46,.08);border-radius:24px;padding:24px 20px 28px;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(15px)}
+.profile-header{display:flex;align-items:center;gap:18px;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid rgba(245,184,27,.04);flex-wrap:wrap}
+.profile-avatar{width:80px;height:80px;border-radius:50%;background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;font-size:40px;color:#6b6380;border:2px solid rgba(245,184,27,.15);flex-shrink:0;overflow:hidden}
+.profile-avatar img{width:100%;height:100%;object-fit:cover}
+.profile-info .name{font-size:20px;font-weight:700;color:#f0e8d0}
+.profile-info .name i{color:#f5b81b;font-size:16px;margin-left:6px}
+.profile-info .id{display:none}
+.profile-info .league{display:inline-block;background:rgba(26,26,62,.15);padding:4px 14px;border-radius:40px;font-size:12px;font-weight:600;color:#8890b0;margin-top:6px;border:1px solid rgba(245,184,27,.04)}
+.profile-info .league i{color:#f5b81b;margin-right:4px}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+.stat-item{background:rgba(10,10,46,.1);border-radius:14px;padding:14px 10px;text-align:center;border:1px solid rgba(245,184,27,.04)}
+.stat-item .value{font-size:20px;font-weight:700;color:#f0e8d0}
+.stat-item .value.gold{color:#f5b81b}
+.stat-item .value.green{color:#6fcf97}
+.stat-item .value.red{color:#e74c3c}
+.stat-item .label{font-size:10px;color:#6b6380;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+.calibration-section{background:rgba(10,10,46,.1);border-radius:14px;padding:16px 20px;margin-bottom:18px;border:1px solid rgba(245,184,27,.04);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.calibration-section .left{display:flex;align-items:center;gap:14px}
+.calibration-section .left .cal-icon{font-size:26px;color:#f5b81b}
+.calibration-section .left .cal-info .title{font-weight:600;font-size:15px;color:#f0e8d0}
+.calibration-section .left .cal-info .sub{font-size:13px;color:#6b6380}
+.calibration-section .right .progress-text{font-size:20px;font-weight:700;color:#f5b81b}
+.calibration-section .right .progress-bar{width:100px;height:6px;background:rgba(26,26,62,.15);border-radius:10px;overflow:hidden}
+.calibration-section .right .progress-bar .fill{height:100%;background:linear-gradient(45deg,#f5b81b,#ffcc33);border-radius:10px;width:0%;transition:width .3s ease}
+.elo-section{background:rgba(10,10,46,.1);border-radius:14px;padding:16px 20px;margin-bottom:18px;border:1px solid rgba(245,184,27,.04);display:none;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.elo-section.show{display:flex}
+.elo-section .left{display:flex;align-items:center;gap:14px}
+.elo-section .left .elo-icon{font-size:26px;color:#f5b81b}
+.elo-section .left .elo-info .title{font-weight:600;font-size:15px;color:#f0e8d0}
+.elo-section .left .elo-info .sub{font-size:13px;color:#6b6380}
+.elo-section .right .elo-value{font-size:24px;font-weight:700;color:#f5b81b}
+.elo-section .right .elo-change{font-size:13px;color:#6b6380;text-align:right}
+.elo-section .right .elo-change .win{color:#6fcf97}
+.elo-section .right .elo-change .lose{color:#e74c3c}
+.profile-actions-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.profile-actions-btns .btn{padding:10px 24px;border-radius:60px;border:0;font-weight:600;font-size:13px;cursor:pointer;transition:.12s;display:inline-flex;align-items:center;gap:8px}
+.profile-actions-btns .btn-edit{background:rgba(26,26,62,.2);color:#c0b8d0;border:1px solid rgba(245,184,27,.04)}
+.profile-actions-btns .btn-edit:hover{background:rgba(245,184,27,.1)}
+.profile-actions-btns .btn-help{background:rgba(26,26,62,.2);color:#c0b8d0;border:1px solid rgba(245,184,27,.04)}
+.profile-actions-btns .btn-help:hover{background:rgba(245,184,27,.1)}
+.profile-actions-btns .btn-logout{background:rgba(58,26,26,.2);color:#ff6b6b;border:1px solid #ff6b6b}
+.profile-actions-btns .btn-logout:hover{background:rgba(74,42,42,.2)}
+.profile-actions-btns .btn-back{background:rgba(26,26,62,.2);color:#c0b8d0;border:1px solid rgba(245,184,27,.04)}
+.profile-actions-btns .btn-back:hover{background:rgba(245,184,27,.1)}
+.history-section{margin-top:18px;padding-top:18px;border-top:1px solid rgba(245,184,27,.04)}
+.history-section .history-title{font-size:17px;font-weight:700;color:#f0e8d0;margin-bottom:12px}
+.history-empty{background:rgba(10,10,46,.1);border-radius:14px;padding:30px 16px;text-align:center;border:1px solid rgba(245,184,27,.04)}
+.history-empty i{font-size:40px;color:#6b6380;margin-bottom:10px;display:block}
+.history-empty .empty-text{font-size:14px;color:#6b6380}
+.history-empty .empty-sub{font-size:13px;color:#4a4270;margin-top:4px}
+.history-list{display:flex;flex-direction:column;gap:6px}
+.history-item{background:rgba(10,10,46,.1);border-radius:12px;padding:10px 14px;border:1px solid rgba(245,184,27,.04);display:flex;justify-content:space-between;align-items:center;font-size:13px;flex-wrap:wrap;gap:6px}
+.history-item .match-info{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.history-item .match-info .match-number{color:#6b6380;font-weight:600;font-size:12px}
+.history-item .match-info .match-map{color:#8890b0;font-size:13px}
+.history-item .match-result{font-weight:700;padding:3px 12px;border-radius:40px;font-size:12px}
+.history-item .match-result.win{background:rgba(26,58,42,.2);color:#6fcf97}
+.history-item .match-result.lose{background:rgba(58,26,26,.2);color:#e74c3c}
+.history-item .elo-change{font-size:12px;font-weight:600;margin-left:6px}
+.history-item .elo-change.positive{color:#6fcf97}
+.history-item .elo-change.negative{color:#e74c3c}
+
+/* ===== МОДАЛЬНОЕ ОКНО ===== */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:2000;justify-content:center;align-items:center;animation:fade .25s ease;padding:20px}
+.modal-overlay.active{display:flex}
+.modal{background:linear-gradient(145deg,#1a1a4e,#2a1a6e);border-radius:24px;padding:30px 28px;max-width:440px;width:100%;border:1px solid rgba(245,184,27,.2);box-shadow:0 20px 60px rgba(0,0,0,.9);position:relative}
+.modal .modal-close{position:absolute;top:12px;right:16px;font-size:22px;color:#6b6380;cursor:pointer;transition:.15s;background:0;border:0}
+.modal .modal-close:hover{color:#f0e8d0}
+.modal .modal-title{font-size:20px;font-weight:700;color:#f0e8d0;margin-bottom:4px}
+.modal .modal-sub{font-size:13px;color:#6b6380;margin-bottom:18px}
+.modal .avatar-section{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:14px 16px;background:rgba(10,10,46,.1);border-radius:14px;border:1px solid rgba(245,184,27,.04)}
+.modal .avatar-section .avatar-preview{width:56px;height:56px;border-radius:50%;background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;font-size:26px;color:#6b6380;border:2px solid rgba(245,184,27,.1);flex-shrink:0;overflow:hidden}
+.modal .avatar-section .avatar-preview img{width:100%;height:100%;object-fit:cover}
+.modal .avatar-section .avatar-actions{display:flex;flex-direction:column;gap:4px}
+.modal .avatar-section .avatar-actions .label{font-size:12px;color:#8890b0}
+.modal .avatar-section .avatar-actions .btn-upload{background:rgba(26,26,62,.2);border:1px solid rgba(245,184,27,.15);padding:4px 16px;border-radius:40px;color:#c0b8d0;font-weight:500;font-size:12px;cursor:pointer;transition:.1s;display:inline-flex;align-items:center;gap:6px;width:fit-content}
+.modal .avatar-section .avatar-actions .btn-upload:hover{background:rgba(245,184,27,.1)}
+.modal .form-group{margin-bottom:14px}
+.modal .form-group label{display:block;font-size:12px;font-weight:600;color:#8890b0;margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px}
+.modal .form-group input{width:100%;background:rgba(10,10,46,.1);border:1px solid rgba(245,184,27,.1);border-radius:12px;padding:10px 14px;font-size:15px;color:#f0e8d0;outline:0;transition:.15s}
+.modal .form-group input:focus{border-color:#f5b81b;box-shadow:0 0 0 3px rgba(245,184,27,.08)}
+.modal .form-group input::placeholder{color:#4a4270}
+.modal .modal-actions{display:flex;gap:10px;margin-top:6px}
+.modal .modal-actions .btn{padding:10px 24px;border-radius:60px;border:0;font-weight:600;font-size:14px;cursor:pointer;transition:.12s;flex:1}
+.modal .modal-actions .btn-cancel{background:rgba(26,26,62,.2);color:#c0b8d0;border:1px solid rgba(245,184,27,.04)}
+.modal .modal-actions .btn-cancel:hover{background:rgba(245,184,27,.1)}
+.modal .modal-actions .btn-save{background:linear-gradient(45deg,#f5b81b,#ffcc33);color:#0a0a2e}
+.modal .modal-actions .btn-save:hover{transform:scale(.97)}
+
+/* ===== ДРУГИЕ СТИЛИ ===== */
 .match-page{background:rgba(10,10,46,.08);border-radius:24px;padding:28px 20px 30px;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(15px)}
 .match-page .match-id{text-align:center;font-size:18px;font-weight:700;color:#f5b81b;margin-bottom:20px;padding:12px;border-radius:60px;border:1px solid rgba(245,184,27,.12);background:rgba(245,184,27,.05)}
 .teams-row{display:flex;gap:20px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
@@ -620,96 +371,11 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .rating-table .rank.silver{color:#c0c8d0}
 .rating-table .rank.bronze{color:#cd7f32}
 .rating-table .player-name{font-weight:600;color:#f0e8d0;font-size:13px;display:flex;align-items:center;gap:8px}
-.rating-table .player-name .avatar-mini{width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid rgba(245,184,27,.1);flex-shrink:0}
+.rating-table .player-name .avatar-mini{width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid rgba(245,184,27,.1);flex-shrink:0;background:rgba(26,26,62,.15)}
 .rating-table .player-name i{color:#f5b81b;font-size:12px;margin-left:4px}
 .rating-table .player-rating{font-weight:700;color:#f5b81b}
 .rating-table .player-rating.calibration{color:#f5b81b;font-size:12px}
 .rating-table .player-prize{font-weight:700;color:#f5b81b;font-size:13px}
-.profile-page{background:rgba(10,10,46,.08);border-radius:24px;padding:24px 20px 28px;border:1px solid rgba(245,184,27,.04);backdrop-filter:blur(15px)}
-.profile-header{display:flex;align-items:center;gap:18px;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid rgba(245,184,27,.04);flex-wrap:wrap}
-.profile-avatar{width:80px;height:80px;border-radius:50%;background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;font-size:40px;color:#6b6380;border:2px solid rgba(245,184,27,.15);flex-shrink:0;cursor:pointer;transition:.15s;overflow:hidden}
-.profile-avatar img{width:100%;height:100%;object-fit:cover}
-.profile-avatar:hover{border-color:#f5b81b;background:rgba(245,184,27,.05)}
-.profile-info .name{font-size:20px;font-weight:700;color:#f0e8d0}
-.profile-info .name i{color:#f5b81b;font-size:16px;margin-left:6px}
-.profile-info .id{display:none}
-.profile-info .league{display:inline-block;background:rgba(26,26,62,.15);padding:4px 14px;border-radius:40px;font-size:12px;font-weight:600;color:#8890b0;margin-top:6px;border:1px solid rgba(245,184,27,.04)}
-.profile-info .league i{color:#f5b81b;margin-right:4px}
-.stats-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:20px}
-.stat-item{background:rgba(10,10,46,.1);border-radius:14px;padding:14px 10px;text-align:center;border:1px solid rgba(245,184,27,.04)}
-.stat-item .value{font-size:20px;font-weight:700;color:#f0e8d0}
-.stat-item .value.gold{color:#f5b81b}
-.stat-item .value.green{color:#6fcf97}
-.stat-item .value.red{color:#e74c3c}
-.stat-item .label{font-size:10px;color:#6b6380;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
-.calibration-section{background:rgba(10,10,46,.1);border-radius:14px;padding:16px 20px;margin-bottom:18px;border:1px solid rgba(245,184,27,.04);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.calibration-section .left{display:flex;align-items:center;gap:14px}
-.calibration-section .left .cal-icon{font-size:26px;color:#f5b81b}
-.calibration-section .left .cal-info .title{font-weight:600;font-size:15px;color:#f0e8d0}
-.calibration-section .left .cal-info .sub{font-size:13px;color:#6b6380}
-.calibration-section .right .progress-text{font-size:20px;font-weight:700;color:#f5b81b}
-.calibration-section .right .progress-bar{width:100px;height:6px;background:rgba(26,26,62,.15);border-radius:10px;overflow:hidden}
-.calibration-section .right .progress-bar .fill{height:100%;background:linear-gradient(45deg,#f5b81b,#ffcc33);border-radius:10px;width:0%;transition:width .3s ease}
-.elo-section{background:rgba(10,10,46,.1);border-radius:14px;padding:16px 20px;margin-bottom:18px;border:1px solid rgba(245,184,27,.04);display:none;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.elo-section.show{display:flex}
-.elo-section .left{display:flex;align-items:center;gap:14px}
-.elo-section .left .elo-icon{font-size:26px;color:#f5b81b}
-.elo-section .left .elo-info .title{font-weight:600;font-size:15px;color:#f0e8d0}
-.elo-section .left .elo-info .sub{font-size:13px;color:#6b6380}
-.elo-section .right .elo-value{font-size:24px;font-weight:700;color:#f5b81b}
-.elo-section .right .elo-change{font-size:13px;color:#6b6380;text-align:right}
-.elo-section .right .elo-change .win{color:#6fcf97}
-.elo-section .right .elo-change .lose{color:#e74c3c}
-.profile-actions-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.profile-actions-btns .btn{padding:10px 24px;border-radius:60px;border:0;font-weight:600;font-size:13px;cursor:pointer;transition:.12s;display:inline-flex;align-items:center;gap:8px}
-.profile-actions-btns .btn-edit{background:rgba(26,26,62,.2);color:#c0b8d0;border:1px solid rgba(245,184,27,.04)}
-.profile-actions-btns .btn-edit:hover{background:rgba(245,184,27,.1)}
-.profile-actions-btns .btn-help{background:rgba(26,26,62,.2);color:#c0b8d0;border:1px solid rgba(245,184,27,.04)}
-.profile-actions-btns .btn-help:hover{background:rgba(245,184,27,.1)}
-.profile-actions-btns .btn-logout{background:rgba(58,26,26,.2);color:#ff6b6b;border:1px solid #ff6b6b}
-.profile-actions-btns .btn-logout:hover{background:rgba(74,42,42,.2)}
-.history-section{margin-top:18px;padding-top:18px;border-top:1px solid rgba(245,184,27,.04)}
-.history-section .history-title{font-size:17px;font-weight:700;color:#f0e8d0;margin-bottom:12px}
-.history-empty{background:rgba(10,10,46,.1);border-radius:14px;padding:30px 16px;text-align:center;border:1px solid rgba(245,184,27,.04)}
-.history-empty i{font-size:40px;color:#6b6380;margin-bottom:10px;display:block}
-.history-empty .empty-text{font-size:14px;color:#6b6380}
-.history-empty .empty-sub{font-size:13px;color:#4a4270;margin-top:4px}
-.history-list{display:flex;flex-direction:column;gap:6px}
-.history-item{background:rgba(10,10,46,.1);border-radius:12px;padding:10px 14px;border:1px solid rgba(245,184,27,.04);display:flex;justify-content:space-between;align-items:center;font-size:13px;flex-wrap:wrap;gap:6px}
-.history-item .match-info{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.history-item .match-info .match-number{color:#6b6380;font-weight:600;font-size:12px}
-.history-item .match-info .match-map{color:#8890b0;font-size:13px}
-.history-item .match-result{font-weight:700;padding:3px 12px;border-radius:40px;font-size:12px}
-.history-item .match-result.win{background:rgba(26,58,42,.2);color:#6fcf97}
-.history-item .match-result.lose{background:rgba(58,26,26,.2);color:#e74c3c}
-.history-item .elo-change{font-size:12px;font-weight:600;margin-left:6px}
-.history-item .elo-change.positive{color:#6fcf97}
-.history-item .elo-change.negative{color:#e74c3c}
-.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:2000;justify-content:center;align-items:center;animation:fade .25s ease;padding:20px}
-.modal-overlay.active{display:flex}
-.modal{background:linear-gradient(145deg,#1a1a4e,#2a1a6e);border-radius:24px;padding:30px 28px;max-width:440px;width:100%;border:1px solid rgba(245,184,27,.2);box-shadow:0 20px 60px rgba(0,0,0,.9);position:relative}
-.modal .modal-close{position:absolute;top:12px;right:16px;font-size:22px;color:#6b6380;cursor:pointer;transition:.15s;background:0;border:0}
-.modal .modal-close:hover{color:#f0e8d0}
-.modal .modal-title{font-size:20px;font-weight:700;color:#f0e8d0;margin-bottom:4px}
-.modal .modal-sub{font-size:13px;color:#6b6380;margin-bottom:18px}
-.modal .avatar-section{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:14px 16px;background:rgba(10,10,46,.1);border-radius:14px;border:1px solid rgba(245,184,27,.04)}
-.modal .avatar-section .avatar-preview{width:56px;height:56px;border-radius:50%;background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;font-size:26px;color:#6b6380;border:2px solid rgba(245,184,27,.1);flex-shrink:0;overflow:hidden}
-.modal .avatar-section .avatar-preview img{width:100%;height:100%;object-fit:cover}
-.modal .avatar-section .avatar-actions{display:flex;flex-direction:column;gap:4px}
-.modal .avatar-section .avatar-actions .label{font-size:12px;color:#8890b0}
-.modal .avatar-section .avatar-actions .btn-upload{background:rgba(26,26,62,.2);border:1px solid rgba(245,184,27,.15);padding:4px 16px;border-radius:40px;color:#c0b8d0;font-weight:500;font-size:12px;cursor:pointer;transition:.1s;display:inline-flex;align-items:center;gap:6px;width:fit-content}
-.modal .avatar-section .avatar-actions .btn-upload:hover{background:rgba(245,184,27,.1)}
-.modal .form-group{margin-bottom:14px}
-.modal .form-group label{display:block;font-size:12px;font-weight:600;color:#8890b0;margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px}
-.modal .form-group input{width:100%;background:rgba(10,10,46,.1);border:1px solid rgba(245,184,27,.1);border-radius:12px;padding:10px 14px;font-size:15px;color:#f0e8d0;outline:0;transition:.15s}
-.modal .form-group input:focus{border-color:#f5b81b;box-shadow:0 0 0 3px rgba(245,184,27,.08)}
-.modal .form-group input::placeholder{color:#4a4270}
-.modal .modal-actions{display:flex;gap:10px;margin-top:6px}
-.modal .modal-actions .btn{padding:10px 24px;border-radius:60px;border:0;font-weight:600;font-size:14px;cursor:pointer;transition:.12s;flex:1}
-.modal .modal-actions .btn-cancel{background:rgba(26,26,62,.2);color:#c0b8d0;border:1px solid rgba(245,184,27,.04)}
-.modal .modal-actions .btn-cancel:hover{background:rgba(245,184,27,.1)}
-.modal .modal-actions .btn-save{background:linear-gradient(45deg,#f5b81b,#ffcc33);color:#0a0a2e}
-.modal .modal-actions .btn-save:hover{transform:scale(.97)}
 .toast{position:fixed;bottom:1.5rem;right:1.5rem;background:rgba(26,26,62,.7);border:1px solid rgba(245,184,27,.2);border-radius:14px;padding:.8rem 1.2rem;box-shadow:0 20px 60px rgba(0,0,0,.8);z-index:9999;max-width:360px;transform:translateY(80px);opacity:0;transition:.4s ease;color:#f0e8d0}
 .toast.visible{transform:translateY(0);opacity:1}
 .toast .toast-title{font-weight:700;margin-bottom:.2rem;font-size:14px}
@@ -808,7 +474,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
-<!-- ГЛАВНАЯ СТРАНИЦА (вкладка main, но без кнопки в навбаре) -->
+<!-- ГЛАВНАЯ СТРАНИЦА -->
 <div id="tabMain" class="tab-content active">
 <div class="main-menu">
 <div class="stats-bar">
@@ -840,6 +506,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
+<!-- ПОИСК -->
 <div id="tabSearch" class="tab-content">
 <div class="search-page-modern">
 <div class="search-hero">
@@ -847,7 +514,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 <h2>Поиск <span class="highlight">матча</span></h2>
 <p>Найди соперников и докажи своё превосходство в 3 на 3</p>
 </div>
-
 <div class="search-status-container">
 <div class="search-status-left">
 <div class="status-dot" id="statusDot"></div>
@@ -864,7 +530,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 </div>
-
 <div class="players-slots" id="playersSlots">
 <div class="player-slot" data-slot="1"><span class="slot-number">1</span></div>
 <div class="player-slot-connector"></div>
@@ -878,7 +543,6 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 <div class="player-slot-connector"></div>
 <div class="player-slot" data-slot="6"><span class="slot-number">6</span></div>
 </div>
-
 <div class="search-actions">
 <div class="search-buttons-row">
 <button class="btn-search-modern" id="searchMatchBtn">
@@ -899,6 +563,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
+<!-- МАТЧ -->
 <div id="tabMatch" class="tab-content">
 <div class="match-page">
 <div class="match-id">🎮 Матч #<span id="matchIdDisplay">0000</span></div>
@@ -963,6 +628,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
+<!-- РЕЙТИНГ -->
 <div id="tabRating" class="tab-content">
 <div class="rating-page">
 <div class="rating-title">🏆 Топ игроков</div>
@@ -973,26 +639,47 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
+<!-- МИССИИ -->
 <div id="tabMissions" class="tab-content"><div class="missions-page"><div class="big-icon"><i class="fas fa-tasks"></i></div><h2>Миссии</h2><p>Ежедневные задания и миссии</p><p style="color:#4a4270;margin-top:8px">🚧 Раздел в разработке</p></div></div>
 
+<!-- МАГАЗИН -->
 <div id="tabShop" class="tab-content"><div class="shop-page"><div class="big-icon"><i class="fas fa-store"></i></div><h2>Магазин</h2><p>Привилегии и улучшения для аккаунта</p><p style="color:#4a4270;margin-top:8px">🚧 Раздел в разработке</p></div></div>
 
+<!-- ПРОФИЛЬ (СВОЙ) -->
 <div id="tabProfile" class="tab-content">
 <div class="profile-page">
 <div class="profile-header"><div class="profile-avatar" id="avatarPreview"><i class="fas fa-user"></i></div><div class="profile-info"><div class="name" id="profileNameDisplay">Игрок <i class="fas fa-check-circle"></i></div><div class="id" style="display:none" id="profileIdDisplay"></div><div class="league"><i class="fas fa-trophy"></i> DEFAULT LEAGUE · Калибровка рейтинга</div></div></div>
 <div class="stats-grid"><div class="stat-item"><div class="value gold" id="winrateDisplay">0%</div><div class="label">Винрейт</div></div><div class="stat-item"><div class="value green" id="winsDisplay">0</div><div class="label">Победы</div></div><div class="stat-item"><div class="value red" id="lossesDisplay">0</div><div class="label">Поражения</div></div><div class="stat-item"><div class="value gold" id="matchesDisplay">0</div><div class="label">Матчи</div></div></div>
 <div class="calibration-section" id="calibrationSection"><div class="left"><div class="cal-icon"><i class="fas fa-chart-line"></i></div><div class="cal-info"><div class="title">Калибровка</div><div class="sub" id="calibrationSub">Пройдите 10 матчей для определения рейтинга</div></div></div><div class="right"><span class="progress-text" id="calibrationText">0/10</span><div class="progress-bar"><div class="fill" id="calibrationFill"></div></div></div></div>
 <div class="elo-section" id="eloSection"><div class="left"><div class="elo-icon"><i class="fas fa-star"></i></div><div class="elo-info"><div class="title">Текущий ELO</div><div class="sub" id="eloSub">Ваш рейтинг в лиге</div></div></div><div class="right"><div class="elo-value" id="eloValue">0</div><div class="elo-change"><span class="win">+25</span> / <span class="lose">-25</span></div></div></div>
-<div class="profile-actions-btns"><button class="btn btn-edit" id="editProfileBtn"><i class="fas fa-pen"></i> Редактировать</button><button class="btn btn-help" id="helpBtn"><i class="fas fa-question-circle"></i> Помощь</button><button class="btn btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Выйти</button></div>
+<div class="profile-actions-btns" id="profileActions">
+<button class="btn btn-edit" id="editProfileBtn"><i class="fas fa-pen"></i> Редактировать</button>
+<button class="btn btn-help" id="helpBtn"><i class="fas fa-question-circle"></i> Помощь</button>
+<button class="btn btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Выйти</button>
+</div>
 <div class="history-section"><div class="history-title">Последние матчи</div><div id="historyContainer"><div class="history-empty" id="historyEmpty"><i class="fas fa-trophy"></i><div class="empty-text">В этой лиге матчей пока нет.</div><div class="empty-sub">Сыграйте свой первый матч, чтобы он появился здесь</div></div><div class="history-list" id="historyList" style="display:none"></div></div></div>
 </div>
 </div>
 
+<!-- ПРОФИЛЬ ДРУГОГО ИГРОКА (скрытая вкладка) -->
+<div id="tabUserProfile" class="tab-content">
+<div class="profile-page">
+<div class="profile-header"><div class="profile-avatar" id="userProfileAvatar"><i class="fas fa-user"></i></div><div class="profile-info"><div class="name" id="userProfileName">Игрок</div><div class="league" id="userProfileLeague"><i class="fas fa-trophy"></i> DEFAULT LEAGUE</div></div></div>
+<div class="stats-grid"><div class="stat-item"><div class="value gold" id="userWinrate">0%</div><div class="label">Винрейт</div></div><div class="stat-item"><div class="value green" id="userWins">0</div><div class="label">Победы</div></div><div class="stat-item"><div class="value red" id="userLosses">0</div><div class="label">Поражения</div></div><div class="stat-item"><div class="value gold" id="userMatches">0</div><div class="label">Матчи</div></div></div>
+<div class="calibration-section" id="userCalibrationSection"><div class="left"><div class="cal-icon"><i class="fas fa-chart-line"></i></div><div class="cal-info"><div class="title">Калибровка</div><div class="sub" id="userCalibrationSub">Пройдите 10 матчей для определения рейтинга</div></div></div><div class="right"><span class="progress-text" id="userCalibrationText">0/10</span><div class="progress-bar"><div class="fill" id="userCalibrationFill"></div></div></div></div>
+<div class="elo-section" id="userEloSection"><div class="left"><div class="elo-icon"><i class="fas fa-star"></i></div><div class="elo-info"><div class="title">Текущий ELO</div><div class="sub">Рейтинг игрока</div></div></div><div class="right"><div class="elo-value" id="userEloValue">0</div></div></div>
+<div class="profile-actions-btns"><button class="btn btn-back" id="backFromUserProfile"><i class="fas fa-arrow-left"></i> Назад</button></div>
+<div class="history-section"><div class="history-title">Последние матчи</div><div id="userHistoryContainer"><div class="history-empty" id="userHistoryEmpty"><i class="fas fa-trophy"></i><div class="empty-text">У этого игрока пока нет матчей</div></div><div class="history-list" id="userHistoryList" style="display:none"></div></div></div>
+</div>
+</div>
+
+<!-- АДМИН ПАНЕЛИ -->
 <div id="tabAdminUsers" class="tab-content"><div class="rating-page"><div class="rating-title"><i class="fas fa-users-cog"></i> Управление администраторами</div><div class="rating-sub">Только главный администратор может назначать и удалять админов</div><div id="adminUsersList" style="margin-top:16px"></div></div></div>
 <div id="tabAdminQueue" class="tab-content"><div class="rating-page"><div class="rating-title"><i class="fas fa-clock"></i> Очередь игроков</div><div class="rating-sub">Просматривайте и управляйте очередью поиска</div><div id="adminQueueList" style="margin-top:16px"></div><button class="btn-action" onclick="clearQueue()" style="margin-top:12px;background:rgba(58,26,26,.2);color:#ff6b6b;border:1px solid #ff6b6b;padding:10px 20px;border-radius:40px;cursor:pointer;font-size:13px"><i class="fas fa-trash"></i> Очистить очередь</button></div></div>
 
 </div>
 
+<!-- МОДАЛЬНОЕ ОКНО РЕДАКТИРОВАНИЯ -->
 <div class="modal-overlay" id="editModal">
 <div class="modal"><button class="modal-close" id="closeEditModal">&times;</button>
 <div class="modal-title">Редактирование профиля</div><div class="modal-sub">Измените никнейм и аватар.</div>
@@ -1002,6 +689,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
+<!-- TOAST -->
 <div class="toast" id="toast"><div class="toast-title" id="toastTitle">Успешно!</div><div class="toast-text" id="toastText">Действие выполнено</div></div>
 
 <input type="file" id="fileInputResult" accept="image/*" style="display:none" />
@@ -1079,7 +767,7 @@ function switchTab(tabId){
     
     document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
-    const map={main:'tabMain',search:'tabSearch',rating:'tabRating',missions:'tabMissions',shop:'tabShop',match:'tabMatch',profile:'tabProfile',adminUsers:'tabAdminUsers',adminQueue:'tabAdminQueue'};
+    const map={main:'tabMain',search:'tabSearch',rating:'tabRating',missions:'tabMissions',shop:'tabShop',match:'tabMatch',profile:'tabProfile',userProfile:'tabUserProfile',adminUsers:'tabAdminUsers',adminQueue:'tabAdminQueue'};
     const tab=document.getElementById(map[tabId]);if(tab)tab.classList.add('active');
     const item=document.querySelector(`.nav-item[data-tab="${tabId}"]`);if(item)item.classList.add('active');
 }
@@ -1110,6 +798,7 @@ let finalMap='💎 Gem Grab';
 let isBanPhaseActive=false;
 let banPollingInterval=null;
 let matchCounter=0;
+let allUsersCache=[];
 
 // ===== API =====
 async function apiRequest(endpoint,options={}){
@@ -1151,6 +840,7 @@ async function getMatch(mid){return apiRequest('/api/match/'+mid)}
 async function updateMatch(md){return apiRequest('/api/match/update',{method:'PUT',body:JSON.stringify(md)})}
 async function getStats(){return apiRequest('/api/stats')}
 async function getAllUsers(){return apiRequest('/api/users/public')}
+async function getUserByUsername(username){return apiRequest('/api/users/'+username)}
 async function checkAdmin(){try{return await apiRequest('/api/admin/check')}catch{return{isAdmin:false,isSuperAdmin:false}}}
 
 // ===== ОТМЕНА МАТЧА =====
@@ -1339,7 +1029,7 @@ window.addEventListener('popstate',function(){
     }
 });
 
-// ===== UI =====
+// ===== UI СВОЕГО ПРОФИЛЯ =====
 function updateUI(user){
     document.getElementById('navUsername').textContent=user.username;
     document.getElementById('profileNameDisplay').innerHTML=user.username+' <i class="fas fa-check-circle"></i>';
@@ -1377,7 +1067,73 @@ function updateUI(user){
         document.getElementById('historyList').style.display='none';
         document.getElementById('historyEmpty').style.display='block';
     }
+    // Показываем кнопки редактирования только для своего профиля
+    document.getElementById('profileActions').style.display='flex';
     switchTab('main');
+}
+
+// ===== ПРОСМОТР ПРОФИЛЯ ДРУГОГО ИГРОКА =====
+async function viewUserProfile(username){
+    try{
+        // Прячем кнопки редактирования
+        document.getElementById('profileActions').style.display='none';
+        
+        const data = await getUserByUsername(username);
+        if(!data || !data.user){
+            showToast('error','Ошибка','Пользователь не найден');
+            return;
+        }
+        const u = data.user;
+        
+        document.getElementById('userProfileName').textContent = u.username;
+        
+        // Аватар
+        const avatar = u.avatar || localStorage.getItem('user_avatar_'+u.username) || '';
+        if(avatar){
+            document.getElementById('userProfileAvatar').innerHTML = '<img src="'+avatar+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
+        }else{
+            document.getElementById('userProfileAvatar').innerHTML = '<i class="fas fa-user"></i>';
+        }
+        
+        document.getElementById('userWins').textContent = u.wins||0;
+        document.getElementById('userLosses').textContent = u.losses||0;
+        document.getElementById('userMatches').textContent = u.matches||0;
+        const total=(u.wins||0)+(u.losses||0);
+        const winrate=total>0?Math.round(((u.wins||0)/total)*100):0;
+        document.getElementById('userWinrate').textContent = winrate+'%';
+        
+        const cal=Math.min(u.calibrationMatches||0,10);
+        if(u.isCalibrated){
+            document.getElementById('userCalibrationSection').style.display='none';
+            document.getElementById('userEloSection').classList.add('show');
+            document.getElementById('userEloValue').textContent = u.elo||1000;
+        }else{
+            document.getElementById('userCalibrationSection').style.display='flex';
+            document.getElementById('userEloSection').classList.remove('show');
+            document.getElementById('userCalibrationText').textContent = cal+'/10';
+            document.getElementById('userCalibrationFill').style.width = (cal/10*100)+'%';
+            document.getElementById('userCalibrationSub').textContent = 'Пройдите 10 матчей для определения рейтинга';
+        }
+        
+        // История
+        if(u.history && u.history.length>0){
+            document.getElementById('userHistoryList').style.display='flex';
+            document.getElementById('userHistoryEmpty').style.display='none';
+            document.getElementById('userHistoryList').innerHTML = u.history.slice(-15).reverse().map(item=>{
+                return'<div class="history-item"><div class="match-info"><span class="match-number">#'+item.matchId+'</span><span class="match-map">'+(item.map||'💎 Gem Grab')+'</span><span style="color:#6b6380;font-size:11px">'+item.date+'</span></div><span class="match-result '+(item.result==='win'?'win':'lose')+'">'+(item.result==='win'?'🏆 Победа':'❌ Поражение')+'</span></div>';
+            }).join('');
+        }else{
+            document.getElementById('userHistoryList').style.display='none';
+            document.getElementById('userHistoryEmpty').style.display='block';
+        }
+        
+        document.getElementById('userProfileLeague').innerHTML = '<i class="fas fa-trophy"></i> '+(u.isCalibrated ? 'ELO '+u.elo : 'Калибровка');
+        
+        switchTab('userProfile');
+    }catch(e){
+        showToast('error','Ошибка','Не удалось загрузить профиль игрока');
+        console.error(e);
+    }
 }
 
 // ===== ТОП ИГРОКОВ С АВАТАРАМИ =====
@@ -1385,6 +1141,7 @@ async function loadTopPlayers(){
     try{
         const data=await getAllUsers();
         const users=data.users||[];
+        allUsersCache=users;
         const sorted=users.sort((a,b)=>{
             if(a.is_calibrated&&b.is_calibrated)return(b.elo||0)-(a.elo||0);
             if(a.is_calibrated&&!b.is_calibrated)return-1;
@@ -1405,7 +1162,7 @@ async function loadTopPlayers(){
             const elo=cal?'ELO: '+(p.elo||1000):'📊 Калибровка '+m+'/10';
             const avatar = p.avatar || '';
             const avatarHtml = avatar ? '<img src="'+avatar+'" class="avatar-mini" />' : '<div class="avatar-mini" style="background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;border-radius:50%;width:32px;height:32px;font-size:14px;border:2px solid rgba(245,184,27,.1);flex-shrink:0;color:#6b6380;"><i class="fas fa-user"></i></div>';
-            return'<div class="top-player"><span class="rank '+(classes[i]||'')+'">'+(medals[i]||(i+1))+'</span>'+avatarHtml+'<div class="info"><div class="name">'+p.username+'</div><div class="elo '+(!cal?'calibration':'')+'">'+elo+'</div></div><span class="wins">🏆 '+(p.wins||0)+'</span></div>';
+            return'<div class="top-player" onclick="viewUserProfile(\''+p.username+'\')"><span class="rank '+(classes[i]||'')+'">'+(medals[i]||(i+1))+'</span>'+avatarHtml+'<div class="info"><div class="name">'+p.username+'</div><div class="elo '+(!cal?'calibration':'')+'">'+elo+'</div></div><span class="wins">🏆 '+(p.wins||0)+'</span></div>';
         }).join('');
     }catch(e){
         const c=document.getElementById('topPlayersList');
@@ -1439,7 +1196,7 @@ async function renderRating(){
             const rClass=p.is_calibrated?'player-rating':'player-rating calibration';
             const avatar = p.avatar || '';
             const avatarHtml = avatar ? '<img src="'+avatar+'" class="avatar-mini" />' : '<div class="avatar-mini" style="background:rgba(26,26,62,.15);display:flex;align-items:center;justify-content:center;border-radius:50%;width:28px;height:28px;font-size:12px;border:1px solid rgba(245,184,27,.1);flex-shrink:0;color:#6b6380;"><i class="fas fa-user"></i></div>';
-            return'<tr><td class="rank '+cls+'">#'+rank+'</td><td class="player-name">'+avatarHtml+' '+p.username+' <i class="fas fa-check-circle"></i></td><td class="'+rClass+'">'+rating+'</td><td class="player-prize">'+(prizes[i]||'')+'</td></tr>';
+            return'<tr><td class="rank '+cls+'">#'+rank+'</td><td class="player-name" style="cursor:pointer" onclick="viewUserProfile(\''+p.username+'\')">'+avatarHtml+' '+p.username+' <i class="fas fa-check-circle"></i></td><td class="'+rClass+'">'+rating+'</td><td class="player-prize">'+(prizes[i]||'')+'</td></tr>';
         }).join('');
     }catch(e){
         body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#6b6380;padding:30px 0"><i class="fas fa-exclamation-circle" style="font-size:20px;display:block;margin-bottom:8px;color:#ff6b6b"></i>Ошибка загрузки рейтинга<br><small style="color:#4a4270">Попробуйте обновить страницу</small></td></tr>';
@@ -1915,6 +1672,9 @@ document.getElementById('fileInputAvatar').addEventListener('change',function(e)
         document.getElementById('avatarPreview').innerHTML='<img src="'+src+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%" />';
         localStorage.setItem('user_avatar', src);
         showToast('success','Аватар загружен','Изображение сохранено');
+        // Обновляем топ и рейтинг
+        loadTopPlayers();
+        renderRating();
     };
     reader.readAsDataURL(file);
     this.value='';
@@ -1958,6 +1718,10 @@ document.getElementById('victoryA').addEventListener('click',()=>handleVictory('
 document.getElementById('victoryB').addEventListener('click',()=>handleVictory('B'));
 document.getElementById('searchMatchBtn').addEventListener('click',startSearch);
 document.getElementById('cancelSearchBtn').addEventListener('click',cancelSearch);
+document.getElementById('backFromUserProfile').addEventListener('click',()=>{
+    document.getElementById('profileActions').style.display='flex';
+    switchTab('profile');
+});
 
 document.getElementById('fileInputResult').addEventListener('change',function(e){
     const file=e.target.files[0];
