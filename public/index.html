@@ -63,7 +63,7 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .tab-content.active{display:block}
 @keyframes fade{0%{opacity:.3;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
 
-/* ===== КРАСИВЫЙ ПОИСК МАТЧА ===== */
+/* ===== ПОИСК МАТЧА ===== */
 .search-page-modern {
     background: rgba(10,10,46,.08);
     border-radius: 32px;
@@ -90,19 +90,18 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
     text-align: center;
     position: relative;
     z-index: 1;
-    margin-bottom: 36px;
+    margin-bottom: 28px;
 }
 
 .search-hero .hero-icon {
-    font-size: 72px;
+    font-size: 56px;
     color: #f5b81b;
     display: block;
-    margin-bottom: 12px;
-    animation: floatIcon 4s ease-in-out infinite;
+    margin-bottom: 10px;
 }
 
 .search-hero h2 {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 800;
     color: #f0e8d0;
     letter-spacing: -0.5px;
@@ -116,22 +115,22 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 
 .search-hero p {
     color: #8890b0;
-    font-size: 16px;
-    margin-top: 6px;
+    font-size: 15px;
+    margin-top: 4px;
 }
 
 /* Статус поиска */
 .search-status-container {
     background: rgba(10,10,46,.15);
-    border-radius: 20px;
-    padding: 20px 24px;
-    margin-bottom: 28px;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
     border: 1px solid rgba(245,184,27,.08);
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 12px;
     position: relative;
     z-index: 1;
 }
@@ -139,12 +138,12 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .search-status-left {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
 }
 
 .search-status-left .status-dot {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background: #4a4270;
     transition: all .3s ease;
@@ -168,8 +167,8 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 }
 
 .search-status-left .status-text {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 500;
     color: #c0b8d0;
 }
 
@@ -180,30 +179,30 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .search-status-right {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
 }
 
 .search-status-right .players-count {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     background: rgba(10,10,46,.2);
-    padding: 6px 16px 6px 12px;
+    padding: 4px 14px 4px 10px;
     border-radius: 40px;
     border: 1px solid rgba(245,184,27,.08);
 }
 
 .search-status-right .players-count .number {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 800;
     color: #f5b81b;
     font-variant-numeric: tabular-nums;
-    min-width: 32px;
+    min-width: 28px;
     text-align: center;
 }
 
 .search-status-right .players-count .label {
-    font-size: 13px;
+    font-size: 12px;
     color: #8890b0;
 }
 
@@ -212,114 +211,74 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
     align-items: center;
     gap: 6px;
     color: #8890b0;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .search-status-right .timer .time {
     font-weight: 700;
     color: #f0e8d0;
-    font-size: 18px;
+    font-size: 17px;
     font-variant-numeric: tabular-nums;
-    min-width: 48px;
+    min-width: 44px;
 }
 
-/* Анимация игроков */
-.players-animation {
+/* Слоты игроков (без анимаций) */
+.players-slots {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin: 20px 0 28px;
+    gap: 6px;
+    margin: 16px 0 24px;
     position: relative;
     z-index: 1;
-    min-height: 56px;
+    min-height: 48px;
+    flex-wrap: wrap;
 }
 
 .player-slot {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: rgba(26,26,62,.15);
     border: 2px solid rgba(245,184,27,.1);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 14px;
     color: #4a4270;
-    transition: all .4s ease;
+    transition: all .3s ease;
     position: relative;
+    font-weight: 600;
 }
 
 .player-slot.filled {
     border-color: #f5b81b;
     background: rgba(245,184,27,.1);
     color: #f5b81b;
-    transform: scale(1.05);
-}
-
-.player-slot.filled::after {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    border: 2px solid rgba(245,184,27,.15);
-    animation: ripple 1.5s ease-out infinite;
-}
-
-@keyframes ripple {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(1.4); opacity: 0; }
 }
 
 .player-slot .slot-number {
-    position: absolute;
-    bottom: -8px;
-    right: -8px;
-    background: #0a0a2e;
-    border: 1px solid rgba(245,184,27,.15);
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    font-size: 9px;
-    font-weight: 700;
-    color: #8890b0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 10px;
+    opacity: .5;
 }
 
 .player-slot.filled .slot-number {
-    background: #f5b81b;
-    color: #0a0a2e;
-}
-
-.player-slot .player-name-tag {
-    position: absolute;
-    bottom: -24px;
-    font-size: 9px;
-    color: #6b6380;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity .3s ease;
-}
-
-.player-slot.filled .player-name-tag {
     opacity: 1;
 }
 
 .player-slot-connector {
-    width: 20px;
+    width: 14px;
     height: 2px;
-    background: rgba(245,184,27,.1);
+    background: rgba(245,184,27,.08);
     transition: background .4s ease;
     flex-shrink: 0;
 }
 
 .player-slot-connector.active {
-    background: rgba(245,184,27,.3);
+    background: rgba(245,184,27,.25);
 }
 
-/* Кнопка поиска */
+/* Кнопки */
 .search-actions {
     display: flex;
     flex-direction: column;
@@ -329,22 +288,31 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
     z-index: 1;
 }
 
+.search-buttons-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .btn-search-modern {
     background: linear-gradient(135deg, #f5b81b, #f5a623);
     border: none;
-    padding: 18px 56px;
+    padding: 16px 48px;
     border-radius: 60px;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
     color: #0a0a2e;
     cursor: pointer;
     transition: all .3s ease;
     display: inline-flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     box-shadow: 0 8px 40px rgba(245,184,27,.25);
     position: relative;
     overflow: hidden;
+    min-width: 200px;
+    justify-content: center;
 }
 
 .btn-search-modern::before {
@@ -381,26 +349,16 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
     background: linear-gradient(135deg, #e74c3c, #c0392b);
     color: #fff;
     box-shadow: 0 8px 40px rgba(231,76,60,.3);
-    animation: pulse-cancel 2s ease-in-out infinite;
-}
-
-@keyframes pulse-cancel {
-    0%, 100% { box-shadow: 0 8px 40px rgba(231,76,60,.3); }
-    50% { box-shadow: 0 8px 60px rgba(231,76,60,.5); }
 }
 
 .btn-search-modern.cancel:hover:not(:disabled) {
     box-shadow: 0 12px 50px rgba(231,76,60,.45);
 }
 
-.btn-search-modern .btn-icon {
-    font-size: 20px;
-}
-
 .btn-search-modern .btn-spinner {
     display: none;
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     border: 3px solid rgba(10,10,46,.1);
     border-top-color: #0a0a2e;
     border-radius: 50%;
@@ -424,13 +382,39 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
     100% { transform: rotate(360deg); }
 }
 
-/* Инфо под кнопкой */
+.btn-cancel-search {
+    background: rgba(231,76,60,.15);
+    border: 2px solid rgba(231,76,60,.3);
+    padding: 16px 32px;
+    border-radius: 60px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #ff6b6b;
+    cursor: pointer;
+    transition: all .3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 180px;
+    justify-content: center;
+}
+
+.btn-cancel-search:hover {
+    background: rgba(231,76,60,.25);
+    border-color: #e74c3c;
+    transform: scale(1.02);
+}
+
+.btn-cancel-search.hidden {
+    display: none;
+}
+
 .search-info {
     display: flex;
-    gap: 24px;
+    gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 8px;
+    margin-top: 6px;
     font-size: 13px;
     color: #6b6380;
     position: relative;
@@ -450,61 +434,67 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 /* Для мобильных */
 @media(max-width:768px) {
     .search-page-modern {
-        padding: 24px 16px 32px;
-        border-radius: 24px;
+        padding: 20px 14px 28px;
+        border-radius: 20px;
     }
     .search-hero h2 {
-        font-size: 24px;
+        font-size: 20px;
     }
     .search-hero .hero-icon {
-        font-size: 48px;
+        font-size: 40px;
     }
     .search-status-container {
         flex-direction: column;
         align-items: stretch;
-        padding: 16px 18px;
-        gap: 12px;
+        padding: 12px 14px;
+        gap: 10px;
     }
     .search-status-right {
         justify-content: space-between;
     }
     .search-status-right .players-count .number {
-        font-size: 22px;
-        min-width: 28px;
+        font-size: 20px;
+        min-width: 24px;
     }
     .search-status-right .timer .time {
-        font-size: 16px;
-        min-width: 40px;
+        font-size: 15px;
+        min-width: 36px;
     }
-    .players-animation {
+    .players-slots {
         gap: 4px;
-        flex-wrap: wrap;
-        min-height: 44px;
+        min-height: 40px;
     }
     .player-slot {
-        width: 40px;
-        height: 40px;
-        font-size: 14px;
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
     }
     .player-slot .slot-number {
-        width: 16px;
-        height: 16px;
         font-size: 8px;
-        bottom: -6px;
-        right: -6px;
     }
     .player-slot-connector {
-        width: 10px;
+        width: 8px;
     }
     .btn-search-modern {
-        padding: 14px 36px;
-        font-size: 15px;
-        gap: 10px;
+        padding: 12px 28px;
+        font-size: 14px;
+        min-width: 160px;
+    }
+    .btn-cancel-search {
+        padding: 12px 24px;
+        font-size: 14px;
+        min-width: 140px;
+    }
+    .search-buttons-row {
+        flex-direction: column;
         width: 100%;
-        justify-content: center;
+    }
+    .search-buttons-row .btn-search-modern,
+    .search-buttons-row .btn-cancel-search {
+        width: 100%;
     }
     .search-info {
-        gap: 12px;
+        gap: 10px;
         font-size: 12px;
         flex-direction: column;
         align-items: center;
@@ -882,26 +872,32 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 </div>
 </div>
 
-<div class="players-animation" id="playersAnimation">
-<div class="player-slot" data-slot="1"><span class="slot-number">1</span><span class="player-name-tag"></span></div>
+<!-- Слоты игроков (без анимаций) -->
+<div class="players-slots" id="playersSlots">
+<div class="player-slot" data-slot="1"><span class="slot-number">1</span></div>
 <div class="player-slot-connector"></div>
-<div class="player-slot" data-slot="2"><span class="slot-number">2</span><span class="player-name-tag"></span></div>
+<div class="player-slot" data-slot="2"><span class="slot-number">2</span></div>
 <div class="player-slot-connector"></div>
-<div class="player-slot" data-slot="3"><span class="slot-number">3</span><span class="player-name-tag"></span></div>
-<div class="player-slot-connector" style="width:30px;background:rgba(245,184,27,.05)"></div>
-<div class="player-slot" data-slot="4"><span class="slot-number">4</span><span class="player-name-tag"></span></div>
+<div class="player-slot" data-slot="3"><span class="slot-number">3</span></div>
+<div class="player-slot-connector" style="width:20px;background:rgba(245,184,27,.05)"></div>
+<div class="player-slot" data-slot="4"><span class="slot-number">4</span></div>
 <div class="player-slot-connector"></div>
-<div class="player-slot" data-slot="5"><span class="slot-number">5</span><span class="player-name-tag"></span></div>
+<div class="player-slot" data-slot="5"><span class="slot-number">5</span></div>
 <div class="player-slot-connector"></div>
-<div class="player-slot" data-slot="6"><span class="slot-number">6</span><span class="player-name-tag"></span></div>
+<div class="player-slot" data-slot="6"><span class="slot-number">6</span></div>
 </div>
 
 <div class="search-actions">
+<div class="search-buttons-row">
 <button class="btn-search-modern" id="searchMatchBtn">
 <span class="btn-icon"><i class="fas fa-play"></i></span>
 <span class="btn-text">НАЙТИ МАТЧ</span>
 <span class="btn-spinner"></span>
 </button>
+<button class="btn-cancel-search hidden" id="cancelSearchBtn">
+<i class="fas fa-times-circle"></i> ОТМЕНИТЬ
+</button>
+</div>
 <div class="search-info">
 <span class="info-item"><i class="fas fa-users"></i> 3v3 формат</span>
 <span class="info-item"><i class="fas fa-clock"></i> Быстрый поиск</span>
@@ -1490,6 +1486,7 @@ function handleLogout(){
 // ===== ПОИСК МАТЧА =====
 function updateSearchUI(isActive, players=[]){
     const btn=document.getElementById('searchMatchBtn');
+    const cancelBtn=document.getElementById('cancelSearchBtn');
     const dot=document.getElementById('statusDot');
     const statusText=document.getElementById('statusText');
     const countDisplay=document.getElementById('playersCountDisplay');
@@ -1499,21 +1496,18 @@ function updateSearchUI(isActive, players=[]){
     if(isActive){
         btn.classList.add('searching');
         btn.innerHTML='<span class="btn-spinner"></span><span class="btn-text">ПОИСК...</span>';
+        btn.disabled=true;
+        cancelBtn.classList.remove('hidden');
         dot.className='status-dot searching';
         statusText.innerHTML='<span class="highlight-text">Поиск</span> соперников...';
         isSearching=true;
-        document.querySelector('.timer-display')?.style.setProperty('display','block');
         
-        // Активируем слоты
+        // Обновляем слоты
         slots.forEach((slot, i) => {
             if(i < players.length) {
                 slot.classList.add('filled');
-                const nameTag = slot.querySelector('.player-name-tag');
-                if(nameTag && players[i]) nameTag.textContent = players[i];
             } else {
                 slot.classList.remove('filled');
-                const nameTag = slot.querySelector('.player-name-tag');
-                if(nameTag) nameTag.textContent = '';
             }
         });
         
@@ -1526,14 +1520,14 @@ function updateSearchUI(isActive, players=[]){
     } else {
         btn.classList.remove('searching');
         btn.innerHTML='<span class="btn-icon"><i class="fas fa-play"></i></span><span class="btn-text">НАЙТИ МАТЧ</span>';
+        btn.disabled=false;
+        cancelBtn.classList.add('hidden');
         dot.className='status-dot';
         statusText.textContent='Готов к поиску';
         isSearching=false;
         
         slots.forEach(slot => {
             slot.classList.remove('filled');
-            const nameTag = slot.querySelector('.player-name-tag');
-            if(nameTag) nameTag.textContent = '';
         });
         connectors.forEach(conn => conn.classList.remove('active'));
         countDisplay.textContent = '0';
@@ -1944,6 +1938,8 @@ document.getElementById('attachResultBtn').addEventListener('click',handleAttach
 document.getElementById('victoryA').addEventListener('click',()=>handleVictory('A'));
 document.getElementById('victoryB').addEventListener('click',()=>handleVictory('B'));
 document.getElementById('searchMatchBtn').addEventListener('click',startSearch);
+document.getElementById('cancelSearchBtn').addEventListener('click',cancelSearch);
+
 document.getElementById('fileInputAvatar').addEventListener('change',function(e){
     const file=e.target.files[0];
     if(!file)return;
