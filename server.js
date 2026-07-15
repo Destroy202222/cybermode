@@ -109,7 +109,6 @@ app.post('/api/auth/register', async (req, res) => {
                 elo: 1000,
                 calibration_matches: 0,
                 is_calibrated: false,
-                avatar: null,
                 history: []
             })
             .select()
@@ -129,8 +128,7 @@ app.post('/api/auth/register', async (req, res) => {
                 id: user.id,
                 username: user.username,
                 email: user.email,
-                isAdmin: user.is_admin,
-                avatar: user.avatar || null
+                isAdmin: user.is_admin
             }
         });
     } catch (error) {
@@ -172,7 +170,6 @@ app.post('/api/auth/login', async (req, res) => {
                 username: user.username,
                 email: user.email,
                 isAdmin: user.is_admin || false,
-                avatar: user.avatar || null,
                 wins: user.wins || 0,
                 losses: user.losses || 0,
                 matches: user.matches || 0,
@@ -216,7 +213,6 @@ app.get('/api/auth/me', async (req, res) => {
             username: user.username,
             email: user.email,
             isAdmin: user.is_admin || false,
-            avatar: user.avatar || null,
             wins: user.wins || 0,
             losses: user.losses || 0,
             matches: user.matches || 0,
@@ -231,7 +227,7 @@ app.get('/api/auth/me', async (req, res) => {
     }
 });
 
-// ===== ПРОФИЛЬ (ОБНОВЛЕНИЕ С АВАТАРОМ) =====
+// ===== ПРОФИЛЬ (ОБНОВЛЕНИЕ) =====
 app.put('/api/profile/update', async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
@@ -245,19 +241,15 @@ app.put('/api/profile/update', async (req, res) => {
             return res.status(401).json({ error: 'Неверный токен' });
         }
 
-        const { username, avatar } = req.body;
+        const { username } = req.body;
 
-        const updateData = {};
-        if (username !== undefined) updateData.username = username;
-        if (avatar !== undefined) updateData.avatar = avatar;
-
-        if (Object.keys(updateData).length === 0) {
-            return res.status(400).json({ error: 'Нет данных для обновления' });
+        if (!username) {
+            return res.status(400).json({ error: 'Укажите никнейм' });
         }
 
         const { data: user, error } = await supabase
             .from('users')
-            .update(updateData)
+            .update({ username: username })
             .eq('id', decoded.userId)
             .select()
             .single();
@@ -266,11 +258,7 @@ app.put('/api/profile/update', async (req, res) => {
 
         res.json({
             success: true,
-            user: {
-                id: user.id,
-                username: user.username,
-                avatar: user.avatar || null
-            }
+            user: { username: user.username }
         });
     } catch (error) {
         console.error('Update profile error:', error);
@@ -287,11 +275,31 @@ app.get('/api/users/:username', async (req, res) => {
             return res.status(400).json({ error: 'Имя пользователя не указано' });
         }
 
-        const { data: user, error } = await supabase
+        // Пробуем получить пользователя с avatar, если поле есть
+        let query = supabase
             .from('users')
-            .select('id, username, avatar, wins, losses, matches, elo, is_calibrated, calibration_matches, history, created_at')
-            .eq('username', username)
-            .single();
+            .select('id, username, wins, losses, matches, elo, is_calibrated, calibration_matches, history, created_at')
+            .eq('username', username);
+        
+        // Пробуем добавить avatar, если поле существует
+        try {
+            const { data: columns } = await supabase
+                .from('information_schema.columns')
+                .select('column_name')
+                .eq('table_name', 'users')
+                .eq('column_name', 'avatar');
+            
+            if (columns && columns.length > 0) {
+                query = supabase
+                    .from('users')
+                    .select('id, username, avatar, wins, losses, matches, elo, is_calibrated, calibration_matches, history, created_at')
+                    .eq('username', username);
+            }
+        } catch (e) {
+            // Если не удалось проверить, просто запрашиваем без avatar
+        }
+
+        const { data: user, error } = await query.single();
 
         if (error || !user) {
             return res.status(404).json({ error: 'Пользователь не найден' });
@@ -318,13 +326,34 @@ app.get('/api/users/:username', async (req, res) => {
     }
 });
 
-// ===== ПУБЛИЧНЫЙ СПИСОК ПОЛЬЗОВАТЕЛЕЙ (С АВАТАРОМ) =====
+// ===== ПУБЛИЧНЫЙ СПИСОК ПОЛЬЗОВАТЕЛЕЙ =====
 app.get('/api/users/public', async (req, res) => {
     try {
-        const { data: users, error } = await supabase
+        // Пробуем получить с avatar
+        let query = supabase
             .from('users')
-            .select('id, username, avatar, wins, losses, matches, elo, is_calibrated, calibration_matches')
+            .select('id, username, wins, losses, matches, elo, is_calibrated, calibration_matches')
             .order('elo', { ascending: false });
+        
+        // Пробуем добавить avatar
+        try {
+            const { data: columns } = await supabase
+                .from('information_schema.columns')
+                .select('column_name')
+                .eq('table_name', 'users')
+                .eq('column_name', 'avatar');
+            
+            if (columns && columns.length > 0) {
+                query = supabase
+                    .from('users')
+                    .select('id, username, avatar, wins, losses, matches, elo, is_calibrated, calibration_matches')
+                    .order('elo', { ascending: false });
+            }
+        } catch (e) {
+            // Игнорируем
+        }
+
+        const { data: users, error } = await query;
 
         if (error) {
             console.error('Supabase error:', error);
@@ -518,12 +547,17 @@ app.delete('/api/admin/users/:userId', async (req, res) => {
 // ===== ОЧЕРЕДЬ =====
 app.get('/api/queue', async (req, res) => {
     try {
+        // Проверяем существование таблицы
         const { data: queue, error } = await supabase
             .from('queue')
             .select('players')
             .order('created_at', { ascending: false })
             .limit(1)
             .maybeSingle();
+
+        if (error && error.code === '42P01') { // Таблица не существует
+            return res.json({ players: [] });
+        }
 
         if (error) throw error;
 
@@ -542,6 +576,7 @@ app.post('/api/queue/join', async (req, res) => {
             return res.status(400).json({ error: 'Имя пользователя не указано' });
         }
 
+        // Проверяем существование таблицы
         const { data: existing } = await supabase
             .from('queue')
             .select('players')
@@ -907,18 +942,25 @@ app.get('/api/stats', async (req, res) => {
             .from('matches')
             .select('*', { count: 'exact', head: true });
 
-        const { data: queue } = await supabase
-            .from('queue')
-            .select('players')
-            .order('created_at', { ascending: false })
-            .limit(1)
-            .maybeSingle();
+        // Проверяем существование таблицы queue
+        let pending = 0;
+        try {
+            const { data: queue } = await supabase
+                .from('queue')
+                .select('players')
+                .order('created_at', { ascending: false })
+                .limit(1)
+                .maybeSingle();
+            pending = queue?.players?.length || 0;
+        } catch (e) {
+            // Таблица не существует
+        }
 
         res.json({
             totalUsers: usersCount || 0,
             tournaments: matchesCount || 0,
             servers: 0,
-            pending: queue?.players?.length || 0
+            pending: pending
         });
     } catch (error) {
         console.error('Stats error:', error);
