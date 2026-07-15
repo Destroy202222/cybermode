@@ -13,7 +13,7 @@ app.use(cors({
     credentials: true
 }));
 
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 
 // ===== ПОДКЛЮЧЕНИЕ К SUPABASE =====
 const supabaseUrl = process.env.SUPABASE_URL;
@@ -109,6 +109,7 @@ app.post('/api/auth/register', async (req, res) => {
                 elo: 1000,
                 calibration_matches: 0,
                 is_calibrated: false,
+                avatar: null,
                 history: []
             })
             .select()
@@ -128,7 +129,8 @@ app.post('/api/auth/register', async (req, res) => {
                 id: user.id,
                 username: user.username,
                 email: user.email,
-                isAdmin: user.is_admin
+                isAdmin: user.is_admin,
+                avatar: user.avatar || null
             }
         });
     } catch (error) {
@@ -170,6 +172,7 @@ app.post('/api/auth/login', async (req, res) => {
                 username: user.username,
                 email: user.email,
                 isAdmin: user.is_admin || false,
+                avatar: user.avatar || null,
                 wins: user.wins || 0,
                 losses: user.losses || 0,
                 matches: user.matches || 0,
@@ -213,6 +216,7 @@ app.get('/api/auth/me', async (req, res) => {
             username: user.username,
             email: user.email,
             isAdmin: user.is_admin || false,
+            avatar: user.avatar || null,
             wins: user.wins || 0,
             losses: user.losses || 0,
             matches: user.matches || 0,
@@ -227,7 +231,7 @@ app.get('/api/auth/me', async (req, res) => {
     }
 });
 
-// ===== ПРОФИЛЬ =====
+// ===== ПРОФИЛЬ (ОБНОВЛЕНИЕ С АВАТАРОМ) =====
 app.put('/api/profile/update', async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
@@ -241,15 +245,19 @@ app.put('/api/profile/update', async (req, res) => {
             return res.status(401).json({ error: 'Неверный токен' });
         }
 
-        const { username } = req.body;
+        const { username, avatar } = req.body;
 
-        if (!username) {
-            return res.status(400).json({ error: 'Укажите никнейм' });
+        const updateData = {};
+        if (username !== undefined) updateData.username = username;
+        if (avatar !== undefined) updateData.avatar = avatar;
+
+        if (Object.keys(updateData).length === 0) {
+            return res.status(400).json({ error: 'Нет данных для обновления' });
         }
 
         const { data: user, error } = await supabase
             .from('users')
-            .update({ username: username })
+            .update(updateData)
             .eq('id', decoded.userId)
             .select()
             .single();
@@ -258,7 +266,11 @@ app.put('/api/profile/update', async (req, res) => {
 
         res.json({
             success: true,
-            user: { username: user.username }
+            user: {
+                id: user.id,
+                username: user.username,
+                avatar: user.avatar || null
+            }
         });
     } catch (error) {
         console.error('Update profile error:', error);
@@ -266,12 +278,52 @@ app.put('/api/profile/update', async (req, res) => {
     }
 });
 
-// ===== ПУБЛИЧНЫЙ СПИСОК ПОЛЬЗОВАТЕЛЕЙ =====
+// ===== ПОЛУЧЕНИЕ ПРОФИЛЯ ДРУГОГО ИГРОКА =====
+app.get('/api/users/:username', async (req, res) => {
+    try {
+        const { username } = req.params;
+
+        if (!username) {
+            return res.status(400).json({ error: 'Имя пользователя не указано' });
+        }
+
+        const { data: user, error } = await supabase
+            .from('users')
+            .select('id, username, avatar, wins, losses, matches, elo, is_calibrated, calibration_matches, history, created_at')
+            .eq('username', username)
+            .single();
+
+        if (error || !user) {
+            return res.status(404).json({ error: 'Пользователь не найден' });
+        }
+
+        res.json({
+            user: {
+                id: user.id,
+                username: user.username,
+                avatar: user.avatar || null,
+                wins: user.wins || 0,
+                losses: user.losses || 0,
+                matches: user.matches || 0,
+                elo: user.elo || 1000,
+                isCalibrated: user.is_calibrated || false,
+                calibrationMatches: user.calibration_matches || 0,
+                history: user.history || [],
+                createdAt: user.created_at
+            }
+        });
+    } catch (error) {
+        console.error('Get user error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// ===== ПУБЛИЧНЫЙ СПИСОК ПОЛЬЗОВАТЕЛЕЙ (С АВАТАРОМ) =====
 app.get('/api/users/public', async (req, res) => {
     try {
         const { data: users, error } = await supabase
             .from('users')
-            .select('id, username, wins, losses, matches, elo, is_calibrated, calibration_matches')
+            .select('id, username, avatar, wins, losses, matches, elo, is_calibrated, calibration_matches')
             .order('elo', { ascending: false });
 
         if (error) {
@@ -282,6 +334,7 @@ app.get('/api/users/public', async (req, res) => {
         const formattedUsers = (users || []).map(u => ({
             id: u.id,
             username: u.username,
+            avatar: u.avatar || null,
             wins: u.wins || 0,
             losses: u.losses || 0,
             matches: u.matches || 0,
@@ -597,7 +650,7 @@ app.delete('/api/queue/clear', async (req, res) => {
     }
 });
 
-// ===== МАТЧИ (С СОХРАНЕНИЕМ ВСЕХ ДАННЫХ В БД) =====
+// ===== МАТЧИ =====
 app.post('/api/match/create', async (req, res) => {
     try {
         const { matchId, matchNumber, teamA, teamB, banned, finalMap, players, captainA, captainB, status } = req.body;
@@ -688,7 +741,6 @@ app.put('/api/match/update', async (req, res) => {
     }
 });
 
-// ===== ОТМЕНА МАТЧА =====
 app.delete('/api/match/:matchId/cancel', async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
@@ -723,7 +775,6 @@ app.delete('/api/match/:matchId/cancel', async (req, res) => {
     }
 });
 
-// ===== ЗАВЕРШЕНИЕ МАТЧА =====
 app.post('/api/match/finish', async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
